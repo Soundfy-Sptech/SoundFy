@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundFy - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <aside class="sidebar">
+        <a class="logo" href="index.html">
+            <b>S</b>
+            <span>Sound<span>Fy</span></span>
+        </a>
+
+        <div class="workspace">
+            <b>ST</b>
+            <div>
+                <strong>SoundFy Studio</strong>
+                <small>Workspace profissional</small>
+            </div>
+            <i>⌄</i>
+        </div>
+
+        <nav>
+            <label>VISÃO GERAL</label>
+            <a class="active" href="index.html"><span>Dashboard</span></a>
+            <a href="#tendencias"> <span>Tendências</span></a>
+            <a href="#generos"> <span>Gêneros</span></a>
+            <a href="#regioes"> <span>Regiões</span></a>
+
+            <label>PRODUTOR</label>
+            <a href="agenda.html"> <span>Agenda</span></a>
+
+            <label>ANÁLISES</label>
+            <a href="#relatorios"> <span>Relatórios</span></a>
+            <a href="#insights"> <span>Insights</span></a>
+        </nav>
+
+        <div class="side-bottom">
+            <a href="configuracoes.html">⚙ <span>Configurações</span></a>
+
+            <div class="plan">
+                <b>✦</b>
+                <div>
+                    <strong>Plano Pro</strong>
+                    <small>Dados atualizados</small>
+                </div>
+            </div>
+
+            <div class="profile">
+                <b>FL</b>
+                <div>
+                    <strong>Felipe Leone</strong>
+                    <small>Produtor</small>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main>
+        <header>
+            <button id="menu" class="mobile-menu">☰</button>
+
+            <div class="crumb">
+                Workspace <b>/</b> <strong>Dashboard</strong>
+            </div>
+
+            <div class="mobile-logo">
+                Sound<span>Fy</span>
+            </div>
+
+            <div class="actions">
+
+                <button class="bell">♢<i></i></button>
+                <b class="top-avatar">FL</b>
+            </div>
+        </header>
+
+        <section class="intro">
+            <div>
+                <p>QUINTA-FEIRA, 27 AGO 2026</p>
+                <h1>Bom trabalho, Felipe.</h1>
+                <span>Veja o que está acontecendo no mercado musical.</span>
+            </div>
+
+            <div class="header-buttons">
+                <button class="filter">Últimos 30 dias ⌄</button>
+                <a class="primary" href="agenda.html">＋ Novo compromisso</a>
+            </div>
+        </section>
+
+        <section class="kpis">
+            <article>
+                <div>
+                   <b> <span style="font-size: 20px;">Índice de crescimento</span> </b>
+                </div>
+                <strong>+18,7%</strong>
+                <small style="font-size: 15px;"><em>↑ 4,2%</em> vs. período anterior</small>
+                <div class="spark"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            </article>
+
+            <article>
+                <div>
+                   <b> <span style="font-size: 20px;">Gêneros monitorados</span> </b>
+                </div>
+                <strong>48</strong>
+                <br>
+                <small style="font-size: 15px;"><em class="purple-text">+6</em> novos este mês</small>
+                <div class="dots"><i></i><i></i><i></i><i></i><i></i></div>
+            </article>
+
+            <article>
+                <div>
+                   <b> <span style="font-size: 20px;">Regiões analisadas</span> </b>
+                </div>
+                <strong>27</strong>
+                <br>
+                <small style="font-size: 15px;"><em>↑ 3</em> novas regiões</small>
+                <div class="bars"><i></i><i></i><i></i><i></i><i></i></div>
+            </article>
+
+            <article>
+                <div>
+                   <b> <span style="font-size: 20px;">Oportunidades detectadas</span></b>
+                </div>
+                <strong>12</strong>
+                <br>
+                <small style="font-size: 15px;"><em class="orange-text">4 novas</em> nas últimas 48h</small>
+                <div class="priority">
+                    Alta prioridade
+                    <b>4</b>
+                </div>
+            </article>
+        </section>
+
+        <section class="grid" id="tendencias">
+            <article class="panel chart-panel">
+                <div class="panel-head">
+                    <div>
+                        <p>VISÃO DO MERCADO</p>
+                        <h2>Tendência de interesse musical</h2>
+                    </div>
+                    <button class="filter">Últimas 5 semanas ⌄</button>
+                </div>
+
+                <div class="chart-explanation">
+                    <strong>O mercado está acelerando</strong>
+                    <span>O índice de interesse subiu de 58 para 101 pontos no período analisado.</span>
+                </div>
+
+                <div class="legend">
+                    <span><i class="green-dot"></i>Interesse do público</span>
+                    <span><i class="purple-dot"></i>Buscas</span>
+                </div>
+
+                <div class="chart">
+                    <div class="axis">
+                        <span>100</span>
+                        <span>75</span>
+                        <span>50</span>
+                        <span>25</span>
+                        <span>0</span>
+                    </div>
+
+                    <div class="graph">
+                        <div class="line l1"></div>
+                        <div class="line l2"></div>
+                        <div class="line l3"></div>
+                        <div class="line l4"></div>
+
+                        <svg viewBox="0 0 700 220" preserveAspectRatio="none" aria-label="Gráfico de tendência de interesse">
+                            <path class="area" d="M0 160 C80 158 100 145 140 140 S210 135 270 112 S340 115 400 90 S470 94 530 67 S620 65 700 30 L700 220 L0 220Z"></path>
+                            <path class="trend" d="M0 160 C80 158 100 145 140 140 S210 135 270 112 S340 115 400 90 S470 94 530 67 S620 65 700 30"></path>
+                            <path class="trend purple-line" d="M0 178 C80 174 105 165 145 160 S215 158 275 138 S345 145 405 119 S475 128 535 99 S620 108 700 78"></path>
+                        </svg>
+
+                        <div class="dates">
+                            <span>30 JUL</span>
+                            <span>06 AGO</span>
+                            <span>13 AGO</span>
+                            <span>20 AGO</span>
+                            <span>27 AGO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trend-summary">
+                    <div>
+                        <span>Início</span>
+                        <strong>58 pts</strong>
+                    </div>
+                    <div>
+                        <span>Agora</span>
+                        <strong>101 pts</strong>
+                    </div>
+                    <div>
+                        <span>Variação</span>
+                        <strong class="green-text">+74,1%</strong>
+                    </div>
+                </div>
+            </article>
+
+            <article class="panel insight" id="insights">
+                <div class="panel-head">
+                    <div>
+                        <p style="font-size: 15px;">INSIGHT DA SEMANA</p>
+                        <h2><b>Nova Oportunidade detectada</b></h2>
+                    </div>
+                    <mark>NOVO</mark>
+                </div>
+
+                <div class="insight-body">
+                    <h3>Brazilian Phonk</h3>
+                    <strong>+42,8% <small>crescimento</small></strong>
+                    <p>O subgênero acelerou nas últimas 4 semanas, com maior concentração de crescimento no Sudeste.</p>
+                </div>
+
+                <div class="meta">
+                    <span>Região destaque<strong>São Paulo</strong></span>
+                    <span>Potencial<strong class="green-text">Alto</strong></span>
+                </div>
+
+                <button class="outline">Ver análise completa →</button>
+            </article>
+        </section>
+
+        <section class="grid lower">
+            <article class="panel" id="generos">
+                <div class="panel-head">
+                    <div>
+                        <p>RANKING</p>
+                        <h2>Gêneros em alta</h2>
+                    </div>
+                    <a href="#generos">Ver todos →</a>
+                </div>
+
+                <div class="genre">
+                    <span>01</span>
+                    <i></i>
+                    <div><strong>Brazilian Phonk</strong><small>Eletrônica · Subgênero</small></div>
+                    <b>+42,8%</b>↗
+                </div>
+
+                <div class="genre">
+                    <span>02</span>
+                    <i></i>
+                    <div><strong>Hyperpop</strong><small>Pop · Subgênero</small></div>
+                    <b>+31,4%</b>↗
+                </div>
+
+                <div class="genre">
+                    <span>03</span>
+                    <i></i>
+                    <div><strong>Afrobeats</strong><small>R&B · Global</small></div>
+                    <b>+24,9%</b>↗
+                </div>
+
+                <div class="genre">
+                    <span>04</span>
+                    <i></i>
+                    <div><strong>Drill</strong><small>Hip-Hop · Subgênero</small></div>
+                    <b>+19,6%</b>↗
+                </div>
+
+                <div class="genre">
+                    <span>05</span>
+                    <i></i>
+                    <div><strong>House</strong><small>Eletrônica · Dance</small></div>
+                    <b>+15,2%</b>↗
+                </div>
+            </article>
+
+            <article class="panel" id="regioes">
+                <div class="panel-head">
+                    <div>
+                        <p>GEOGRAFIA</p>
+                        <h2>Regiões com maior crescimento</h2>
+                    </div>
+                </div>
+
+                <div class="region">
+                    <strong>01&nbsp; Sudeste</strong>
+                    <span><i style="width:89%"></i></span>
+                    <b>+28,4%</b>
+                </div>
+
+                <div class="region">
+                    <strong>02&nbsp; Sul</strong>
+                    <span><i style="width:71%"></i></span>
+                    <b>+21,1%</b>
+                </div>
+
+                <div class="region">
+                    <strong>03&nbsp; Nordeste</strong>
+                    <span><i style="width:58%"></i></span>
+                    <b>+17,8%</b>
+                </div>
+
+                <div class="region">
+                    <strong>04&nbsp; Centro-Oeste</strong>
+                    <span><i style="width:43%"></i></span>
+                    <b>+12,2%</b>
+                </div>
+
+                <div class="region">
+                    <strong>05&nbsp; Norte</strong>
+                    <span><i style="width:31%"></i></span>
+                    <b>+8,7%</b>
+                </div>
+            </article>
+        </section>
+
+        <section class="panel reports" id="relatorios">
+            <div class="panel-head">
+                <div>
+                    <p>RELATÓRIOS RECENTES</p>
+                    <h2>Consultas do seu workspace</h2>
+                </div>
+                <a href="#relatorios">Ver histórico →</a>
+            </div>
+
+            <div class="report-head">
+                <span>Relatório</span>
+                <span>Filtro</span>
+                <span>Gerado em</span>
+                <span>Status</span>
+            </div>
+
+            <div class="report">
+                <strong>Tendências eletrônicas — Brasil</strong>
+                <span>Eletrônica · Brasil</span>
+                <span>Hoje, 14:32</span>
+                <em>Concluído</em>
+            </div>
+
+            <div class="report">
+                <strong>Oportunidades para festivais</strong>
+                <span>SP · 30 dias</span>
+                <span>Ontem, 17:08</span>
+                <em>Concluído</em>
+            </div>
+
+            <div class="report">
+                <strong>Radar de subgêneros</strong>
+                <span>Global · 90 dias</span>
+                <span>26 ago, 11:46</span>
+                <em>Concluído</em>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

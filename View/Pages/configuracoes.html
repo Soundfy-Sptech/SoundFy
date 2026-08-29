@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundFy Intelligence — Configurações</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <aside class="sidebar">
+        <a class="logo" href="index.html">
+            <b>S</b>
+            <span>Sound<span>Fy</span><small>INTELLIGENCE</small></span>
+        </a>
+
+        <div class="workspace">
+            <b>ST</b>
+            <div>
+                <strong>SoundFy Studio</strong>
+                <small>Workspace profissional</small>
+            </div>
+        </div>
+
+        <nav>
+            <label>VISÃO GERAL</label>
+            <a href="index.html">▦ <span>Dashboard</span></a>
+            <a href="index.html#tendencias">⌁ <span>Tendências</span></a>
+            <a href="index.html#generos">◉ <span>Gêneros</span></a>
+            <a href="index.html#regioes">⌖ <span>Regiões</span></a>
+
+            <label>PRODUTOR</label>
+            <a href="agenda.html">◷ <span>Agenda</span></a>
+
+            <label>ANÁLISES</label>
+            <a href="index.html#relatorios">▤ <span>Relatórios</span></a>
+            <a href="index.html#insights">✦ <span>Insights</span></a>
+        </nav>
+
+        <div class="side-bottom">
+            <a class="active" href="configuracoes.html">⚙ <span>Configurações</span></a>
+
+            <div class="profile">
+                <b>FL</b>
+                <div>
+                    <strong>Felipe Leone</strong>
+                    <small>Produtor</small>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main>
+        <header>
+            <button id="menu" class="mobile-menu">☰</button>
+
+            <div class="crumb">
+                Workspace <b>/</b> <strong>Configurações</strong>
+            </div>
+
+            <div class="mobile-logo">
+                Sound<span>Fy</span>
+            </div>
+
+            <div class="actions">
+                <b class="top-avatar">FL</b>
+            </div>
+        </header>
+
+        <section class="intro">
+            <div>
+                <p>WORKSPACE</p>
+                <h1>Configurações</h1>
+                <span>Gerencie preferências, fontes de dados e acesso.</span>
+            </div>
+        </section>
+
+        <section class="settings-layout">
+            <nav class="settings-nav">
+                <a class="active" href="#workspace">Workspace</a>
+                <a href="#aparencia">Aparência</a>
+                <a href="#dados">Fontes de dados</a>
+                <a href="#notificacoes">Notificações</a>
+            </nav>
+
+            <div class="settings-content">
+                <article class="panel settings-card" id="workspace">
+                    <div class="panel-head">
+                        <div>
+                            <p>WORKSPACE</p>
+                            <h2>Informações gerais</h2>
+                            <span>Dados utilizados para identificar seu ambiente de análise.</span>
+                        </div>
+                    </div>
+
+                    <div class="form">
+                        <label>
+                            Nome do workspace
+                            <input value="SoundFy Studio">
+                        </label>
+
+                        <label>
+                            Responsável
+                            <input value="Felipe Leone">
+                        </label>
+
+                        <label class="full">
+                            Descrição
+                            <textarea>Plataforma de inteligência para análise de tendências e oportunidades do mercado musical.</textarea>
+                        </label>
+                    </div>
+
+                    <div class="save">
+                        <button class="outline">Cancelar</button>
+                        <button class="primary">Salvar alterações</button>
+                    </div>
+                </article>
+
+                <article class="panel settings-card" id="aparencia">
+                    <div class="panel-head">
+                        <div>
+                            <p>INTERFACE</p>
+                            <h2>Aparência</h2>
+                            <span>Escolha a aparência do SoundFy Intelligence.</span>
+                        </div>
+                    </div>
+
+                    <div class="theme-options">
+                        <button class="theme-choice" data-theme-choice="dark">
+                            <i class="preview dark-preview"></i>
+                            <strong>Escuro</strong>
+                            <small>Visual executivo e contraste alto.</small>
+                        </button>
+
+                        <button class="theme-choice" data-theme-choice="light">
+                            <i class="preview light-preview"></i>
+                            <strong>Claro</strong>
+                            <small>Interface limpa para ambientes claros.</small>
+                        </button>
+                    </div>
+                </article>
+
+                <article class="panel settings-card" id="dados">
+                    <div class="panel-head">
+                        <div>
+                            <p>DADOS</p>
+                            <h2>Fontes de dados</h2>
+                        </div>
+                    </div>
+
+                    <div class="setting">
+                        <div>
+                            <strong>Consumo de áudio</strong>
+                            <small>Reproduções e comportamento de escuta.</small>
+                        </div>
+                        <em>Ativa</em>
+                    </div>
+
+                    <div class="setting">
+                        <div>
+                            <strong>Buscas</strong>
+                            <small>Termos pesquisados e evolução do interesse.</small>
+                        </div>
+                        <em>Ativa</em>
+                    </div>
+
+                    <div class="setting">
+                        <div>
+                            <strong>Interações</strong>
+                            <small>Curtidas e sinais de interesse.</small>
+                        </div>
+                        <em>Ativa</em>
+                    </div>
+                </article>
+
+                <article class="panel settings-card" id="notificacoes">
+                    <div class="panel-head">
+                        <div>
+                            <p>ALERTAS</p>
+                            <h2>Notificações</h2>
+                        </div>
+                    </div>
+
+                    <div class="setting">
+                        <div>
+                            <strong>Novas oportunidades</strong>
+                            <small>Avise quando uma tendência atingir alta relevância.</small>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <i></i>
+                        </label>
+                    </div>
+
+                    <div class="setting">
+                        <div>
+                            <strong>Relatórios concluídos</strong>
+                            <small>Avise quando uma análise estiver pronta.</small>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <i></i>
+                        </label>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

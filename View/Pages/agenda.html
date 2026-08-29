@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundFy Intelligence — Agenda</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <aside class="sidebar">
+        <a class="logo" href="index.html">
+            <b>S</b>
+            <span>Sound<span>Fy</span><small>INTELLIGENCE</small></span>
+        </a>
+
+        <div class="workspace">
+            <b>ST</b>
+            <div>
+                <strong>SoundFy Studio</strong>
+                <small>Workspace profissional</small>
+            </div>
+        </div>
+
+        <nav>
+            <label>VISÃO GERAL</label>
+            <a href="index.html">▦ <span>Dashboard</span></a>
+            <a href="index.html#tendencias">⌁ <span>Tendências</span></a>
+            <a href="index.html#generos">◉ <span>Gêneros</span></a>
+            <a href="index.html#regioes">⌖ <span>Regiões</span></a>
+
+            <label>PRODUTOR</label>
+            <a class="active" href="agenda.html">◷ <span>Agenda</span></a>
+
+            <label>ANÁLISES</label>
+            <a href="index.html#relatorios">▤ <span>Relatórios</span></a>
+            <a href="index.html#insights">✦ <span>Insights</span></a>
+        </nav>
+
+        <div class="side-bottom">
+            <a href="configuracoes.html">⚙ <span>Configurações</span></a>
+
+            <div class="plan">
+                <b>✦</b>
+                <div>
+                    <strong>Plano Pro</strong>
+                    <small>Dados atualizados</small>
+                </div>
+            </div>
+
+            <div class="profile">
+                <b>FL</b>
+                <div>
+                    <strong>Felipe Leone</strong>
+                    <small>Produtor</small>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main>
+        <header>
+            <button id="menu" class="mobile-menu">☰</button>
+
+            <div class="crumb">
+                Workspace <b>/</b> <strong>Agenda</strong>
+            </div>
+
+            <div class="mobile-logo">
+                Sound<span>Fy</span>
+            </div>
+
+            <div class="actions">
+                <button class="bell">♢<i></i></button>
+                <b class="top-avatar">FL</b>
+            </div>
+        </header>
+
+        <section class="intro">
+            <div>
+                <p>PRODUTOR</p>
+                <h1>Agenda</h1>
+                <span>Organize reuniões, gravações e compromissos do seu workspace.</span>
+            </div>
+
+            <button id="openAppointment" class="primary">＋ Novo compromisso</button>
+        </section>
+
+        <section class="agenda-layout">
+            <article class="panel agenda-calendar">
+                <div class="panel-head">
+                    <div>
+                        <p>CALENDÁRIO</p>
+                        <h2>Agosto 2026</h2>
+                    </div>
+                    <div class="calendar-nav">
+                        <button class="outline" id="previousMonth">‹</button>
+                        <button class="outline" id="nextMonth">›</button>
+                    </div>
+                </div>
+
+                <div class="calendar-week">
+                    <span>DOM</span>
+                    <span>SEG</span>
+                    <span>TER</span>
+                    <span>QUA</span>
+                    <span>QUI</span>
+                    <span>SEX</span>
+                    <span>SÁB</span>
+                </div>
+
+                <div id="calendar" class="calendar"></div>
+            </article>
+
+            <article class="panel agenda-list-panel">
+                <div class="panel-head">
+                    <div>
+                        <p>COMPROMISSOS</p>
+                        <h2>Próximos agendamentos</h2>
+                    </div>
+                    <span id="appointmentCount" class="count-badge">0</span>
+                </div>
+
+                <div id="appointmentList" class="appointment-list"></div>
+            </article>
+        </section>
+
+        <section class="panel agenda-info">
+            <div>
+                <p>FLUXO DO PRODUTOR</p>
+                <h2>Não perca nenhum compromisso</h2>
+                <span>Marque reuniões como concluídas ou cancele compromissos diretamente pela agenda.</span>
+            </div>
+
+            <div class="agenda-stats">
+                <div>
+                    <strong id="scheduledCount">0</strong>
+                    <span>Agendados</span>
+                </div>
+                <div>
+                    <strong id="completedCount">0</strong>
+                    <span>Concluídos</span>
+                </div>
+                <div>
+                    <strong id="cancelledCount">0</strong>
+                    <span>Cancelados</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="appointmentModal" class="modal">
+        <div class="modal-card">
+            <div class="modal-head">
+                <div>
+                    <p>NOVO COMPROMISSO</p>
+                    <h2>Adicionar à agenda</h2>
+                </div>
+                <button id="closeAppointment" class="modal-close">×</button>
+            </div>
+
+            <form id="appointmentForm">
+                <label>
+                    Compromisso
+                    <input id="appointmentTitle" type="text" placeholder="Ex.: Reunião com gravadora" required>
+                </label>
+
+                <div class="form-row">
+                    <label>
+                        Data
+                        <input id="appointmentDate" type="date" required>
+                    </label>
+
+                    <label>
+                        Horário
+                        <input id="appointmentTime" type="time" required>
+                    </label>
+                </div>
+
+                <label>
+                    Tipo
+                    <select id="appointmentType">
+                        <option>Reunião</option>
+                        <option>Gravação</option>
+                        <option>Show / Evento</option>
+                        <option>Deadline</option>
+                        <option>Outro</option>
+                    </select>
+                </label>
+
+                <label>
+                    Observação
+                    <textarea id="appointmentNote" placeholder="Adicione uma observação opcional"></textarea>
+                </label>
+
+                <div class="modal-actions">
+                    <button type="button" id="cancelModal" class="outline">Cancelar</button>
+                    <button type="submit" class="primary">Agendar compromisso</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
