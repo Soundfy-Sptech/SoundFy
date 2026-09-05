@@ -1,64 +1,64 @@
-const themeButton = document.getElementById("theme");
-const menuButton = document.getElementById("menu");
-const sidebar = document.querySelector(".sidebar");
+const botaoTema = document.getElementById("tema");
+const botaoMenu = document.getElementById("menu");
+const barraLateral = document.querySelector(".barra-lateral");
 
-function setTheme(themeName) {
-    document.documentElement.setAttribute("data-theme", themeName);
+function definirTema(nomeTema) {
+    document.documentElement.setAttribute("data-theme", nomeTema);
 
-    if (themeButton) {
-        themeButton.textContent = themeName === "light" ? "☾" : "☀";
+    if (botaoTema) {
+        botaoTema.textContent = nomeTema === "light" ? "☾" : "☀";
     }
 
-    document.querySelectorAll("[data-theme-choice]").forEach(function(choice) {
-        choice.classList.toggle(
-            "selected",
-            choice.dataset.themeChoice === themeName
+    document.querySelectorAll("[data-theme-choice]").forEach(function(opcao) {
+        opcao.classList.toggle(
+            "selecionado",
+            opcao.dataset.themeChoice === nomeTema
         );
     });
 }
 
-const savedTheme = localStorage.getItem("soundfy-theme") || "dark";
-setTheme(savedTheme);
+const temaSalvo = localStorage.getItem("soundfy-theme") || "dark";
+definirTema(temaSalvo);
 
-if (themeButton) {
-    themeButton.onclick = function() {
-        const nextTheme =
+if (botaoTema) {
+    botaoTema.onclick = function() {
+        const proximoTema =
             document.documentElement.dataset.theme === "dark"
                 ? "light"
                 : "dark";
 
-        localStorage.setItem("soundfy-theme", nextTheme);
-        setTheme(nextTheme);
+        localStorage.setItem("soundfy-theme", proximoTema);
+        definirTema(proximoTema);
     };
 }
 
-document.querySelectorAll("[data-theme-choice]").forEach(function(choice) {
-    choice.onclick = function() {
-        const selectedTheme = choice.dataset.themeChoice;
+document.querySelectorAll("[data-theme-choice]").forEach(function(opcao) {
+    opcao.onclick = function() {
+        const temaSelecionado = opcao.dataset.themeChoice;
 
-        localStorage.setItem("soundfy-theme", selectedTheme);
-        setTheme(selectedTheme);
+        localStorage.setItem("soundfy-theme", temaSelecionado);
+        definirTema(temaSelecionado);
     };
 });
 
-if (menuButton && sidebar) {
-    menuButton.onclick = function() {
-        sidebar.classList.toggle("mobile-open");
+if (botaoMenu && barraLateral) {
+    botaoMenu.onclick = function() {
+        barraLateral.classList.toggle("mobile-aberto");
     };
 }
 
-document.querySelectorAll(".primary").forEach(function(button) {
-    if (button.id === "openAppointment") {
+document.querySelectorAll(".primario").forEach(function(botao) {
+    if (botao.id === "abrirCompromisso") {
         return;
     }
 
-    button.addEventListener("click", function() {
-        if (button.textContent.includes("Salvar alterações")) {
-            const originalText = button.textContent;
-            button.textContent = "Salvo ✓";
+    botao.addEventListener("click", function() {
+        if (botao.textContent.includes("Salvar alterações")) {
+            const textoOriginal = botao.textContent;
+            botao.textContent = "Salvo ✓";
 
             setTimeout(function() {
-                button.textContent = originalText;
+                botao.textContent = textoOriginal;
             }, 1500);
         }
     });
@@ -66,354 +66,354 @@ document.querySelectorAll(".primary").forEach(function(button) {
 
 /* Agenda */
 
-const appointmentStorageKey = "soundfy-appointments";
+const chaveArmazenamentoCompromissos = "soundfy-appointments";
 
-const defaultAppointments = [
+const compromissosPadrao = [
     {
         id: 1,
-        title: "Reunião com gravadora",
-        date: "2026-08-27",
-        time: "14:30",
-        type: "Reunião",
-        note: "Apresentar análise de tendências eletrônicas.",
-        status: "scheduled"
+        titulo: "Reunião com gravadora",
+        data: "2026-08-27",
+        horario: "14:30",
+        tipo: "Reunião",
+        nota: "Apresentar análise de tendências eletrônicas.",
+        status: "agendado"
     },
     {
         id: 2,
-        title: "Sessão de produção",
-        date: "2026-08-28",
-        time: "16:00",
-        type: "Gravação",
-        note: "Finalização do projeto Brazilian Phonk.",
-        status: "scheduled"
+        titulo: "Sessão de produção",
+        data: "2026-08-28",
+        horario: "16:00",
+        tipo: "Gravação",
+        nota: "Finalização do projeto Brazilian Phonk.",
+        status: "agendado"
     },
     {
         id: 3,
-        title: "Festival SoundFy",
-        date: "2026-08-30",
-        time: "19:00",
-        type: "Show / Evento",
-        note: "Revisar line-up e oportunidades.",
-        status: "scheduled"
+        titulo: "Festival SoundFy",
+        data: "2026-08-30",
+        horario: "19:00",
+        tipo: "Show / Evento",
+        nota: "Revisar line-up e oportunidades.",
+        status: "agendado"
     }
 ];
 
-let appointments = JSON.parse(
-    localStorage.getItem(appointmentStorageKey) || "null"
-) || defaultAppointments;
+let compromissos = JSON.parse(
+    localStorage.getItem(chaveArmazenamentoCompromissos) || "null"
+) || compromissosPadrao;
 
-let calendarDate = new Date(2026, 7, 1);
+let dataCalendario = new Date(2026, 7, 1);
 
-function saveAppointments() {
+function salvarCompromissos() {
     localStorage.setItem(
-        appointmentStorageKey,
-        JSON.stringify(appointments)
+        chaveArmazenamentoCompromissos,
+        JSON.stringify(compromissos)
     );
 }
 
-function formatDate(dateString) {
-    const date = new Date(dateString + "T00:00:00");
+function formatarData(dataTexto) {
+    const data = new Date(dataTexto + "T00:00:00");
 
-    return date.toLocaleDateString("pt-BR", {
+    return data.toLocaleDateString("pt-BR", {
         day: "2-digit",
         month: "short"
     });
 }
 
-function getStatusLabel(status) {
-    if (status === "completed") {
+function obterRotuloStatus(status) {
+    if (status === "concluido") {
         return "Concluído";
     }
 
-    if (status === "cancelled") {
+    if (status === "cancelado") {
         return "Cancelado";
     }
 
     return "Agendado";
 }
 
-function renderCalendar() {
-    const calendar = document.getElementById("calendar");
+function renderizarCalendario() {
+    const calendario = document.getElementById("calendario");
 
-    if (!calendar) {
+    if (!calendario) {
         return;
     }
 
-    calendar.innerHTML = "";
+    calendario.innerHTML = "";
 
-    const year = calendarDate.getFullYear();
-    const month = calendarDate.getMonth();
+    const ano = dataCalendario.getFullYear();
+    const mes = dataCalendario.getMonth();
 
-    const firstDay = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const primeiroDia = new Date(ano, mes, 1).getDay();
+    const diasNoMes = new Date(ano, mes + 1, 0).getDate();
 
-    for (let index = 0; index < firstDay; index++) {
-        const emptyDay = document.createElement("div");
-        emptyDay.className = "calendar-day";
-        calendar.appendChild(emptyDay);
+    for (let indice = 0; indice < primeiroDia; indice++) {
+        const diaVazio = document.createElement("div");
+        diaVazio.className = "calendario-dia";
+        calendario.appendChild(diaVazio);
     }
 
-    for (let day = 1; day <= daysInMonth; day++) {
-        const cell = document.createElement("div");
-        const number = document.createElement("span");
+    for (let dia = 1; dia <= diasNoMes; dia++) {
+        const celula = document.createElement("div");
+        const numero = document.createElement("span");
 
-        cell.className = "calendar-day current-month";
-        number.className = "calendar-number";
-        number.textContent = day;
+        celula.className = "calendario-dia mes-atual";
+        numero.className = "calendario-numero";
+        numero.textContent = dia;
 
-        const dateKey =
-            year +
+        const chaveData =
+            ano +
             "-" +
-            String(month + 1).padStart(2, "0") +
+            String(mes + 1).padStart(2, "0") +
             "-" +
-            String(day).padStart(2, "0");
+            String(dia).padStart(2, "0");
 
-        if (dateKey === "2026-08-27") {
-            cell.classList.add("today");
+        if (chaveData === "2026-08-27") {
+            celula.classList.add("hoje");
         }
 
-        const hasAppointment = appointments.some(function(appointment) {
+        const temCompromisso = compromissos.some(function(compromisso) {
             return (
-                appointment.date === dateKey &&
-                appointment.status !== "cancelled"
+                compromisso.data === chaveData &&
+                compromisso.status !== "cancelado"
             );
         });
 
-        if (hasAppointment) {
-            const dot = document.createElement("i");
-            dot.className = "calendar-event-dot";
-            cell.appendChild(dot);
+        if (temCompromisso) {
+            const ponto = document.createElement("i");
+            ponto.className = "calendario-ponto-evento";
+            celula.appendChild(ponto);
         }
 
-        cell.appendChild(number);
+        celula.appendChild(numero);
 
-        cell.onclick = function() {
-            document.getElementById("appointmentDate").value = dateKey;
-            openAppointmentModal();
+        celula.onclick = function() {
+            document.getElementById("dataCompromisso").value = chaveData;
+            abrirModalCompromisso();
         };
 
-        calendar.appendChild(cell);
+        calendario.appendChild(celula);
     }
 }
 
-function renderAppointments() {
-    const list = document.getElementById("appointmentList");
+function renderizarCompromissos() {
+    const lista = document.getElementById("listaCompromissos");
 
-    if (!list) {
+    if (!lista) {
         return;
     }
 
-    list.innerHTML = "";
+    lista.innerHTML = "";
 
-    const orderedAppointments = appointments.slice().sort(function(a, b) {
+    const compromissosOrdenados = compromissos.slice().sort(function(a, b) {
         return (
-            new Date(a.date + "T" + a.time) -
-            new Date(b.date + "T" + b.time)
+            new Date(a.data + "T" + a.horario) -
+            new Date(b.data + "T" + b.horario)
         );
     });
 
-    document.getElementById("appointmentCount").textContent =
-        orderedAppointments.length;
+    document.getElementById("contagemCompromissos").textContent =
+        compromissosOrdenados.length;
 
-    if (orderedAppointments.length === 0) {
-        const empty = document.createElement("div");
-        empty.className = "empty-state";
-        empty.textContent = "Nenhum compromisso cadastrado.";
-        list.appendChild(empty);
+    if (compromissosOrdenados.length === 0) {
+        const vazio = document.createElement("div");
+        vazio.className = "estado-vazio";
+        vazio.textContent = "Nenhum compromisso cadastrado.";
+        lista.appendChild(vazio);
     }
 
-    orderedAppointments.forEach(function(appointment) {
-        const card = document.createElement("div");
-        const top = document.createElement("div");
-        const title = document.createElement("strong");
+    compromissosOrdenados.forEach(function(compromisso) {
+        const cartao = document.createElement("div");
+        const topo = document.createElement("div");
+        const titulo = document.createElement("strong");
         const status = document.createElement("span");
         const meta = document.createElement("div");
 
-        card.className = "appointment " + appointment.status;
-        top.className = "appointment-top";
-        title.className = "appointment-title";
-        status.className = "appointment-status " + appointment.status;
-        meta.className = "appointment-meta";
+        cartao.className = "compromisso " + compromisso.status;
+        topo.className = "compromisso-topo";
+        titulo.className = "compromisso-titulo";
+        status.className = "compromisso-status " + compromisso.status;
+        meta.className = "compromisso-meta";
 
-        title.textContent = appointment.title;
-        status.textContent = getStatusLabel(appointment.status);
+        titulo.textContent = compromisso.titulo;
+        status.textContent = obterRotuloStatus(compromisso.status);
 
         meta.innerHTML =
             "<span>◷ " +
-            formatDate(appointment.date) +
+            formatarData(compromisso.data) +
             "</span>" +
             "<span>• " +
-            appointment.time +
+            compromisso.horario +
             "</span>" +
             "<span>• " +
-            appointment.type +
+            compromisso.tipo +
             "</span>";
 
-        top.appendChild(title);
-        top.appendChild(status);
+        topo.appendChild(titulo);
+        topo.appendChild(status);
 
-        card.appendChild(top);
-        card.appendChild(meta);
+        cartao.appendChild(topo);
+        cartao.appendChild(meta);
 
-        if (appointment.note) {
-            const note = document.createElement("p");
-            note.className = "appointment-note";
-            note.textContent = appointment.note;
-            card.appendChild(note);
+        if (compromisso.nota) {
+            const nota = document.createElement("p");
+            nota.className = "compromisso-nota";
+            nota.textContent = compromisso.nota;
+            cartao.appendChild(nota);
         }
 
-        if (appointment.status === "scheduled") {
-            const actions = document.createElement("div");
-            const completeButton = document.createElement("button");
-            const cancelButton = document.createElement("button");
+        if (compromisso.status === "agendado") {
+            const acoes = document.createElement("div");
+            const botaoConcluir = document.createElement("button");
+            const botaoCancelar = document.createElement("button");
 
-            actions.className = "appointment-actions";
+            acoes.className = "compromisso-acoes";
 
-            completeButton.className = "small-action complete";
-            completeButton.textContent = "Marcar como concluído";
+            botaoConcluir.className = "acao-pequena concluir";
+            botaoConcluir.textContent = "Marcar como concluído";
 
-            cancelButton.className = "small-action cancel";
-            cancelButton.textContent = "Cancelar";
+            botaoCancelar.className = "acao-pequena cancelar";
+            botaoCancelar.textContent = "Cancelar";
 
-            completeButton.onclick = function() {
-                updateAppointmentStatus(appointment.id, "completed");
+            botaoConcluir.onclick = function() {
+                atualizarStatusCompromisso(compromisso.id, "concluido");
             };
 
-            cancelButton.onclick = function() {
-                updateAppointmentStatus(appointment.id, "cancelled");
+            botaoCancelar.onclick = function() {
+                atualizarStatusCompromisso(compromisso.id, "cancelado");
             };
 
-            actions.appendChild(completeButton);
-            actions.appendChild(cancelButton);
-            card.appendChild(actions);
+            acoes.appendChild(botaoConcluir);
+            acoes.appendChild(botaoCancelar);
+            cartao.appendChild(acoes);
         }
 
-        list.appendChild(card);
+        lista.appendChild(cartao);
     });
 
-    updateAgendaStats();
+    atualizarEstatisticasAgenda();
 }
 
-function updateAppointmentStatus(id, status) {
-    appointments = appointments.map(function(appointment) {
-        if (appointment.id === id) {
+function atualizarStatusCompromisso(id, status) {
+    compromissos = compromissos.map(function(compromisso) {
+        if (compromisso.id === id) {
             return {
-                ...appointment,
+                ...compromisso,
                 status: status
             };
         }
 
-        return appointment;
+        return compromisso;
     });
 
-    saveAppointments();
-    renderCalendar();
-    renderAppointments();
+    salvarCompromissos();
+    renderizarCalendario();
+    renderizarCompromissos();
 }
 
-function updateAgendaStats() {
-    const scheduled = appointments.filter(function(appointment) {
-        return appointment.status === "scheduled";
+function atualizarEstatisticasAgenda() {
+    const agendados = compromissos.filter(function(compromisso) {
+        return compromisso.status === "agendado";
     }).length;
 
-    const completed = appointments.filter(function(appointment) {
-        return appointment.status === "completed";
+    const concluidos = compromissos.filter(function(compromisso) {
+        return compromisso.status === "concluido";
     }).length;
 
-    const cancelled = appointments.filter(function(appointment) {
-        return appointment.status === "cancelled";
+    const cancelados = compromissos.filter(function(compromisso) {
+        return compromisso.status === "cancelado";
     }).length;
 
-    const scheduledElement = document.getElementById("scheduledCount");
-    const completedElement = document.getElementById("completedCount");
-    const cancelledElement = document.getElementById("cancelledCount");
+    const elementoAgendados = document.getElementById("contagemAgendados");
+    const elementoConcluidos = document.getElementById("contagemConcluidos");
+    const elementoCancelados = document.getElementById("contagemCancelados");
 
-    if (scheduledElement) {
-        scheduledElement.textContent = scheduled;
+    if (elementoAgendados) {
+        elementoAgendados.textContent = agendados;
     }
 
-    if (completedElement) {
-        completedElement.textContent = completed;
+    if (elementoConcluidos) {
+        elementoConcluidos.textContent = concluidos;
     }
 
-    if (cancelledElement) {
-        cancelledElement.textContent = cancelled;
+    if (elementoCancelados) {
+        elementoCancelados.textContent = cancelados;
     }
 }
 
-function openAppointmentModal() {
-    const modal = document.getElementById("appointmentModal");
+function abrirModalCompromisso() {
+    const modal = document.getElementById("modalCompromisso");
 
     if (modal) {
-        modal.classList.add("open");
+        modal.classList.add("aberto");
     }
 }
 
-function closeAppointmentModal() {
-    const modal = document.getElementById("appointmentModal");
+function fecharModalCompromisso() {
+    const modal = document.getElementById("modalCompromisso");
 
     if (modal) {
-        modal.classList.remove("open");
+        modal.classList.remove("aberto");
     }
 }
 
-const openAppointmentButton = document.getElementById("openAppointment");
-const closeAppointmentButton = document.getElementById("closeAppointment");
-const cancelModalButton = document.getElementById("cancelModal");
-const appointmentForm = document.getElementById("appointmentForm");
+const botaoAbrirCompromisso = document.getElementById("abrirCompromisso");
+const botaoFecharCompromisso = document.getElementById("fecharCompromisso");
+const botaoCancelarModal = document.getElementById("cancelarModal");
+const formularioCompromisso = document.getElementById("formularioCompromisso");
 
-if (openAppointmentButton) {
-    openAppointmentButton.onclick = openAppointmentModal;
+if (botaoAbrirCompromisso) {
+    botaoAbrirCompromisso.onclick = abrirModalCompromisso;
 }
 
-if (closeAppointmentButton) {
-    closeAppointmentButton.onclick = closeAppointmentModal;
+if (botaoFecharCompromisso) {
+    botaoFecharCompromisso.onclick = fecharModalCompromisso;
 }
 
-if (cancelModalButton) {
-    cancelModalButton.onclick = closeAppointmentModal;
+if (botaoCancelarModal) {
+    botaoCancelarModal.onclick = fecharModalCompromisso;
 }
 
-if (appointmentForm) {
-    appointmentForm.onsubmit = function(event) {
-        event.preventDefault();
+if (formularioCompromisso) {
+    formularioCompromisso.onsubmit = function(evento) {
+        evento.preventDefault();
 
-        const newAppointment = {
+        const novoCompromisso = {
             id: Date.now(),
-            title: document.getElementById("appointmentTitle").value,
-            date: document.getElementById("appointmentDate").value,
-            time: document.getElementById("appointmentTime").value,
-            type: document.getElementById("appointmentType").value,
-            note: document.getElementById("appointmentNote").value,
-            status: "scheduled"
+            titulo: document.getElementById("tituloCompromisso").value,
+            data: document.getElementById("dataCompromisso").value,
+            horario: document.getElementById("horarioCompromisso").value,
+            tipo: document.getElementById("tipoCompromisso").value,
+            nota: document.getElementById("notaCompromisso").value,
+            status: "agendado"
         };
 
-        appointments.push(newAppointment);
-        saveAppointments();
-        renderCalendar();
-        renderAppointments();
+        compromissos.push(novoCompromisso);
+        salvarCompromissos();
+        renderizarCalendario();
+        renderizarCompromissos();
 
-        appointmentForm.reset();
-        closeAppointmentModal();
+        formularioCompromisso.reset();
+        fecharModalCompromisso();
     };
 }
 
-const previousMonthButton = document.getElementById("previousMonth");
-const nextMonthButton = document.getElementById("nextMonth");
+const botaoMesAnterior = document.getElementById("mesAnterior");
+const botaoProximoMes = document.getElementById("proximoMes");
 
-if (previousMonthButton) {
-    previousMonthButton.onclick = function() {
-        calendarDate.setMonth(calendarDate.getMonth() - 1);
-        renderCalendar();
+if (botaoMesAnterior) {
+    botaoMesAnterior.onclick = function() {
+        dataCalendario.setMonth(dataCalendario.getMonth() - 1);
+        renderizarCalendario();
     };
 }
 
-if (nextMonthButton) {
-    nextMonthButton.onclick = function() {
-        calendarDate.setMonth(calendarDate.getMonth() + 1);
-        renderCalendar();
+if (botaoProximoMes) {
+    botaoProximoMes.onclick = function() {
+        dataCalendario.setMonth(dataCalendario.getMonth() + 1);
+        renderizarCalendario();
     };
 }
 
-renderCalendar();
-renderAppointments();
+renderizarCalendario();
+renderizarCompromissos();
