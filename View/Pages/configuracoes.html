@@ -8,39 +8,39 @@
 </head>
 
 <body>
-    <aside class="sidebar">
+    <aside class="barra-lateral">
         <a class="logo" href="index.html">
             <b>S</b>
             <span>Sound<span>Fy</span><small>INTELLIGENCE</small></span>
         </a>
 
-        <div class="workspace">
+        <div class="espaco-trabalho">
             <b>ST</b>
             <div>
                 <strong>SoundFy Studio</strong>
-                <small>Workspace profissional</small>
+                <small>Espaço de trabalho profissional</small>
             </div>
         </div>
 
         <nav>
             <label>VISÃO GERAL</label>
-            <a href="index.html"><span>Dashboard</span></a>
-            <a href="index.html#tendencias"><span>Tendências</span></a>
-            <a href="index.html#generos"><span>Gêneros</span></a>
-            <a href="index.html#regioes"> <span>Regiões</span></a>
+            <a href="index.html">▦ <span>Dashboard</span></a>
+            <a href="index.html#tendencias">⌁ <span>Tendências</span></a>
+            <a href="index.html#generos">◉ <span>Gêneros</span></a>
+            <a href="index.html#regioes">⌖ <span>Regiões</span></a>
 
             <label>PRODUTOR</label>
-            <a href="agenda.html"><span>Agenda</span></a>
+            <a href="agenda.html">◷ <span>Agenda</span></a>
 
             <label>ANÁLISES</label>
-            <a href="index.html#relatorios"><span>Relatórios</span></a>
-            <a href="index.html#insights"><span>Insights</span></a>
+            <a href="index.html#relatorios">▤ <span>Relatórios</span></a>
+            <a href="index.html#insights">✦ <span>Insights</span></a>
         </nav>
 
-        <div class="side-bottom">
-            <a class="active" href="configuracoes.html">⚙ <span>Configurações</span></a>
+        <div class="rodape-lateral">
+            <a class="ativo" href="configuracoes.html">⚙ <span>Configurações</span></a>
 
-            <div class="profile">
+            <div class="perfil">
                 <b>FL</b>
                 <div>
                     <strong>Felipe Leone</strong>
@@ -52,52 +52,50 @@
 
     <main>
         <header>
-            <button id="menu" class="mobile-menu">☰</button>
+            <button id="menu" class="menu-mobile">☰</button>
 
-            <div class="crumb">
-                Workspace <b>/</b> <strong>Configurações</strong>
+            <div class="trilha">
+                Espaço de trabalho <b>/</b> <strong>Configurações</strong>
             </div>
 
-            <div class="mobile-logo">
+            <div class="logo-mobile">
                 Sound<span>Fy</span>
             </div>
 
-            <div class="actions">
-                <!-- Botão de alternância rápida adicionado aqui para o JS funcionar 100% -->
-                <button id="theme" class="theme-toggle-btn">☀</button>
-                <b class="top-avatar">FL</b>
+            <div class="acoes">
+                <b class="avatar-topo">FL</b>
             </div>
         </header>
 
-        <section class="intro">
+        <section class="introducao">
             <div>
-                <p>WORKSPACE</p>
+                <p>ESPAÇO DE TRABALHO</p>
                 <h1>Configurações</h1>
                 <span>Gerencie preferências, fontes de dados e acesso.</span>
             </div>
         </section>
 
-        <section class="settings-layout">
-            <nav class="settings-nav">
-                <a class="active" href="#workspace">Workspace</a>
+        <section class="layout-configuracoes">
+            <nav class="nav-configuracoes">
+                <a class="ativo" href="#espaco-trabalho">Espaço de trabalho</a>
                 <a href="#aparencia">Aparência</a>
                 <a href="#dados">Fontes de dados</a>
                 <a href="#notificacoes">Notificações</a>
             </nav>
 
-            <div class="settings-content">
-                <article class="panel settings-card" id="workspace">
-                    <div class="panel-head">
+            <div class="conteudo-configuracoes">
+                <article class="painel cartao-configuracoes" id="espaco-trabalho">
+                    <div class="painel-cabecalho">
                         <div>
-                            <p>WORKSPACE</p>
+                            <p>ESPAÇO DE TRABALHO</p>
                             <h2>Informações gerais</h2>
                             <span>Dados utilizados para identificar seu ambiente de análise.</span>
                         </div>
                     </div>
 
-                    <div class="form">
+                    <div class="formulario">
                         <label>
-                            Nome do workspace
+                            Nome do espaço de trabalho
                             <input value="SoundFy Studio">
                         </label>
 
@@ -106,20 +104,20 @@
                             <input value="Felipe Leone">
                         </label>
 
-                        <label class="full">
+                        <label class="completo">
                             Descrição
                             <textarea>Plataforma de inteligência para análise de tendências e oportunidades do mercado musical.</textarea>
                         </label>
                     </div>
 
-                    <div class="save">
-                        <button class="outline">Cancelar</button>
-                        <button class="primary">Salvar alterações</button>
+                    <div class="salvar">
+                        <button class="contorno">Cancelar</button>
+                        <button class="primario">Salvar alterações</button>
                     </div>
                 </article>
 
-                <article class="panel settings-card" id="aparencia">
-                    <div class="panel-head">
+                <article class="painel cartao-configuracoes" id="aparencia">
+                    <div class="painel-cabecalho">
                         <div>
                             <p>INTERFACE</p>
                             <h2>Aparência</h2>
@@ -127,30 +125,30 @@
                         </div>
                     </div>
 
-                    <div class="theme-options">
-                        <button class="theme-choice" data-theme-choice="dark">
-                            <i class="preview dark-preview"></i>
+                    <div class="opcoes-tema">
+                        <button class="escolha-tema" data-theme-choice="dark">
+                            <i class="previa previa-escura"></i>
                             <strong>Escuro</strong>
                             <small>Visual executivo e contraste alto.</small>
                         </button>
 
-                        <button class="theme-choice" data-theme-choice="light">
-                            <i class="preview light-preview"></i>
+                        <button class="escolha-tema" data-theme-choice="light">
+                            <i class="previa previa-clara"></i>
                             <strong>Claro</strong>
                             <small>Interface limpa para ambientes claros.</small>
                         </button>
                     </div>
                 </article>
 
-                <article class="panel settings-card" id="dados">
-                    <div class="panel-head">
+                <article class="painel cartao-configuracoes" id="dados">
+                    <div class="painel-cabecalho">
                         <div>
                             <p>DADOS</p>
                             <h2>Fontes de dados</h2>
                         </div>
                     </div>
 
-                    <div class="setting">
+                    <div class="configuracao">
                         <div>
                             <strong>Consumo de áudio</strong>
                             <small>Reproduções e comportamento de escuta.</small>
@@ -158,7 +156,7 @@
                         <em>Ativa</em>
                     </div>
 
-                    <div class="setting">
+                    <div class="configuracao">
                         <div>
                             <strong>Buscas</strong>
                             <small>Termos pesquisados e evolução do interesse.</small>
@@ -166,7 +164,7 @@
                         <em>Ativa</em>
                     </div>
 
-                    <div class="setting">
+                    <div class="configuracao">
                         <div>
                             <strong>Interações</strong>
                             <small>Curtidas e sinais de interesse.</small>
@@ -175,31 +173,31 @@
                     </div>
                 </article>
 
-                <article class="panel settings-card" id="notificacoes">
-                    <div class="panel-head">
+                <article class="painel cartao-configuracoes" id="notificacoes">
+                    <div class="painel-cabecalho">
                         <div>
                             <p>ALERTAS</p>
                             <h2>Notificações</h2>
                         </div>
                     </div>
 
-                    <div class="setting">
+                    <div class="configuracao">
                         <div>
                             <strong>Novas oportunidades</strong>
                             <small>Avise quando uma tendência atingir alta relevância.</small>
                         </div>
-                        <label class="switch">
+                        <label class="alternador">
                             <input type="checkbox" checked>
                             <i></i>
                         </label>
                     </div>
 
-                    <div class="setting">
+                    <div class="configuracao">
                         <div>
                             <strong>Relatórios concluídos</strong>
                             <small>Avise quando uma análise estiver pronta.</small>
                         </div>
-                        <label class="switch">
+                        <label class="alternador">
                             <input type="checkbox" checked>
                             <i></i>
                         </label>
@@ -209,7 +207,6 @@
         </section>
     </main>
 
-   
     <script src="../JS/script.js"></script>
 </body>
 </html>

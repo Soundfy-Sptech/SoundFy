@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SoundFy — Entrar ou criar conta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../Style/cadastro.css">
+</head>
+<body>
+
+  <a class="marca" href="home.html">
+    <div class="logo">S</div>
+    <span class="nome">Sound<span class="destaque">Fy</span></span>
+  </a>
+
+  <div class="conteudo">
+    <div class="apresentacao">
+      <p class="rotulo">INTELIGÊNCIA DE MERCADO MUSICAL</p>
+      <h1>Entre para acompanhar o mercado <span class="destaque">em tempo real.</span></h1>
+      <p class="descricao">Uma conta SoundFy dá acesso ao dashboard completo de tendências, gêneros e regiões para sua produtora, gravadora ou evento.</p>
+    </div>
+
+    <div class="cartao-acesso">
+      <div class="abas">
+        <button type="button" id="abaEntrar" class="ativo" onclick="MostrarEntrar()">Entrar</button>
+        <button type="button" id="abaCriar" onclick="MostrarCriar()">Criar conta</button>
+      </div>
+
+      <div id="formEntrar" class="formulario ativo">
+        <div class="campo">
+          <p>E-mail</p>
+          <input id="entrarEmail" type="email" placeholder="voce@suaempresa.com">
+        </div>
+        <div class="campo">
+          <p>Senha</p>
+          <input id="entrarSenha" type="password" placeholder="••••••••">
+        </div>
+        <a class="esqueci" href="#">Esqueci minha senha</a>
+        <button class="botao-enviar" onclick="Entrar()">Entrar</button>
+      </div>
+
+      <div id="formCriar" class="formulario">
+        <div class="campo">
+          <p>Nome</p>
+          <input id="criarNome" type="text" placeholder="Seu nome">
+        </div>
+        <div class="campo">
+          <p>Produtora, gravadora ou evento</p>
+          <input id="criarOrg" type="text" placeholder="Nome da organização">
+        </div>
+        <div class="campo">
+          <p>E-mail</p>
+          <input id="criarEmail" type="email" placeholder="voce@suaempresa.com">
+        </div>
+        <div class="campo">
+          <p>Senha</p>
+          <input id="criarSenha" type="password" placeholder="Mínimo 6 caracteres">
+        </div>
+        <button class="botao-enviar" onclick="Criar()">Criar conta</button>
+      </div>
+
+      <p class="status" id="status">Tudo certo! Redirecionando…</p>
+
+      <p class="rodape" id="dicaEntrar">Ainda não tem conta? <button onclick="MostrarCriar()">Criar conta</button></p>
+      <p class="rodape" id="dicaCriar" style="display:none;">Já tem conta? <button onclick="MostrarEntrar()">Entrar</button></p>
+    </div>
+  </div>
+
+  <script>
+    function MostrarEntrar() {
+      abaEntrar.className = "ativo"
+      abaCriar.className = ""
+      formEntrar.className = "formulario ativo"
+      formCriar.className = "formulario"
+      dicaEntrar.style.display = "block"
+      dicaCriar.style.display = "none"
+      status.className = "status"
+    }
+
+    function MostrarCriar() {
+      abaCriar.className = "ativo"
+      abaEntrar.className = ""
+      formCriar.className = "formulario ativo"
+      formEntrar.className = "formulario"
+      dicaCriar.style.display = "block"
+      dicaEntrar.style.display = "none"
+      status.className = "status"
+    }
+
+    function ConcluirAcesso(nome) {
+      localStorage.setItem("soundfy-user", JSON.stringify({ nome: nome || "Produtor" }))
+      status.textContent = "Tudo certo! Redirecionando…"
+      status.className = "status mostrar"
+
+      setTimeout(function () {
+        window.location.href = "index.html"
+      }, 900)
+    }
+
+    function Entrar() {
+      let email = entrarEmail.value
+      ConcluirAcesso(email.split("@")[0])
+    }
+
+    function Criar() {
+      let nome = criarNome.value
+      ConcluirAcesso(nome)
+    }
+  </script>
+
+</body>
+</html>
