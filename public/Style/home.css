@@ -36,6 +36,9 @@ body {
 .container-mini-dash {
     width: 50%;
     min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .titulo {
@@ -142,6 +145,132 @@ body {
     font-family: "Manrope", sans-serif;
     font-size: 14px;
     font-weight: 500;
+}
+
+.mini-dash-cartao {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    padding: 22px 24px 26px;
+    background-color: #170f24;
+    border: 1px solid rgba(245, 240, 250, 0.09);
+    border-radius: 18px;
+    transform: rotate(-3deg);
+    box-shadow: 0 30px 60px rgba(124, 58, 237, 0.25);
+}
+
+.mini-dash-topo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.mini-dash-bolinhas {
+    display: flex;
+    gap: 5px;
+}
+
+.mini-dash-bolinhas span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: rgba(245, 240, 250, 0.16);
+}
+
+.mini-dash-topo p {
+    color: #9c8fb0;
+    font-family: "Manrope", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.mini-dash-indicadores {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.mini-dash-indicador {
+    flex: 1;
+    padding: 10px 12px;
+    background-color: #1f1530;
+    border: 1px solid rgba(245, 240, 250, 0.09);
+    border-radius: 10px;
+}
+
+.mini-dash-indicador small {
+    display: block;
+    color: #9c8fb0;
+    font-family: "Manrope", sans-serif;
+    font-size: 9px;
+    margin-bottom: 6px;
+}
+
+.mini-dash-indicador strong {
+    display: block;
+    color: #f5f0fa;
+    font-family: "Sora", sans-serif;
+    font-size: 16px;
+}
+
+.mini-dash-indicador.destaque strong {
+    color: #ffc857;
+}
+
+.mini-dash-grafico {
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+    height: 56px;
+    padding: 10px 12px;
+    background-color: #1f1530;
+    border: 1px solid rgba(245, 240, 250, 0.09);
+    border-radius: 10px;
+    margin-bottom: 18px;
+}
+
+.mini-dash-grafico span {
+    flex: 1;
+    border-radius: 3px 3px 0 0;
+    background: linear-gradient(180deg, #a78bfa, #7c3aed);
+}
+
+.mini-dash-grafico span:nth-child(4),
+.mini-dash-grafico span:nth-child(6) {
+    background: linear-gradient(180deg, #ff4fa3, #7c3aed);
+}
+
+.mini-dash-grafico span:last-child {
+    background: linear-gradient(180deg, #ffc857, #ff4fa3);
+}
+
+.mini-dash-selo {
+    position: absolute;
+    top: -14px;
+    right: -12px;
+    padding: 8px 12px;
+    background: linear-gradient(120deg, #ff4fa3, #ffc857);
+    border-radius: 10px;
+    transform: rotate(4deg);
+    box-shadow: 0 10px 24px rgba(255, 79, 163, 0.4);
+}
+
+.mini-dash-selo strong {
+    display: block;
+    color: #1a0d12;
+    font-family: "Manrope", sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.mini-dash-selo small {
+    display: block;
+    color: #1a0d12;
+    font-family: "Manrope", sans-serif;
+    font-size: 8.5px;
+    font-weight: 600;
+    opacity: 0.75;
 }
 
 @media (max-width: 900px) {
