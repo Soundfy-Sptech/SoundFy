@@ -7,62 +7,197 @@
 }
 
 body {
-    background-color: #170F24;
+    background-color: #0b0712;
     min-height: 100vh;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-
-    color: #F5F0FA;
-
-    padding: 40px 20px;
+    color: #f5f0fa;
+    font-family: "Manrope", sans-serif;
 }
 
-.marca {
-    margin-bottom: 60px;
-}
-
-.marca span {
-    background-color: #7C3AED;
-    color: #F5F0FA;
-    font-size: 1.2rem;
-    font-weight: bold;
-    padding: 8px 16px;
-    border-radius: 10px;
-}
-
-.hero {
-    max-width: 600px;
-    text-align: center;
-
+.container {
+    width: 90%;
+    max-width: 1400px;
+    min-height: 650px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    gap: 20px;
+    justify-content: center;
+    gap: 0;
 }
 
-.hero h1 {
-    font-size: 2.2rem;
-    line-height: 1.3;
+.container-hero {
+    width: 50%;
+    padding: 30px 45px 30px 0;
 }
 
-.hero h1 span {
-    color: #FF4FA3;
+.container-mini-dash {
+    width: 50%;
+    min-height: 500px;
 }
 
-.hero p {
-    font-size: 1rem;
-    color: #9C8FB0;
+.titulo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 34px;
 }
 
-.botao-cta {
-    background-color: #7C3AED;
-    color: #F5F0FA;
-    font-size: 1rem;
-    padding: 14px 30px;
-    border-radius: 50px;
-    box-shadow: 0px 4px 10px #2f2f2f55;
+.titulo::before {
+    content: "";
+    width: 18px;
+    height: 18px;
+    margin-right: 9px;
+    border-radius: 50%;
+    background-color: #ff4fa3;
+    box-shadow: 0 0 0 5px rgba(255, 79, 163, 0.12);
+}
+
+.titulo span {
+    color: #a78bfa;
+    font-family: "Manrope", sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    line-height: 1.4;
+}
+
+.titulo-principal {
+    max-width: 760px;
+    margin-bottom: 27px;
+}
+
+.titulo-principal span {
+    color: #f5f0fa;
+    font-family: "Sora", sans-serif;
+    font-size: clamp(42px, 4.3vw, 70px);
+    font-weight: 800;
+    letter-spacing: -3px;
+    line-height: 1.04;
+}
+
+.titulo-principal span::after {
+    content: "";
+}
+
+.texto-hero {
+    max-width: 600px;
+    margin-bottom: 44px;
+}
+
+.texto-hero span {
+    color: #9c8fb0;
+    font-family: "Manrope", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.75;
+}
+
+.titulo-principal .texto-gradiente {
+    background: linear-gradient(90deg, #7c3aed 0%, #ff4fa3 55%, #ffc857 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.botao-hero {
+    display: flex;
+    align-items: center;
+    margin-bottom: 19px;
+}
+
+.botao-hero button {
+    min-width: 220px;
+    padding: 17px 29px;
+    border-radius: 14px;
+    background: linear-gradient(100deg, #7c3aed 0%, #ff4fa3 100%);
+    color: #f5f0fa;
+    font-family: "Manrope", sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.botao-hero button span {
+    margin-left: 12px;
+    font-size: 20px;
+    line-height: 0;
+}
+
+.botao-hero button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(124, 58, 237, 0.25);
+}
+
+.texto-apoio {
+    display: flex;
+    align-items: center;
+}
+
+.texto-apoio span {
+    color: #9c8fb0;
+    font-family: "Manrope", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+@media (max-width: 900px) {
+    .container {
+        width: 92%;
+        min-height: 100vh;
+    }
+
+    .container-hero {
+        width: 100%;
+        padding: 50px 0;
+    }
+
+    .container-mini-dash {
+        display: none;
+    }
+
+    .titulo-principal span {
+        font-size: clamp(38px, 8vw, 58px);
+    }
+}
+
+@media (max-width: 520px) {
+    .titulo {
+        margin-bottom: 25px;
+    }
+
+    .titulo span {
+        font-size: 11px;
+        letter-spacing: 1.5px;
+    }
+
+    .titulo::before {
+        width: 14px;
+        height: 14px;
+        margin-right: 8px;
+    }
+
+    .titulo-principal {
+        margin-bottom: 22px;
+    }
+
+    .titulo-principal span {
+        font-size: 38px;
+        letter-spacing: -2px;
+    }
+
+    .texto-hero {
+        margin-bottom: 32px;
+    }
+
+    .texto-hero span {
+        font-size: 16px;
+    }
+
+    .botao-hero button {
+        width: 100%;
+    }
 }
