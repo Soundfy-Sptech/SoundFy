@@ -1,206 +1,272 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoundFy Intelligence — Agenda</title>
-    <link rel="stylesheet" href="../Style/style.css">
-</head>
-
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="agenda.title">SoundFy Intelligence — Agenda</title>
+    <link rel="stylesheet" href="../Style/style.css" />
+  </head>
+  <body>
     <aside class="barra-lateral">
-        <a class="logo" href="index.html">
-            <b>S</b>
-            <span>Sound<span>Fy</span><small>INTELLIGENCE</small></span>
+      <a class="logo" href="index.html">
+        <b>S</b>
+        <span>
+          Sound<span>Fy</span>
+          <small>INTELLIGENCE</small>
+        </span>
+      </a>
+      <div class="espaco-trabalho">
+        <b>ST</b>
+        <div>
+          <strong>SoundFy Studio</strong>
+          <small data-i18n="workspace.professional"
+            >Espaço de trabalho profissional</small
+          >
+        </div>
+      </div>
+      <nav>
+        <label data-i18n="navigation.overview">VISÃO GERAL</label>
+        <a href="index.html">
+          <span data-i18n="navigation.dashboard">Dashboard</span>
         </a>
-
-        <div class="espaco-trabalho">
-            <b>ST</b>
-            <div>
-                <strong>SoundFy Studio</strong>
-                <small>Espaço de trabalho profissional</small>
-            </div>
+        <a href="index.html#tendencias">
+          <span data-i18n="navigation.trends">Tendências</span>
+        </a>
+        <a href="index.html#generos">
+          <span data-i18n="navigation.genres">Gêneros</span>
+        </a>
+        <a href="index.html#regioes">
+          <span data-i18n="navigation.regions">Regiões</span>
+        </a>
+        <label data-i18n="navigation.producer">PRODUTOR</label>
+        <a class="ativo" href="agenda.html">
+          <span data-i18n="navigation.schedule">Agenda</span>
+        </a>
+        <label data-i18n="navigation.analysis">ANÁLISES</label>
+        <a href="index.html#relatorios">
+          <span data-i18n="navigation.reports">Relatórios</span>
+        </a>
+        <a href="index.html#insights">
+          <span data-i18n="navigation.insights">Insights</span>
+        </a>
+      </nav>
+      <div class="rodape-lateral">
+        <a href="configuracoes.html">
+          ⚙
+          <span data-i18n="navigation.settings">Configurações</span>
+        </a>
+        <div class="plano">
+          <b></b>
+          <div>
+            <strong data-i18n="plan.pro">Plano Pro</strong>
+            <small data-i18n="plan.updated">Dados atualizados</small>
+          </div>
         </div>
-
-        <nav>
-            <label>VISÃO GERAL</label>
-            <a href="index.html">▦ <span>Dashboard</span></a>
-            <a href="index.html#tendencias">⌁ <span>Tendências</span></a>
-            <a href="index.html#generos">◉ <span>Gêneros</span></a>
-            <a href="index.html#regioes">⌖ <span>Regiões</span></a>
-
-            <label>PRODUTOR</label>
-            <a class="ativo" href="agenda.html">◷ <span>Agenda</span></a>
-
-            <label>ANÁLISES</label>
-            <a href="index.html#relatorios">▤ <span>Relatórios</span></a>
-            <a href="index.html#insights">✦ <span>Insights</span></a>
-        </nav>
-
-        <div class="rodape-lateral">
-            <a href="configuracoes.html">⚙ <span>Configurações</span></a>
-
-            <div class="plano">
-                <b>✦</b>
-                <div>
-                    <strong>Plano Pro</strong>
-                    <small>Dados atualizados</small>
-                </div>
-            </div>
-
-            <div class="perfil">
-                <b>FL</b>
-                <div>
-                    <strong>Felipe Leone</strong>
-                    <small>Produtor</small>
-                </div>
-            </div>
+        <div class="perfil">
+          <b>FL</b>
+          <div>
+            <strong>Felipe Leone</strong>
+            <small data-i18n="profile.producer">Produtor</small>
+          </div>
         </div>
+      </div>
     </aside>
-
     <main>
-        <header>
-            <button id="menu" class="menu-mobile">☰</button>
-
-            <div class="trilha">
-                Espaço de trabalho <b>/</b> <strong>Agenda</strong>
-            </div>
-
-            <div class="logo-mobile">
-                Sound<span>Fy</span>
-            </div>
-
-            <div class="acoes">
-                <button class="sino">♢<i></i></button>
-                <b class="avatar-topo">FL</b>
-            </div>
-        </header>
-
-        <section class="introducao">
-            <div>
-                <p>PRODUTOR</p>
-                <h1>Agenda</h1>
-                <span>Organize reuniões, gravações e compromissos do seu espaço de trabalho.</span>
-            </div>
-
-            <button id="abrirCompromisso" class="primario">＋ Novo compromisso</button>
-        </section>
-
-        <section class="layout-agenda">
-            <article class="painel agenda-calendario">
-                <div class="painel-cabecalho">
-                    <div>
-                        <p>CALENDÁRIO</p>
-                        <h2>Agosto 2026</h2>
-                    </div>
-                    <div class="calendario-nav">
-                        <button class="contorno" id="mesAnterior">‹</button>
-                        <button class="contorno" id="proximoMes">›</button>
-                    </div>
-                </div>
-
-                <div class="calendario-semana">
-                    <span>DOM</span>
-                    <span>SEG</span>
-                    <span>TER</span>
-                    <span>QUA</span>
-                    <span>QUI</span>
-                    <span>SEX</span>
-                    <span>SÁB</span>
-                </div>
-
-                <div id="calendario" class="calendario"></div>
-            </article>
-
-            <article class="painel agenda-painel-lista">
-                <div class="painel-cabecalho">
-                    <div>
-                        <p>COMPROMISSOS</p>
-                        <h2>Próximos agendamentos</h2>
-                    </div>
-                    <span id="contagemCompromissos" class="selo-contagem">0</span>
-                </div>
-
-                <div id="listaCompromissos" class="lista-compromissos"></div>
-            </article>
-        </section>
-
-        <section class="painel info-agenda">
-            <div>
-                <p>FLUXO DO PRODUTOR</p>
-                <h2>Não perca nenhum compromisso</h2>
-                <span>Marque reuniões como concluídas ou cancele compromissos diretamente pela agenda.</span>
-            </div>
-
-            <div class="estatisticas-agenda">
-                <div>
-                    <strong id="contagemAgendados">0</strong>
-                    <span>Agendados</span>
-                </div>
-                <div>
-                    <strong id="contagemConcluidos">0</strong>
-                    <span>Concluídos</span>
-                </div>
-                <div>
-                    <strong id="contagemCancelados">0</strong>
-                    <span>Cancelados</span>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <div id="modalCompromisso" class="modal">
-        <div class="modal-cartao">
-            <div class="modal-cabecalho">
-                <div>
-                    <p>NOVO COMPROMISSO</p>
-                    <h2>Adicionar à agenda</h2>
-                </div>
-                <button id="fecharCompromisso" class="modal-fechar">×</button>
-            </div>
-
-            <form id="formularioCompromisso">
-                <label>
-                    Compromisso
-                    <input id="tituloCompromisso" type="text" placeholder="Ex.: Reunião com gravadora" required>
-                </label>
-
-                <div class="linha-formulario">
-                    <label>
-                        Data
-                        <input id="dataCompromisso" type="date" required>
-                    </label>
-
-                    <label>
-                        Horário
-                        <input id="horarioCompromisso" type="time" required>
-                    </label>
-                </div>
-
-                <label>
-                    Tipo
-                    <select id="tipoCompromisso">
-                        <option>Reunião</option>
-                        <option>Gravação</option>
-                        <option>Show / Evento</option>
-                        <option>Deadline</option>
-                        <option>Outro</option>
-                    </select>
-                </label>
-
-                <label>
-                    Observação
-                    <textarea id="notaCompromisso" placeholder="Adicione uma observação opcional"></textarea>
-                </label>
-
-                <div class="modal-acoes">
-                    <button type="button" id="cancelarModal" class="contorno">Cancelar</button>
-                    <button type="submit" class="primario">Agendar compromisso</button>
-                </div>
-            </form>
+      <header>
+        <button id="menu" class="menu-mobile">☰</button>
+        <div class="trilha">
+          <span data-i18n="workspace.name">Espaço de trabalho</span>
+          <b>/</b>
+          <strong data-i18n="navigation.schedule">Agenda</strong>
         </div>
+        <div class="logo-mobile">Sound<span>Fy</span></div>
+        <div class="acoes">
+          <button class="sino">
+            ♢
+            <i></i>
+          </button>
+          <b class="avatar-topo">FL</b>
+        </div>
+      </header>
+      <section class="introducao">
+        <div>
+          <p data-i18n="agenda.producer">PRODUTOR</p>
+          <h1 data-i18n="agenda.heading">Agenda</h1>
+          <span data-i18n="agenda.description">
+            Organize reuniões, gravações e compromissos do seu espaço de
+            trabalho.
+          </span>
+        </div>
+        <button
+          id="abrirCompromisso"
+          class="primario"
+          data-i18n="agenda.newAppointment"
+        >
+          ＋ Novo compromisso
+        </button>
+      </section>
+      <section class="layout-agenda">
+        <article class="painel agenda-calendario">
+          <div class="painel-cabecalho">
+            <div>
+              <p data-i18n="agenda.calendar">CALENDÁRIO</p>
+              <h2 data-i18n="agenda.month">Agosto 2026</h2>
+            </div>
+            <div class="calendario-nav">
+              <button
+                class="contorno"
+                id="mesAnterior"
+                aria-label="Mês anterior"
+                data-i18n="agenda.previousMonth"
+              >
+                ‹
+              </button>
+              <button
+                class="contorno"
+                id="proximoMes"
+                aria-label="Próximo mês"
+                data-i18n="agenda.nextMonth"
+              >
+                ›
+              </button>
+            </div>
+          </div>
+          <div class="calendario-semana">
+            <span data-i18n="days.sun">DOM</span>
+            <span data-i18n="days.mon">SEG</span>
+            <span data-i18n="days.tue">TER</span>
+            <span data-i18n="days.wed">QUA</span>
+            <span data-i18n="days.thu">QUI</span>
+            <span data-i18n="days.fri">SEX</span>
+            <span data-i18n="days.sat">SÁB</span>
+          </div>
+          <div id="calendario" class="calendario"></div>
+        </article>
+        <article class="painel agenda-painel-lista">
+          <div class="painel-cabecalho">
+            <div>
+              <p data-i18n="agenda.appointments">COMPROMISSOS</p>
+              <h2 data-i18n="agenda.upcoming">Próximos agendamentos</h2>
+            </div>
+            <span id="contagemCompromissos" class="selo-contagem">0</span>
+          </div>
+          <div id="listaCompromissos" class="lista-compromissos"></div>
+        </article>
+      </section>
+      <section class="painel info-agenda">
+        <div>
+          <p data-i18n="agenda.workflow">FLUXO DO PRODUTOR</p>
+          <h2 data-i18n="agenda.noMissedAppointments">
+            Não perca nenhum compromisso
+          </h2>
+          <span data-i18n="agenda.workflowDescription">
+            Marque reuniões como concluídas ou cancele compromissos diretamente
+            pela agenda.
+          </span>
+        </div>
+        <div class="estatisticas-agenda">
+          <div>
+            <strong id="contagemAgendados">0</strong>
+            <span data-i18n="agenda.scheduled">Agendados</span>
+          </div>
+          <div>
+            <strong id="contagemConcluidos">0</strong>
+            <span data-i18n="agenda.completed">Concluídos</span>
+          </div>
+          <div>
+            <strong id="contagemCancelados">0</strong>
+            <span data-i18n="agenda.cancelled">Cancelados</span>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div id="modalCompromisso" class="modal">
+      <div class="modal-cartao">
+        <div class="modal-cabecalho">
+          <div>
+            <p data-i18n="agenda.newCommitment">NOVO COMPROMISSO</p>
+            <h2 data-i18n="agenda.addAppointment">Adicionar à agenda</h2>
+          </div>
+          <button
+            id="fecharCompromisso"
+            class="modal-fechar"
+            aria-label="Fechar"
+            data-i18n="common.close"
+          >
+            ×
+          </button>
+        </div>
+        <form id="formularioCompromisso">
+          <label>
+            <span data-i18n="agenda.appointment">Compromisso</span>
+            <input
+              id="tituloCompromisso"
+              type="text"
+              placeholder="Ex.: Reunião com gravadora"
+              data-i18n-placeholder="agenda.appointmentPlaceholder"
+              required
+            />
+          </label>
+          <div class="linha-formulario">
+            <label>
+              <span data-i18n="common.date">Data</span>
+              <input id="dataCompromisso" type="date" required />
+            </label>
+            <label>
+              <span data-i18n="common.time">Horário</span>
+              <input id="horarioCompromisso" type="time" required />
+            </label>
+          </div>
+          <label>
+            <span data-i18n="common.type">Tipo</span>
+            <select id="tipoCompromisso">
+              <option value="reuniao" data-i18n="appointmentTypes.meeting">
+                Reunião
+              </option>
+              <option value="gravacao" data-i18n="appointmentTypes.recording">
+                Gravação
+              </option>
+              <option value="show" data-i18n="appointmentTypes.event">
+                Show / Evento
+              </option>
+              <option value="deadline" data-i18n="appointmentTypes.deadline">
+                Deadline
+              </option>
+              <option value="outro" data-i18n="appointmentTypes.other">
+                Outro
+              </option>
+            </select>
+          </label>
+          <label>
+            <span data-i18n="common.notes">Observação</span>
+            <textarea
+              id="notaCompromisso"
+              placeholder="Adicione uma observação opcional"
+              data-i18n-placeholder="agenda.notesPlaceholder"
+            ></textarea>
+          </label>
+          <div class="modal-acoes">
+            <button
+              type="button"
+              id="cancelarModal"
+              class="contorno"
+              data-i18n="common.cancel"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              class="primario"
+              data-i18n="agenda.scheduleAppointment"
+            >
+              Agendar compromisso
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-
+    <script src="../JS/i18n.js"></script>
+    <script src="../JS/translate.js"></script>
     <script src="../JS/script.js"></script>
-</body>
+  </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoundFy - Dashboard</title>
+    <title data-i18n="index.title"></title>
     <link rel="stylesheet" href="../Style/style.css">
 </head>
 
@@ -18,34 +18,50 @@
             <b>ST</b>
             <div>
                 <strong>SoundFy Studio</strong>
-                <small>Espaço de trabalho profissional</small>
+                <small data-i18n="workspace.professional"></small>
             </div>
             <i>⌄</i>
         </div>
 
         <nav>
-            <label>VISÃO GERAL</label>
-            <a class="ativo" href="index.html"><span>Dashboard</span></a>
-            <a href="#tendencias"> <span>Tendências</span></a>
-            <a href="#generos"> <span>Gêneros</span></a>
-            <a href="#regioes"> <span>Regiões</span></a>
+            <label data-i18n="navigation.overview"></label>
+            <a class="ativo" href="index.html">
+                <span data-i18n="navigation.dashboard"></span>
+            </a>
+            <a href="#tendencias">
+                <span data-i18n="navigation.trends"></span>
+            </a>
+            <a href="#generos">
+                <span data-i18n="navigation.genres"></span>
+            </a>
+            <a href="#regioes">
+                <span data-i18n="navigation.regions"></span>
+            </a>
 
-            <label>PRODUTOR</label>
-            <a href="agenda.html"> <span>Agenda</span></a>
+            <label data-i18n="navigation.producer"></label>
+            <a href="agenda.html">
+                <span data-i18n="navigation.schedule"></span>
+            </a>
 
-            <label>ANÁLISES</label>
-            <a href="#relatorios"> <span>Relatórios</span></a>
-            <a href="#insights"> <span>Insights</span></a>
+            <label data-i18n="navigation.analysis"></label>
+            <a href="#relatorios">
+                <span data-i18n="navigation.reports"></span>
+            </a>
+            <a href="#insights">
+                <span data-i18n="navigation.insights"></span>
+            </a>
         </nav>
 
         <div class="rodape-lateral">
-            <a href="configuracoes.html">⚙ <span>Configurações</span></a>
+            <a href="configuracoes.html">
+                ⚙ <span data-i18n="navigation.settings"></span>
+            </a>
 
             <div class="plano">
                 <b>✦</b>
                 <div>
-                    <strong>Plano Pro</strong>
-                    <small>Dados atualizados</small>
+                    <strong data-i18n="plan.pro"></strong>
+                    <small data-i18n="plan.updated"></small>
                 </div>
             </div>
 
@@ -53,7 +69,7 @@
                 <b>FL</b>
                 <div>
                     <strong>Felipe Leone</strong>
-                    <small>Produtor</small>
+                    <small data-i18n="profile.producer"></small>
                 </div>
             </div>
         </div>
@@ -64,7 +80,9 @@
             <button id="menu" class="menu-mobile">☰</button>
 
             <div class="trilha">
-                Espaço de trabalho <b>/</b> <strong>Dashboard</strong>
+                <span data-i18n="workspace.name"></span>
+                <b>/</b>
+                <strong data-i18n="navigation.dashboard"></strong>
             </div>
 
             <div class="logo-mobile">
@@ -72,7 +90,6 @@
             </div>
 
             <div class="acoes">
-
                 <button class="sino">♢<i></i></button>
                 <b class="avatar-topo">FL</b>
             </div>
@@ -80,56 +97,84 @@
 
         <section class="introducao">
             <div>
-                <p>QUINTA-FEIRA, 27 AGO 2026</p>
-                <h1>Bom trabalho, Felipe.</h1>
-                <span>Veja o que está acontecendo no mercado musical.</span>
+                <p data-i18n="index.date"></p>
+                <h1 data-i18n="index.greeting"></h1>
+                <span data-i18n="index.description"></span>
             </div>
 
             <div class="botoes-cabecalho">
-                <button class="filtro">Últimos 30 dias ⌄</button>
-                <a class="primario" href="agenda.html">＋ Novo compromisso</a>
+                <button class="filtro" data-i18n="index.last30Days"></button>
+                <a class="primario" href="agenda.html">
+                    <span data-i18n="agenda.newAppointment"></span>
+                </a>
             </div>
         </section>
 
         <section class="indicadores">
             <article>
                 <div>
-                   <b> <span style="font-size: 20px;">Índice de crescimento</span> </b>
+                    <b>
+                        <span style="font-size: 20px;" data-i18n="index.growthIndex"></span>
+                    </b>
                 </div>
                 <strong>+18,7%</strong>
-                <small style="font-size: 15px;"><em>↑ 4,2%</em> vs. período anterior</small>
-                <div class="mini-grafico"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                <small style="font-size: 15px;">
+                    <em>↑ 4,2%</em>
+                    <span data-i18n="index.vsPreviousPeriod"></span>
+                </small>
+                <div class="mini-grafico">
+                    <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                </div>
             </article>
 
             <article>
                 <div>
-                   <b> <span style="font-size: 20px;">Gêneros monitorados</span> </b>
+                    <b>
+                        <span style="font-size: 20px;" data-i18n="index.monitoredGenres"></span>
+                    </b>
                 </div>
                 <strong>48</strong>
                 <br>
-                <small style="font-size: 15px;"><em class="texto-secundario">+6</em> novos este mês</small>
-                <div class="pontos"><i></i><i></i><i></i><i></i><i></i></div>
+                <small style="font-size: 15px;">
+                    <em class="texto-secundario">+6</em>
+                    <span data-i18n="index.newThisMonth"></span>
+                </small>
+                <div class="pontos">
+                    <i></i><i></i><i></i><i></i><i></i>
+                </div>
             </article>
 
             <article>
                 <div>
-                   <b> <span style="font-size: 20px;">Regiões analisadas</span> </b>
+                    <b>
+                        <span style="font-size: 20px;" data-i18n="index.analyzedRegions"></span>
+                    </b>
                 </div>
                 <strong>27</strong>
                 <br>
-                <small style="font-size: 15px;"><em>↑ 3</em> novas regiões</small>
-                <div class="barras"><i></i><i></i><i></i><i></i><i></i></div>
+                <small style="font-size: 15px;">
+                    <em>↑ 3</em>
+                    <span data-i18n="index.newRegions"></span>
+                </small>
+                <div class="barras">
+                    <i></i><i></i><i></i><i></i><i></i>
+                </div>
             </article>
 
             <article>
                 <div>
-                   <b> <span style="font-size: 20px;">Oportunidades detectadas</span></b>
+                    <b>
+                        <span style="font-size: 20px;" data-i18n="index.detectedOpportunities"></span>
+                    </b>
                 </div>
                 <strong>12</strong>
                 <br>
-                <small style="font-size: 15px;"><em class="texto-alerta">4 novas</em> nas últimas 48h</small>
+                <small style="font-size: 15px;">
+                    <em class="texto-alerta">4</em>
+                    <span data-i18n="index.newLast48Hours"></span>
+                </small>
                 <div class="prioridade">
-                    Alta prioridade
+                    <span data-i18n="index.highPriority"></span>
                     <b>4</b>
                 </div>
             </article>
@@ -139,20 +184,26 @@
             <article class="painel painel-grafico">
                 <div class="painel-cabecalho">
                     <div>
-                        <p>VISÃO DO MERCADO</p>
-                        <h2>Tendência de interesse musical</h2>
+                        <p data-i18n="index.marketView"></p>
+                        <h2 data-i18n="index.musicInterestTrend"></h2>
                     </div>
-                    <button class="filtro">Últimas 5 semanas ⌄</button>
+                    <button class="filtro" data-i18n="index.last5Weeks"></button>
                 </div>
 
                 <div class="explicacao-grafico">
-                    <strong>O mercado está acelerando</strong>
-                    <span>O índice de interesse subiu de 58 para 101 pontos no período analisado.</span>
+                    <strong data-i18n="index.marketAccelerating"></strong>
+                    <span data-i18n="index.marketExplanation"></span>
                 </div>
 
                 <div class="legenda">
-                    <span><i class="ponto-primario"></i>Interesse do público</span>
-                    <span><i class="ponto-secundario"></i>Buscas</span>
+                    <span>
+                        <i class="ponto-primario"></i>
+                        <span data-i18n="index.publicInterest"></span>
+                    </span>
+                    <span>
+                        <i class="ponto-secundario"></i>
+                        <span data-i18n="index.searches"></span>
+                    </span>
                 </div>
 
                 <div class="grafico">
@@ -177,26 +228,26 @@
                         </svg>
 
                         <div class="datas">
-                            <span>30 JUL</span>
-                            <span>06 AGO</span>
-                            <span>13 AGO</span>
-                            <span>20 AGO</span>
-                            <span>27 AGO</span>
+                            <span data-i18n="index.date30Jul"></span>
+                            <span data-i18n="index.date06Aug"></span>
+                            <span data-i18n="index.date13Aug"></span>
+                            <span data-i18n="index.date20Aug"></span>
+                            <span data-i18n="index.date27Aug"></span>
                         </div>
                     </div>
                 </div>
 
                 <div class="resumo-tendencia">
                     <div>
-                        <span>Início</span>
+                        <span data-i18n="index.start"></span>
                         <strong>58 pts</strong>
                     </div>
                     <div>
-                        <span>Agora</span>
+                        <span data-i18n="index.now"></span>
                         <strong>101 pts</strong>
                     </div>
                     <div>
-                        <span>Variação</span>
+                        <span data-i18n="index.change"></span>
                         <strong class="texto-positivo">+74,1%</strong>
                     </div>
                 </div>
@@ -205,24 +256,35 @@
             <article class="painel insight" id="insights">
                 <div class="painel-cabecalho">
                     <div>
-                        <p style="font-size: 15px;">INSIGHT DA SEMANA</p>
-                        <h2><b>Nova Oportunidade detectada</b></h2>
+                        <p style="font-size: 15px;" data-i18n="index.weeklyInsight"></p>
+                        <h2>
+                            <b data-i18n="index.newOpportunity"></b>
+                        </h2>
                     </div>
-                    <mark>NOVO</mark>
+                    <mark data-i18n="index.new"></mark>
                 </div>
 
                 <div class="corpo-insight">
                     <h3>Brazilian Phonk</h3>
-                    <strong>+42,8% <small>crescimento</small></strong>
-                    <p>O subgênero acelerou nas últimas 4 semanas, com maior concentração de crescimento no Sudeste.</p>
+                    <strong>
+                        +42,8%
+                        <small data-i18n="index.growth"></small>
+                    </strong>
+                    <p data-i18n="index.phonkDescription"></p>
                 </div>
 
                 <div class="meta">
-                    <span>Região destaque<strong>São Paulo</strong></span>
-                    <span>Potencial<strong class="texto-positivo">Alto</strong></span>
+                    <span>
+                        <span data-i18n="index.highlightRegion"></span>
+                        <strong>São Paulo</strong>
+                    </span>
+                    <span>
+                        <span data-i18n="index.potential"></span>
+                        <strong class="texto-positivo" data-i18n="index.high"></strong>
+                    </span>
                 </div>
 
-                <button class="contorno">Ver análise completa →</button>
+                <button class="contorno" data-i18n="index.viewFullAnalysis"></button>
             </article>
         </section>
 
@@ -230,44 +292,59 @@
             <article class="painel" id="generos">
                 <div class="painel-cabecalho">
                     <div>
-                        <p>RANKING</p>
-                        <h2>Gêneros em alta</h2>
+                        <p data-i18n="index.ranking"></p>
+                        <h2 data-i18n="index.trendingGenres"></h2>
                     </div>
-                    <a href="#generos">Ver todos →</a>
+                    <a href="#generos" data-i18n="index.viewAll"></a>
                 </div>
 
                 <div class="genero">
                     <span>01</span>
                     <i></i>
-                    <div><strong>Brazilian Phonk</strong><small>Eletrônica · Subgênero</small></div>
+                    <div>
+                        <strong>Brazilian Phonk</strong>
+                        <small data-i18n="index.electronicSubgenre"></small>
+                    </div>
                     <b>+42,8%</b>↗
                 </div>
 
                 <div class="genero">
                     <span>02</span>
                     <i></i>
-                    <div><strong>Hyperpop</strong><small>Pop · Subgênero</small></div>
+                    <div>
+                        <strong>Hyperpop</strong>
+                        <small data-i18n="index.popSubgenre"></small>
+                    </div>
                     <b>+31,4%</b>↗
                 </div>
 
                 <div class="genero">
                     <span>03</span>
                     <i></i>
-                    <div><strong>Afrobeats</strong><small>R&B · Global</small></div>
+                    <div>
+                        <strong>Afrobeats</strong>
+                        <small data-i18n="index.rnbGlobal"></small>
+                    </div>
                     <b>+24,9%</b>↗
                 </div>
 
                 <div class="genero">
                     <span>04</span>
                     <i></i>
-                    <div><strong>Drill</strong><small>Hip-Hop · Subgênero</small></div>
+                    <div>
+                        <strong>Drill</strong>
+                        <small data-i18n="index.hipHopSubgenre"></small>
+                    </div>
                     <b>+19,6%</b>↗
                 </div>
 
                 <div class="genero">
                     <span>05</span>
                     <i></i>
-                    <div><strong>House</strong><small>Eletrônica · Dance</small></div>
+                    <div>
+                        <strong>House</strong>
+                        <small data-i18n="index.electronicDance"></small>
+                    </div>
                     <b>+15,2%</b>↗
                 </div>
             </article>
@@ -275,37 +352,37 @@
             <article class="painel" id="regioes">
                 <div class="painel-cabecalho">
                     <div>
-                        <p>GEOGRAFIA</p>
-                        <h2>Regiões com maior crescimento</h2>
+                        <p data-i18n="index.geography"></p>
+                        <h2 data-i18n="index.regionsGrowth"></h2>
                     </div>
                 </div>
 
                 <div class="regiao">
-                    <strong>01&nbsp; Sudeste</strong>
+                    <strong>01&nbsp; <span data-i18n="index.southeast"></span></strong>
                     <span><i style="width:89%"></i></span>
                     <b>+28,4%</b>
                 </div>
 
                 <div class="regiao">
-                    <strong>02&nbsp; Sul</strong>
+                    <strong>02&nbsp; <span data-i18n="index.south"></span></strong>
                     <span><i style="width:71%"></i></span>
                     <b>+21,1%</b>
                 </div>
 
                 <div class="regiao">
-                    <strong>03&nbsp; Nordeste</strong>
+                    <strong>03&nbsp; <span data-i18n="index.northeast"></span></strong>
                     <span><i style="width:58%"></i></span>
                     <b>+17,8%</b>
                 </div>
 
                 <div class="regiao">
-                    <strong>04&nbsp; Centro-Oeste</strong>
+                    <strong>04&nbsp; <span data-i18n="index.centralWest"></span></strong>
                     <span><i style="width:43%"></i></span>
                     <b>+12,2%</b>
                 </div>
 
                 <div class="regiao">
-                    <strong>05&nbsp; Norte</strong>
+                    <strong>05&nbsp; <span data-i18n="index.north"></span></strong>
                     <span><i style="width:31%"></i></span>
                     <b>+8,7%</b>
                 </div>
@@ -315,42 +392,44 @@
         <section class="painel relatorios" id="relatorios">
             <div class="painel-cabecalho">
                 <div>
-                    <p>RELATÓRIOS RECENTES</p>
-                    <h2>Consultas do seu espaço de trabalho</h2>
+                    <p data-i18n="index.recentReports"></p>
+                    <h2 data-i18n="index.workspaceQueries"></h2>
                 </div>
-                <a href="#relatorios">Ver histórico →</a>
+                <a href="#relatorios" data-i18n="index.viewHistory"></a>
             </div>
 
             <div class="relatorio-cabecalho">
-                <span>Relatório</span>
-                <span>Filtro</span>
-                <span>Gerado em</span>
-                <span>Status</span>
+                <span data-i18n="index.report"></span>
+                <span data-i18n="index.filter"></span>
+                <span data-i18n="index.generatedAt"></span>
+                <span data-i18n="index.status"></span>
             </div>
 
             <div class="relatorio">
-                <strong>Tendências eletrônicas — Brasil</strong>
-                <span>Eletrônica · Brasil</span>
-                <span>Hoje, 14:32</span>
-                <em>Concluído</em>
+                <strong data-i18n="index.electronicTrends"></strong>
+                <span data-i18n="index.electronicBrazil"></span>
+                <span data-i18n="index.today1432"></span>
+                <em data-i18n="index.completed"></em>
             </div>
 
             <div class="relatorio">
-                <strong>Oportunidades para festivais</strong>
-                <span>SP · 30 dias</span>
-                <span>Ontem, 17:08</span>
-                <em>Concluído</em>
+                <strong data-i18n="index.festivalOpportunities"></strong>
+                <span data-i18n="index.sp30Days"></span>
+                <span data-i18n="index.yesterday1708"></span>
+                <em data-i18n="index.completed"></em>
             </div>
 
             <div class="relatorio">
-                <strong>Radar de subgêneros</strong>
-                <span>Global · 90 dias</span>
-                <span>26 ago, 11:46</span>
-                <em>Concluído</em>
+                <strong data-i18n="index.subgenreRadar"></strong>
+                <span data-i18n="index.global90Days"></span>
+                <span data-i18n="index.aug26"></span>
+                <em data-i18n="index.completed"></em>
             </div>
         </section>
     </main>
 
-    <script src="../JS/script.js"></script>
+   <script src="../JS/i18n.js"></script>
+<script src="../JS/translate.js"></script>
+<script src="../JS/script.js"></script>
 </body>
 </html>

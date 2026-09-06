@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoundFy Intelligence — Configurações</title>
+    <title data-i18n="configuracoes.title">SoundFy Intelligence — Configurações</title>
     <link rel="stylesheet" href="../Style/style.css">
 </head>
-
 <body>
     <aside class="barra-lateral">
         <a class="logo" href="index.html">
@@ -18,33 +17,33 @@
             <b>ST</b>
             <div>
                 <strong>SoundFy Studio</strong>
-                <small>Espaço de trabalho profissional</small>
+                <small data-i18n="workspace.professional"></small>
             </div>
         </div>
 
         <nav>
-            <label>VISÃO GERAL</label>
-            <a href="index.html">▦ <span>Dashboard</span></a>
-            <a href="index.html#tendencias">⌁ <span>Tendências</span></a>
-            <a href="index.html#generos">◉ <span>Gêneros</span></a>
-            <a href="index.html#regioes">⌖ <span>Regiões</span></a>
+            <label data-i18n="navigation.overview"></label>
+            <a href="index.html"><span data-i18n="navigation.dashboard"></span></a>
+            <a href="index.html#tendencias"><span data-i18n="navigation.trends"></span></a>
+            <a href="index.html#generos"><span data-i18n="navigation.genres"></span></a>
+            <a href="index.html#regioes"><span data-i18n="navigation.regions"></span></a>
 
-            <label>PRODUTOR</label>
-            <a href="agenda.html">◷ <span>Agenda</span></a>
+            <label data-i18n="navigation.producer"></label>
+            <a href="agenda.html"><span data-i18n="navigation.schedule"></span></a>
 
-            <label>ANÁLISES</label>
-            <a href="index.html#relatorios">▤ <span>Relatórios</span></a>
-            <a href="index.html#insights">✦ <span>Insights</span></a>
+            <label data-i18n="navigation.analysis"></label>
+            <a href="index.html#relatorios"><span data-i18n="navigation.reports"></span></a>
+            <a href="index.html#insights"><span data-i18n="navigation.insights"></span></a>
         </nav>
 
         <div class="rodape-lateral">
-            <a class="ativo" href="configuracoes.html">⚙ <span>Configurações</span></a>
+            <a class="ativo" href="configuracoes.html">⚙ <span data-i18n="navigation.settings"></span></a>
 
             <div class="perfil">
                 <b>FL</b>
                 <div>
                     <strong>Felipe Leone</strong>
-                    <small>Produtor</small>
+                    <small data-i18n="profile.producer"></small>
                 </div>
             </div>
         </div>
@@ -55,7 +54,9 @@
             <button id="menu" class="menu-mobile">☰</button>
 
             <div class="trilha">
-                Espaço de trabalho <b>/</b> <strong>Configurações</strong>
+                <span data-i18n="workspace.name"></span>
+                <b>/</b>
+                <strong data-i18n="navigation.settings"></strong>
             </div>
 
             <div class="logo-mobile">
@@ -69,123 +70,137 @@
 
         <section class="introducao">
             <div>
-                <p>ESPAÇO DE TRABALHO</p>
-                <h1>Configurações</h1>
-                <span>Gerencie preferências, fontes de dados e acesso.</span>
+                <p data-i18n="configuracoes.workspaceLabel"></p>
+                <h1 data-i18n="configuracoes.heading"></h1>
+                <span data-i18n="configuracoes.description"></span>
             </div>
         </section>
 
         <section class="layout-configuracoes">
             <nav class="nav-configuracoes">
-                <a class="ativo" href="#espaco-trabalho">Espaço de trabalho</a>
-                <a href="#aparencia">Aparência</a>
-                <a href="#dados">Fontes de dados</a>
-                <a href="#notificacoes">Notificações</a>
+                <a class="ativo" href="#espaco-trabalho" data-i18n="configuracoes.workspaceTab"></a>
+                <a href="#aparencia" data-i18n="configuracoes.appearanceTab"></a>
+                <a href="#dados" data-i18n="configuracoes.dataTab"></a>
+                <a href="#notificacoes" data-i18n="configuracoes.notificationsTab"></a>
             </nav>
 
             <div class="conteudo-configuracoes">
                 <article class="painel cartao-configuracoes" id="espaco-trabalho">
                     <div class="painel-cabecalho">
                         <div>
-                            <p>ESPAÇO DE TRABALHO</p>
-                            <h2>Informações gerais</h2>
-                            <span>Dados utilizados para identificar seu ambiente de análise.</span>
+                            <p data-i18n="configuracoes.workspaceLabel"></p>
+                            <h2 data-i18n="configuracoes.generalInfo"></h2>
+                            <span data-i18n="configuracoes.generalInfoDescription"></span>
                         </div>
                     </div>
 
                     <div class="formulario">
                         <label>
-                            Nome do espaço de trabalho
+                            <span data-i18n="configuracoes.workspaceName"></span>
                             <input value="SoundFy Studio">
                         </label>
 
                         <label>
-                            Responsável
+                            <span data-i18n="configuracoes.responsible"></span>
                             <input value="Felipe Leone">
                         </label>
 
                         <label class="completo">
-                            Descrição
-                            <textarea>Plataforma de inteligência para análise de tendências e oportunidades do mercado musical.</textarea>
+                            <span data-i18n="configuracoes.descriptionLabel"></span>
+                            <textarea data-i18n-placeholder="configuracoes.workspaceDescription">Plataforma de inteligência para análise de tendências e oportunidades do mercado musical.</textarea>
                         </label>
                     </div>
 
                     <div class="salvar">
-                        <button class="contorno">Cancelar</button>
-                        <button class="primario">Salvar alterações</button>
+                        <button class="contorno" data-i18n="common.cancel"></button>
+                        <button class="primario" data-i18n="configuracoes.saveChanges"></button>
                     </div>
                 </article>
 
                 <article class="painel cartao-configuracoes" id="aparencia">
                     <div class="painel-cabecalho">
                         <div>
-                            <p>INTERFACE</p>
-                            <h2>Aparência</h2>
-                            <span>Escolha a aparência do SoundFy Intelligence.</span>
+                            <p data-i18n="configuracoes.interfaceLabel"></p>
+                            <h2 data-i18n="configuracoes.appearance"></h2>
+                            <span data-i18n="configuracoes.appearanceDescription"></span>
                         </div>
                     </div>
 
                     <div class="opcoes-tema">
                         <button class="escolha-tema" data-theme-choice="dark">
                             <i class="previa previa-escura"></i>
-                            <strong>Escuro</strong>
-                            <small>Visual executivo e contraste alto.</small>
+                            <strong data-i18n="configuracoes.dark"></strong>
+                            <small data-i18n="configuracoes.darkDescription"></small>
                         </button>
 
                         <button class="escolha-tema" data-theme-choice="light">
                             <i class="previa previa-clara"></i>
-                            <strong>Claro</strong>
-                            <small>Interface limpa para ambientes claros.</small>
+                            <strong data-i18n="configuracoes.light"></strong>
+                            <small data-i18n="configuracoes.lightDescription"></small>
                         </button>
+                    </div>
+
+                    <div class="configuracao">
+                        <div>
+                            <strong data-i18n="configuracoes.language"></strong>
+                            <small data-i18n="configuracoes.languageDescription"></small>
+                        </div>
+
+                        <select id="language">
+                            <option value="pt" data-i18n="configuracoes.portuguese"></option>
+                            <option value="en" data-i18n="configuracoes.english"></option>
+                            <option value="es" data-i18n="configuracoes.spanish"></option>
+                        </select>
                     </div>
                 </article>
 
                 <article class="painel cartao-configuracoes" id="dados">
                     <div class="painel-cabecalho">
                         <div>
-                            <p>DADOS</p>
-                            <h2>Fontes de dados</h2>
+                            <p data-i18n="configuracoes.dataLabel"></p>
+                            <h2 data-i18n="configuracoes.dataSources"></h2>
                         </div>
                     </div>
 
                     <div class="configuracao">
                         <div>
-                            <strong>Consumo de áudio</strong>
-                            <small>Reproduções e comportamento de escuta.</small>
+                            <strong data-i18n="configuracoes.audioConsumption"></strong>
+                            <small data-i18n="configuracoes.audioConsumptionDescription"></small>
                         </div>
-                        <em>Ativa</em>
+                        <em data-i18n="configuracoes.active"></em>
                     </div>
 
                     <div class="configuracao">
                         <div>
-                            <strong>Buscas</strong>
-                            <small>Termos pesquisados e evolução do interesse.</small>
+                            <strong data-i18n="configuracoes.searches"></strong>
+                            <small data-i18n="configuracoes.searchesDescription"></small>
                         </div>
-                        <em>Ativa</em>
+                        <em data-i18n="configuracoes.active"></em>
                     </div>
 
                     <div class="configuracao">
                         <div>
-                            <strong>Interações</strong>
-                            <small>Curtidas e sinais de interesse.</small>
+                            <strong data-i18n="configuracoes.interactions"></strong>
+                            <small data-i18n="configuracoes.interactionsDescription"></small>
                         </div>
-                        <em>Ativa</em>
+                        <em data-i18n="configuracoes.active"></em>
                     </div>
                 </article>
 
                 <article class="painel cartao-configuracoes" id="notificacoes">
                     <div class="painel-cabecalho">
                         <div>
-                            <p>ALERTAS</p>
-                            <h2>Notificações</h2>
+                            <p data-i18n="configuracoes.alertsLabel"></p>
+                            <h2 data-i18n="configuracoes.notifications"></h2>
                         </div>
                     </div>
 
                     <div class="configuracao">
                         <div>
-                            <strong>Novas oportunidades</strong>
-                            <small>Avise quando uma tendência atingir alta relevância.</small>
+                            <strong data-i18n="configuracoes.newOpportunities"></strong>
+                            <small data-i18n="configuracoes.newOpportunitiesDescription"></small>
                         </div>
+
                         <label class="alternador">
                             <input type="checkbox" checked>
                             <i></i>
@@ -194,9 +209,10 @@
 
                     <div class="configuracao">
                         <div>
-                            <strong>Relatórios concluídos</strong>
-                            <small>Avise quando uma análise estiver pronta.</small>
+                            <strong data-i18n="configuracoes.completedReports"></strong>
+                            <small data-i18n="configuracoes.completedReportsDescription"></small>
                         </div>
+
                         <label class="alternador">
                             <input type="checkbox" checked>
                             <i></i>
@@ -207,6 +223,17 @@
         </section>
     </main>
 
-    <script src="../JS/script.js"></script>
+   <script src="../JS/i18n.js"></script>
+<script src="../JS/translate.js"></script>
+<script>
+    let language = document.querySelector("#language")
+
+    language.value = localStorage.getItem("soundfy-language") || "pt"
+
+    language.addEventListener("change", function () {
+        changeLanguage(this.value)
+    })
+</script>
+<script src="../JS/script.js"></script>
 </body>
 </html>

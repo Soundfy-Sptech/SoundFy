@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoundFy</title>
+    <title data-i18n="home.title">SoundFy</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,30 +17,41 @@
     <div class="container">
         <div class="container-hero">
             <div class="titulo">
-                <span>INTELIGÊNCIA MUSICAL PARA FESTIVAIS</span>
+                <span data-i18n="home.marketLabel">INTELIGÊNCIA MUSICAL PARA FESTIVAIS</span>
             </div>
 
             <div class="titulo-principal">
-                <span>Transforme dados musicais em decisões mais <span class="texto-gradiente">estratégicas</span></span>
+                <span>
+                    <span data-i18n="home.heading">Transforme dados musicais em decisões mais</span>
+                    <span class="texto-gradiente" data-i18n="home.headingHighlight">estratégicas</span>
+                </span>
             </div>
 
             <div class="texto-hero">
-                <span>Acompanhe gêneros em ascensão, picos de busca e oportunidades por região para fechar o line-up certo.</span>
+                <span data-i18n="home.description">
+                    Acompanhe gêneros em ascensão, picos de busca e oportunidades por região para fechar o line-up certo.
+                </span>
             </div>
 
             <div class="botao-hero">
-                <button onclick="window.location.href='./cadastro.html'">Começar <span>→</span></button>
+                <button onclick="window.location.href='./cadastro.html'">
+                    <span data-i18n="home.start">Começar</span>
+                    <span>→</span>
+                </button>
             </div>
 
             <div class="texto-apoio">
-                <span>Sem custo para começar · dados atualizados semanalmente</span>
+                <span data-i18n="home.supportText">
+                    Sem custo para começar · dados atualizados semanalmente
+                </span>
             </div>
         </div>
+
         <div class="container-mini-dash">
             <div class="mini-dash-cartao">
                 <div class="mini-dash-selo">
                     <strong>+42,8%</strong>
-                    <small>Brazilian Phonk · SP</small>
+                    <small data-i18n="home.phonk">Brazilian Phonk · SP</small>
                 </div>
 
                 <div class="mini-dash-topo">
@@ -49,20 +60,23 @@
                         <span></span>
                         <span></span>
                     </div>
-                    <p>SoundFy · Dashboard</p>
+
+                    <p data-i18n="home.dashboard">SoundFy · Dashboard</p>
                 </div>
 
                 <div class="mini-dash-indicadores">
                     <div class="mini-dash-indicador destaque">
-                        <small>Crescimento</small>
+                        <small data-i18n="home.growth">Crescimento</small>
                         <strong>+18,7%</strong>
                     </div>
+
                     <div class="mini-dash-indicador">
-                        <small>Gêneros</small>
+                        <small data-i18n="home.genres">Gêneros</small>
                         <strong>48</strong>
                     </div>
+
                     <div class="mini-dash-indicador">
-                        <small>Regiões</small>
+                        <small data-i18n="home.regions">Regiões</small>
                         <strong>27</strong>
                     </div>
                 </div>
@@ -80,6 +94,8 @@
             </div>
         </div>
     </div>
+
+    <script src="../JS/translate.js"></script>
 </body>
 
 </html>
