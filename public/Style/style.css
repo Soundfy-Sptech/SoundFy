@@ -563,6 +563,7 @@ header {
     font-weight: 700;
 }
 
+
 .explicacao-grafico {
     display: flex;
     flex-direction: column;
@@ -1072,13 +1073,13 @@ header {
 }
 
 .configuracao strong {
-    font-size: 8px;
+    font-size: 0.85rem;
 }
 
 .configuracao small {
     margin-top: 3px;
     color: var(--cinza);
-    font-size: 7px;
+    font-size: 0.65rem;
 }
 
 .configuracao > em {
@@ -1257,6 +1258,14 @@ header {
 .compromisso-titulo {
     font-size: 9px;
     font-weight: 800;
+}
+
+.idioma-select{
+    background-color: #160f22;
+    width: 120px;
+    height: 30px;
+    border-radius: 8px;
+    color: white;
 }
 
 .compromisso-status {
