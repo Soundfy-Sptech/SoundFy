@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundFy Intelligence — Regiões</title>
+    <link rel="stylesheet" href="../Style/style.css">
+</head>
+
+<body>
+    <aside class="barra-lateral">
+        <a class="logo" href="index.html">
+            <b>S</b>
+            <span>Sound<span>Fy</span><small>INTELLIGENCE</small></span>
+        </a>
+
+        <div class="espaco-trabalho">
+            <b>ST</b>
+            <div>
+                <strong>SoundFy Studio</strong>
+                <small>Espaço de trabalho profissional</small>
+            </div>
+        </div>
+
+        <nav>
+            <label>VISÃO GERAL</label>
+            <a href="index.html">▦ <span>Dashboard</span></a>
+            <a href="index.html#tendencias">⌁ <span>Tendências</span></a>
+            <a href="index.html#generos">◉ <span>Gêneros</span></a>
+            <a class="ativo" href="regioes.html">⌖ <span>Regiões</span></a>
+
+            <label>PRODUTOR</label>
+            <a href="agenda.html">◷ <span>Agenda</span></a>
+
+            <label>ANÁLISES</label>
+            <a href="index.html#relatorios">▤ <span>Relatórios</span></a>
+            <a href="index.html#insights">✦ <span>Insights</span></a>
+        </nav>
+
+        <div class="rodape-lateral">
+            <a href="configuracoes.html">⚙ <span>Configurações</span></a>
+
+            <div class="plano">
+                <b>✦</b>
+                <div>
+                    <strong>Plano Pro</strong>
+                    <small>Dados atualizados</small>
+                </div>
+            </div>
+
+            <div class="perfil">
+                <b>FL</b>
+                <div>
+                    <strong>Felipe Leone</strong>
+                    <small>Produtor</small>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main>
+        <header>
+            <button id="menu" class="menu-mobile">☰</button>
+
+            <div class="trilha">
+                Espaço de trabalho <b>/</b> <strong>Regiões</strong>
+            </div>
+
+            <div class="logo-mobile">
+                Sound<span>Fy</span>
+            </div>
+
+            <div class="acoes">
+                <button class="sino">♢<i></i></button>
+                <b class="avatar-topo">FL</b>
+            </div>
+        </header>
+
+        <section class="introducao">
+            <div>
+                <p>GEOGRAFIA</p>
+                <h1>Buscar por região</h1>
+                <span>Explore gêneros, artistas e cidades em alta em cada região do Brasil.</span>
+            </div>
+        </section>
+
+        <section class="painel busca-regiao">
+            <label for="campoRegiao">Região</label>
+            <div class="busca-regiao-linha">
+                <input id="campoRegiao" type="text" list="listaRegioes" placeholder="Digite: Norte, Nordeste, Centro-Oeste, Sudeste ou Sul" value="Sudeste">
+                <datalist id="listaRegioes">
+                    <option value="Norte">
+                    <option value="Nordeste">
+                    <option value="Centro-Oeste">
+                    <option value="Sudeste">
+                    <option value="Sul">
+                </datalist>
+                <button id="botaoBuscarRegiao" class="primario">Buscar →</button>
+            </div>
+            <p id="mensagemRegiao" class="estado-vazio" style="display:none;"></p>
+        </section>
+
+        <div id="resultadoRegiao">
+            <section class="indicadores indicadores-regiao">
+                <article>
+                    <div><b><span style="font-size: 20px;">Pontuação total</span></b></div>
+                    <strong id="kpiPontuacao">—</strong>
+                </article>
+                <article>
+                    <div><b><span style="font-size: 20px;">Registros</span></b></div>
+                    <strong id="kpiRegistros">—</strong>
+                </article>
+                <article>
+                    <div><b><span style="font-size: 20px;">Cidades</span></b></div>
+                    <strong id="kpiCidades">—</strong>
+                </article>
+                <article>
+                    <div><b><span style="font-size: 20px;">Músicas</span></b></div>
+                    <strong id="kpiMusicas">—</strong>
+                </article>
+                <article>
+                    <div><b><span style="font-size: 20px;">Média por cidade</span></b></div>
+                    <strong id="kpiMedia">—</strong>
+                </article>
+            </section>
+
+            <section class="grade">
+                <article class="painel">
+                    <div class="painel-cabecalho">
+                        <div>
+                            <p>RANKING</p>
+                            <h2 id="tituloGenerosRegiao">Gêneros em alta — Sudeste</h2>
+                        </div>
+                    </div>
+                    <div id="listaGenerosRegiao"></div>
+                </article>
+
+                <article class="painel">
+                    <div class="painel-cabecalho">
+                        <div>
+                            <p>RANKING</p>
+                            <h2 id="tituloArtistasRegiao">Artistas em alta — Sudeste</h2>
+                        </div>
+                    </div>
+                    <div id="listaArtistasRegiao"></div>
+                </article>
+            </section>
+
+            <section class="painel">
+                <div class="painel-cabecalho">
+                    <div>
+                        <p>GEOGRAFIA</p>
+                        <h2 id="tituloCidadesRegiao">Cidades analisadas — Sudeste</h2>
+                    </div>
+                </div>
+                <div id="listaCidadesRegiao"></div>
+            </section>
+        </div>
+    </main>
+
+    <script src="../JS/script.js"></script>
+</body>
+</html>

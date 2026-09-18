@@ -563,7 +563,6 @@ header {
     font-weight: 700;
 }
 
-
 .explicacao-grafico {
     display: flex;
     flex-direction: column;
@@ -867,6 +866,50 @@ header {
     font-size: 8px;
 }
 
+.busca-regiao {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.busca-regiao > label {
+    color: var(--cinza);
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.busca-regiao-linha {
+    display: flex;
+    gap: 10px;
+}
+
+.busca-regiao-linha input {
+    flex: 1;
+    border: 1px solid var(--borda);
+    outline: 0;
+    background: var(--superficie-2);
+    color: var(--texto);
+    border-radius: 7px;
+    padding: 10px 12px;
+    font-size: 10px;
+    font-family: "Manrope", sans-serif;
+}
+
+.indicadores-regiao {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+@media (max-width: 900px) {
+    .indicadores-regiao {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .busca-regiao-linha {
+        flex-direction: column;
+    }
+}
+
 .relatorios {
     margin-top: 0;
 }
@@ -1073,13 +1116,13 @@ header {
 }
 
 .configuracao strong {
-    font-size: 0.85rem;
+    font-size: 8px;
 }
 
 .configuracao small {
     margin-top: 3px;
     color: var(--cinza);
-    font-size: 0.65rem;
+    font-size: 7px;
 }
 
 .configuracao > em {
@@ -1258,14 +1301,6 @@ header {
 .compromisso-titulo {
     font-size: 9px;
     font-weight: 800;
-}
-
-.idioma-select{
-    background-color: #160f22;
-    width: 120px;
-    height: 30px;
-    border-radius: 8px;
-    color: white;
 }
 
 .compromisso-status {
