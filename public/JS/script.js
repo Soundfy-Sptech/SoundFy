@@ -5,10 +5,6 @@ const barraLateral = document.querySelector(".barra-lateral");
 function definirTema(nomeTema) {
     document.documentElement.setAttribute("data-theme", nomeTema);
 
-    if (botaoTema) {
-        botaoTema.textContent = nomeTema === "light" ? "☾" : "☀";
-    }
-
     document.querySelectorAll("[data-theme-choice]").forEach(function(opcao) {
         opcao.classList.toggle(
             "selecionado",
