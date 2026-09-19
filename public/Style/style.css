@@ -101,7 +101,7 @@ a {
 .logo small {
     display: block;
     color: var(--cinza);
-    font-size: 6px;
+    font-size: 10px;
     letter-spacing: .16em;
 }
 
@@ -129,7 +129,7 @@ a {
 .espaco-trabalho > b {
     width: 34px;
     height: 34px;
-    font-size: 9px;
+    font-size: 13px;
 }
 
 .espaco-trabalho strong,
@@ -141,14 +141,14 @@ a {
 
 .espaco-trabalho strong,
 .perfil strong {
-    font-size: 9px;
+    font-size: 13px;
 }
 
 .espaco-trabalho small,
 .perfil small {
     margin-top: 3px;
     color: var(--cinza);
-    font-size: 7px;
+    font-size: 11px;
 }
 
 nav {
@@ -159,7 +159,7 @@ nav {
 nav label {
     margin: 14px 10px 5px;
     color: #646b74;
-    font-size: 7px;
+    font-size: 11px;
     font-weight: 800;
     letter-spacing: .15em;
 }
@@ -172,7 +172,7 @@ nav a {
     border-radius: 7px;
     color: #9aa1aa;
     font-weight: 600;
-    font-size: 10px;
+    font-size: 14px;
 }
 
 nav a:hover {
@@ -200,7 +200,7 @@ nav a:first-letter {
     margin-bottom: 9px;
     color: #9aa1aa;
     border-radius: 7px;
-    font-size: 10px;
+    font-size: 14px;
     font-weight: 600;
 }
 
@@ -231,12 +231,12 @@ nav a:first-letter {
 }
 
 .plano strong {
-    font-size: 9px;
+    font-size: 13px;
 }
 
 .plano small {
     color: var(--cinza);
-    font-size: 7px;
+    font-size: 11px;
     margin-top: 2px;
 }
 
@@ -252,7 +252,7 @@ nav a:first-letter {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    font-size: 8px;
+    font-size: 12px;
 }
 
 main {
@@ -271,7 +271,7 @@ header {
 
 .trilha {
     color: var(--cinza);
-    font-size: 9px;
+    font-size: 13px;
 }
 
 .trilha b {
@@ -315,7 +315,7 @@ header {
     border-radius: 50%;
     background: var(--rosa);
     color: white;
-    font-size: 8px;
+    font-size: 12px;
 }
 
 .menu-mobile,
@@ -335,7 +335,7 @@ header {
 .painel-cabecalho p,
 .info-agenda p {
     color: var(--cinza);
-    font-size: 7px;
+    font-size: 11px;
     font-weight: 800;
     letter-spacing: .16em;
 }
@@ -364,7 +364,7 @@ header {
     color: var(--texto);
     border: 1px solid var(--borda);
     border-radius: 7px;
-    font-size: 9px;
+    font-size: 13px;
     font-weight: 700;
 }
 
@@ -376,7 +376,7 @@ header {
     background: linear-gradient(120deg, var(--roxo), var(--rosa));
     color: #fff;
     border-radius: 7px;
-    font-size: 9px;
+    font-size: 13px;
     font-weight: 800;
 }
 
@@ -399,7 +399,7 @@ header {
     justify-content: space-between;
     align-items: center;
     color: var(--cinza);
-    font-size: 9px;
+    font-size: 13px;
 }
 
 .icone {
@@ -441,7 +441,7 @@ header {
 
 .indicadores small {
     color: var(--cinza);
-    font-size: 8px;
+    font-size: 12px;
 }
 
 .indicadores em {
@@ -520,13 +520,13 @@ header {
     padding-top: 10px;
     margin-top: 9px;
     border-top: 1px solid var(--borda);
-    font-size: 8px;
+    font-size: 12px;
     color: var(--cinza);
 }
 
 .prioridade b {
     color: var(--dourado);
-    font-size: 10px;
+    font-size: 14px;
 }
 
 .grade {
@@ -559,7 +559,7 @@ header {
 
 .painel-cabecalho a {
     color: var(--cinza);
-    font-size: 8px;
+    font-size: 12px;
     font-weight: 700;
 }
 
@@ -575,12 +575,12 @@ header {
 }
 
 .explicacao-grafico strong {
-    font-size: 10px;
+    font-size: 14px;
 }
 
 .explicacao-grafico span {
     color: var(--cinza);
-    font-size: 8px;
+    font-size: 12px;
 }
 
 .legenda {
@@ -588,7 +588,7 @@ header {
     gap: 14px;
     margin-top: 14px;
     color: var(--cinza);
-    font-size: 8px;
+    font-size: 12px;
 }
 
 .legenda span {
@@ -625,7 +625,7 @@ header {
     justify-content: space-between;
     padding: 5px 0 27px;
     color: var(--cinza);
-    font-size: 7px;
+    font-size: 11px;
 }
 
 .grafico-area {
@@ -676,7 +676,7 @@ header {
     display: flex;
     justify-content: space-between;
     color: var(--cinza);
-    font-size: 7px;
+    font-size: 11px;
 }
 
 .resumo-tendencia {
@@ -695,11 +695,11 @@ header {
 
 .resumo-tendencia span {
     color: var(--cinza);
-    font-size: 7px;
+    font-size: 11px;
 }
 
 .resumo-tendencia strong {
-    font-size: 10px;
+    font-size: 14px;
 }
 
 .insight mark {
@@ -707,7 +707,7 @@ header {
     border-radius: 4px;
     background: rgba(124,58,237,.09);
     color: var(--roxo);
-    font-size: 6px;
+    font-size: 10px;
     font-weight: 800;
 }
 
@@ -741,14 +741,14 @@ header {
 
 .corpo-insight small {
     color: var(--cinza);
-    font-size: 7px;
+    font-size: 11px;
     font-weight: 400;
 }
 
 .corpo-insight p {
     margin-top: 11px;
     color: var(--cinza);
-    font-size: 8px;
+    font-size: 12px;
     line-height: 1.55;
 }
 
@@ -762,14 +762,14 @@ header {
 
 .meta span {
     color: var(--cinza);
-    font-size: 7px;
+    font-size: 11px;
 }
 
 .meta strong {
     display: block;
     margin-top: 4px;
     color: var(--texto);
-    font-size: 9px;
+    font-size: 13px;
 }
 
 .texto-positivo {
@@ -800,7 +800,7 @@ header {
 
 .genero > span {
     color: var(--cinza);
-    font-size: 7px;
+    font-size: 11px;
 }
 
 .genero > i {
@@ -821,18 +821,18 @@ header {
 }
 
 .genero strong {
-    font-size: 8px;
+    font-size: 12px;
 }
 
 .genero small {
     margin-top: 3px;
     color: var(--cinza);
-    font-size: 7px;
+    font-size: 11px;
 }
 
 .genero > b {
     color: var(--roxo);
-    font-size: 8px;
+    font-size: 12px;
 }
 
 .regiao {
@@ -844,7 +844,7 @@ header {
 }
 
 .regiao strong {
-    font-size: 8px;
+    font-size: 12px;
 }
 
 .regiao > span {
@@ -863,7 +863,7 @@ header {
 
 .regiao > b {
     color: var(--roxo);
-    font-size: 8px;
+    font-size: 12px;
 }
 
 .busca-regiao {
@@ -875,7 +875,7 @@ header {
 
 .busca-regiao > label {
     color: var(--cinza);
-    font-size: 9px;
+    font-size: 13px;
     font-weight: 700;
 }
 
@@ -892,7 +892,7 @@ header {
     color: var(--texto);
     border-radius: 7px;
     padding: 10px 12px;
-    font-size: 10px;
+    font-size: 14px;
     font-family: "Manrope", sans-serif;
 }
 
@@ -926,18 +926,18 @@ header {
     margin-top: 16px;
     padding: 0 8px 8px;
     color: var(--cinza);
-    font-size: 7px;
+    font-size: 11px;
     text-transform: uppercase;
 }
 
 .relatorio {
     padding: 10px 8px;
     border-top: 1px solid var(--borda);
-    font-size: 7px;
+    font-size: 11px;
 }
 
 .relatorio strong {
-    font-size: 8px;
+    font-size: 12px;
 }
 
 .relatorio span {
@@ -950,7 +950,7 @@ header {
     background: rgba(124,58,237,.08);
     padding: 4px 5px;
     border-radius: 4px;
-    font-size: 6px;
+    font-size: 10px;
     width: max-content;
     font-weight: 800;
 }
@@ -974,7 +974,7 @@ header {
 }
 
 .nav-configuracoes a {
-    font-size: 9px;
+    font-size: 13px;
     padding: 10px;
     border-radius: 7px;
 }
@@ -997,7 +997,7 @@ header {
     display: block;
     margin-top: 7px;
     color: var(--cinza);
-    font-size: 8px;
+    font-size: 12px;
 }
 
 .formulario {
@@ -1012,7 +1012,7 @@ header {
     display: grid;
     gap: 6px;
     color: var(--cinza);
-    font-size: 8px;
+    font-size: 12px;
     font-weight: 700;
 }
 
@@ -1032,7 +1032,7 @@ header {
     color: var(--texto);
     border-radius: 7px;
     padding: 10px;
-    font-size: 9px;
+    font-size: 13px;
 }
 
 .formulario textarea {
@@ -1088,12 +1088,12 @@ header {
 }
 
 .escolha-tema strong {
-    font-size: 8px;
+    font-size: 12px;
     align-self: end;
 }
 
 .escolha-tema small {
-    font-size: 7px;
+    font-size: 11px;
     color: var(--cinza);
 }
 
@@ -1116,13 +1116,13 @@ header {
 }
 
 .configuracao strong {
-    font-size: 8px;
+    font-size: 12px;
 }
 
 .configuracao small {
     margin-top: 3px;
     color: var(--cinza);
-    font-size: 7px;
+    font-size: 11px;
 }
 
 .configuracao > em {
@@ -1131,7 +1131,7 @@ header {
     background: rgba(124,58,237,.09);
     padding: 4px 6px;
     border-radius: 4px;
-    font-size: 6px;
+    font-size: 10px;
     font-weight: 800;
 }
 
@@ -1209,7 +1209,7 @@ header {
 .calendario-semana span {
     text-align: center;
     color: var(--cinza);
-    font-size: 7px;
+    font-size: 11px;
     font-weight: 800;
 }
 
@@ -1241,7 +1241,7 @@ header {
 }
 
 .calendario-numero {
-    font-size: 8px;
+    font-size: 12px;
     font-weight: 700;
 }
 
@@ -1264,7 +1264,7 @@ header {
     border-radius: 12px;
     background: rgba(124,58,237,.09);
     color: var(--roxo);
-    font-size: 8px;
+    font-size: 12px;
     font-weight: 800;
 }
 
@@ -1299,14 +1299,14 @@ header {
 }
 
 .compromisso-titulo {
-    font-size: 9px;
+    font-size: 13px;
     font-weight: 800;
 }
 
 .compromisso-status {
     padding: 3px 5px;
     border-radius: 4px;
-    font-size: 6px;
+    font-size: 10px;
     font-weight: 800;
     background: rgba(124,58,237,.09);
     color: var(--roxo);
@@ -1328,13 +1328,13 @@ header {
     gap: 7px;
     margin-top: 7px;
     color: var(--cinza);
-    font-size: 7px;
+    font-size: 11px;
 }
 
 .compromisso-nota {
     margin-top: 8px;
     color: var(--cinza);
-    font-size: 7px;
+    font-size: 11px;
     line-height: 1.4;
 }
 
@@ -1350,7 +1350,7 @@ header {
     border-radius: 6px;
     background: var(--superficie);
     color: var(--texto);
-    font-size: 7px;
+    font-size: 11px;
     font-weight: 700;
 }
 
@@ -1366,7 +1366,7 @@ header {
     padding: 30px 10px;
     text-align: center;
     color: var(--cinza);
-    font-size: 8px;
+    font-size: 12px;
 }
 
 .info-agenda {
@@ -1386,7 +1386,7 @@ header {
     display: block;
     margin-top: 7px;
     color: var(--cinza);
-    font-size: 8px;
+    font-size: 12px;
 }
 
 .estatisticas-agenda {
@@ -1407,7 +1407,7 @@ header {
 
 .estatisticas-agenda span {
     color: var(--cinza);
-    font-size: 7px;
+    font-size: 11px;
 }
 
 .modal {
@@ -1444,7 +1444,7 @@ header {
 
 .modal-cabecalho p {
     color: var(--cinza);
-    font-size: 7px;
+    font-size: 11px;
     font-weight: 800;
     letter-spacing: .16em;
 }
@@ -1688,7 +1688,7 @@ header {
     }
 
     .calendario-semana span {
-        font-size: 6px;
+        font-size: 10px;
     }
 
     .calendario {
