@@ -64,6 +64,14 @@ bugfix/correcao-login
 
 ## **1. Atualizar a `development`**
 
+Primeira vez lendo o README? 
+faça primeiro de tudo: 
+```bash
+git fetch origin (PARA BUSCAR O QUE HÁ DE REMOTO NO GITHUB PARA A SUA MÁQUINA)
+git checkout -b development origin/development (CRIAR A DEVELOPMENT NA SUA MÁQUINA)
+```
+Após finalizado, siga o resto: 
+
 Antes de iniciar uma nova tarefa:
 
 ```bash
