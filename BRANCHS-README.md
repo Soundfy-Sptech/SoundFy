@@ -62,11 +62,19 @@ bugfix/correcao-login
 
 ---
 
-## **1. Atualizar a `development`**
+## **1. Criar a `development` e atualizar**
+
+No começo de tudo, na primeira vez que você ler este README, faça: 
+```bash
+git fetch origin   (PARA ATUALIZAR O QUE HÁ DE REMOTO NO GITHUB PARA A SUA MÁQUINA)
+git checkout -b development origin/development (PARA CRIAR A BRANCH DEVELOPMENT NA SUA MÁQUINA)
+```
+Depois disso, você pode seguir com este tutorial: 
 
 Antes de iniciar uma nova tarefa:
 
 ```bash
+
 git checkout development
 git pull origin development
 ```
