@@ -13,6 +13,9 @@ function definirTema(nomeTema) {
     });
 }
 
+
+
+
 const temaSalvo = localStorage.getItem("soundfy-theme") || "dark";
 definirTema(temaSalvo);
 
