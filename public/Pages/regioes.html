@@ -24,21 +24,20 @@
 
         <nav>
             <label>VISÃO GERAL</label>
-            <a href="index.html">▦ <span>Dashboard</span></a>
-            <a href="index.html#tendencias">⌁ <span>Tendências</span></a>
-            <a href="index.html#generos">◉ <span>Gêneros</span></a>
-            <a class="ativo" href="regioes.html">⌖ <span>Regiões</span></a>
+            <a href="index.html"><span>Dashboard</span></a>
+            <a href="index.html#tendencias"><span>Tendências</span></a>
+            <a href="index.html#generos"><span>Gêneros</span></a>
+            <a class="ativo" href="regioes.html"><span>Regiões</span></a>
 
             <label>PRODUTOR</label>
-            <a href="agenda.html">◷ <span>Agenda</span></a>
 
             <label>ANÁLISES</label>
-            <a href="index.html#relatorios">▤ <span>Relatórios</span></a>
-            <a href="index.html#insights">✦ <span>Insights</span></a>
+            <a href="index.html#relatorios"><span>Relatórios</span></a>
+            <a href="index.html#insights"><span>Insights</span></a>
         </nav>
 
         <div class="rodape-lateral">
-            <a href="configuracoes.html">⚙ <span>Configurações</span></a>
+            <a href="configuracoes.html">⚙<span>Configurações</span></a>
 
             <div class="plano">
                 <b>✦</b>
@@ -70,10 +69,36 @@
                 Sound<span>Fy</span>
             </div>
 
-            <div class="acoes">
-                <button class="sino">♢<i></i></button>
-                <b class="avatar-topo">FL</b>
+        <div class="acoes">
+    <button class="sino">♢<i></i></button>
+
+    <div class="menu-perfil-container">
+        <button
+            class="avatar-topo"
+            id="perfil-menu-botao"
+            aria-label="Abrir menu do perfil"
+            aria-expanded="false"
+            aria-controls="perfil-menu"
+        >
+            FL
+        </button>
+
+        <div class="menu-perfil" id="perfil-menu" hidden>
+            <div class="menu-perfil-info">
+                <strong data-i18n="profile.name">Felipe Leone</strong>
+                <small data-i18n="profile.producer">Produtor</small>
             </div>
+
+            <a href="configuracoes.html" data-i18n="navigation.settings">
+                Configurações
+            </a>
+
+            <button type="button" id="perfil-sair" data-i18n="profile.logout">
+                Sair
+            </button>
+        </div>
+    </div>
+</div>
         </header>
 
         <section class="introducao">
@@ -159,5 +184,7 @@
     </main>
 
     <script src="../JS/script.js"></script>
+    <script src="../JS/menu-perfil.js"></script>
+    <script src="../JS/sidebar-perfil.js"></script>
 </body>
 </html>

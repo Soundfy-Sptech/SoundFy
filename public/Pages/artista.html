@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SoundFy | Perfil do Artista</title>
+
+    <link rel="stylesheet" href="../Style/style.css">
+    <link rel="stylesheet" href="../Style/artista.css">
+</head>
+
+<body>
+    <aside class="barra-lateral">
+        <a class="logo" href="index.html">
+            <b>S</b>
+            <span>Sound<span>Fy</span></span>
+        </a>
+
+        <div class="espaco-trabalho">
+            <b>ST</b>
+            <div>
+                <strong>SoundFy Studio</strong>
+                <small>Espaço de trabalho profissional</small>
+            </div>
+            <i>⌄</i>
+        </div>
+
+        <nav>
+            <label>VISÃO GERAL</label>
+            <a href="index.html">Dashboard</a>
+            <a href="index.html#tendencias">Tendências</a>
+            <a href="index.html#generos">Gêneros</a>
+            <a href="regioes.html">Regiões</a>
+
+            <label>ANÁLISES</label>
+            <a class="ativo" href="artista.html">Artistas</a>
+            <a href="index.html#relatorios">Relatórios</a>
+            <a href="index.html#insights">Insights</a>
+        </nav>
+
+        <div class="rodape-lateral">
+            <a href="configuracoes.html">⚙ Configurações</a>
+
+            <div class="plano">
+                <b>✦</b>
+                <div>
+                    <strong>Plano Pro</strong>
+                    <small>Dados atualizados</small>
+                </div>
+            </div>
+
+            <div class="perfil">
+                <b>FL</b>
+                <div>
+                    <strong>Felipe Leone</strong>
+                    <small>Produtor</small>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main>
+        <header>
+            <button id="menu" class="menu-mobile">☰</button>
+
+            <div class="trilha">
+                <span>Espaço de trabalho</span>
+                <b>/</b>
+                <strong>Perfil do artista</strong>
+            </div>
+
+            <div class="logo-mobile">
+                Sound<span>Fy</span>
+            </div>
+
+         <div class="acoes">
+    <button class="sino">♢<i></i></button>
+
+    <div class="menu-perfil-container">
+        <button
+            class="avatar-topo"
+            id="perfil-menu-botao"
+            aria-label="Abrir menu do perfil"
+            aria-expanded="false"
+            aria-controls="perfil-menu"
+        >
+            FL
+        </button>
+
+        <div class="menu-perfil" id="perfil-menu" hidden>
+            <div class="menu-perfil-info">
+                <strong data-i18n="profile.name">Felipe Leone</strong>
+                <small data-i18n="profile.producer">Produtor</small>
+            </div>
+
+            <a href="configuracoes.html" data-i18n="navigation.settings">
+                Configurações
+            </a>
+
+            <button type="button" id="perfil-sair" data-i18n="profile.logout">
+                Sair
+            </button>
+        </div>
+    </div>
+</div>
+        </header>
+
+        <section class="introducao">
+            <div>
+                <p>EXPLORADOR MUSICAL</p>
+                <h1>Perfil Analítico do Artista</h1>
+                <span>
+                    Explore o desempenho, a popularidade e as oportunidades
+                    de artistas do mercado musical.
+                </span>
+            </div>
+        </section>
+
+        <section class="artista-filtros painel">
+            <div>
+                <label for="artista-select">Artista</label>
+                <select id="artista-select">
+                    <option value="artista1">Artista Demonstração</option>
+                    <option value="artista2">Artista Alternativo</option>
+                    <option value="artista3">Artista Emergente</option>
+                </select>
+            </div>
+
+            <span class="demo-aviso">
+                Dados demonstrativos
+            </span>
+        </section>
+
+        <section class="artista-resumo">
+            <article class="painel artista-identidade">
+                <div class="artista-avatar" id="artista-avatar">AD</div>
+
+                <div>
+                    <span class="artista-selo">PERFIL ANALÍTICO</span>
+                    <h2 id="artista-nome">Artista Demonstração</h2>
+                    <p id="artista-genero">Pop · Música brasileira</p>
+                </div>
+            </article>
+
+            <article class="painel artista-kpi">
+                <span>Popularidade</span>
+                <strong id="popularidade">82/100</strong>
+                <small>Índice demonstrativo</small>
+            </article>
+
+            <article class="painel artista-kpi">
+                <span>Crescimento</span>
+                <strong id="crescimento">+12,4%</strong>
+                <small>Variação demonstrativa</small>
+            </article>
+
+            <article class="painel artista-kpi">
+                <span>Faixas analisadas</span>
+                <strong id="faixas">24</strong>
+                <small>Catálogo demonstrativo</small>
+            </article>
+        </section>
+
+        <section class="artista-graficos">
+            <article class="painel">
+                <div class="painel-cabecalho">
+                    <div>
+                        <h2>Evolução da popularidade</h2>
+                        <p>Comparação ilustrativa entre períodos</p>
+                    </div>
+                </div>
+
+                <div class="grafico-artista">
+                    <canvas id="grafico-popularidade"></canvas>
+                </div>
+            </article>
+
+            <article class="painel">
+                <div class="painel-cabecalho">
+                    <div>
+                        <h2>Distribuição por gênero</h2>
+                        <p>Perfil musical ilustrativo</p>
+                    </div>
+                </div>
+
+                <div class="grafico-artista">
+                    <canvas id="grafico-generos"></canvas>
+                </div>
+            </article>
+        </section>
+
+        <section class="painel artista-faixas">
+            <div class="painel-cabecalho">
+                <div>
+                    <h2>Faixas em destaque</h2>
+                    <p>Exemplo de como os dados do catálogo serão apresentados</p>
+                </div>
+            </div>
+
+            <div class="tabela-responsiva">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Faixa</th>
+                            <th>Gênero</th>
+                            <th>Popularidade</th>
+                            <th>Tendência</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tabela-faixas"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="painel artista-insight">
+            <span>INSIGHT ANALÍTICO</span>
+            <h2 id="insight-titulo">Oportunidade de crescimento</h2>
+            <p id="insight-descricao">
+                Os indicadores demonstrativos sugerem espaço para explorar
+                novos públicos e acompanhar a evolução do artista.
+            </p>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../JS/i18n.js"></script>
+    <script src="../JS/translate.js"></script>
+    <script src="../JS/script.js"></script>
+    <script src="../JS/artista.js"></script>
+    <script src="../JS/menu-perfil.js"></script>
+    <script src="../JS/sidebar-perfil.js"></script>
+</body>
+</html>

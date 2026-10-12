@@ -23,34 +23,51 @@
             <i>⌄</i>
         </div>
 
-        <nav>
-            <label data-i18n="navigation.overview"></label>
-            <a class="ativo" href="index.html">
-                <span data-i18n="navigation.dashboard"></span>
-            </a>
-            <a href="#tendencias">
-                <span data-i18n="navigation.trends"></span>
-            </a>
-            <a href="#generos">
-                <span data-i18n="navigation.genres"></span>
-            </a>
-            <a href="./regioes.html">
-                <span data-i18n="navigation.regions"></span>
-            </a>
+      <nav>
+    <label data-i18n="navigation.overview">VISÃO GERAL</label>
 
-            <label data-i18n="navigation.producer"></label>
-            <a href="agenda.html">
-                <span data-i18n="navigation.schedule"></span>
-            </a>
+    <a class="ativo" href="index.html">
+        <span data-i18n="navigation.dashboard">Dashboard</span>
+    </a>
 
-            <label data-i18n="navigation.analysis"></label>
-            <a href="#relatorios">
-                <span data-i18n="navigation.reports"></span>
-            </a>
-            <a href="#insights">
-                <span data-i18n="navigation.insights"></span>
-            </a>
-        </nav>
+    <a href="#tendencias">
+        <span data-i18n="navigation.trends">Tendências</span>
+    </a>
+
+    <a href="#generos">
+        <span data-i18n="navigation.genres">Gêneros</span>
+    </a>
+
+    <a href="regioes.html">
+        <span data-i18n="navigation.regions">Regiões</span>
+    </a>
+
+    <div data-role-section="artist">
+        <label data-i18n="navigation.artistArea">ÁREA DO ARTISTA</label>
+
+        <a href="artista.html">
+            <span data-i18n="navigation.artistProfile">Meu perfil de artista</span>
+        </a>
+    </div>
+
+    <div data-role-section="producer">
+        <label data-i18n="navigation.producerArea">ÁREA DO PRODUTOR</label>
+
+        <a href="produtor.html">
+            <span data-i18n="navigation.production">Área de produção</span>
+        </a>
+    </div>
+
+    <label data-i18n="navigation.analysis">ANÁLISES</label>
+
+    <a href="#relatorios">
+        <span data-i18n="navigation.reports">Relatórios</span>
+    </a>
+
+    <a href="#insights">
+        <span data-i18n="navigation.insights">Insights</span>
+    </a>
+</nav>
 
         <div class="rodape-lateral">
             <a href="configuracoes.html">
@@ -89,10 +106,36 @@
                 Sound<span>Fy</span>
             </div>
 
-            <div class="acoes">
-                <button class="sino">♢<i></i></button>
-                <b class="avatar-topo">FL</b>
+       <div class="acoes">
+    <button class="sino">♢<i></i></button>
+
+    <div class="menu-perfil-container">
+        <button
+            class="avatar-topo"
+            id="perfil-menu-botao"
+            aria-label="Abrir menu do perfil"
+            aria-expanded="false"
+            aria-controls="perfil-menu"
+        >
+            FL
+        </button>
+
+        <div class="menu-perfil" id="perfil-menu" hidden>
+            <div class="menu-perfil-info">
+                <strong data-i18n="profile.name">Felipe Leone</strong>
+                <small data-i18n="profile.producer">Produtor</small>
             </div>
+
+            <a href="configuracoes.html" data-i18n="navigation.settings">
+                Configurações
+            </a>
+
+            <button type="button" id="perfil-sair" data-i18n="profile.logout">
+                Sair
+            </button>
+        </div>
+    </div>
+</div>
         </header>
 
         <section class="introducao">
@@ -103,11 +146,9 @@
             </div>
 
             <div class="botoes-cabecalho">
-                <button class="filtro" data-i18n="index.last30Days"></button>
-                <a class="primario" href="agenda.html">
-                    <span data-i18n="agenda.newAppointment"></span>
-                </a>
+
             </div>
+
         </section>
 
         <section class="indicadores">
@@ -431,5 +472,7 @@
    <script src="../JS/i18n.js"></script>
 <script src="../JS/translate.js"></script>
 <script src="../JS/script.js"></script>
+<script src="../JS/menu-perfil.js"></script>
+<script src="../JS/sidebar-perfil.js"></script>
 </body>
 </html>
