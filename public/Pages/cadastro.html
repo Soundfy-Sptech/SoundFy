@@ -186,54 +186,124 @@
         </div>
     </div>
 
-    <script>
-        function MostrarEntrar() {
-            abaEntrar.className = "ativo"
-            abaCriar.className = ""
-            formEntrar.className = "formulario ativo"
-            formCriar.className = "formulario"
-            dicaEntrar.style.display = "block"
-            dicaCriar.style.display = "none"
-            status.className = "status"
-        }
+<script>
+    function MostrarEntrar() {
+        abaEntrar.className = "ativo"
+        abaCriar.className = ""
+        formEntrar.className = "formulario ativo"
+        formCriar.className = "formulario"
+        dicaEntrar.style.display = "block"
+        dicaCriar.style.display = "none"
+        status.className = "status"
+    }
 
-        function MostrarCriar() {
-            abaCriar.className = "ativo"
-            abaEntrar.className = ""
-            formCriar.className = "formulario ativo"
-            formEntrar.className = "formulario"
-            dicaCriar.style.display = "block"
-            dicaEntrar.style.display = "none"
-            status.className = "status"
-        }
+    function MostrarCriar() {
+        abaCriar.className = "ativo"
+        abaEntrar.className = ""
+        formCriar.className = "formulario ativo"
+        formEntrar.className = "formulario"
+        dicaCriar.style.display = "block"
+        dicaEntrar.style.display = "none"
+        status.className = "status"
+    }
 
-        function ConcluirAcesso(nome) {
-            localStorage.setItem(
-                "soundfy-user",
-                JSON.stringify({
-                    nome: nome || "Produtor"
-                })
-            )
+    function Entrar() {
+        let emailVar = entrarEmail.value
+        let senhaVar = entrarSenha.value
 
-            status.textContent = t("cadastro.successMessage")
+        if (emailVar == "" || senhaVar == "") {
+            status.textContent = "Preencha todos os campos para entrar."
             status.className = "status mostrar"
-
-            setTimeout(function () {
-                window.location.href = "index.html"
-            }, 900)
+            return false;
         }
 
-        function Entrar() {
-            let email = entrarEmail.value
-            ConcluirAcesso(email.split("@")[0])
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json().then(json => {
+                    // Armazena dados na sessão para o sessao.js
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+
+                    status.textContent = "Login realizado com sucesso! Redirecionando..."
+                    status.className = "status mostrar"
+
+                    setTimeout(function () {
+                        window.location.href = "index.html"
+                    }, 1000);
+                });
+            } else {
+                resposta.text().then(texto => {
+                    status.textContent = texto || "Erro ao realizar login."
+                    status.className = "status mostrar"
+                });
+            }
+        }).catch(function (erro) {
+            console.log("Erro na requisição: ", erro);
+            status.textContent = "Houve um erro ao tentar realizar o login."
+            status.className = "status mostrar"
+        });
+
+        return false;
+    }
+
+    function Criar() {
+        let nomeVar = criarNome.value
+        let orgVar = criarOrg.value // Pode ser enviado como telefone ou outro campo adicional
+        let emailVar = criarEmail.value
+        let senhaVar = criarSenha.value
+
+        if (nomeVar == "" || emailVar == "" || senhaVar == "") {
+            status.textContent = "Preencha os campos obrigatórios (Nome, E-mail e Senha)."
+            status.className = "status mostrar"
+            return false;
         }
 
-        function Criar() {
-            let nome = criarNome.value
-            ConcluirAcesso(nome)
-        }
-    </script>
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nomeServer: nomeVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar,
+                telefoneServer: orgVar // Envia a organização/telefone como parâmetro opcional
+            })
+        }).then(function (resposta) {
+            if (resposta.ok) {
+                status.textContent = "Cadastro realizado com sucesso! Redirecionando..."
+                status.className = "status mostrar"
 
+                setTimeout(function () {
+                    MostrarEntrar();
+                }, 1500);
+            } else {
+                resposta.text().then(texto => {
+                    status.textContent = texto || "Erro ao cadastrar."
+                    status.className = "status mostrar"
+                });
+            }
+        }).catch(function (erro) {
+            console.log("Erro na requisição: ", erro);
+            status.textContent = "Houve um erro ao tentar realizar o cadastro."
+            status.className = "status mostrar"
+        });
+
+        return false;
+    }
+</script>
+
+    <script src="../JS/sessao.js"></script>
     <script src="../JS/i18n.js"></script>
     <script src="../JS/translate.js"></script>
 </body>
