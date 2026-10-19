@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title data-i18n="producer.title">SoundFy | Área do Produtor</title>
+
+    <link rel="stylesheet" href="../Style/style.css">
+    <link rel="stylesheet" href="../Style/produtor.css">
+</head>
+
+<body>
+    <aside class="barra-lateral">
+        <a class="logo" href="index.html">
+            <b>S</b>
+            <span>Sound<span>Fy</span></span>
+        </a>
+
+        <div class="espaco-trabalho">
+            <b>ST</b>
+            <div>
+                <strong>SoundFy Studio</strong>
+                <small data-i18n="workspace.professional">Espaço profissional</small>
+            </div>
+            <i>⌄</i>
+        </div>
+
+        <nav>
+            <label data-i18n="navigation.overview">VISÃO GERAL</label>
+
+            <a href="index.html">
+                <span data-i18n="navigation.dashboard">Dashboard</span>
+            </a>
+
+            <a href="index.html#tendencias">
+                <span data-i18n="navigation.trends">Tendências</span>
+            </a>
+
+            <a href="index.html#generos">
+                <span data-i18n="navigation.genres">Gêneros</span>
+            </a>
+
+            <a href="regioes.html">
+                <span data-i18n="navigation.regions">Regiões</span>
+            </a>
+
+            <div data-role-section="artist" hidden>
+                <label data-i18n="navigation.artistArea">ÁREA DO ARTISTA</label>
+                <a href="artista.html">
+                    <span data-i18n="navigation.artistProfile">Meu perfil de artista</span>
+                </a>
+            </div>
+
+            <div data-role-section="producer">
+                <label data-i18n="navigation.producerArea">ÁREA DO PRODUTOR</label>
+
+                <a class="ativo" href="produtor.html">
+                    <span data-i18n="navigation.production">Área de produção</span>
+                </a>
+
+                <a href="#comparador">
+                    <span data-i18n="producer.comparator">Comparador de artistas</span>
+                </a>
+            </div>
+
+            <label data-i18n="navigation.analysis">ANÁLISES</label>
+
+            <a href="index.html#relatorios">
+                <span data-i18n="navigation.reports">Relatórios</span>
+            </a>
+
+            <a href="index.html#insights">
+                <span data-i18n="navigation.insights">Insights</span>
+            </a>
+        </nav>
+
+        <div class="rodape-lateral">
+            <a href="configuracoes.html">
+                ⚙ <span data-i18n="navigation.settings">Configurações</span>
+            </a>
+
+            <div class="plano">
+                <b>✦</b>
+                <div>
+                    <strong data-i18n="plan.pro">Plano Pro</strong>
+                    <small data-i18n="plan.updated">Dados atualizados</small>
+                </div>
+            </div>
+
+            <div class="perfil">
+                <b>FL</b>
+                <div>
+                    <strong>Felipe Leone</strong>
+                    <small data-i18n="profile.producer">Produtor</small>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main>
+        <header>
+            <button id="menu" class="menu-mobile">☰</button>
+
+            <div class="trilha">
+                <span data-i18n="workspace.name">SoundFy Studio</span>
+                <b>/</b>
+                <strong data-i18n="producer.title">Área do Produtor</strong>
+            </div>
+
+            <div class="logo-mobile">
+                Sound<span>Fy</span>
+            </div>
+
+            <div class="acoes">
+                <button class="sino">♢<i></i></button>
+
+                <div class="menu-perfil-container">
+                    <button
+                        class="avatar-topo"
+                        id="perfil-menu-botao"
+                        aria-label="Abrir menu do perfil"
+                        aria-expanded="false"
+                        aria-controls="perfil-menu"
+                    >
+                        FL
+                    </button>
+
+                    <div class="menu-perfil" id="perfil-menu" hidden>
+                        <div class="menu-perfil-info">
+                            <strong data-i18n="profile.name">Felipe Leone</strong>
+                            <small data-i18n="profile.producer">Produtor</small>
+                        </div>
+
+                        <a href="configuracoes.html" data-i18n="navigation.settings">
+                            Configurações
+                        </a>
+
+                        <button type="button" id="perfil-sair" data-i18n="profile.logout">
+                            Sair
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="introducao">
+            <div>
+                <p data-i18n="producer.eyebrow">SOUNDFY STUDIO</p>
+                <h1 data-i18n="producer.heading">Área do Produtor</h1>
+                <span data-i18n="producer.description">
+                    Analise o mercado musical e encontre novas oportunidades.
+                </span>
+            </div>
+        </section>
+
+        <section class="produtor-aviso">
+            <span data-i18n="producer.demo">Dados demonstrativos</span>
+        </section>
+
+        <section class="produtor-indicadores">
+            <article class="painel">
+                <span data-i18n="producer.artistsAnalyzed">Artistas analisados</span>
+                <strong>128</strong>
+                <small data-i18n="producer.demoMetric">Exemplo ilustrativo</small>
+            </article>
+
+            <article class="painel">
+                <span data-i18n="producer.trendsTracked">Tendências acompanhadas</span>
+                <strong>24</strong>
+                <small data-i18n="producer.demoMetric">Exemplo ilustrativo</small>
+            </article>
+
+            <article class="painel">
+                <span data-i18n="producer.genresAnalyzed">Gêneros analisados</span>
+                <strong>16</strong>
+                <small data-i18n="producer.demoMetric">Exemplo ilustrativo</small>
+            </article>
+
+            <article class="painel">
+                <span data-i18n="producer.opportunities">Oportunidades identificadas</span>
+                <strong>8</strong>
+                <small data-i18n="producer.demoMetric">Exemplo ilustrativo</small>
+            </article>
+        </section>
+
+        <section class="produtor-secao">
+            <div class="painel-cabecalho">
+                <div>
+                    <h2 data-i18n="producer.toolsTitle">Ferramentas de produção</h2>
+                    <p data-i18n="producer.toolsDescription">
+                        Acesse as ferramentas de análise do SoundFy.
+                    </p>
+                </div>
+            </div>
+
+            <div class="produtor-ferramentas">
+                <a class="painel produtor-ferramenta" href="index.html#tendencias">
+                    <span class="produtor-icone">↗</span>
+                    <h3 data-i18n="navigation.trends">Tendências</h3>
+                    <p data-i18n="producer.trendsDescription">
+                        Explore tendências do mercado musical.
+                    </p>
+                </a>
+
+                <a class="painel produtor-ferramenta" href="regioes.html">
+                    <span class="produtor-icone">◎</span>
+                    <h3 data-i18n="navigation.regions">Regiões</h3>
+                    <p data-i18n="producer.regionsDescription">
+                        Explore os dados por região.
+                    </p>
+                </a>
+
+                <a class="painel produtor-ferramenta" href="#comparador">
+                    <span class="produtor-icone">⇄</span>
+                    <h3 data-i18n="producer.comparator">Comparador de artistas</h3>
+                    <p data-i18n="producer.comparatorDescription">
+                        Compare indicadores entre artistas.
+                    </p>
+                </a>
+            </div>
+        </section>
+
+        <section class="painel produtor-secao" id="comparador">
+            <div class="painel-cabecalho">
+                <div>
+                    <h2 data-i18n="producer.comparator">Comparador de artistas</h2>
+                    <p data-i18n="producer.comparatorDescription">
+                        Compare indicadores entre artistas.
+                    </p>
+                </div>
+            </div>
+
+            <div class="produtor-comparador">
+                <div>
+                    <label for="artista-a" data-i18n="producer.artistA">Artista A</label>
+                    <select id="artista-a">
+                        <option value="a" data-i18n="producer.demoArtistA">Artista Demonstração A</option>
+                        <option value="b" data-i18n="producer.demoArtistB">Artista Demonstração B</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="artista-b" data-i18n="producer.artistB">Artista B</label>
+                    <select id="artista-b">
+                        <option value="b" data-i18n="producer.demoArtistB">Artista Demonstração B</option>
+                        <option value="a" data-i18n="producer.demoArtistA">Artista Demonstração A</option>
+                    </select>
+                </div>
+
+                <p data-i18n="producer.comparatorPending">
+                    A comparação será implementada com os dados do projeto.
+                </p>
+            </div>
+        </section>
+
+        <section class="painel produtor-secao">
+            <div class="painel-cabecalho">
+                <div>
+                    <h2 data-i18n="producer.insightsTitle">Insights de mercado</h2>
+                    <p data-i18n="producer.insightsDescription">
+                        Exemplos de análises que poderão ser realizadas.
+                    </p>
+                </div>
+            </div>
+
+            <div class="produtor-insight">
+                <strong data-i18n="producer.insightExample">
+                    Explore novos segmentos musicais
+                </strong>
+                <p data-i18n="producer.insightPending">
+                    Os insights reais dependerão da integração com os dados.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <script src="../JS/i18n.js"></script>
+    <script src="../JS/translate.js"></script>
+    <script src="../JS/script.js"></script>
+    <script src="../JS/menu-perfil.js"></script>
+    <script src="../JS/sidebar-perfil.js"></script>
+</body>
+</html>

@@ -1707,3 +1707,139 @@ header {
         bottom: 5px;
     }
 }
+
+.menu-perfil-container {
+    position: relative;
+}
+
+button.avatar-topo {
+    cursor: pointer;
+    font: inherit;
+}
+
+button.avatar-topo:focus-visible {
+    outline: 2px solid var(--roxo-claro);
+    outline-offset: 3px;
+}
+
+.menu-perfil {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    z-index: 1000;
+    width: 220px;
+    padding: 8px;
+    background: var(--superficie);
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+}
+
+.menu-perfil[hidden] {
+    display: none;
+}
+
+.menu-perfil-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 12px;
+    border-bottom: 1px solid var(--borda);
+    margin-bottom: 6px;
+}
+
+.menu-perfil-info strong {
+    color: var(--texto);
+    font-size: 13px;
+}
+
+.menu-perfil-info small {
+    color: var(--cinza);
+    font-size: 12px;
+}
+
+.menu-perfil a,
+.menu-perfil > button {
+    display: block;
+    width: 100%;
+    padding: 11px 12px;
+    color: var(--texto);
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    text-align: left;
+    text-decoration: none;
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.menu-perfil a:hover,
+.menu-perfil > button:hover {
+    background: var(--superficie-2);
+}
+
+.menu-perfil > button {
+    color: #fb7185;
+}
+
+nav [data-role-section][hidden] {
+    display: none !important;
+}
+
+.idioma-select {
+    width: 180px;
+    min-width: 150px;
+    padding: 12px 40px 12px 14px;
+
+    color: var(--texto);
+    background-color: var(--superficie-2);
+
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+    outline: none;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23a78bfa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.idioma-select:hover {
+    border-color: var(--roxo-claro);
+}
+
+.idioma-select:focus-visible {
+    border-color: var(--roxo);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+}
+
+.idioma-select option {
+    color: var(--texto);
+    background-color: var(--superficie);
+}
+
+:root[data-theme="light"] .idioma-select {
+    background-color: var(--superficie);
+}
+
+@media (max-width: 600px) {
+    .idioma-select {
+        width: 100%;
+        min-width: 0;
+    }
+}
