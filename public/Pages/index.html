@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="index.title"></title>
+    <title data-i18n="index.title">SoundFy — Dashboard</title>
     <link rel="stylesheet" href="../Style/style.css">
 </head>
 
@@ -18,75 +19,55 @@
             <b>ST</b>
             <div>
                 <strong>SoundFy Studio</strong>
-                <small data-i18n="workspace.professional"></small>
+                <small data-i18n="workspace.professional">Workspace Profissional</small>
             </div>
             <i>⌄</i>
         </div>
 
-      <nav>
-    <label data-i18n="navigation.overview">VISÃO GERAL</label>
+        <nav>
+            <label data-i18n="navigation.overview">VISÃO GERAL</label>
 
-    <a class="ativo" href="index.html">
-        <span data-i18n="navigation.dashboard">Dashboard</span>
-    </a>
+            <a class="ativo" href="index.html">
+                <span data-i18n="navigation.dashboard">Dashboard</span>
+            </a>
 
-    <a href="#tendencias">
-        <span data-i18n="navigation.trends">Tendências</span>
-    </a>
+            <a href="regioes.html">
+                <span data-i18n="navigation.regions">Regiões</span>
+            </a>
 
-    <a href="#generos">
-        <span data-i18n="navigation.genres">Gêneros</span>
-    </a>
+            <div data-role-section="artist">
+                <label data-i18n="navigation.artistArea">ÁREA DO ARTISTA</label>
+                <a href="artista.html">
+                    <span data-i18n="navigation.artistProfile">Meu perfil de artista</span>
+                </a>
+            </div>
 
-    <a href="regioes.html">
-        <span data-i18n="navigation.regions">Regiões</span>
-    </a>
+            <div data-role-section="producer">
+                <label data-i18n="navigation.producerArea">ÁREA DO PRODUTOR</label>
+                <a href="produtor.html">
+                    <span data-i18n="navigation.production">Área de produção</span>
+                </a>
+            </div>
 
-    <div data-role-section="artist">
-        <label data-i18n="navigation.artistArea">ÁREA DO ARTISTA</label>
+            <label data-i18n="navigation.analysis">ANÁLISES</label>
 
-        <a href="artista.html">
-            <span data-i18n="navigation.artistProfile">Meu perfil de artista</span>
-        </a>
-    </div>
+            <a href="relatorios.html">
+                <span data-i18n="navigation.reports">Relatórios</span>
+            </a>
+        </nav>
 
-    <div data-role-section="producer">
-        <label data-i18n="navigation.producerArea">ÁREA DO PRODUTOR</label>
 
-        <a href="produtor.html">
-            <span data-i18n="navigation.production">Área de produção</span>
-        </a>
-    </div>
-
-    <label data-i18n="navigation.analysis">ANÁLISES</label>
-
-    <a href="#relatorios">
-        <span data-i18n="navigation.reports">Relatórios</span>
-    </a>
-
-    <a href="#insights">
-        <span data-i18n="navigation.insights">Insights</span>
-    </a>
-</nav>
 
         <div class="rodape-lateral">
             <a href="configuracoes.html">
-                ⚙ <span data-i18n="navigation.settings"></span>
+                ⚙ <span data-i18n="navigation.settings">Configurações</span>
             </a>
-
-            <div class="plano">
-                <b>✦</b>
-                <div>
-                    <strong data-i18n="plan.pro"></strong>
-                    <small data-i18n="plan.updated"></small>
-                </div>
-            </div>
 
             <div class="perfil">
                 <b>FL</b>
                 <div>
                     <strong>Felipe Leone</strong>
-                    <small data-i18n="profile.producer"></small>
+                    <small data-i18n="profile.producer">Produtor</small>
                 </div>
             </div>
         </div>
@@ -97,127 +78,94 @@
             <button id="menu" class="menu-mobile">☰</button>
 
             <div class="trilha">
-                <span data-i18n="workspace.name"></span>
+                <span data-i18n="workspace.name">SoundFy Studio</span>
                 <b>/</b>
-                <strong data-i18n="navigation.dashboard"></strong>
+                <strong data-i18n="navigation.dashboard">Dashboard</strong>
             </div>
 
             <div class="logo-mobile">
                 Sound<span>Fy</span>
             </div>
 
-       <div class="acoes">
-    <button class="sino">♢<i></i></button>
+            <div class="acoes">
+                <button class="sino" aria-label="Notificações">♢<i></i></button>
 
-    <div class="menu-perfil-container">
-        <button
-            class="avatar-topo"
-            id="perfil-menu-botao"
-            aria-label="Abrir menu do perfil"
-            aria-expanded="false"
-            aria-controls="perfil-menu"
-        >
-            FL
-        </button>
+                <div class="menu-perfil-container">
+                    <button class="avatar-topo" id="perfil-menu-botao" aria-label="Abrir menu do perfil"
+                        aria-expanded="false" aria-controls="perfil-menu">
+                        FL
+                    </button>
 
-        <div class="menu-perfil" id="perfil-menu" hidden>
-            <div class="menu-perfil-info">
-                <strong data-i18n="profile.name">Felipe Leone</strong>
-                <small data-i18n="profile.producer">Produtor</small>
+                    <div class="menu-perfil" id="perfil-menu" hidden>
+                        <div class="menu-perfil-info">
+                            <strong data-i18n="profile.name">Felipe Leone</strong>
+                            <small data-i18n="profile.producer">Produtor</small>
+                        </div>
+
+                        <a href="configuracoes.html" data-i18n="navigation.settings">
+                            Configurações
+                        </a>
+
+                        <button type="button" id="perfil-sair" data-i18n="profile.logout">
+                            Sair
+                        </button>
+                    </div>
+                </div>
             </div>
-
-            <a href="configuracoes.html" data-i18n="navigation.settings">
-                Configurações
-            </a>
-
-            <button type="button" id="perfil-sair" data-i18n="profile.logout">
-                Sair
-            </button>
-        </div>
-    </div>
-</div>
         </header>
 
         <section class="introducao">
             <div>
-                <p data-i18n="index.date"></p>
-                <h1 data-i18n="index.greeting"></h1>
-                <span data-i18n="index.description"></span>
+                <p data-i18n="index.date">Quinta-feira, 22 de Outubro</p>
+                <h1 data-i18n="index.greeting">Olá, Felipe</h1>
+                <span data-i18n="index.description">Aqui está o panorama geral do mercado musical de hoje.</span>
             </div>
-
-            <div class="botoes-cabecalho">
-
-            </div>
-
         </section>
 
         <section class="indicadores">
-            <article>
-                <div>
-                    <b>
-                        <span style="font-size: 20px;" data-i18n="index.growthIndex"></span>
-                    </b>
+            <article class="kpi-card">
+                <div class="kpi-header">
+                    <span data-i18n="index.growthIndex">Índice de Crescimento</span>
+                    <span class="kpi-badge positivo">+18,7%</span>
                 </div>
-                <strong>+18,7%</strong>
-                <small style="font-size: 15px;">
+                <strong class="kpi-valor">+18,7%</strong>
+                <small class="kpi-meta">
                     <em>↑ 4,2%</em>
-                    <span data-i18n="index.vsPreviousPeriod"></span>
+                    <span data-i18n="index.vsPreviousPeriod">vs. período anterior</span>
                 </small>
-                <div class="mini-grafico">
-                    <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-                </div>
             </article>
 
-            <article>
-                <div>
-                    <b>
-                        <span style="font-size: 20px;" data-i18n="index.monitoredGenres"></span>
-                    </b>
+            <article class="kpi-card">
+                <div class="kpi-header">
+                    <span data-i18n="index.monitoredGenres">Gêneros Monitorados</span>
+                    <span class="kpi-badge neutro">+6 novos</span>
                 </div>
-                <strong>48</strong>
-                <br>
-                <small style="font-size: 15px;">
-                    <em class="texto-secundario">+6</em>
-                    <span data-i18n="index.newThisMonth"></span>
+                <strong class="kpi-valor">48</strong>
+                <small class="kpi-meta">
+                    <span data-i18n="index.newThisMonth">adicionados este mês</span>
                 </small>
-                <div class="pontos">
-                    <i></i><i></i><i></i><i></i><i></i>
-                </div>
             </article>
 
-            <article>
-                <div>
-                    <b>
-                        <span style="font-size: 20px;" data-i18n="index.analyzedRegions"></span>
-                    </b>
+            <article class="kpi-card">
+                <div class="kpi-header">
+                    <span data-i18n="index.analyzedRegions">Regiões Analisadas</span>
+                    <span class="kpi-badge positivo">↑ 3</span>
                 </div>
-                <strong>27</strong>
-                <br>
-                <small style="font-size: 15px;">
-                    <em>↑ 3</em>
-                    <span data-i18n="index.newRegions"></span>
+                <strong class="kpi-valor">27</strong>
+                <small class="kpi-meta">
+                    <span data-i18n="index.newRegions">novas microrregiões</span>
                 </small>
-                <div class="barras">
-                    <i></i><i></i><i></i><i></i><i></i>
-                </div>
             </article>
 
-            <article>
-                <div>
-                    <b>
-                        <span style="font-size: 20px;" data-i18n="index.detectedOpportunities"></span>
-                    </b>
+            <article class="kpi-card">
+                <div class="kpi-header">
+                    <span data-i18n="index.detectedOpportunities">Oportunidades</span>
+                    <span class="kpi-badge alerta">4 prioritárias</span>
                 </div>
-                <strong>12</strong>
-                <br>
-                <small style="font-size: 15px;">
-                    <em class="texto-alerta">4</em>
-                    <span data-i18n="index.newLast48Hours"></span>
+                <strong class="kpi-valor">12</strong>
+                <small class="kpi-meta">
+                    <span data-i18n="index.newLast48Hours">detectadas nas últimas 48h</span>
                 </small>
-                <div class="prioridade">
-                    <span data-i18n="index.highPriority"></span>
-                    <b>4</b>
-                </div>
             </article>
         </section>
 
@@ -225,25 +173,26 @@
             <article class="painel painel-grafico">
                 <div class="painel-cabecalho">
                     <div>
-                        <p data-i18n="index.marketView"></p>
-                        <h2 data-i18n="index.musicInterestTrend"></h2>
+                        <p data-i18n="index.marketView">VISÃO DE MERCADO</p>
+                        <h2 data-i18n="index.musicInterestTrend">Tendência de Interesse Musical</h2>
                     </div>
-                    <button class="filtro" data-i18n="index.last5Weeks"></button>
+                    <button class="filtro" data-i18n="index.last5Weeks">Últimas 5 semanas</button>
                 </div>
 
                 <div class="explicacao-grafico">
-                    <strong data-i18n="index.marketAccelerating"></strong>
-                    <span data-i18n="index.marketExplanation"></span>
+                    <strong data-i18n="index.marketAccelerating">Mercado em aceleração:</strong>
+                    <span data-i18n="index.marketExplanation">O volume de buscas por novos gêneros cresceu 74% no
+                        período.</span>
                 </div>
 
                 <div class="legenda">
                     <span>
                         <i class="ponto-primario"></i>
-                        <span data-i18n="index.publicInterest"></span>
+                        <span data-i18n="index.publicInterest">Interesse do público</span>
                     </span>
                     <span>
                         <i class="ponto-secundario"></i>
-                        <span data-i18n="index.searches"></span>
+                        <span data-i18n="index.searches">Volume de buscas</span>
                     </span>
                 </div>
 
@@ -262,33 +211,40 @@
                         <div class="line l3"></div>
                         <div class="line l4"></div>
 
-                        <svg viewBox="0 0 700 220" preserveAspectRatio="none" aria-label="Gráfico de tendência de interesse">
-                            <path class="area" d="M0 160 C80 158 100 145 140 140 S210 135 270 112 S340 115 400 90 S470 94 530 67 S620 65 700 30 L700 220 L0 220Z"></path>
-                            <path class="tendencia" d="M0 160 C80 158 100 145 140 140 S210 135 270 112 S340 115 400 90 S470 94 530 67 S620 65 700 30"></path>
-                            <path class="tendencia linha-secundaria" d="M0 178 C80 174 105 165 145 160 S215 158 275 138 S345 145 405 119 S475 128 535 99 S620 108 700 78"></path>
+                        <svg viewBox="0 0 700 220" preserveAspectRatio="none"
+                            aria-label="Gráfico de tendência de interesse">
+                            <path class="area"
+                                d="M0 160 C80 158 100 145 140 140 S210 135 270 112 S340 115 400 90 S470 94 530 67 S620 65 700 30 L700 220 L0 220Z">
+                            </path>
+                            <path class="tendencia"
+                                d="M0 160 C80 158 100 145 140 140 S210 135 270 112 S340 115 400 90 S470 94 530 67 S620 65 700 30">
+                            </path>
+                            <path class="tendencia linha-secundaria"
+                                d="M0 178 C80 174 105 165 145 160 S215 158 275 138 S345 145 405 119 S475 128 535 99 S620 108 700 78">
+                            </path>
                         </svg>
 
                         <div class="datas">
-                            <span data-i18n="index.date30Jul"></span>
-                            <span data-i18n="index.date06Aug"></span>
-                            <span data-i18n="index.date13Aug"></span>
-                            <span data-i18n="index.date20Aug"></span>
-                            <span data-i18n="index.date27Aug"></span>
+                            <span data-i18n="index.date30Jul">30 Jul</span>
+                            <span data-i18n="index.date06Aug">06 Ago</span>
+                            <span data-i18n="index.date13Aug">13 Ago</span>
+                            <span data-i18n="index.date20Aug">20 Ago</span>
+                            <span data-i18n="index.date27Aug">27 Ago</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="resumo-tendencia">
                     <div>
-                        <span data-i18n="index.start"></span>
+                        <span data-i18n="index.start">Início</span>
                         <strong>58 pts</strong>
                     </div>
                     <div>
-                        <span data-i18n="index.now"></span>
+                        <span data-i18n="index.now">Atual</span>
                         <strong>101 pts</strong>
                     </div>
                     <div>
-                        <span data-i18n="index.change"></span>
+                        <span data-i18n="index.change">Variação</span>
                         <strong class="texto-positivo">+74,1%</strong>
                     </div>
                 </div>
@@ -297,35 +253,34 @@
             <article class="painel insight" id="insights">
                 <div class="painel-cabecalho">
                     <div>
-                        <p style="font-size: 15px;" data-i18n="index.weeklyInsight"></p>
-                        <h2>
-                            <b data-i18n="index.newOpportunity"></b>
-                        </h2>
+                        <p data-i18n="index.weeklyInsight">INSIGHT DA SEMANA</p>
+                        <h2><b data-i18n="index.newOpportunity">Nova Oportunidade</b></h2>
                     </div>
-                    <mark data-i18n="index.new"></mark>
+                    <mark data-i18n="index.new">NOVO</mark>
                 </div>
 
                 <div class="corpo-insight">
                     <h3>Brazilian Phonk</h3>
-                    <strong>
-                        +42,8%
-                        <small data-i18n="index.growth"></small>
-                    </strong>
-                    <p data-i18n="index.phonkDescription"></p>
+                    <div class="crescimento-tag">
+                        <strong>+42,8%</strong>
+                        <small data-i18n="index.growth">de crescimento</small>
+                    </div>
+                    <p data-i18n="index.phonkDescription">Alta demanda em playlists de treino e redes de vídeo curto com
+                        escassez de lançamentos de produtores nacionais.</p>
                 </div>
 
                 <div class="meta">
-                    <span>
-                        <span data-i18n="index.highlightRegion"></span>
+                    <div>
+                        <span data-i18n="index.highlightRegion">Região Destaque</span>
                         <strong>São Paulo</strong>
-                    </span>
-                    <span>
-                        <span data-i18n="index.potential"></span>
-                        <strong class="texto-positivo" data-i18n="index.high"></strong>
-                    </span>
+                    </div>
+                    <div>
+                        <span data-i18n="index.potential">Potencial</span>
+                        <strong class="texto-positivo" data-i18n="index.high">Alto</strong>
+                    </div>
                 </div>
 
-                <button class="contorno" data-i18n="index.viewFullAnalysis"></button>
+                <button class="botao-acao" data-i18n="index.viewFullAnalysis">Ver Análise Completa →</button>
             </article>
         </section>
 
@@ -333,146 +288,129 @@
             <article class="painel" id="generos">
                 <div class="painel-cabecalho">
                     <div>
-                        <p data-i18n="index.ranking"></p>
-                        <h2 data-i18n="index.trendingGenres"></h2>
+                        <p data-i18n="index.ranking">RANKING</p>
+                        <h2 data-i18n="index.trendingGenres">Gêneros em Alta</h2>
                     </div>
-                    <a href="#generos" data-i18n="index.viewAll"></a>
+                    <a class="link-ver-mais" href="#generos" data-i18n="index.viewAll">Ver todos →</a>
                 </div>
 
-                <div class="genero">
-                    <span>01</span>
-                    <i></i>
-                    <div>
-                        <strong>Brazilian Phonk</strong>
-                        <small data-i18n="index.electronicSubgenre"></small>
+                <div class="lista-rank">
+                    <div class="item-rank">
+                        <span class="posicao">01</span>
+                        <div class="info">
+                            <strong>Brazilian Phonk</strong>
+                            <small data-i18n="index.electronicSubgenre">Subgênero Eletrônico</small>
+                        </div>
+                        <span class="variacao positivo">+42,8% ↗</span>
                     </div>
-                    <b>+42,8%</b>↗
-                </div>
 
-                <div class="genero">
-                    <span>02</span>
-                    <i></i>
-                    <div>
-                        <strong>Hyperpop</strong>
-                        <small data-i18n="index.popSubgenre"></small>
+                    <div class="item-rank">
+                        <span class="posicao">02</span>
+                        <div class="info">
+                            <strong>Hyperpop</strong>
+                            <small data-i18n="index.popSubgenre">Subgênero Pop</small>
+                        </div>
+                        <span class="variacao positivo">+31,4% ↗</span>
                     </div>
-                    <b>+31,4%</b>↗
-                </div>
 
-                <div class="genero">
-                    <span>03</span>
-                    <i></i>
-                    <div>
-                        <strong>Afrobeats</strong>
-                        <small data-i18n="index.rnbGlobal"></small>
+                    <div class="item-rank">
+                        <span class="posicao">03</span>
+                        <div class="info">
+                            <strong>Afrobeats</strong>
+                            <small data-i18n="index.rnbGlobal">R&B / Global</small>
+                        </div>
+                        <span class="variacao positivo">+24,9% ↗</span>
                     </div>
-                    <b>+24,9%</b>↗
-                </div>
 
-                <div class="genero">
-                    <span>04</span>
-                    <i></i>
-                    <div>
-                        <strong>Drill</strong>
-                        <small data-i18n="index.hipHopSubgenre"></small>
+                    <div class="item-rank">
+                        <span class="posicao">04</span>
+                        <div class="info">
+                            <strong>Drill</strong>
+                            <small data-i18n="index.hipHopSubgenre">Subgênero Hip-Hop</small>
+                        </div>
+                        <span class="variacao positivo">+19,6% ↗</span>
                     </div>
-                    <b>+19,6%</b>↗
-                </div>
 
-                <div class="genero">
-                    <span>05</span>
-                    <i></i>
-                    <div>
-                        <strong>House</strong>
-                        <small data-i18n="index.electronicDance"></small>
+                    <div class="item-rank">
+                        <span class="posicao">05</span>
+                        <div class="info">
+                            <strong>House</strong>
+                            <small data-i18n="index.electronicDance">Eletrônico / Dance</small>
+                        </div>
+                        <span class="variacao positivo">+15,2% ↗</span>
                     </div>
-                    <b>+15,2%</b>↗
                 </div>
             </article>
 
             <article class="painel" id="regioes">
                 <div class="painel-cabecalho">
                     <div>
-                        <p data-i18n="index.geography"></p>
-                        <h2 data-i18n="index.regionsGrowth"></h2>
+                        <p data-i18n="index.geography">GEOGRAFIA</p>
+                        <h2 data-i18n="index.regionsGrowth">Crescimento por Região</h2>
                     </div>
                 </div>
 
-                <div class="regiao">
-                    <strong>01&nbsp; <span data-i18n="index.southeast"></span></strong>
-                    <span><i style="width:89%"></i></span>
-                    <b>+28,4%</b>
-                </div>
+                <div class="lista-regioes">
+                    <div class="item-regiao">
+                        <div class="regiao-info">
+                            <span data-i18n="index.southeast">Sudeste</span>
+                            <strong>+28,4%</strong>
+                        </div>
+                        <div class="barra-fundo">
+                            <div class="barra-progresso" style="width: 89%;"></div>
+                        </div>
+                    </div>
 
-                <div class="regiao">
-                    <strong>02&nbsp; <span data-i18n="index.south"></span></strong>
-                    <span><i style="width:71%"></i></span>
-                    <b>+21,1%</b>
-                </div>
+                    <div class="item-regiao">
+                        <div class="regiao-info">
+                            <span data-i18n="index.south">Sul</span>
+                            <strong>+21,1%</strong>
+                        </div>
+                        <div class="barra-fundo">
+                            <div class="barra-progresso" style="width: 71%;"></div>
+                        </div>
+                    </div>
 
-                <div class="regiao">
-                    <strong>03&nbsp; <span data-i18n="index.northeast"></span></strong>
-                    <span><i style="width:58%"></i></span>
-                    <b>+17,8%</b>
-                </div>
+                    <div class="item-regiao">
+                        <div class="regiao-info">
+                            <span data-i18n="index.northeast">Nordeste</span>
+                            <strong>+17,8%</strong>
+                        </div>
+                        <div class="barra-fundo">
+                            <div class="barra-progresso" style="width: 58%;"></div>
+                        </div>
+                    </div>
 
-                <div class="regiao">
-                    <strong>04&nbsp; <span data-i18n="index.centralWest"></span></strong>
-                    <span><i style="width:43%"></i></span>
-                    <b>+12,2%</b>
-                </div>
+                    <div class="item-regiao">
+                        <div class="regiao-info">
+                            <span data-i18n="index.centralWest">Centro-Oeste</span>
+                            <strong>+12,2%</strong>
+                        </div>
+                        <div class="barra-fundo">
+                            <div class="barra-progresso" style="width: 43%;"></div>
+                        </div>
+                    </div>
 
-                <div class="regiao">
-                    <strong>05&nbsp; <span data-i18n="index.north"></span></strong>
-                    <span><i style="width:31%"></i></span>
-                    <b>+8,7%</b>
+                    <div class="item-regiao">
+                        <div class="regiao-info">
+                            <span data-i18n="index.north">Norte</span>
+                            <strong>+8,7%</strong>
+                        </div>
+                        <div class="barra-fundo">
+                            <div class="barra-progresso" style="width: 31%;"></div>
+                        </div>
+                    </div>
                 </div>
             </article>
         </section>
-
-        <section class="painel relatorios" id="relatorios">
-            <div class="painel-cabecalho">
-                <div>
-                    <p data-i18n="index.recentReports"></p>
-                    <h2 data-i18n="index.workspaceQueries"></h2>
-                </div>
-                <a href="#relatorios" data-i18n="index.viewHistory"></a>
-            </div>
-
-            <div class="relatorio-cabecalho">
-                <span data-i18n="index.report"></span>
-                <span data-i18n="index.filter"></span>
-                <span data-i18n="index.generatedAt"></span>
-                <span data-i18n="index.status"></span>
-            </div>
-
-            <div class="relatorio">
-                <strong data-i18n="index.electronicTrends"></strong>
-                <span data-i18n="index.electronicBrazil"></span>
-                <span data-i18n="index.today1432"></span>
-                <em data-i18n="index.completed"></em>
-            </div>
-
-            <div class="relatorio">
-                <strong data-i18n="index.festivalOpportunities"></strong>
-                <span data-i18n="index.sp30Days"></span>
-                <span data-i18n="index.yesterday1708"></span>
-                <em data-i18n="index.completed"></em>
-            </div>
-
-            <div class="relatorio">
-                <strong data-i18n="index.subgenreRadar"></strong>
-                <span data-i18n="index.global90Days"></span>
-                <span data-i18n="index.aug26"></span>
-                <em data-i18n="index.completed"></em>
-            </div>
-        </section>
     </main>
 
-   <script src="../JS/i18n.js"></script>
-<script src="../JS/translate.js"></script>
-<script src="../JS/script.js"></script>
-<script src="../JS/menu-perfil.js"></script>
-<script src="../JS/sidebar-perfil.js"></script>
+    <script src="../JS/sessao.js"></script>
+    <script src="../JS/i18n.js"></script>
+    <script src="../JS/translate.js"></script>
+    <script src="../JS/script.js"></script>
+    <script src="../JS/menu-perfil.js"></script>
+    <script src="../JS/sidebar-perfil.js"></script>
 </body>
+
 </html>

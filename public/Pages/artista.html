@@ -27,28 +27,41 @@
         </div>
 
         <nav>
-            <label>VISÃO GERAL</label>
-            <a href="index.html">Dashboard</a>
-            <a href="index.html#tendencias">Tendências</a>
-            <a href="index.html#generos">Gêneros</a>
-            <a href="regioes.html">Regiões</a>
+            <label data-i18n="navigation.overview">VISÃO GERAL</label>
 
-            <label>ANÁLISES</label>
-            <a class="ativo" href="artista.html">Artistas</a>
-            <a href="index.html#relatorios">Relatórios</a>
-            <a href="index.html#insights">Insights</a>
+            <a href="index.html">
+                <span data-i18n="navigation.dashboard">Dashboard</span>
+            </a>
+
+            <a href="regioes.html">
+                <span data-i18n="navigation.regions">Regiões</span>
+            </a>
+
+            <div data-role-section="artist">
+                <label data-i18n="navigation.artistArea">ÁREA DO ARTISTA</label>
+
+                <a class="ativo" href="artista.html">
+                    <span data-i18n="navigation.artistProfile">Meu perfil de artista</span>
+                </a>
+            </div>
+
+            <div data-role-section="producer">
+                <label data-i18n="navigation.producerArea">ÁREA DO PRODUTOR</label>
+
+                <a href="produtor.html">
+                    <span data-i18n="navigation.production">Área de produção</span>
+                </a>
+            </div>
+
+            <label data-i18n="navigation.analysis">ANÁLISES</label>
+
+            <a href="./relatorios.html">
+                <span data-i18n="navigation.reports">Relatórios</span>
+            </a>
         </nav>
 
         <div class="rodape-lateral">
-            <a href="configuracoes.html">⚙ Configurações</a>
-
-            <div class="plano">
-                <b>✦</b>
-                <div>
-                    <strong>Plano Pro</strong>
-                    <small>Dados atualizados</small>
-                </div>
-            </div>
+            <a href="configuracoes.html">⚙<span data-i18n="navigation.settings">Configurações</span></a>
 
             <div class="perfil">
                 <b>FL</b>
@@ -225,6 +238,7 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../JS/sessao.js"></script>
     <script src="../JS/i18n.js"></script>
     <script src="../JS/translate.js"></script>
     <script src="../JS/script.js"></script>

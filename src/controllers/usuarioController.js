@@ -5,6 +5,7 @@ function cadastrar(req, res) {
     let email = req.body.emailServer
     let senha = req.body.senhaServer
     let telefone = req.body.telefoneServer;
+    let tipo_usuario = req.body.tipoUsuarioServer;
 
     if (nome == undefined) {
         res.status(400).send("Seu nome não foi encontrado")
@@ -16,7 +17,7 @@ function cadastrar(req, res) {
         res.status(400).send("Sua senha não foi definida")
     }
     else {
-        usuarioModel.cadastrar(nome, email, senha, telefone)
+        usuarioModel.cadastrar(nome, email, senha, telefone, tipo_usuario)
             .then(
                 function (resultado) {
                     res.json(resultado)
