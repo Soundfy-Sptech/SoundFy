@@ -8,7 +8,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="../Style/cadastro.css">
 </head>
@@ -29,28 +31,18 @@
             </h1>
 
             <p class="descricao" data-i18n="cadastro.description">
-                Uma conta SoundFy dá acesso ao dashboard completo de tendências, gêneros e regiões para sua produtora, gravadora ou evento.
+                Uma conta SoundFy dá acesso ao dashboard completo de tendências, gêneros e regiões para sua produtora,
+                gravadora ou evento.
             </p>
         </div>
 
         <div class="cartao-acesso">
             <div class="abas">
-                <button
-                    type="button"
-                    id="abaEntrar"
-                    class="ativo"
-                    onclick="MostrarEntrar()"
-                    data-i18n="cadastro.login"
-                >
+                <button type="button" id="abaEntrar" class="ativo" onclick="MostrarEntrar()" data-i18n="cadastro.login">
                     Entrar
                 </button>
 
-                <button
-                    type="button"
-                    id="abaCriar"
-                    onclick="MostrarCriar()"
-                    data-i18n="cadastro.createAccount"
-                >
+                <button type="button" id="abaCriar" onclick="MostrarCriar()" data-i18n="cadastro.createAccount">
                     Criar conta
                 </button>
             </div>
@@ -59,37 +51,21 @@
                 <div class="campo">
                     <p data-i18n="cadastro.email">E-mail</p>
 
-                    <input
-                        id="entrarEmail"
-                        type="email"
-                        data-i18n-placeholder="cadastro.emailPlaceholder"
-                        placeholder="voce@suaempresa.com"
-                    >
+                    <input id="entrarEmail" type="email" data-i18n-placeholder="cadastro.emailPlaceholder"
+                        placeholder="voce@suaempresa.com">
                 </div>
 
                 <div class="campo">
                     <p data-i18n="cadastro.password">Senha</p>
 
-                    <input
-                        id="entrarSenha"
-                        type="password"
-                        placeholder="••••••••"
-                    >
+                    <input id="entrarSenha" type="password" placeholder="••••••••">
                 </div>
 
-                <a
-                    class="esqueci"
-                    href="#"
-                    data-i18n="cadastro.forgotPassword"
-                >
+                <a class="esqueci" href="#" data-i18n="cadastro.forgotPassword">
                     Esqueci minha senha
                 </a>
 
-                <button
-                    class="botao-enviar"
-                    onclick="Entrar()"
-                    data-i18n="cadastro.login"
-                >
+                <button class="botao-enviar" onclick="Entrar()" data-i18n="cadastro.login">
                     Entrar
                 </button>
             </div>
@@ -98,210 +74,192 @@
                 <div class="campo">
                     <p data-i18n="cadastro.name">Nome</p>
 
-                    <input
-                        id="criarNome"
-                        type="text"
-                        data-i18n-placeholder="cadastro.namePlaceholder"
-                        placeholder="Seu nome"
-                    >
-                </div>
-
-                <div class="campo">
-                    <p data-i18n="cadastro.organization">
-                        Produtora, gravadora ou evento
-                    </p>
-
-                    <input
-                        id="criarOrg"
-                        type="text"
-                        data-i18n-placeholder="cadastro.organizationPlaceholder"
-                        placeholder="Nome da organização"
-                    >
+                    <input id="criarNome" type="text" data-i18n-placeholder="cadastro.namePlaceholder"
+                        placeholder="Seu nome">
                 </div>
 
                 <div class="campo">
                     <p data-i18n="cadastro.email">E-mail</p>
 
-                    <input
-                        id="criarEmail"
-                        type="email"
-                        data-i18n-placeholder="cadastro.emailPlaceholder"
-                        placeholder="voce@suaempresa.com"
-                    >
+                    <input id="criarEmail" type="email" data-i18n-placeholder="cadastro.emailPlaceholder"
+                        placeholder="voce@suaempresa.com">
+                </div>
+
+                <div class="campo">
+                    <p data-i18n="Telefone">Telefone</p>
+
+                    <input id="criarTelefone" type="tel" data-i18n-placeholder="(11) 91234 5678"
+                        placeholder="(11) 99999-9999">
+                </div>
+
+                <div class="campo">
+                    <p data-i18n="Tipo de Usuário">Tipo de Usuário</p>
+
+                    <select id="criarTipoUsuario">
+                        <option value="" disabled selected>Selecione uma opção</option>
+                        <option value="Artista">Artista</option>
+                        <option value="Produtor">Produtor</option>
+                    </select>
                 </div>
 
                 <div class="campo">
                     <p data-i18n="cadastro.password">Senha</p>
 
-                    <input
-                        id="criarSenha"
-                        type="password"
-                        data-i18n-placeholder="cadastro.passwordPlaceholder"
-                        placeholder="Mínimo 6 caracteres"
-                    >
+                    <input id="criarSenha" type="password" data-i18n-placeholder="cadastro.passwordPlaceholder"
+                        placeholder="Mínimo 6 caracteres">
                 </div>
 
-                <button
-                    class="botao-enviar"
-                    onclick="Criar()"
-                    data-i18n="cadastro.createAccount"
-                >
+                <button class="botao-enviar" onclick="Criar()" data-i18n="cadastro.createAccount">
                     Criar conta
                 </button>
             </div>
 
-            <p
-                class="status"
-                id="status"
-                data-i18n="cadastro.successMessage"
-            >
+            <p class="status" id="status" data-i18n="cadastro.successMessage">
                 Tudo certo! Redirecionando…
             </p>
 
             <p class="rodape" id="dicaEntrar">
                 <span data-i18n="cadastro.noAccount">Ainda não tem conta?</span>
 
-                <button
-                    onclick="MostrarCriar()"
-                    data-i18n="cadastro.createAccount"
-                >
+                <button onclick="MostrarCriar()" data-i18n="cadastro.createAccount">
                     Criar conta
                 </button>
             </p>
 
-            <p
-                class="rodape"
-                id="dicaCriar"
-                style="display:none;"
-            >
+            <p class="rodape" id="dicaCriar" style="display:none;">
                 <span data-i18n="cadastro.hasAccount">Já tem uma conta?</span>
 
-                <button
-                    onclick="MostrarEntrar()"
-                    data-i18n="cadastro.login"
-                >
+                <button onclick="MostrarEntrar()" data-i18n="cadastro.login">
                     Entrar
                 </button>
             </p>
         </div>
     </div>
 
-<script>
-    function MostrarEntrar() {
-        abaEntrar.className = "ativo"
-        abaCriar.className = ""
-        formEntrar.className = "formulario ativo"
-        formCriar.className = "formulario"
-        dicaEntrar.style.display = "block"
-        dicaCriar.style.display = "none"
-        status.className = "status"
-    }
+    <script>
+        function MostrarEntrar() {
+            document.getElementById("abaEntrar").className = "ativo";
+            document.getElementById("abaCriar").className = "";
+            document.getElementById("formEntrar").className = "formulario ativo";
+            document.getElementById("formCriar").className = "formulario";
+            document.getElementById("dicaEntrar").style.display = "block";
+            document.getElementById("dicaCriar").style.display = "none";
+            document.getElementById("status").className = "status";
+        }
 
-    function MostrarCriar() {
-        abaCriar.className = "ativo"
-        abaEntrar.className = ""
-        formCriar.className = "formulario ativo"
-        formEntrar.className = "formulario"
-        dicaCriar.style.display = "block"
-        dicaEntrar.style.display = "none"
-        status.className = "status"
-    }
+        function MostrarCriar() {
+            document.getElementById("abaCriar").className = "ativo";
+            document.getElementById("abaEntrar").className = "";
+            document.getElementById("formCriar").className = "formulario ativo";
+            document.getElementById("formEntrar").className = "formulario";
+            document.getElementById("dicaCriar").style.display = "block";
+            document.getElementById("dicaEntrar").style.display = "none";
+            document.getElementById("status").className = "status";
+        }
 
-    function Entrar() {
-        let emailVar = entrarEmail.value
-        let senhaVar = entrarSenha.value
+        function Entrar() {
+            let emailVar = document.getElementById("entrarEmail").value;
+            let senhaVar = document.getElementById("entrarSenha").value;
+            let status = document.getElementById("status");
 
-        if (emailVar == "" || senhaVar == "") {
-            status.textContent = "Preencha todos os campos para entrar."
-            status.className = "status mostrar"
+            if (emailVar == "" || senhaVar == "") {
+                status.textContent = "Preencha todos os campos para entrar.";
+                status.className = "status mostrar";
+                return false;
+            }
+
+            fetch("/usuarios/autenticar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    emailServer: emailVar,
+                    senhaServer: senhaVar
+                })
+            }).then(function (resposta) {
+                if (resposta.ok) {
+                    resposta.json().then(json => {
+                        sessionStorage.EMAIL_USUARIO = json.email;
+                        sessionStorage.NOME_USUARIO = json.nome;
+                        sessionStorage.ID_USUARIO = json.id;
+                        sessionStorage.TIPO_USUARIO = json.tipoUsuario || json.tipo;
+
+                        status.textContent = "Login realizado com sucesso! Redirecionando...";
+                        status.className = "status mostrar";
+
+                        setTimeout(function () {
+                            window.location.href = "index.html";
+                        }, 1000);
+                    });
+                } else {
+                    resposta.text().then(texto => {
+                        status.textContent = texto || "Erro ao realizar login.";
+                        status.className = "status mostrar";
+                    });
+                }
+            }).catch(function (erro) {
+                console.log("Erro na requisição: ", erro);
+                status.textContent = "Houve um erro ao tentar realizar o login.";
+                status.className = "status mostrar";
+            });
+
             return false;
         }
 
-        fetch("/usuarios/autenticar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                emailServer: emailVar,
-                senhaServer: senhaVar
-            })
-        }).then(function (resposta) {
-            if (resposta.ok) {
-                resposta.json().then(json => {
-                    // Armazena dados na sessão para o sessao.js
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id;
+        function Criar() {
+            let nomeVar = document.getElementById("criarNome").value;
+            let emailVar = document.getElementById("criarEmail").value;
+            let telefoneVar = document.getElementById("criarTelefone").value;
+            let tipoUsuarioVar = document.getElementById("criarTipoUsuario").value;
+            let senhaVar = document.getElementById("criarSenha").value;
+            let status = document.getElementById("status");
 
-                    status.textContent = "Login realizado com sucesso! Redirecionando..."
-                    status.className = "status mostrar"
+            if (nomeVar == "" || emailVar == "" || telefoneVar == "" || tipoUsuarioVar == "" || senhaVar == "") {
+                status.textContent = "Preencha todos os campos para cadastrar.";
+                status.className = "status mostrar";
+                return false;
+            }
+
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    nomeServer: nomeVar,
+                    emailServer: emailVar,
+                    telefoneServer: telefoneVar,
+                    tipoUsuarioServer: tipoUsuarioVar,
+                    senhaServer: senhaVar
+                })
+            }).then(function (resposta) {
+                if (resposta.ok) {
+                    sessionStorage.NOME_USUARIO = nomeVar;
+                    sessionStorage.EMAIL_USUARIO = emailVar;
+                    sessionStorage.TIPO_USUARIO = tipoUsuarioVar;
+
+                    status.textContent = "Cadastro realizado com sucesso! Redirecionando...";
+                    status.className = "status mostrar";
 
                     setTimeout(function () {
-                        window.location.href = "index.html"
+                        window.location.href = "index.html";
                     }, 1000);
-                });
-            } else {
-                resposta.text().then(texto => {
-                    status.textContent = texto || "Erro ao realizar login."
-                    status.className = "status mostrar"
-                });
-            }
-        }).catch(function (erro) {
-            console.log("Erro na requisição: ", erro);
-            status.textContent = "Houve um erro ao tentar realizar o login."
-            status.className = "status mostrar"
-        });
+                } else {
+                    resposta.text().then(texto => {
+                        status.textContent = texto || "Erro ao cadastrar.";
+                        status.className = "status mostrar";
+                    });
+                }
+            }).catch(function (erro) {
+                console.log("Erro na requisição: ", erro);
+                status.textContent = "Houve um erro ao tentar realizar o cadastro.";
+                status.className = "status mostrar";
+            });
 
-        return false;
-    }
-
-    function Criar() {
-        let nomeVar = criarNome.value
-        let orgVar = criarOrg.value // Pode ser enviado como telefone ou outro campo adicional
-        let emailVar = criarEmail.value
-        let senhaVar = criarSenha.value
-
-        if (nomeVar == "" || emailVar == "" || senhaVar == "") {
-            status.textContent = "Preencha os campos obrigatórios (Nome, E-mail e Senha)."
-            status.className = "status mostrar"
             return false;
         }
-
-        fetch("/usuarios/cadastrar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                nomeServer: nomeVar,
-                emailServer: emailVar,
-                senhaServer: senhaVar,
-                telefoneServer: orgVar // Envia a organização/telefone como parâmetro opcional
-            })
-        }).then(function (resposta) {
-            if (resposta.ok) {
-                status.textContent = "Cadastro realizado com sucesso! Redirecionando..."
-                status.className = "status mostrar"
-
-                setTimeout(function () {
-                    MostrarEntrar();
-                }, 1500);
-            } else {
-                resposta.text().then(texto => {
-                    status.textContent = texto || "Erro ao cadastrar."
-                    status.className = "status mostrar"
-                });
-            }
-        }).catch(function (erro) {
-            console.log("Erro na requisição: ", erro);
-            status.textContent = "Houve um erro ao tentar realizar o cadastro."
-            status.className = "status mostrar"
-        });
-
-        return false;
-    }
-</script>
+    </script>
 
     <script src="../JS/sessao.js"></script>
     <script src="../JS/i18n.js"></script>

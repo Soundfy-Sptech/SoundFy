@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,7 @@
 </head>
 
 <body>
-<aside class="barra-lateral">
+    <aside class="barra-lateral">
         <a class="logo" href="index.html">
             <b>S</b>
             <span>Sound<span>Fy</span><small>INTELLIGENCE</small></span>
@@ -18,41 +19,53 @@
             <b>ST</b>
             <div>
                 <strong>SoundFy Studio</strong>
-                <small>Espaço de trabalho profissional</small>
+                <small data-i18n="workspace.professional">Espaço de trabalho profissional</small>
             </div>
+            <i>⌄</i>
         </div>
 
         <nav>
-            <label>VISÃO GERAL</label>
-            <a href="index.html">▦ <span>Dashboard</span></a>
-            <a href="index.html#tendencias">⌁ <span>Tendências</span></a>
-            <a href="index.html#generos">◉ <span>Gêneros</span></a>
-            <a class="ativo" href="regioes.html">⌖ <span>Regiões</span></a>
+            <label data-i18n="navigation.overview">VISÃO GERAL</label>
 
-            <label>PRODUTOR</label>
-            <a href="agenda.html">◷ <span>Agenda</span></a>
+            <a href="index.html">
+                <span data-i18n="navigation.dashboard">Dashboard</span>
+            </a>
 
-            <label>ANÁLISES</label>
-            <a href="index.html#relatorios">▤ <span>Relatórios</span></a>
-            <a href="index.html#insights">✦ <span>Insights</span></a>
+            <a class="ativo" href="regioes.html">
+                <span data-i18n="navigation.regions">Regiões</span>
+            </a>
+
+            <div data-role-section="artist">
+                <label data-i18n="navigation.artistArea">ÁREA DO ARTISTA</label>
+
+                <a href="artista.html">
+                    <span data-i18n="navigation.artistProfile">Meu perfil de artista</span>
+                </a>
+            </div>
+
+            <div data-role-section="producer">
+                <label data-i18n="navigation.producerArea">ÁREA DO PRODUTOR</label>
+
+                <a href="produtor.html">
+                    <span data-i18n="navigation.production">Área de produção</span>
+                </a>
+            </div>
+
+            <label data-i18n="navigation.analysis">ANÁLISES</label>
+
+            <a href="./relatorios.html">
+                <span data-i18n="navigation.reports">Relatórios</span>
+            </a>
         </nav>
 
         <div class="rodape-lateral">
-            <a href="configuracoes.html">⚙ <span>Configurações</span></a>
-
-            <div class="plano">
-                <b>✦</b>
-                <div>
-                    <strong>Plano Pro</strong>
-                    <small>Dados atualizados</small>
-                </div>
-            </div>
+            <a href="configuracoes.html">⚙<span data-i18n="navigation.settings">Configurações</span></a>
 
             <div class="perfil">
                 <b>FL</b>
                 <div>
-                    <strong>Felipe Leone</strong>
-                    <small>Produtor</small>
+                    <strong data-i18n="profile.name">Felipe Leone</strong>
+                    <small data-i18n="profile.producer">Produtor</small>
                 </div>
             </div>
         </div>
@@ -63,7 +76,8 @@
             <button id="menu" class="menu-mobile">☰</button>
 
             <div class="trilha">
-                Espaço de trabalho <b>/</b> <strong>Regiões</strong>
+                <span data-i18n="workspace.name">Espaço de trabalho</span> <b>/</b> <strong
+                    data-i18n="navigation.regions">Regiões</strong>
             </div>
 
             <div class="logo-mobile">
@@ -72,7 +86,28 @@
 
             <div class="acoes">
                 <button class="sino">♢<i></i></button>
-                <b class="avatar-topo">FL</b>
+
+                <div class="menu-perfil-container">
+                    <button class="avatar-topo" id="perfil-menu-botao" aria-label="Abrir menu do perfil"
+                        aria-expanded="false" aria-controls="perfil-menu">
+                        FL
+                    </button>
+
+                    <div class="menu-perfil" id="perfil-menu" hidden>
+                        <div class="menu-perfil-info">
+                            <strong data-i18n="profile.name">Felipe Leone</strong>
+                            <small data-i18n="profile.producer">Produtor</small>
+                        </div>
+
+                        <a href="configuracoes.html" data-i18n="navigation.settings">
+                            Configurações
+                        </a>
+
+                        <button type="button" id="perfil-sair" data-i18n="profile.logout">
+                            Sair
+                        </button>
+                    </div>
+                </div>
             </div>
         </header>
 
@@ -87,7 +122,8 @@
         <section class="painel busca-regiao">
             <label for="campoRegiao">Região</label>
             <div class="busca-regiao-linha">
-                <input id="campoRegiao" type="text" list="listaRegioes" placeholder="Digite: Norte, Nordeste, Centro-Oeste, Sudeste ou Sul" value="Sudeste">
+                <input id="campoRegiao" type="text" list="listaRegioes"
+                    placeholder="Digite: Norte, Nordeste, Centro-Oeste, Sudeste ou Sul" value="Sudeste">
                 <datalist id="listaRegioes">
                     <option value="Norte">
                     <option value="Nordeste">
@@ -102,25 +138,29 @@
 
         <div id="resultadoRegiao">
             <section class="indicadores indicadores-regiao">
-                <article>
-                    <div><b><span style="font-size: 20px;">Pontuação total</span></b></div>
-                    <strong id="kpiPontuacao">—</strong>
+                <article class="kpi-card">
+                    <div class="kpi-header"><span>Pontuação Total</span></div>
+                    <strong class="kpi-valor" id="kpiPontuacao">—</strong>
                 </article>
-                <article>
-                    <div><b><span style="font-size: 20px;">Registros</span></b></div>
-                    <strong id="kpiRegistros">—</strong>
+
+                <article class="kpi-card">
+                    <div class="kpi-header"><span>Registros</span></div>
+                    <strong class="kpi-valor" id="kpiRegistros">—</strong>
                 </article>
-                <article>
-                    <div><b><span style="font-size: 20px;">Cidades</span></b></div>
-                    <strong id="kpiCidades">—</strong>
+
+                <article class="kpi-card">
+                    <div class="kpi-header"><span>Cidades</span></div>
+                    <strong class="kpi-valor" id="kpiCidades">—</strong>
                 </article>
-                <article>
-                    <div><b><span style="font-size: 20px;">Músicas</span></b></div>
-                    <strong id="kpiMusicas">—</strong>
+
+                <article class="kpi-card">
+                    <div class="kpi-header"><span>Músicas</span></div>
+                    <strong class="kpi-valor" id="kpiMusicas">—</strong>
                 </article>
-                <article>
-                    <div><b><span style="font-size: 20px;">Média por cidade</span></b></div>
-                    <strong id="kpiMedia">—</strong>
+
+                <article class="kpi-card">
+                    <div class="kpi-header"><span>Média por Cidade</span></div>
+                    <strong class="kpi-valor" id="kpiMedia">—</strong>
                 </article>
             </section>
 
@@ -132,7 +172,7 @@
                             <h2 id="tituloGenerosRegiao">Gêneros em alta — Sudeste</h2>
                         </div>
                     </div>
-                    <div id="listaGenerosRegiao"></div>
+                    <div id="listaGenerosRegiao" class="lista-rank"></div>
                 </article>
 
                 <article class="painel">
@@ -142,7 +182,7 @@
                             <h2 id="tituloArtistasRegiao">Artistas em alta — Sudeste</h2>
                         </div>
                     </div>
-                    <div id="listaArtistasRegiao"></div>
+                    <div id="listaArtistasRegiao" class="lista-rank"></div>
                 </article>
             </section>
 
@@ -153,11 +193,17 @@
                         <h2 id="tituloCidadesRegiao">Cidades analisadas — Sudeste</h2>
                     </div>
                 </div>
-                <div id="listaCidadesRegiao"></div>
+                <div id="listaCidadesRegiao" class="lista-rank"></div>
             </section>
         </div>
     </main>
 
+    <script src="../JS/sessao.js"></script>
+    <script src="../JS/i18n.js"></script>
+    <script src="../JS/translate.js"></script>
     <script src="../JS/script.js"></script>
+    <script src="../JS/menu-perfil.js"></script>
+    <script src="../JS/sidebar-perfil.js"></script>
 </body>
+
 </html>

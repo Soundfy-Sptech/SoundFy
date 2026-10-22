@@ -1,67 +1,62 @@
 // ============================================================
-// ARQUIVO COMENTADO: public/js/sessao.js
-// Comentários adicionados para explicar a função de cada parte do código.
+// ARQUIVO: JS/sessao.js
 // ============================================================
-// sessão
-// Cria uma função. Essa função agrupa comandos para serem executados quando for chamada.
+
 function validarSessao() {
-// Define ou altera um valor usado pelo programa.
     var email = sessionStorage.EMAIL_USUARIO;
-// Define ou altera um valor usado pelo programa.
     var nome = sessionStorage.NOME_USUARIO;
 
-// Define ou altera um valor usado pelo programa.
     var b_usuario = document.getElementById("b_usuario");
 
-// Inicia uma condição. O código dentro do bloco só executa se a condição for verdadeira.
     if (email != null && nome != null) {
-// Define ou altera um valor usado pelo programa.
-        b_usuario.innerHTML = nome;
-// Executa este bloco quando as condições anteriores não foram atendidas.
+        if (b_usuario) {
+            b_usuario.innerHTML = nome;
+        }
+        controlarExibicaoPorTipoUsuario();
     } else {
-// Define ou altera um valor usado pelo programa.
-        window.location = "../login.html";
-// Fecha o bloco de código iniciado anteriormente.
+        window.location.href = "cadastro.html";
     }
-// Fecha o bloco de código iniciado anteriormente.
 }
 
-// Cria uma função. Essa função agrupa comandos para serem executados quando for chamada.
+function controlarExibicaoPorTipoUsuario() {
+    // Recupera o tipo de usuário salvo na sessão
+    var tipoUsuario = sessionStorage.TIPO_USUARIO;
+
+    var secaoArtista = document.querySelector('[data-role-section="artist"]');
+    var secaoProdutor = document.querySelector('[data-role-section="producer"]');
+
+    if (!secaoArtista || !secaoProdutor) {
+        return;
+    }
+
+    if (tipoUsuario) {
+        var tipoNormalizado = String(tipoUsuario).trim().toLowerCase();
+
+        if (tipoNormalizado === "artista") {
+            // Exibe a aba do artista e oculta a do produtor
+            secaoArtista.style.setProperty("display", "block", "important");
+            secaoProdutor.style.setProperty("display", "none", "important");
+        } else if (tipoNormalizado === "produtor") {
+            // Exibe a aba do produtor e oculta a do artista
+            secaoArtista.style.setProperty("display", "none", "important");
+            secaoProdutor.style.setProperty("display", "block", "important");
+        } else {
+            secaoArtista.style.setProperty("display", "none", "important");
+            secaoProdutor.style.setProperty("display", "none", "important");
+        }
+    }
+}
+
 function limparSessao() {
-// Usa o sessionStorage, que guarda dados temporários enquanto a aba/navegador está aberto.
     sessionStorage.clear();
-// Define ou altera um valor usado pelo programa.
-    window.location = "../login.html";
-// Fecha o bloco de código iniciado anteriormente.
+    window.location.href = "cadastro.html";
 }
 
-// carregamento (loading)
-// Cria uma função. Essa função agrupa comandos para serem executados quando for chamada.
-function aguardar() {
-// Define ou altera um valor usado pelo programa.
-    var divAguardar = document.getElementById("div_aguardar");
-// Define ou altera um valor usado pelo programa.
-    divAguardar.style.display = "flex";
-// Fecha o bloco de código iniciado anteriormente.
+// Executa assim que o DOM estiver pronto e também ao finalizar o carregamento total
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", controlarExibicaoPorTipoUsuario);
+} else {
+    controlarExibicaoPorTipoUsuario();
 }
 
-// Cria uma função. Essa função agrupa comandos para serem executados quando for chamada.
-function finalizarAguardar(texto) {
-// Define ou altera um valor usado pelo programa.
-    var divAguardar = document.getElementById("div_aguardar");
-// Define ou altera um valor usado pelo programa.
-    divAguardar.style.display = "none";
-
-// Define ou altera um valor usado pelo programa.
-    var divErrosLogin = document.getElementById("div_erros_login");
-// Inicia uma condição. O código dentro do bloco só executa se a condição for verdadeira.
-    if (texto) {
-// Define ou altera um valor usado pelo programa.
-        divErrosLogin.style.display = "flex";
-// Define ou altera um valor usado pelo programa.
-        divErrosLogin.innerHTML = texto;
-// Fecha o bloco de código iniciado anteriormente.
-    }
-// Fecha o bloco de código iniciado anteriormente.
-}
-
+window.addEventListener("load", controlarExibicaoPorTipoUsuario);
