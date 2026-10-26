@@ -215,12 +215,49 @@
             let senhaVar = document.getElementById("criarSenha").value;
             let status = document.getElementById("status");
 
-            if (nomeVar == "" || emailVar == "" || telefoneVar == "" || tipoUsuarioVar == "" || senhaVar == "") {
-                status.textContent = "Preencha todos os campos para cadastrar.";
+            // Lógica de Validação (baseada no seu modelo de referência)
+            let restricaoNome = ['@', '#', '$', '*', '/', '<', '>', '!', '%', '&', '?', '=', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+            let nomeTamanho = nomeVar.length;
+            let senhaTamanho = senhaVar.length;
+
+            let temCaracterProibido = false;
+            for (let i = 0; i < restricaoNome.length; i++) {
+                let indiceLista = restricaoNome[i];
+                if (nomeVar.includes(indiceLista)) {
+                    temCaracterProibido = true;
+                    break;
+                }
+            }
+
+            // 1. Validação do Nome
+            if (nomeVar == '' || nomeTamanho < 3 || temCaracterProibido) {
+                status.textContent = 'O nome precisa ter pelo menos 3 caracteres e não pode conter números nem símbolos.';
                 status.className = "status mostrar";
                 return false;
             }
 
+            // 2. Validação do E-mail
+            if (emailVar == '' || !emailVar.includes('@') || !emailVar.includes('.') || emailVar.includes(' ')) {
+                status.textContent = 'O e-mail precisa ter @ e . para ser válido (sem espaços).';
+                status.className = "status mostrar";
+                return false;
+            }
+
+            // 3. Validação de Telefone e Tipo de Usuário (Campos presentes no seu formulário)
+            if (telefoneVar == '' || tipoUsuarioVar == '') {
+                status.textContent = 'Preencha todos os campos para cadastrar.';
+                status.className = "status mostrar";
+                return false;
+            }
+
+            // 4. Validação da Senha
+            if (senhaVar == '' || senhaTamanho < 8 || senhaVar.includes(' ')) {
+                status.textContent = 'A senha precisa ter no mínimo 8 caracteres e não pode conter espaços.';
+                status.className = "status mostrar";
+                return false;
+            }
+
+            // Se passar por todas as validações, envia os dados
             fetch("/usuarios/cadastrar", {
                 method: "POST",
                 headers: {
