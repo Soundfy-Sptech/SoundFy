@@ -1,16 +1,19 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="relatorios.title">SoundFy Intelligence — Relatórios</title>
+    <title data-i18n="reports.title">SoundFy Intelligence — Relatórios</title>
+
     <link rel="stylesheet" href="../Style/style.css">
     <link rel="stylesheet" href="../Style/relatorios.css">
 
-    <!-- SheetJS para exportação em XLSX -->
-    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>  
-
+    <!-- Bibliotecas de exportação -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 </head>
 
 <body>
@@ -46,7 +49,6 @@
 
             <div data-role-section="artist">
                 <label data-i18n="navigation.artistArea">ÁREA DO ARTISTA</label>
-
                 <a href="artista.html">
                     <span data-i18n="navigation.artistProfile">Meu perfil de artista</span>
                 </a>
@@ -54,7 +56,6 @@
 
             <div data-role-section="producer">
                 <label data-i18n="navigation.producerArea">ÁREA DO PRODUTOR</label>
-
                 <a href="produtor.html">
                     <span data-i18n="navigation.production">Área de produção</span>
                 </a>
@@ -65,9 +66,9 @@
             <a href="configuracoes.html">⚙<span data-i18n="navigation.settings">Configurações</span></a>
 
             <div class="perfil">
-                <b>FL</b>
+                <b data-user-initials>U</b>
                 <div>
-                    <strong data-i18n="profile.name">Felipe Leone</strong>
+                    <strong data-user-name>Usuário</strong>
                     <small data-i18n="profile.producer">Produtor</small>
                 </div>
             </div>
@@ -76,10 +77,12 @@
 
     <main>
         <header>
-            <button id="menu" class="menu-mobile">☰</button>
+            <button id="menu" class="menu-mobile" type="button" aria-label="Abrir menu">☰</button>
 
             <div class="trilha">
-                <span data-i18n="workspace.name">SoundFy Studio</span> <b>/</b> <strong data-i18n="navigation.reports">Relatórios</strong>
+                <span data-i18n="workspace.name">SoundFy Studio</span>
+                <b>/</b>
+                <strong data-i18n="navigation.reports">Relatórios</strong>
             </div>
 
             <div class="logo-mobile">
@@ -87,16 +90,22 @@
             </div>
 
             <div class="acoes">
-                <button class="sino" aria-label="Notificações">♢<i></i></button>
+                <button class="sino" type="button" aria-label="Notificações">♢<i></i></button>
 
                 <div class="menu-perfil-container">
-                    <button class="avatar-topo" id="perfil-menu-botao" aria-label="Abrir menu do perfil" aria-expanded="false" aria-controls="perfil-menu">
-                        FL
+                    <button
+                        class="avatar-topo"
+                        id="perfil-menu-botao"
+                        type="button"
+                        aria-label="Abrir menu do perfil"
+                        aria-expanded="false"
+                        aria-controls="perfil-menu">
+                        <b data-user-initials>U</b>
                     </button>
 
                     <div class="menu-perfil" id="perfil-menu" hidden>
                         <div class="menu-perfil-info">
-                            <strong data-i18n="profile.name">Felipe Leone</strong>
+                            <strong data-user-name>Usuário</strong>
                             <small data-i18n="profile.producer">Produtor</small>
                         </div>
 
@@ -109,83 +118,108 @@
 
         <section class="introducao">
             <div>
-                <p>CENTRAL DE DADOS</p>
-                <h1>Relatórios de Inteligência Musical</h1>
-                <span>Filtre, analise e exporte relatórios consolidados do mercado musical brasileiro.</span>
+                <p data-i18n="reports.eyebrow">CENTRAL DE DADOS</p>
+                <h1 data-i18n="reports.heading">Relatórios de Inteligência Musical</h1>
+                <span data-i18n="reports.description">
+                    Filtre, analise e exporte relatórios consolidados do mercado musical brasileiro.
+                </span>
             </div>
         </section>
 
-        <!-- Painel de KPIs Dinâmicos -->
         <section class="indicadores">
             <article class="kpi-card">
-                <div class="kpi-header"><span>Pontuação Total</span></div>
-                <strong class="kpi-valor">9.582.709</strong>
-                <small class="kpi-meta">Música Brasil</small>
+                <div class="kpi-header">
+                    <span data-i18n="reports.totalScore">Pontuação Total</span>
+                </div>
+                <strong class="kpi-valor" id="kpiPontuacao">9.582.709</strong>
+                <small class="kpi-meta" data-i18n="reports.brazilianMusic">Música Brasil</small>
             </article>
 
             <article class="kpi-card">
-                <div class="kpi-header"><span>Registros Analisados</span></div>
-                <strong class="kpi-valor">189.849</strong>
-                <small class="kpi-meta"><em>↑ 100%</em> base auditada</small>
+                <div class="kpi-header">
+                    <span data-i18n="reports.recordsAnalyzed">Registros Analisados</span>
+                </div>
+                <strong class="kpi-valor" id="kpiRegistros">189.849</strong>
+                <small class="kpi-meta">
+                    <em>↑ 100%</em>
+                    <span data-i18n="reports.auditedDatabase">base auditada</span>
+                </small>
             </article>
 
             <article class="kpi-card">
-                <div class="kpi-header"><span>Cidades Cobertas</span></div>
-                <strong class="kpi-valor">16 Cidades</strong>
-                <small class="kpi-meta">5 Regiões do Brasil</small>
+                <div class="kpi-header">
+                    <span data-i18n="reports.citiesCovered">Cidades Cobertas</span>
+                </div>
+                <strong class="kpi-valor" id="kpiCidades">16</strong>
+                <small class="kpi-meta" data-i18n="reports.brazilRegions">5 Regiões do Brasil</small>
             </article>
 
             <article class="kpi-card">
-                <div class="kpi-header"><span>Músicas Mapeadas</span></div>
-                <strong class="kpi-valor">4.768 Faixas</strong>
-                <small class="kpi-meta">Base consolidada</small>
+                <div class="kpi-header">
+                    <span data-i18n="reports.tracksMapped">Músicas Mapeadas</span>
+                </div>
+                <strong class="kpi-valor" id="kpiFaixas">4.768</strong>
+                <small class="kpi-meta" data-i18n="reports.consolidatedDatabase">Base consolidada</small>
             </article>
         </section>
 
-        <!-- Barra de Filtros e Exportação -->
         <section class="painel-filtros">
             <div class="grupo-filtros">
-                <select id="filtroTipo" class="filtro-select">
-                    <option value="artistas">Artistas Detalhados</option>
-                    <option value="generos">Gêneros Detalhados</option>
-                    <option value="cidades">Desempenho por Cidade</option>
-                    <option value="resumo">Resumo por Região</option>
+                <select id="filtroTipo" class="filtro-select" aria-label="Tipo de relatório">
+                    <option value="artistas" data-i18n="reports.typeArtists">Artistas Detalhados</option>
+                    <option value="generos" data-i18n="reports.typeGenres">Gêneros Detalhados</option>
+                    <option value="cidades" data-i18n="reports.typeCities">Desempenho por Cidade</option>
+                    <option value="resumo" data-i18n="reports.typeRegions">Resumo por Região</option>
                 </select>
 
-                <select id="filtroRegiao" class="filtro-select">
-                    <option value="todas">Todas as Regiões</option>
-                    <option value="Sudeste">Sudeste</option>
-                    <option value="Nordeste">Nordeste</option>
-                    <option value="Centro-Oeste">Centro-Oeste</option>
-                    <option value="Sul">Sul</option>
-                    <option value="Norte">Norte</option>
+                <select id="filtroRegiao" class="filtro-select" aria-label="Filtrar por região">
+                    <option value="todas" data-i18n="reports.allRegions">Todas as Regiões</option>
+                    <option value="Sudeste" data-i18n="reports.southeast">Sudeste</option>
+                    <option value="Nordeste" data-i18n="reports.northeast">Nordeste</option>
+                    <option value="Centro-Oeste" data-i18n="reports.midwest">Centro-Oeste</option>
+                    <option value="Sul" data-i18n="reports.south">Sul</option>
+                    <option value="Norte" data-i18n="reports.north">Norte</option>
                 </select>
 
-                <select id="filtroLimite" class="filtro-select">
-                    <option value="10">Exibir Top 10</option>
-                    <option value="25" selected>Exibir Top 25</option>
-                    <option value="50">Exibir Top 50</option>
-                    <option value="todos">Exibir Todos</option>
+                <select id="filtroLimite" class="filtro-select" aria-label="Quantidade de registros">
+                    <option value="10" data-i18n="reports.top10">Exibir Top 10</option>
+                    <option value="25" selected data-i18n="reports.top25">Exibir Top 25</option>
+                    <option value="50" data-i18n="reports.top50">Exibir Top 50</option>
+                    <option value="todos" data-i18n="reports.showAll">Exibir Todos</option>
                 </select>
 
                 <div class="pesquisa-container">
-                    <input type="text" id="filtroBusca" class="filtro-input" placeholder="Buscar artista, gênero, cidade...">
+                    <input
+                        type="text"
+                        id="filtroBusca"
+                        class="filtro-input"
+                        data-i18n-placeholder="reports.searchPlaceholder"
+                        placeholder="Buscar artista, gênero, cidade..."
+                        aria-label="Buscar nos relatórios">
                 </div>
             </div>
 
             <div class="botoes-exportacao">
-                <button class="btn-export" onclick="exportarCSV()"> <span>Baixar CSV</span></button>
-                <button class="btn-export" onclick="exportarXLSX()"> <span>Baixar XLSX</span></button>
-                <button class="btn-export btn-pdf" onclick="exportarPDF()"> <span>Gerar PDF</span></button>
+                <button class="btn-export" id="btnExportarCSV" type="button">
+                    <span data-i18n="reports.downloadCSV">Baixar CSV</span>
+                </button>
+
+                <button class="btn-export" id="btnExportarXLSX" type="button">
+                    <span data-i18n="reports.downloadXLSX">Baixar XLSX</span>
+                </button>
+
+                <button class="btn-export btn-pdf" id="btnExportarPDF" type="button">
+                    <span data-i18n="reports.generatePDF">Gerar PDF</span>
+                </button>
             </div>
         </section>
 
-        <!-- Tabela do Relatório -->
         <section class="painel">
             <div class="painel-cabecalho">
                 <div>
-                    <p id="subtituloRelatorio">RELATÓRIO DETALHADO</p>
+                    <p id="subtituloRelatorio" data-i18n="reports.detailedReport">RELATÓRIO DETALHADO</p>
                 </div>
+
                 <span id="contadorLinhas" class="kpi-badge neutro">0 registros encontrados</span>
             </div>
 
@@ -204,5 +238,7 @@
     <script src="../JS/script.js"></script>
     <script src="../JS/menu-perfil.js"></script>
     <script src="../JS/sidebar-perfil.js"></script>
+    <script src="../JS/relatorios.js"></script>
 </body>
+
 </html>

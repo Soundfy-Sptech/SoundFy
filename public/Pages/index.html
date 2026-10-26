@@ -64,9 +64,9 @@
             </a>
 
             <div class="perfil">
-                <b>FL</b>
+                <b data-user-initials>U</b>
                 <div>
-                    <strong>Felipe Leone</strong>
+                    <strong data-user-name>Usuário</strong>
                     <small data-i18n="profile.producer">Produtor</small>
                 </div>
             </div>
@@ -93,12 +93,12 @@
                 <div class="menu-perfil-container">
                     <button class="avatar-topo" id="perfil-menu-botao" aria-label="Abrir menu do perfil"
                         aria-expanded="false" aria-controls="perfil-menu">
-                        FL
+                        <b data-user-initials>U</b>
                     </button>
 
                     <div class="menu-perfil" id="perfil-menu" hidden>
                         <div class="menu-perfil-info">
-                            <strong data-i18n="profile.name">Felipe Leone</strong>
+                            <strong data-user-name>Usuário</strong>
                             <small data-i18n="profile.producer">Produtor</small>
                         </div>
 
@@ -117,7 +117,10 @@
         <section class="introducao">
             <div>
                 <p data-i18n="index.date">Quinta-feira, 22 de Outubro</p>
-                <h1 data-i18n="index.greeting">Olá, Felipe</h1>
+                <h1>
+    <span data-i18n="index.greeting">Olá,</span>
+    <span id="nome-usuario-greeting">Usuário</span>
+</h1>
                 <span data-i18n="index.description">Aqui está o panorama geral do mercado musical de hoje.</span>
             </div>
         </section>
