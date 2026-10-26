@@ -58,9 +58,9 @@
             <a class="ativo" href="configuracoes.html">⚙ <span data-i18n="navigation.settings"></span></a>
 
             <div class="perfil">
-                <b>FL</b>
+                <b data-user-initials>U</b>
                 <div>
-                    <strong>Felipe Leone</strong>
+                    <strong data-user-name>Usuário</strong>
                     <small data-i18n="profile.producer"></small>
                 </div>
             </div>
@@ -92,12 +92,12 @@
             aria-expanded="false"
             aria-controls="perfil-menu"
         >
-            FL
+            <b data-user-initials>U</b>
         </button>
 
         <div class="menu-perfil" id="perfil-menu" hidden>
             <div class="menu-perfil-info">
-                <strong data-i18n="profile.name">Felipe Leone</strong>
+                <strong data-user-name>Usuário</strong>
                 <small data-i18n="profile.producer">Produtor</small>
             </div>
 
@@ -147,7 +147,6 @@
 
                         <label>
                             <span data-i18n="configuracoes.responsible"></span>
-                            <input value="Felipe Leone">
                         </label>
 
                         <label class="completo">
@@ -270,15 +269,23 @@
 
    <script src="../JS/i18n.js"></script>
 <script src="../JS/translate.js"></script>
+
 <script>
-    let language = document.querySelector("#language")
+    const seletorIdioma = document.querySelector("#language");
 
-    language.value = localStorage.getItem("soundfy-language") || "pt"
+    seletorIdioma.value = localStorage.getItem("soundfy-language") || "pt";
 
-    language.addEventListener("change", function () {
-        changeLanguage(this.value)
-    })
+    seletorIdioma.addEventListener("change", async function () {
+        try {
+            await changeLanguage(this.value);
+        } catch (erro) {
+            console.error("Erro ao trocar idioma:", erro);
+        }
+    });
 </script>
+
+
+
 <script src="../JS/script.js"></script>
 <script src="../JS/menu-perfil.js"></script>
 <script src="../JS/sidebar-perfil.js"></script>

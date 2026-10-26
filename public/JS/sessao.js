@@ -60,3 +60,32 @@ if (document.readyState === "loading") {
 }
 
 window.addEventListener("load", controlarExibicaoPorTipoUsuario);
+
+function atualizarDadosPerfil() {
+    const nome = sessionStorage.getItem("NOME_USUARIO");
+    const nomeUsuario = nome || "Usuário";
+
+    document.querySelectorAll("[data-user-name]").forEach(function (elemento) {
+        elemento.textContent = nomeUsuario;
+    });
+
+    document.querySelectorAll("[data-user-initials]").forEach(function (elemento) {
+        elemento.textContent = nomeUsuario
+            .trim()
+            .split(/\s+/)
+            .slice(0, 2)
+            .map(function (parte) {
+                return parte.charAt(0);
+            })
+            .join("")
+            .toUpperCase();
+    });
+
+    const saudacao = document.getElementById("nome-usuario-greeting");
+
+    if (saudacao) {
+        saudacao.textContent = nomeUsuario;
+    }
+}
+
+document.addEventListener("DOMContentLoaded", atualizarDadosPerfil);
