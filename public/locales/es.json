@@ -81,7 +81,6 @@
     "index": {
         "title": "SoundFy - Dashboard",
         "date": "JUEVES, 27 AGO 2026",
-        "greeting": "Buen trabajo, Felipe.",
         "description": "Mira lo que está pasando en el mercado musical.",
         "last30Days": "Últimos 30 días ⌄",
         "growthIndex": "Índice de crecimiento",
@@ -148,7 +147,8 @@
         "subgenreRadar": "Radar de subgéneros",
         "global90Days": "Global · 90 días",
         "aug26": "26 ago, 11:46",
-        "completed": "Completado"
+        "completed": "Completado",
+        "greeting": "Hola,"
     },
     "common": {
         "date": "Fecha",
@@ -199,7 +199,7 @@
         "other": "Otro"
     },
     "profile": {
-  "name": "Felipe Leone",
+  "name": "Usuario",
   "producer": "Productor",
   "logout": "Cerrar sesión"
 },
@@ -270,5 +270,55 @@
         "insightsDescription": "Ejemplos de análisis que estarán disponibles.",
         "insightExample": "Explora nuevos segmentos musicales",
         "insightPending": "Los análisis reales dependerán de la integración de datos."
-    }
+    },
+  "reports": {
+    "title": "SoundFy Intelligence — Informes",
+    "eyebrow": "CENTRO DE DATOS",
+    "heading": "Informes de Inteligencia Musical",
+    "description": "Filtra, analiza y exporta informes consolidados del mercado musical brasileño.",
+    "totalScore": "Puntuación Total",
+    "brazilianMusic": "Música brasileña",
+    "recordsAnalyzed": "Registros Analizados",
+    "auditedDatabase": "base auditada",
+    "citiesCovered": "Ciudades Cubiertas",
+    "brazilRegions": "5 Regiones de Brasil",
+    "tracksMapped": "Canciones Mapeadas",
+    "consolidatedDatabase": "Base consolidada",
+    "typeArtists": "Artistas Detallados",
+    "typeGenres": "Géneros Detallados",
+    "typeCities": "Rendimiento por Ciudad",
+    "typeRegions": "Resumen por Región",
+    "allRegions": "Todas las Regiones",
+    "southeast": "Sudeste",
+    "northeast": "Nordeste",
+    "midwest": "Centro-Oeste",
+    "south": "Sur",
+    "north": "Norte",
+    "top10": "Mostrar Top 10",
+    "top25": "Mostrar Top 25",
+    "top50": "Mostrar Top 50",
+    "showAll": "Mostrar Todos",
+    "searchPlaceholder": "Buscar artista, género, ciudad...",
+    "downloadCSV": "Descargar CSV",
+    "downloadXLSX": "Descargar XLSX",
+    "generatePDF": "Generar PDF",
+    "detailedReport": "INFORME DETALLADO",
+    "recordsFound": "registros encontrados",
+    "columnArtist": "Artista",
+    "columnRegion": "Región",
+    "columnCity": "Ciudad",
+    "columnGenre": "Género",
+    "columnScore": "Puntuación",
+    "columnPopularity": "Popularidad",
+    "columnArtists": "Artistas",
+    "columnTracks": "Canciones",
+    "columnCities": "Ciudades",
+    "noDataToExport": "No hay datos para exportar con los filtros seleccionados.",
+    "xlsxLibraryError": "No se pudo cargar la biblioteca de exportación XLSX.",
+    "pdfLibraryError": "No se pudo cargar la biblioteca de generación de PDF.",
+    "pdfTableError": "No se pudo generar la tabla en el PDF.",
+    "pdfTitle": "Informe de Inteligencia Musical — SoundFy",
+    "pdfType": "Tipo de informe",
+    "pdfGeneratedAt": "Generado el"
+  }
 }

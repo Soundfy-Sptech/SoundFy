@@ -81,7 +81,6 @@
     "index": {
         "title": "SoundFy - Dashboard",
         "date": "THURSDAY, AUG 27 2026",
-        "greeting": "Good work, Felipe.",
         "description": "See what's happening in the music market.",
         "last30Days": "Last 30 days ⌄",
         "growthIndex": "Growth index",
@@ -148,7 +147,8 @@
         "subgenreRadar": "Subgenre radar",
         "global90Days": "Global · 90 days",
         "aug26": "Aug 26, 11:46",
-        "completed": "Completed"
+        "completed": "Completed",
+        "greeting": "Hello,"
     },
     "common": {
         "date": "Date",
@@ -200,7 +200,7 @@
         "other": "Other"
     },
     "profile": {
-  "name": "Felipe Leone",
+  "name": "User",
   "producer": "Producer",
   "logout": "Log out"
 },
@@ -271,5 +271,55 @@
         "insightsDescription": "Examples of analyses that will be available.",
         "insightExample": "Explore new music segments",
         "insightPending": "Actual insights will depend on data integration."
-    }
+    },
+  "reports": {
+    "title": "SoundFy Intelligence — Reports",
+    "eyebrow": "DATA CENTER",
+    "heading": "Music Intelligence Reports",
+    "description": "Filter, analyze, and export consolidated reports on the Brazilian music market.",
+    "totalScore": "Total Score",
+    "brazilianMusic": "Brazilian Music",
+    "recordsAnalyzed": "Records Analyzed",
+    "auditedDatabase": "audited database",
+    "citiesCovered": "Cities Covered",
+    "brazilRegions": "5 Regions of Brazil",
+    "tracksMapped": "Tracks Mapped",
+    "consolidatedDatabase": "Consolidated database",
+    "typeArtists": "Detailed Artists",
+    "typeGenres": "Detailed Genres",
+    "typeCities": "Performance by City",
+    "typeRegions": "Regional Summary",
+    "allRegions": "All Regions",
+    "southeast": "Southeast",
+    "northeast": "Northeast",
+    "midwest": "Midwest",
+    "south": "South",
+    "north": "North",
+    "top10": "Show Top 10",
+    "top25": "Show Top 25",
+    "top50": "Show Top 50",
+    "showAll": "Show All",
+    "searchPlaceholder": "Search artist, genre, city...",
+    "downloadCSV": "Download CSV",
+    "downloadXLSX": "Download XLSX",
+    "generatePDF": "Generate PDF",
+    "detailedReport": "DETAILED REPORT",
+    "recordsFound": "records found",
+    "columnArtist": "Artist",
+    "columnRegion": "Region",
+    "columnCity": "City",
+    "columnGenre": "Genre",
+    "columnScore": "Score",
+    "columnPopularity": "Popularity",
+    "columnArtists": "Artists",
+    "columnTracks": "Tracks",
+    "columnCities": "Cities",
+    "noDataToExport": "There is no data to export with the selected filters.",
+    "xlsxLibraryError": "The XLSX export library could not be loaded.",
+    "pdfLibraryError": "The PDF generation library could not be loaded.",
+    "pdfTableError": "The table could not be generated in the PDF.",
+    "pdfTitle": "Music Intelligence Report — SoundFy",
+    "pdfType": "Report type",
+    "pdfGeneratedAt": "Generated at"
+  }
 }
