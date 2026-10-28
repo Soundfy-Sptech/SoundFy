@@ -426,6 +426,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 8px;
     font-size: 13px;
     color: var(--cinza);
     font-weight: 600;
@@ -436,6 +437,8 @@ header {
     border-radius: 20px;
     font-size: 11px;
     font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .kpi-badge.positivo { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
@@ -547,7 +550,7 @@ header {
 .grafico {
     height: 215px;
     display: grid;
-    grid-template-columns: 28px 1fr;
+    grid-template-columns: 42px 1fr;
     margin-top: 10px;
 }
 
@@ -558,6 +561,7 @@ header {
     padding: 5px 0 27px;
     color: var(--cinza);
     font-size: 11px;
+    white-space: nowrap;
 }
 
 .grafico-area {
@@ -1066,16 +1070,6 @@ header {
     font-size: 11px;
 }
 
-.configuracao > em {
-    font-style: normal;
-    color: var(--roxo);
-    background: rgba(124,58,237,.09);
-    padding: 4px 6px;
-    border-radius: 4px;
-    font-size: 10px;
-    font-weight: 800;
-}
-
 .alternador {
     position: relative;
     width: 34px;
@@ -1194,6 +1188,82 @@ button.avatar-topo:focus-visible {
 
 nav [data-role-section][hidden] {
     display: none !important;
+}
+
+/* ============================================================
+   Barra lateral: abas por perfil (sem piscar)
+   Por padrão, tudo que é específico de perfil fica oculto. O script
+   JS/sidebar-perfil.js (no <head>) grava o perfil em
+   <html data-perfil="artista|produtor"> antes da primeira pintura.
+   Sem perfil válido, nenhuma opção específica é exibida.
+   ============================================================ */
+[data-role-section] {
+    display: none !important;
+}
+
+html[data-perfil="artista"] [data-role-section="artist"],
+html[data-perfil="produtor"] [data-role-section="producer"] {
+    display: block !important;
+}
+
+/* ============================================================
+   Barra lateral: estrutura estável (mesmas alturas em todas as páginas)
+   ============================================================ */
+.barra-lateral .logo {
+    height: 31px;
+    flex-shrink: 0;
+}
+
+.barra-lateral .espaco-trabalho {
+    min-height: 56px;
+    flex-shrink: 0;
+}
+
+.barra-lateral .espaco-trabalho div strong,
+.barra-lateral .perfil strong {
+    line-height: 16px;
+}
+
+.barra-lateral .espaco-trabalho div small,
+.barra-lateral .perfil small {
+    line-height: 14px;
+    min-height: 14px;
+}
+
+.barra-lateral nav {
+    flex-shrink: 0;
+}
+
+.barra-lateral nav label {
+    display: block;
+    line-height: 14px;
+}
+
+.barra-lateral nav a {
+    min-height: 38px;
+    line-height: 20px;
+    box-sizing: border-box;
+}
+
+.barra-lateral .rodape-lateral {
+    flex-shrink: 0;
+}
+
+.barra-lateral .rodape-lateral > a {
+    align-items: center;
+    min-height: 38px;
+    line-height: 20px;
+    box-sizing: border-box;
+}
+
+.barra-lateral .perfil {
+    min-height: 55px;
+    box-sizing: border-box;
+}
+
+.barra-lateral .perfil > div {
+    min-width: 0;
+    min-height: 32px;
 }
 
 .idioma-select {

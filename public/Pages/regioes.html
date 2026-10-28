@@ -4,21 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoundFy Intelligence — Regiões</title>
+    <title data-i18n="regions.title">SoundFy Intelligence — Regiões</title>
     <link rel="stylesheet" href="../Style/style.css">
+    <script src="../JS/sidebar-perfil.js"></script>
 </head>
 
 <body>
     <aside class="barra-lateral">
         <a class="logo" href="index.html">
             <b>S</b>
-            <span>Sound<span>Fy</span><small>INTELLIGENCE</small></span>
+            <span>Sound<span>Fy</span></span>
         </a>
 
         <div class="espaco-trabalho">
             <b>ST</b>
             <div>
-                <strong>SoundFy Studio</strong>
+                <strong data-i18n="workspace.title">Análise Musical</strong>
                 <small data-i18n="workspace.professional">Espaço de trabalho profissional</small>
             </div>
             <i>⌄</i>
@@ -38,34 +39,35 @@
             <div data-role-section="artist">
                 <label data-i18n="navigation.artistArea">ÁREA DO ARTISTA</label>
 
-                <a href="artista.html">
-                    <span data-i18n="navigation.artistProfile">Meu perfil de artista</span>
-                </a>
+            <a href="artista.html">
+                <span data-i18n="navigation.artistProfile">Meu perfil de artista</span>
+            </a>
             </div>
 
             <div data-role-section="producer">
                 <label data-i18n="navigation.producerArea">ÁREA DO PRODUTOR</label>
 
-                <a href="produtor.html">
-                    <span data-i18n="navigation.production">Área de produção</span>
-                </a>
+            <a href="produtor.html">
+                <span data-i18n="navigation.production">Área de produção</span>
+            </a>
             </div>
 
             <label data-i18n="navigation.analysis">ANÁLISES</label>
 
-            <a href="./relatorios.html">
+            <a href="relatorios.html">
                 <span data-i18n="navigation.reports">Relatórios</span>
             </a>
         </nav>
 
         <div class="rodape-lateral">
-            <a href="configuracoes.html">⚙<span data-i18n="navigation.settings">Configurações</span></a>
+            <a href="configuracoes.html">⚙ <span data-i18n="navigation.settings">Configurações</span></a>
 
             <div class="perfil">
                 <b data-user-initials>U</b>
                 <div>
                     <strong data-user-name>Usuário</strong>
-                    <small data-i18n="profile.producer">Produtor</small>
+                    <small data-role-section="artist" data-i18n="profile.artist">Artista</small>
+                    <small data-role-section="producer" data-i18n="profile.producer">Produtor</small>
                 </div>
             </div>
         </div>
@@ -85,10 +87,10 @@
             </div>
 
             <div class="acoes">
-                <button class="sino">♢<i></i></button>
+                <button class="sino" aria-label="Notificações" data-i18n-aria-label="configuracoes.notifications">♢<i></i></button>
 
                 <div class="menu-perfil-container">
-                    <button class="avatar-topo" id="perfil-menu-botao" aria-label="Abrir menu do perfil"
+                    <button class="avatar-topo" id="perfil-menu-botao" aria-label="Abrir menu do perfil" data-i18n-aria-label="profile.openMenu"
                         aria-expanded="false" aria-controls="perfil-menu">
                         <b data-user-initials>U</b>
                     </button>
@@ -96,7 +98,8 @@
                     <div class="menu-perfil" id="perfil-menu" hidden>
                         <div class="menu-perfil-info">
                             <strong data-user-name>Usuário</strong>
-                            <small data-i18n="profile.producer">Produtor</small>
+                            <small data-role-section="artist" data-i18n="profile.artist">Artista</small>
+                            <small data-role-section="producer" data-i18n="profile.producer">Produtor</small>
                         </div>
 
                         <a href="configuracoes.html" data-i18n="navigation.settings">
@@ -113,17 +116,18 @@
 
         <section class="introducao">
             <div>
-                <p>GEOGRAFIA</p>
-                <h1>Buscar por região</h1>
-                <span>Explore gêneros, artistas e cidades em alta em cada região do Brasil.</span>
+                <p data-i18n="regions.eyebrow">GEOGRAFIA</p>
+                <h1 data-i18n="regions.heading">Buscar por região</h1>
+                <span data-i18n="regions.description">Explore gêneros, artistas e cidades em alta em cada região do Brasil.</span>
             </div>
         </section>
 
         <section class="painel busca-regiao">
-            <label for="campoRegiao">Região</label>
+            <label for="campoRegiao" data-i18n="regions.label">Região</label>
             <div class="busca-regiao-linha">
                 <input id="campoRegiao" type="text" list="listaRegioes"
-                    placeholder="Digite: Norte, Nordeste, Centro-Oeste, Sudeste ou Sul" value="Sudeste">
+                    placeholder="Digite: Norte, Nordeste, Centro-Oeste, Sudeste ou Sul"
+                    data-i18n-placeholder="regions.searchPlaceholder" value="Sudeste">
                 <datalist id="listaRegioes">
                     <option value="Norte">
                     <option value="Nordeste">
@@ -131,7 +135,7 @@
                     <option value="Sudeste">
                     <option value="Sul">
                 </datalist>
-                <button id="botaoBuscarRegiao" class="primario">Buscar →</button>
+                <button id="botaoBuscarRegiao" class="primario" data-i18n="regions.searchButton">Buscar →</button>
             </div>
             <p id="mensagemRegiao" class="estado-vazio" style="display:none;"></p>
         </section>
@@ -139,27 +143,27 @@
         <div id="resultadoRegiao">
             <section class="indicadores indicadores-regiao">
                 <article class="kpi-card">
-                    <div class="kpi-header"><span>Pontuação Total</span></div>
+                    <div class="kpi-header"><span data-i18n="regions.kpiScore">Pontuação Total</span></div>
                     <strong class="kpi-valor" id="kpiPontuacao">—</strong>
                 </article>
 
                 <article class="kpi-card">
-                    <div class="kpi-header"><span>Registros</span></div>
+                    <div class="kpi-header"><span data-i18n="regions.kpiRecords">Registros</span></div>
                     <strong class="kpi-valor" id="kpiRegistros">—</strong>
                 </article>
 
                 <article class="kpi-card">
-                    <div class="kpi-header"><span>Cidades</span></div>
+                    <div class="kpi-header"><span data-i18n="regions.kpiCities">Cidades</span></div>
                     <strong class="kpi-valor" id="kpiCidades">—</strong>
                 </article>
 
                 <article class="kpi-card">
-                    <div class="kpi-header"><span>Músicas</span></div>
+                    <div class="kpi-header"><span data-i18n="regions.kpiTracks">Músicas</span></div>
                     <strong class="kpi-valor" id="kpiMusicas">—</strong>
                 </article>
 
                 <article class="kpi-card">
-                    <div class="kpi-header"><span>Média por Cidade</span></div>
+                    <div class="kpi-header"><span data-i18n="regions.kpiAverage">Média por Cidade</span></div>
                     <strong class="kpi-valor" id="kpiMedia">—</strong>
                 </article>
             </section>
@@ -168,7 +172,7 @@
                 <article class="painel">
                     <div class="painel-cabecalho">
                         <div>
-                            <p>RANKING</p>
+                            <p data-i18n="regions.ranking">RANKING</p>
                             <h2 id="tituloGenerosRegiao">Gêneros em alta — Sudeste</h2>
                         </div>
                     </div>
@@ -178,7 +182,7 @@
                 <article class="painel">
                     <div class="painel-cabecalho">
                         <div>
-                            <p>RANKING</p>
+                            <p data-i18n="regions.ranking">RANKING</p>
                             <h2 id="tituloArtistasRegiao">Artistas em alta — Sudeste</h2>
                         </div>
                     </div>
@@ -189,7 +193,7 @@
             <section class="painel">
                 <div class="painel-cabecalho">
                     <div>
-                        <p>GEOGRAFIA</p>
+                        <p data-i18n="regions.eyebrow">GEOGRAFIA</p>
                         <h2 id="tituloCidadesRegiao">Cidades analisadas — Sudeste</h2>
                     </div>
                 </div>
@@ -203,7 +207,6 @@
     <script src="../JS/translate.js"></script>
     <script src="../JS/script.js"></script>
     <script src="../JS/menu-perfil.js"></script>
-    <script src="../JS/sidebar-perfil.js"></script>
 </body>
 
 </html>

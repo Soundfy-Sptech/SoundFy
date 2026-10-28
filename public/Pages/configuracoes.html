@@ -5,63 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="configuracoes.title">SoundFy Intelligence — Configurações</title>
     <link rel="stylesheet" href="../Style/style.css">
+    <script src="../JS/sidebar-perfil.js"></script>
 </head>
 <body>
     <aside class="barra-lateral">
         <a class="logo" href="index.html">
             <b>S</b>
-            <span>Sound<span>Fy</span><small>INTELLIGENCE</small></span>
+            <span>Sound<span>Fy</span></span>
         </a>
 
         <div class="espaco-trabalho">
             <b>ST</b>
             <div>
-                <strong>SoundFy Studio</strong>
-                <small data-i18n="workspace.professional"></small>
+                <strong data-i18n="workspace.title">Análise Musical</strong>
+                <small data-i18n="workspace.professional">Espaço de trabalho profissional</small>
             </div>
+            <i>⌄</i>
         </div>
- <nav>
-    <label data-i18n="navigation.overview">VISÃO GERAL</label>
 
-    <a class="ativo" href="index.html">
-        <span data-i18n="navigation.dashboard">Dashboard</span>
-    </a>
+        <nav>
+            <label data-i18n="navigation.overview">VISÃO GERAL</label>
 
-    <a href="regioes.html">
-        <span data-i18n="navigation.regions">Regiões</span>
-    </a>
+            <a href="index.html">
+                <span data-i18n="navigation.dashboard">Dashboard</span>
+            </a>
 
-    <div data-role-section="artist">
-        <label data-i18n="navigation.artistArea">ÁREA DO ARTISTA</label>
+            <a href="regioes.html">
+                <span data-i18n="navigation.regions">Regiões</span>
+            </a>
 
-        <a href="artista.html">
-            <span data-i18n="navigation.artistProfile">Meu perfil de artista</span>
-        </a>
-    </div>
+            <div data-role-section="artist">
+                <label data-i18n="navigation.artistArea">ÁREA DO ARTISTA</label>
 
-    <div data-role-section="producer">
-        <label data-i18n="navigation.producerArea">ÁREA DO PRODUTOR</label>
+            <a href="artista.html">
+                <span data-i18n="navigation.artistProfile">Meu perfil de artista</span>
+            </a>
+            </div>
 
-        <a href="produtor.html">
-            <span data-i18n="navigation.production">Área de produção</span>
-        </a>
-    </div>
+            <div data-role-section="producer">
+                <label data-i18n="navigation.producerArea">ÁREA DO PRODUTOR</label>
 
-    <label data-i18n="navigation.analysis">ANÁLISES</label>
+            <a href="produtor.html">
+                <span data-i18n="navigation.production">Área de produção</span>
+            </a>
+            </div>
 
-    <a href="./relatorios.html">
-        <span data-i18n="navigation.reports">Relatórios</span>
-    </a>
-</nav>
+            <label data-i18n="navigation.analysis">ANÁLISES</label>
+
+            <a href="relatorios.html">
+                <span data-i18n="navigation.reports">Relatórios</span>
+            </a>
+        </nav>
 
         <div class="rodape-lateral">
-            <a class="ativo" href="configuracoes.html">⚙ <span data-i18n="navigation.settings"></span></a>
+            <a class="ativo" href="configuracoes.html">⚙ <span data-i18n="navigation.settings">Configurações</span></a>
 
             <div class="perfil">
                 <b data-user-initials>U</b>
                 <div>
                     <strong data-user-name>Usuário</strong>
-                    <small data-i18n="profile.producer"></small>
+                    <small data-role-section="artist" data-i18n="profile.artist">Artista</small>
+                    <small data-role-section="producer" data-i18n="profile.producer">Produtor</small>
                 </div>
             </div>
         </div>
@@ -82,13 +86,14 @@
             </div>
 
          <div class="acoes">
-    <button class="sino">♢<i></i></button>
+    <button class="sino" aria-label="Notificações" data-i18n-aria-label="configuracoes.notifications">♢<i></i></button>
 
     <div class="menu-perfil-container">
         <button
             class="avatar-topo"
             id="perfil-menu-botao"
             aria-label="Abrir menu do perfil"
+            data-i18n-aria-label="profile.openMenu"
             aria-expanded="false"
             aria-controls="perfil-menu"
         >
@@ -98,7 +103,8 @@
         <div class="menu-perfil" id="perfil-menu" hidden>
             <div class="menu-perfil-info">
                 <strong data-user-name>Usuário</strong>
-                <small data-i18n="profile.producer">Produtor</small>
+                <small data-role-section="artist" data-i18n="profile.artist">Artista</small>
+                <small data-role-section="producer" data-i18n="profile.producer">Produtor</small>
             </div>
 
             <a href="configuracoes.html" data-i18n="navigation.settings">
@@ -125,7 +131,6 @@
             <nav class="nav-configuracoes">
                 <a class="ativo" href="#espaco-trabalho" data-i18n="configuracoes.workspaceTab"></a>
                 <a href="#aparencia" data-i18n="configuracoes.appearanceTab"></a>
-                <a href="#dados" data-i18n="configuracoes.dataTab"></a>
                 <a href="#notificacoes" data-i18n="configuracoes.notificationsTab"></a>
             </nav>
 
@@ -140,18 +145,14 @@
                     </div>
 
                     <div class="formulario">
-                        <label>
+                        <label class="completo">
                             <span data-i18n="configuracoes.workspaceName"></span>
                             <input value="SoundFy Studio">
                         </label>
 
-                        <label>
-                            <span data-i18n="configuracoes.responsible"></span>
-                        </label>
-
                         <label class="completo">
                             <span data-i18n="configuracoes.descriptionLabel"></span>
-                            <textarea data-i18n-placeholder="configuracoes.workspaceDescription">Plataforma de inteligência para análise de tendências e oportunidades do mercado musical.</textarea>
+                            <textarea data-i18n-placeholder="configuracoes.workspaceDescription" data-i18n-value="configuracoes.workspaceDescription">Plataforma de inteligência para análise de tendências e oportunidades do mercado musical.</textarea>
                         </label>
                     </div>
 
@@ -198,39 +199,6 @@
                     </div>
                 </article>
 
-                <article class="painel cartao-configuracoes" id="dados">
-                    <div class="painel-cabecalho">
-                        <div>
-                            <p data-i18n="configuracoes.dataLabel"></p>
-                            <h2 data-i18n="configuracoes.dataSources"></h2>
-                        </div>
-                    </div>
-
-                    <div class="configuracao">
-                        <div>
-                            <strong data-i18n="configuracoes.audioConsumption"></strong>
-                            <small data-i18n="configuracoes.audioConsumptionDescription"></small>
-                        </div>
-                        <em data-i18n="configuracoes.active"></em>
-                    </div>
-
-                    <div class="configuracao">
-                        <div>
-                            <strong data-i18n="configuracoes.searches"></strong>
-                            <small data-i18n="configuracoes.searchesDescription"></small>
-                        </div>
-                        <em data-i18n="configuracoes.active"></em>
-                    </div>
-
-                    <div class="configuracao">
-                        <div>
-                            <strong data-i18n="configuracoes.interactions"></strong>
-                            <small data-i18n="configuracoes.interactionsDescription"></small>
-                        </div>
-                        <em data-i18n="configuracoes.active"></em>
-                    </div>
-                </article>
-
                 <article class="painel cartao-configuracoes" id="notificacoes">
                     <div class="painel-cabecalho">
                         <div>
@@ -267,27 +235,149 @@
         </section>
     </main>
 
-   <script src="../JS/i18n.js"></script>
+   <script src="../JS/sessao.js"></script>
+<script src="../JS/i18n.js"></script>
 <script src="../JS/translate.js"></script>
 
 <script>
-    const seletorIdioma = document.querySelector("#language");
+    (function () {
+        // ---------- Idioma ----------
+        // A preferência fica em localStorage ("soundfy-language"), gerenciada por JS/i18n.js.
+        const seletorIdioma = document.querySelector("#language");
 
-    seletorIdioma.value = localStorage.getItem("soundfy-language") || "pt";
+        seletorIdioma.value = localStorage.getItem("soundfy-language") || "pt";
 
-    seletorIdioma.addEventListener("change", async function () {
-        try {
-            await changeLanguage(this.value);
-        } catch (erro) {
-            console.error("Erro ao trocar idioma:", erro);
+        seletorIdioma.addEventListener("change", async function () {
+            try {
+                await changeLanguage(this.value);
+            } catch (erro) {
+                console.error("Erro ao trocar idioma:", erro);
+            }
+        });
+
+        // Mantém o seletor igual ao idioma realmente aplicado (ex.: ao voltar pelo histórico).
+        onLanguageReady(function () {
+            seletorIdioma.value = window.currentLanguage();
+        });
+
+        // ---------- Navegação lateral das configurações ----------
+        // O destaque (.ativo) sempre acompanha a seção ativa: clique, rolagem ou #hash.
+        const links = Array.from(document.querySelectorAll(".nav-configuracoes a[href^='#']"));
+        const itens = links
+            .map(function (link) {
+                return { link: link, secao: document.getElementById(link.getAttribute("href").slice(1)) };
+            })
+            .filter(function (item) {
+                return item.secao;
+            });
+
+        if (!itens.length) {
+            return;
         }
-    });
+
+        const reduzirMovimento = window.matchMedia("(prefers-reduced-motion: reduce)");
+        const margemTopo = 120;
+        let cliqueEmAndamento = false;
+        let temporizador = null;
+        let agendado = false;
+
+        function ativar(item) {
+            itens.forEach(function (outro) {
+                const ativo = outro === item;
+
+                outro.link.classList.toggle("ativo", ativo);
+
+                if (ativo) {
+                    outro.link.setAttribute("aria-current", "true");
+                } else {
+                    outro.link.removeAttribute("aria-current");
+                }
+            });
+        }
+
+        function itemDaRolagem() {
+            const rolagem = window.scrollY || document.documentElement.scrollTop;
+            const altura = document.documentElement.scrollHeight;
+            const noFim = rolagem > 0 && window.innerHeight + rolagem >= altura - 2;
+
+            if (noFim) {
+                return itens[itens.length - 1];
+            }
+
+            let atual = itens[0];
+
+            itens.forEach(function (item) {
+                if (item.secao.getBoundingClientRect().top <= margemTopo) {
+                    atual = item;
+                }
+            });
+
+            return atual;
+        }
+
+        function liberarCliqueDepois(ms) {
+            clearTimeout(temporizador);
+
+            temporizador = setTimeout(function () {
+                cliqueEmAndamento = false;
+            }, ms);
+        }
+
+        itens.forEach(function (item) {
+            item.link.addEventListener("click", function (evento) {
+                evento.preventDefault();
+
+                cliqueEmAndamento = true;
+                ativar(item);
+
+                item.secao.scrollIntoView({
+                    behavior: reduzirMovimento.matches ? "auto" : "smooth",
+                    block: "start"
+                });
+
+                history.replaceState(null, "", "#" + item.secao.id);
+                liberarCliqueDepois(200);
+            });
+        });
+
+        window.addEventListener("scroll", function () {
+            // Durante a rolagem animada do clique, mantém o item clicado.
+            if (cliqueEmAndamento) {
+                liberarCliqueDepois(150);
+                return;
+            }
+
+            if (agendado) {
+                return;
+            }
+
+            agendado = true;
+
+            requestAnimationFrame(function () {
+                agendado = false;
+                ativar(itemDaRolagem());
+            });
+        }, { passive: true });
+
+        window.addEventListener("hashchange", function () {
+            const alvo = itens.find(function (item) {
+                return "#" + item.secao.id === location.hash;
+            });
+
+            if (alvo) {
+                ativar(alvo);
+            }
+        });
+
+        const inicial = itens.find(function (item) {
+            return "#" + item.secao.id === location.hash;
+        });
+
+        ativar(inicial || itemDaRolagem());
+    })();
 </script>
-
-
 
 <script src="../JS/script.js"></script>
 <script src="../JS/menu-perfil.js"></script>
-<script src="../JS/sidebar-perfil.js"></script>
 </body>
 </html>

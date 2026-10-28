@@ -1,26 +1,42 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const secoesArtista = document.querySelectorAll(
-        '[data-role-section="artist"]'
-    );
+// ============================================================
+// ARQUIVO: JS/sidebar-perfil.js
+// Carregado no <head> de TODAS as páginas da dashboard, de forma
+// síncrona, ANTES de o <body> ser desenhado.
+//
+// Lê o perfil em sessionStorage.TIPO_USUARIO (mesma chave gravada
+// no login/cadastro) e registra em <html data-perfil="...">.
+// O CSS (style.css) mantém as abas específicas ocultas por padrão e
+// só mostra as do perfil identificado. Sem sessão válida, nenhuma
+// aba específica aparece (não existe perfil padrão).
+// ============================================================
+(function () {
+    function identificarPerfil() {
+        var tipo = "";
 
-    const secoesProdutor = document.querySelectorAll(
-        '[data-role-section="producer"]'
-    );
+        try {
+            tipo = String(sessionStorage.getItem("TIPO_USUARIO") || "")
+                .trim()
+                .toLowerCase();
+        } catch (erro) {
+            tipo = "";
+        }
 
-    // Valor temporário até a integração com o cadastro.
-    const tipoPerfil = localStorage.getItem("soundfy-role") || "producer";
-
-    function atualizarSidebar(tipo) {
-        const ehArtista = tipo === "artist";
-
-        secoesArtista.forEach(function (secao) {
-            secao.hidden = !ehArtista;
-        });
-
-        secoesProdutor.forEach(function (secao) {
-            secao.hidden = ehArtista;
-        });
+        return tipo === "artista" || tipo === "produtor" ? tipo : "";
     }
 
-    atualizarSidebar(tipoPerfil);
-});
+    function aplicarPerfilSidebar() {
+        var perfil = identificarPerfil();
+        var raiz = document.documentElement;
+
+        if (perfil) {
+            raiz.setAttribute("data-perfil", perfil);
+        } else {
+            raiz.removeAttribute("data-perfil");
+        }
+
+        return perfil;
+    }
+
+    window.aplicarPerfilSidebar = aplicarPerfilSidebar;
+    aplicarPerfilSidebar();
+})();

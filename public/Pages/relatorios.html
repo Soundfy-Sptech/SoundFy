@@ -14,19 +14,20 @@
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+    <script src="../JS/sidebar-perfil.js"></script>
 </head>
 
 <body>
     <aside class="barra-lateral">
         <a class="logo" href="index.html">
             <b>S</b>
-            <span>Sound<span>Fy</span><small>INTELLIGENCE</small></span>
+            <span>Sound<span>Fy</span></span>
         </a>
 
         <div class="espaco-trabalho">
             <b>ST</b>
             <div>
-                <strong>SoundFy Studio</strong>
+                <strong data-i18n="workspace.title">Análise Musical</strong>
                 <small data-i18n="workspace.professional">Espaço de trabalho profissional</small>
             </div>
             <i>⌄</i>
@@ -43,33 +44,38 @@
                 <span data-i18n="navigation.regions">Regiões</span>
             </a>
 
-            <a class="ativo" href="relatorios.html">
-                <span data-i18n="navigation.reports">Relatórios</span>
-            </a>
-
             <div data-role-section="artist">
                 <label data-i18n="navigation.artistArea">ÁREA DO ARTISTA</label>
-                <a href="artista.html">
-                    <span data-i18n="navigation.artistProfile">Meu perfil de artista</span>
-                </a>
+
+            <a href="artista.html">
+                <span data-i18n="navigation.artistProfile">Meu perfil de artista</span>
+            </a>
             </div>
 
             <div data-role-section="producer">
                 <label data-i18n="navigation.producerArea">ÁREA DO PRODUTOR</label>
-                <a href="produtor.html">
-                    <span data-i18n="navigation.production">Área de produção</span>
-                </a>
+
+            <a href="produtor.html">
+                <span data-i18n="navigation.production">Área de produção</span>
+            </a>
             </div>
+
+            <label data-i18n="navigation.analysis">ANÁLISES</label>
+
+            <a class="ativo" href="relatorios.html">
+                <span data-i18n="navigation.reports">Relatórios</span>
+            </a>
         </nav>
 
         <div class="rodape-lateral">
-            <a href="configuracoes.html">⚙<span data-i18n="navigation.settings">Configurações</span></a>
+            <a href="configuracoes.html">⚙ <span data-i18n="navigation.settings">Configurações</span></a>
 
             <div class="perfil">
                 <b data-user-initials>U</b>
                 <div>
                     <strong data-user-name>Usuário</strong>
-                    <small data-i18n="profile.producer">Produtor</small>
+                    <small data-role-section="artist" data-i18n="profile.artist">Artista</small>
+                    <small data-role-section="producer" data-i18n="profile.producer">Produtor</small>
                 </div>
             </div>
         </div>
@@ -106,7 +112,8 @@
                     <div class="menu-perfil" id="perfil-menu" hidden>
                         <div class="menu-perfil-info">
                             <strong data-user-name>Usuário</strong>
-                            <small data-i18n="profile.producer">Produtor</small>
+                            <small data-role-section="artist" data-i18n="profile.artist">Artista</small>
+                            <small data-role-section="producer" data-i18n="profile.producer">Produtor</small>
                         </div>
 
                         <a href="configuracoes.html" data-i18n="navigation.settings">Configurações</a>
@@ -237,7 +244,6 @@
     <script src="../JS/translate.js"></script>
     <script src="../JS/script.js"></script>
     <script src="../JS/menu-perfil.js"></script>
-    <script src="../JS/sidebar-perfil.js"></script>
     <script src="../JS/relatorios.js"></script>
 </body>
 
