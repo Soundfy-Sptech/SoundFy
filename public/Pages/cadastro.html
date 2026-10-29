@@ -106,7 +106,7 @@
                     <p data-i18n="cadastro.password">Senha</p>
 
                     <input id="criarSenha" type="password" data-i18n-placeholder="cadastro.passwordPlaceholder"
-                        placeholder="Mínimo 6 caracteres">
+                        placeholder="Mínimo 8 caracteres">
                 </div>
 
                 <button class="botao-enviar" onclick="Criar()" data-i18n="cadastro.createAccount">
@@ -157,51 +157,113 @@
             document.getElementById("status").className = "status";
         }
 
-        function Entrar() {
-            let emailVar = document.getElementById("entrarEmail").value;
-            let senhaVar = document.getElementById("entrarSenha").value;
-            let status = document.getElementById("status");
+        // A API pode retornar o registro diretamente, dentro de "usuario"/"data"
+        // ou como uma lista de registros. Centralizamos a leitura para manter
+        // cadastro, login e dashboard usando as mesmas chaves de sessão.
+        function extrairDadosUsuario(respostaApi) {
+            let registro = respostaApi;
 
-            if (emailVar == "" || senhaVar == "") {
-                status.textContent = "Preencha todos os campos para entrar.";
-                status.className = "status mostrar";
+            if (Array.isArray(registro)) {
+                registro = registro[0];
+            }
+
+            if (registro && typeof registro === "object") {
+                registro = registro.usuario || registro.user || registro.dados ||
+                    registro.data || registro.resultado || registro;
+            }
+
+            if (Array.isArray(registro)) {
+                registro = registro[0];
+            }
+
+            if (!registro || typeof registro !== "object") return null;
+
+            const nome = registro.nome ?? registro.nomeUsuario ?? registro.name;
+            const email = registro.email ?? registro.emailUsuario;
+            const id = registro.id ?? registro.idUsuario ?? registro.usuarioId;
+            const tipoBruto = registro.tipoUsuario ?? registro.tipo ??
+                registro.perfil ?? registro.userType ?? registro.tipo_usuario;
+            const tipo = String(tipoBruto ?? "").trim().toLowerCase();
+
+            if (typeof nome !== "string" || !nome.trim() ||
+                typeof email !== "string" || !email.trim() ||
+                (tipo !== "artista" && tipo !== "produtor")) {
+                return null;
+            }
+
+            return {
+                nome: nome.trim(),
+                email: email.trim(),
+                id: id == null ? "" : String(id),
+                tipoUsuario: tipo
+            };
+        }
+
+        function salvarSessaoUsuario(usuario) {
+            // Remove dados de uma conta anterior antes de gravar a nova.
+            sessionStorage.removeItem("EMAIL_USUARIO");
+            sessionStorage.removeItem("NOME_USUARIO");
+            sessionStorage.removeItem("ID_USUARIO");
+            sessionStorage.removeItem("TIPO_USUARIO");
+
+            sessionStorage.setItem("EMAIL_USUARIO", usuario.email);
+            sessionStorage.setItem("NOME_USUARIO", usuario.nome);
+            if (usuario.id) sessionStorage.setItem("ID_USUARIO", usuario.id);
+            sessionStorage.setItem("TIPO_USUARIO", usuario.tipoUsuario);
+        }
+
+        function mostrarStatus(status, mensagem) {
+            status.textContent = mensagem;
+            status.className = "status mostrar";
+        }
+
+        function Entrar() {
+            const emailVar = document.getElementById("entrarEmail").value.trim();
+            const senhaVar = document.getElementById("entrarSenha").value;
+            const status = document.getElementById("status");
+
+            if (!emailVar || !senhaVar) {
+                mostrarStatus(status, "Preencha todos os campos para entrar.");
                 return false;
             }
 
             fetch("/usuarios/autenticar", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     emailServer: emailVar,
                     senhaServer: senhaVar
                 })
-            }).then(function (resposta) {
-                if (resposta.ok) {
-                    resposta.json().then(json => {
-                        sessionStorage.EMAIL_USUARIO = json.email;
-                        sessionStorage.NOME_USUARIO = json.nome;
-                        sessionStorage.ID_USUARIO = json.id;
-                        sessionStorage.TIPO_USUARIO = json.tipoUsuario || json.tipo;
-
-                        status.textContent = "Login realizado com sucesso! Redirecionando...";
-                        status.className = "status mostrar";
-
-                        setTimeout(function () {
-                            window.location.href = "index.html";
-                        }, 1000);
-                    });
-                } else {
-                    resposta.text().then(texto => {
-                        status.textContent = texto || "Erro ao realizar login.";
-                        status.className = "status mostrar";
-                    });
+            }).then(async function (resposta) {
+                if (!resposta.ok) {
+                    const texto = await resposta.text();
+                    mostrarStatus(status, texto || "Erro ao realizar login.");
+                    return;
                 }
+
+                const json = await resposta.json();
+                const usuario = extrairDadosUsuario(json);
+
+                if (!usuario) {
+                    // Não mantém sessão antiga nem inventa perfil quando a API
+                    // não devolve os dados mínimos para identificar a conta.
+                    sessionStorage.removeItem("EMAIL_USUARIO");
+                    sessionStorage.removeItem("NOME_USUARIO");
+                    sessionStorage.removeItem("ID_USUARIO");
+                    sessionStorage.removeItem("TIPO_USUARIO");
+                    mostrarStatus(status,
+                        "Login autenticado, mas os dados do perfil não vieram em um formato reconhecido. Verifique a resposta da API /usuarios/autenticar.");
+                    return;
+                }
+
+                salvarSessaoUsuario(usuario);
+                mostrarStatus(status, "Login realizado com sucesso! Redirecionando...");
+                setTimeout(function () {
+                    window.location.href = "index.html";
+                }, 1000);
             }).catch(function (erro) {
-                console.log("Erro na requisição: ", erro);
-                status.textContent = "Houve um erro ao tentar realizar o login.";
-                status.className = "status mostrar";
+                // Não registrar credenciais ou dados sensíveis no console.
+                mostrarStatus(status, "Houve um erro ao tentar realizar o login.");
             });
 
             return false;
@@ -272,9 +334,12 @@
                 })
             }).then(function (resposta) {
                 if (resposta.ok) {
-                    sessionStorage.NOME_USUARIO = nomeVar;
-                    sessionStorage.EMAIL_USUARIO = emailVar;
-                    sessionStorage.TIPO_USUARIO = tipoUsuarioVar;
+                    salvarSessaoUsuario({
+                        nome: nomeVar.trim(),
+                        email: emailVar.trim(),
+                        id: "",
+                        tipoUsuario: String(tipoUsuarioVar).trim().toLowerCase()
+                    });
 
                     status.textContent = "Cadastro realizado com sucesso! Redirecionando...";
                     status.className = "status mostrar";

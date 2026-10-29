@@ -1,62 +1,168 @@
-// ============================================================
-// ARQUIVO: JS/sessao.js
-// ============================================================
 
-function validarSessao() {
-    var email = sessionStorage.EMAIL_USUARIO;
-    var nome = sessionStorage.NOME_USUARIO;
+ // ============================================================
+ // ARQUIVO: JS/sessao.js
+ // Gerenciamento e validação da sessão do usuário
+ // ============================================================
 
-    var b_usuario = document.getElementById("b_usuario");
+ function validarSessao() {
+     const email = sessionStorage.getItem("EMAIL_USUARIO");
+     const nome = sessionStorage.getItem("NOME_USUARIO");
+     const tipoUsuario = (sessionStorage.getItem("TIPO_USUARIO") || "")
+         .trim()
+         .toLowerCase();
 
-    if (email != null && nome != null) {
-        if (b_usuario) {
-            b_usuario.innerHTML = nome;
-        }
-        controlarExibicaoPorTipoUsuario();
-    } else {
-        window.location.href = "cadastro.html";
-    }
-}
+     const b_usuario = document.getElementById("b_usuario");
 
-function controlarExibicaoPorTipoUsuario() {
-    // Recupera o tipo de usuário salvo na sessão
-    var tipoUsuario = sessionStorage.TIPO_USUARIO;
+     // Só permite continuar com uma sessão válida.
+     // Não atribui um perfil padrão caso o tipo seja desconhecido.
+     if (
+         email &&
+         nome &&
+         nome.trim() !== "" &&
+         (tipoUsuario === "artista" || tipoUsuario === "produtor")
+     ) {
+         if (b_usuario) {
+             b_usuario.textContent = nome;
+         }
 
-    var secaoArtista = document.querySelector('[data-role-section="artist"]');
-    var secaoProdutor = document.querySelector('[data-role-section="producer"]');
+         controlarExibicaoPorTipoUsuario();
+     } else {
+         limparDadosSessao();
+         window.location.href = "cadastro.html";
+     }
+ }
 
-    if (!secaoArtista || !secaoProdutor) {
-        return;
-    }
+ // ============================================================
+ // CONTROLE DE EXIBIÇÃO DO PERFIL
+ // ============================================================
 
-    if (tipoUsuario) {
-        var tipoNormalizado = String(tipoUsuario).trim().toLowerCase();
+ function controlarExibicaoPorTipoUsuario() {
+     const tipoUsuario = (
+         sessionStorage.getItem("TIPO_USUARIO") || ""
+     ).trim().toLowerCase();
 
-        if (tipoNormalizado === "artista") {
-            // Exibe a aba do artista e oculta a do produtor
-            secaoArtista.style.setProperty("display", "block", "important");
-            secaoProdutor.style.setProperty("display", "none", "important");
-        } else if (tipoNormalizado === "produtor") {
-            // Exibe a aba do produtor e oculta a do artista
-            secaoArtista.style.setProperty("display", "none", "important");
-            secaoProdutor.style.setProperty("display", "block", "important");
-        } else {
-            secaoArtista.style.setProperty("display", "none", "important");
-            secaoProdutor.style.setProperty("display", "none", "important");
-        }
-    }
-}
+     const perfilValido =
+         tipoUsuario === "artista" ||
+         tipoUsuario === "produtor";
 
-function limparSessao() {
-    sessionStorage.clear();
-    window.location.href = "cadastro.html";
-}
+     if (!perfilValido) {
+         document.documentElement.removeAttribute("data-perfil");
+         return;
+     }
 
-// Executa assim que o DOM estiver pronto e também ao finalizar o carregamento total
-if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", controlarExibicaoPorTipoUsuario);
-} else {
-    controlarExibicaoPorTipoUsuario();
-}
+     // A barra lateral é controlada pelo arquivo
+     // JS/sidebar-perfil.js e pelo atributo data-perfil.
+     if (typeof window.aplicarPerfilSidebar === "function") {
+         window.aplicarPerfilSidebar();
+     } else {
+         document.documentElement.setAttribute(
+             "data-perfil",
+             tipoUsuario
+         );
+     }
+ }
 
-window.addEventListener("load", controlarExibicaoPorTipoUsuario);
+ // ============================================================
+ // LIMPEZA DOS DADOS DA SESSÃO
+ // ============================================================
+
+ function limparDadosSessao() {
+     sessionStorage.removeItem("EMAIL_USUARIO");
+     sessionStorage.removeItem("NOME_USUARIO");
+     sessionStorage.removeItem("ID_USUARIO");
+     sessionStorage.removeItem("TIPO_USUARIO");
+ }
+
+ function limparSessao() {
+     limparDadosSessao();
+
+     window.location.href = "cadastro.html";
+ }
+
+ // ============================================================
+ // ATUALIZAÇÃO DOS DADOS DO PERFIL NA INTERFACE
+ // ============================================================
+
+ function atualizarDadosPerfil() {
+     const nome = sessionStorage.getItem("NOME_USUARIO");
+     const nomeValido = nome && nome.trim() !== "" ? nome.trim() : "";
+
+     const tipoUsuario = (
+         sessionStorage.getItem("TIPO_USUARIO") || ""
+     ).trim().toLowerCase();
+
+     const perfilValido =
+         tipoUsuario === "artista" ||
+         tipoUsuario === "produtor";
+
+     // Não exibe "undefined", nem utiliza um nome fictício
+     // como se fosse o nome real do usuário autenticado.
+     if (!nomeValido || !perfilValido) {
+         document.querySelectorAll("[data-user-name]").forEach(
+             function (elemento) {
+                 elemento.textContent = "";
+             }
+         );
+
+         document.querySelectorAll("[data-user-initials]").forEach(
+             function (elemento) {
+                 elemento.textContent = "";
+             }
+         );
+
+         const saudacao = document.getElementById(
+             "nome-usuario-greeting"
+         );
+
+         if (saudacao) {
+             saudacao.textContent = "";
+         }
+
+         document.documentElement.removeAttribute("data-perfil");
+         return;
+     }
+
+     // Atualiza todos os componentes que exibem o nome.
+     document.querySelectorAll("[data-user-name]").forEach(
+         function (elemento) {
+             elemento.textContent = nomeValido;
+         }
+     );
+
+     // Calcula as iniciais do nome real.
+     const iniciais = nomeValido
+         .trim()
+         .split(/\s+/)
+         .filter(Boolean)
+         .slice(0, 2)
+         .map(function (parte) {
+             return parte.charAt(0);
+         })
+         .join("")
+         .toUpperCase();
+
+     document.querySelectorAll("[data-user-initials]").forEach(
+         function (elemento) {
+             elemento.textContent = iniciais;
+         }
+     );
+
+     // Atualiza a saudação da dashboard.
+     const saudacao = document.getElementById(
+         "nome-usuario-greeting"
+     );
+
+     if (saudacao) {
+         saudacao.textContent = nomeValido;
+     }
+
+     controlarExibicaoPorTipoUsuario();
+ }
+
+ // ============================================================
+ // INICIALIZAÇÃO
+ // ============================================================
+
+ document.addEventListener("DOMContentLoaded", function () {
+     atualizarDadosPerfil();
+ });

@@ -34,10 +34,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    if (botaoSair) {
-        botaoSair.addEventListener("click", function () {
-            alert("A funcionalidade de sair será implementada com a autenticação.");
-            fecharMenu();
-        });
-    }
+   if (botaoSair) {
+    botaoSair.addEventListener("click", function () {
+        fecharMenu();
+        limparSessao();
+    });
+}
 });

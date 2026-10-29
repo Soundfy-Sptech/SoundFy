@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>SoundFy | Perfil do Artista</title>
-
+    <title data-i18n="artist.pageTitle">Perfil Analítico do Artista</title>
     <link rel="stylesheet" href="../Style/style.css">
     <link rel="stylesheet" href="../Style/artista.css">
+    <script src="../JS/sidebar-perfil.js"></script>
 </head>
-
 <body>
     <aside class="barra-lateral">
         <a class="logo" href="index.html">
@@ -20,8 +18,8 @@
         <div class="espaco-trabalho">
             <b>ST</b>
             <div>
-                <strong>SoundFy Studio</strong>
-                <small>Espaço de trabalho profissional</small>
+                <strong data-i18n="workspace.title">Análise Musical</strong>
+                <small data-i18n="workspace.professional">Espaço de trabalho profissional</small>
             </div>
             <i>⌄</i>
         </div>
@@ -40,34 +38,35 @@
             <div data-role-section="artist">
                 <label data-i18n="navigation.artistArea">ÁREA DO ARTISTA</label>
 
-                <a class="ativo" href="artista.html">
-                    <span data-i18n="navigation.artistProfile">Meu perfil de artista</span>
-                </a>
+            <a class="ativo" href="artista.html">
+                <span data-i18n="navigation.artistProfile">Meu perfil de artista</span>
+            </a>
             </div>
 
             <div data-role-section="producer">
                 <label data-i18n="navigation.producerArea">ÁREA DO PRODUTOR</label>
 
-                <a href="produtor.html">
-                    <span data-i18n="navigation.production">Área de produção</span>
-                </a>
+            <a href="produtor.html">
+                <span data-i18n="navigation.production">Área de produção</span>
+            </a>
             </div>
 
             <label data-i18n="navigation.analysis">ANÁLISES</label>
 
-            <a href="./relatorios.html">
+            <a href="relatorios.html">
                 <span data-i18n="navigation.reports">Relatórios</span>
             </a>
         </nav>
 
         <div class="rodape-lateral">
-            <a href="configuracoes.html">⚙<span data-i18n="navigation.settings">Configurações</span></a>
+            <a href="configuracoes.html">⚙ <span data-i18n="navigation.settings">Configurações</span></a>
 
             <div class="perfil">
-                <b>FL</b>
+                <b data-user-initials>U</b>
                 <div>
-                    <strong>Felipe Leone</strong>
-                    <small>Produtor</small>
+                    <strong data-user-name>Usuário</strong>
+                    <small data-role-section="artist" data-i18n="profile.artist">Artista</small>
+                    <small data-role-section="producer" data-i18n="profile.producer">Produtor</small>
                 </div>
             </div>
         </div>
@@ -78,100 +77,108 @@
             <button id="menu" class="menu-mobile">☰</button>
 
             <div class="trilha">
-                <span>Espaço de trabalho</span>
+                <span data-i18n="workspace.name">Espaço de trabalho</span>
                 <b>/</b>
-                <strong>Perfil do artista</strong>
+                <strong data-i18n="artist.pageTitle">Perfil Analítico do Artista</strong>
             </div>
 
-            <div class="logo-mobile">
-                Sound<span>Fy</span>
+            <div class="logo-mobile">Sound<span>Fy</span></div>
+
+            <div class="acoes">
+                <button class="sino" aria-label="Notificações" data-i18n-aria-label="configuracoes.notifications">♢<i></i></button>
+
+                <div class="menu-perfil-container">
+                    <button
+                        class="avatar-topo"
+                        id="perfil-menu-botao"
+                        aria-label="Abrir menu do perfil"
+                        data-i18n-aria-label="profile.openMenu"
+                        aria-expanded="false"
+                        aria-controls="perfil-menu"
+                    >
+                        <b data-user-initials>U</b>
+                    </button>
+
+                    <div class="menu-perfil" id="perfil-menu" hidden>
+                        <div class="menu-perfil-info">
+                            <strong data-user-name>Usuário</strong>
+                            <small data-role-section="artist" data-i18n="profile.artist">Artista</small>
+                            <small data-role-section="producer" data-i18n="profile.producer">Produtor</small>
+                        </div>
+
+                        <a href="configuracoes.html" data-i18n="navigation.settings">
+                            Configurações
+                        </a>
+
+                        <button type="button" id="perfil-sair" data-i18n="profile.logout">
+                            Sair
+                        </button>
+                    </div>
+                </div>
             </div>
-
-         <div class="acoes">
-    <button class="sino">♢<i></i></button>
-
-    <div class="menu-perfil-container">
-        <button
-            class="avatar-topo"
-            id="perfil-menu-botao"
-            aria-label="Abrir menu do perfil"
-            aria-expanded="false"
-            aria-controls="perfil-menu"
-        >
-            FL
-        </button>
-
-        <div class="menu-perfil" id="perfil-menu" hidden>
-            <div class="menu-perfil-info">
-                <strong data-i18n="profile.name">Felipe Leone</strong>
-                <small data-i18n="profile.producer">Produtor</small>
-            </div>
-
-            <a href="configuracoes.html" data-i18n="navigation.settings">
-                Configurações
-            </a>
-
-            <button type="button" id="perfil-sair" data-i18n="profile.logout">
-                Sair
-            </button>
-        </div>
-    </div>
-</div>
         </header>
 
         <section class="introducao">
             <div>
-                <p>EXPLORADOR MUSICAL</p>
-                <h1>Perfil Analítico do Artista</h1>
-                <span>
-                    Explore o desempenho, a popularidade e as oportunidades
-                    de artistas do mercado musical.
+                <p data-i18n="artist.eyebrow">MEU DESEMPENHO NO MERCADO</p>
+                <h1 data-i18n="artist.pageTitle">Perfil Analítico do Artista</h1>
+                <span data-i18n="artist.description">
+                    Veja onde a sua música tem mais presença, como você se posiciona entre os artistas de cada região e quantos pontos separam você do próximo patamar.
                 </span>
             </div>
         </section>
 
         <section class="artista-filtros painel">
             <div>
-                <label for="artista-select">Artista</label>
+                <label for="artista-select" data-i18n="artist.selectLabel">Artista</label>
                 <select id="artista-select">
-                    <option value="artista1">Artista Demonstração</option>
-                    <option value="artista2">Artista Alternativo</option>
-                    <option value="artista3">Artista Emergente</option>
+                    <optgroup label="Maiores pontuações" data-i18n-label="artist.groupTop">
+                        <option value="a1">Henrique &amp; Juliano</option>
+                        <option value="a2">Felipe Amorim</option>
+                        <option value="a3">Gusttavo Lima</option>
+                    </optgroup>
+                    <optgroup label="Presença em uma região" data-i18n-label="artist.groupSingle">
+                        <option value="a4">Raphaela Santos</option>
+                        <option value="a5">Heitor Costa</option>
+                        <option value="a6">Iguinho e Lulinha</option>
+                        <option value="a7">Manu</option>
+                    </optgroup>
+                    <optgroup label="Presença em várias regiões, posições mais baixas" data-i18n-label="artist.groupLow">
+                        <option value="a8">IZA</option>
+                        <option value="a9">Metallica</option>
+                    </optgroup>
                 </select>
             </div>
 
-            <span class="demo-aviso">
-                Dados demonstrativos
-            </span>
+            <span class="demo-aviso" data-i18n="artist.staticNotice">Dados estáticos do mercado musical</span>
         </section>
 
         <section class="artista-resumo">
             <article class="painel artista-identidade">
-                <div class="artista-avatar" id="artista-avatar">AD</div>
-
+                <div class="artista-avatar" id="artista-avatar">HJ</div>
                 <div>
-                    <span class="artista-selo">PERFIL ANALÍTICO</span>
-                    <h2 id="artista-nome">Artista Demonstração</h2>
-                    <p id="artista-genero">Pop · Música brasileira</p>
+                    <span class="artista-selo" data-i18n="artist.profileBadge">PERFIL ANALÍTICO</span>
+                    <h2 id="artista-nome">Henrique &amp; Juliano</h2>
+                    <p id="artista-regioes">Presente em 5 de 5 regiões</p>
                 </div>
             </article>
 
             <article class="painel artista-kpi">
-                <span>Popularidade</span>
-                <strong id="popularidade">82/100</strong>
-                <small>Índice demonstrativo</small>
+                <span data-i18n="artist.totalScore">Pontuação Total</span>
+                <strong id="pontuacao-total">405.777</strong>
+                <small id="pontuacao-total-nota">Soma de pontos nas 5 regiões em que figura</small>
             </article>
 
             <article class="painel artista-kpi">
-                <span>Crescimento</span>
-                <strong id="crescimento">+12,4%</strong>
-                <small>Variação demonstrativa</small>
+                <span data-i18n="artist.bestPosition">Melhor Posição</span>
+                <strong id="melhor-posicao">1º</strong>
+                <small id="melhor-posicao-nota">Centro-Oeste · entre 690 artistas</small>
             </article>
 
             <article class="painel artista-kpi">
-                <span>Faixas analisadas</span>
-                <strong id="faixas">24</strong>
-                <small>Catálogo demonstrativo</small>
+                <span data-i18n="artist.reach">Alcance Geográfico</span>
+                <strong id="alcance-cidades">16</strong>
+                <small data-i18n="artist.reachNote">de 16 cidades monitoradas</small>
             </article>
         </section>
 
@@ -179,11 +186,10 @@
             <article class="painel">
                 <div class="painel-cabecalho">
                     <div>
-                        <h2>Evolução da popularidade</h2>
-                        <p>Comparação ilustrativa entre períodos</p>
+                        <h2 data-i18n="artist.avgChartTitle">Pontuação Média por Cidade</h2>
+                        <p data-i18n="artist.avgChartSub">Pontos por cidade em que o artista aparece, para comparar regiões de tamanhos diferentes</p>
                     </div>
                 </div>
-
                 <div class="grafico-artista">
                     <canvas id="grafico-popularidade"></canvas>
                 </div>
@@ -192,11 +198,10 @@
             <article class="painel">
                 <div class="painel-cabecalho">
                     <div>
-                        <h2>Distribuição por gênero</h2>
-                        <p>Perfil musical ilustrativo</p>
+                        <h2 data-i18n="artist.tracksChartTitle">Músicas no Ranking</h2>
+                        <p data-i18n="artist.tracksChartSub">Quantidade de faixas distintas que entraram nas paradas de cada região</p>
                     </div>
                 </div>
-
                 <div class="grafico-artista">
                     <canvas id="grafico-generos"></canvas>
                 </div>
@@ -206,8 +211,8 @@
         <section class="painel artista-faixas">
             <div class="painel-cabecalho">
                 <div>
-                    <h2>Faixas em destaque</h2>
-                    <p>Exemplo de como os dados do catálogo serão apresentados</p>
+                    <h2 data-i18n="artist.tableTitle">Desempenho por Região</h2>
+                    <p data-i18n="artist.tableSub">Pontuação, presença nas cidades, posição na região e quantos pontos faltam para chegar ao Top 10</p>
                 </div>
             </div>
 
@@ -215,24 +220,71 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Faixa</th>
-                            <th>Gênero</th>
-                            <th>Popularidade</th>
-                            <th>Tendência</th>
+                            <th data-i18n="artist.colRegion">Região</th>
+                            <th data-i18n="artist.colScore">Pontuação</th>
+                            <th data-i18n="artist.colAppearances">Aparições</th>
+                            <th data-i18n="artist.colTracks">Músicas</th>
+                            <th data-i18n="artist.colCities">Cidades</th>
+                            <th data-i18n="artist.colPosition">Posição</th>
+                            <th data-i18n="artist.colToTop10">Para o Top 10</th>
                         </tr>
                     </thead>
-
-                    <tbody id="tabela-faixas"></tbody>
+                    <tbody id="tabela-faixas">
+                        <tr>
+                            <td>Centro-Oeste</td>
+                            <td>161.422 pts</td>
+                            <td>3.329</td>
+                            <td>38</td>
+                            <td>4 de 4</td>
+                            <td>1º</td>
+                            <td>No Top 10</td>
+                        </tr>
+                        <tr>
+                            <td>Sudeste</td>
+                            <td>97.022 pts</td>
+                            <td>1.894</td>
+                            <td>27</td>
+                            <td>4 de 4</td>
+                            <td>1º</td>
+                            <td>No Top 10</td>
+                        </tr>
+                        <tr>
+                            <td>Sul</td>
+                            <td>74.269 pts</td>
+                            <td>1.427</td>
+                            <td>22</td>
+                            <td>3 de 3</td>
+                            <td>1º</td>
+                            <td>No Top 10</td>
+                        </tr>
+                        <tr>
+                            <td>Nordeste</td>
+                            <td>38.754 pts</td>
+                            <td>713</td>
+                            <td>12</td>
+                            <td>3 de 3</td>
+                            <td>4º</td>
+                            <td>No Top 10</td>
+                        </tr>
+                        <tr>
+                            <td>Norte</td>
+                            <td>34.310 pts</td>
+                            <td>679</td>
+                            <td>18</td>
+                            <td>2 de 2</td>
+                            <td>1º</td>
+                            <td>No Top 10</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </section>
 
         <section class="painel artista-insight">
-            <span>INSIGHT ANALÍTICO</span>
-            <h2 id="insight-titulo">Oportunidade de crescimento</h2>
+            <span data-i18n="artist.insightLabel">INSIGHT ANALÍTICO</span>
+            <h2 id="insight-titulo">Principal mercado: Centro-Oeste</h2>
             <p id="insight-descricao">
-                Os indicadores demonstrativos sugerem espaço para explorar
-                novos públicos e acompanhar a evolução do artista.
+                No Centro-Oeste o artista soma 161.422 pts (40.356 por cidade onde aparece), ocupa o 1º lugar entre 690 artistas, com 38 músicas e 3.329 aparições. A posição mais baixa é no Nordeste (4º lugar), ainda dentro do Top 10 da região.
             </p>
         </section>
     </main>
@@ -244,6 +296,5 @@
     <script src="../JS/script.js"></script>
     <script src="../JS/artista.js"></script>
     <script src="../JS/menu-perfil.js"></script>
-    <script src="../JS/sidebar-perfil.js"></script>
 </body>
 </html>

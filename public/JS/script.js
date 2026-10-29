@@ -49,12 +49,14 @@ document.querySelectorAll(".primario").forEach(function(botao) {
     }
 
     botao.addEventListener("click", function() {
-        if (botao.textContent.includes("Salvar alterações")) {
-            const textoOriginal = botao.textContent;
-            botao.textContent = "Salvo ✓";
+        // Identifica o botão pela chave de tradução, não pelo texto (que muda com o idioma).
+        const chave = botao.getAttribute("data-i18n");
+
+        if (chave === "configuracoes.saveChanges" && typeof t === "function") {
+            botao.textContent = t("common.saved");
 
             setTimeout(function() {
-                botao.textContent = textoOriginal;
+                botao.textContent = t(chave);
             }, 1500);
         }
     });
@@ -102,13 +104,40 @@ function normalizarTextoRegiao(texto) {
         .replace(/[\s-]/g, "");
 }
 
-const chaveNormalizadaRegioes = {};
-Object.keys(dadosRegioes).forEach(function(nomeRegiao) {
-    chaveNormalizadaRegioes[normalizarTextoRegiao(nomeRegiao)] = nomeRegiao;
-});
+const NOMES_GENEROS_TRADUZIDOS = {
+    "Outros": "genreNames.others",
+    "Não identificado": "genreNames.unidentified"
+};
+
+// Nome de exibição no idioma atual (as chaves dos dados continuam em português).
+function nomeRegiaoTraduzido(chave) {
+    return typeof t === "function" ? t("regionNames." + chave) : chave;
+}
+
+function nomeGeneroTraduzido(nome) {
+    const chave = NOMES_GENEROS_TRADUZIDOS[nome];
+
+    return chave && typeof t === "function" ? t(chave) : nome;
+}
 
 function formatarNumeroRegiao(numero) {
-    return numero.toLocaleString("pt-BR");
+    return formatNumber(numero);
+}
+
+// Aceita o nome da região no idioma atual ou o nome original (português).
+function descobrirRegiao(texto) {
+    const normalizado = normalizarTextoRegiao(texto || "");
+    let encontrada = null;
+
+    Object.keys(dadosRegioes).forEach(function(nomeRegiao) {
+        const nomes = [nomeRegiao, nomeRegiaoTraduzido(nomeRegiao)];
+
+        if (nomes.some(function(nome) { return normalizarTextoRegiao(nome) === normalizado; })) {
+            encontrada = nomeRegiao;
+        }
+    });
+
+    return encontrada;
 }
 
 function renderizarBarraRegiao(nome, pontos, maiorValor) {
@@ -123,6 +152,22 @@ function renderizarBarraRegiao(nome, pontos, maiorValor) {
     );
 }
 
+let regiaoAtual = null;
+
+function atualizarSugestoesRegiao() {
+    const lista = document.getElementById("listaRegioes");
+
+    if (!lista) {
+        return;
+    }
+
+    lista.innerHTML = Object.keys(dadosRegioes)
+        .map(function(nomeRegiao) {
+            return '<option value="' + nomeRegiaoTraduzido(nomeRegiao) + '">';
+        })
+        .join("");
+}
+
 function buscarRegiao() {
     const campo = document.getElementById("campoRegiao");
     const mensagem = document.getElementById("mensagemRegiao");
@@ -132,35 +177,36 @@ function buscarRegiao() {
         return;
     }
 
-    const chave = normalizarTextoRegiao(campo.value || "");
-    const nomeRegiao = chaveNormalizadaRegioes[chave];
+    const nomeRegiao = descobrirRegiao(campo.value);
 
     if (!nomeRegiao) {
         resultado.style.display = "none";
         mensagem.style.display = "block";
-        mensagem.textContent =
-            "Região não encontrada. Tente: Norte, Nordeste, Centro-Oeste, Sudeste ou Sul.";
+        mensagem.textContent = t("regions.notFound");
         return;
     }
+
+    regiaoAtual = nomeRegiao;
 
     mensagem.style.display = "none";
     resultado.style.display = "block";
 
     const dados = dadosRegioes[nomeRegiao];
+    const nomeExibido = nomeRegiaoTraduzido(nomeRegiao);
 
     document.getElementById("kpiPontuacao").textContent = formatarNumeroRegiao(dados.resumo.pontuacaoTotal);
     document.getElementById("kpiRegistros").textContent = formatarNumeroRegiao(dados.resumo.registros);
-    document.getElementById("kpiCidades").textContent = dados.resumo.cidades;
+    document.getElementById("kpiCidades").textContent = formatarNumeroRegiao(dados.resumo.cidades);
     document.getElementById("kpiMusicas").textContent = formatarNumeroRegiao(dados.resumo.musicas);
     document.getElementById("kpiMedia").textContent = formatarNumeroRegiao(dados.resumo.mediaPorCidade);
 
-    document.getElementById("tituloGenerosRegiao").textContent = "Gêneros em alta — " + nomeRegiao;
-    document.getElementById("tituloArtistasRegiao").textContent = "Artistas em alta — " + nomeRegiao;
-    document.getElementById("tituloCidadesRegiao").textContent = "Cidades analisadas — " + nomeRegiao;
+    document.getElementById("tituloGenerosRegiao").textContent = t("regions.genresTitle", { region: nomeExibido });
+    document.getElementById("tituloArtistasRegiao").textContent = t("regions.artistsTitle", { region: nomeExibido });
+    document.getElementById("tituloCidadesRegiao").textContent = t("regions.citiesTitle", { region: nomeExibido });
 
     const maiorGenero = dados.generos[0].pontos;
     document.getElementById("listaGenerosRegiao").innerHTML = dados.generos
-        .map(function(g) { return renderizarBarraRegiao(g.nome, g.pontos, maiorGenero); })
+        .map(function(g) { return renderizarBarraRegiao(nomeGeneroTraduzido(g.nome), g.pontos, maiorGenero); })
         .join("");
 
     const maiorArtista = dados.artistas[0].pontos;
@@ -186,5 +232,13 @@ if (botaoBuscarRegiao && campoRegiao) {
         }
     });
 
-    buscarRegiao();
+    // Roda quando o idioma termina de carregar e a cada troca de idioma:
+    // mantém a região consultada e atualiza todos os textos.
+    onLanguageReady(function() {
+        const regiaoMantida = regiaoAtual || descobrirRegiao(campoRegiao.value) || "Sudeste";
+
+        atualizarSugestoesRegiao();
+        campoRegiao.value = nomeRegiaoTraduzido(regiaoMantida);
+        buscarRegiao();
+    });
 }

@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title data-i18n="producer.title">SoundFy | Área do Produtor</title>
+    <title>SoundFy | Área do Produtor</title>
 
     <link rel="stylesheet" href="../Style/style.css">
     <link rel="stylesheet" href="../Style/produtor.css">
+    <link rel="stylesheet" href="../Style/artista.css">
+
+    <script src="../JS/sidebar-perfil.js"></script>
 </head>
 
 <body>
@@ -20,8 +24,8 @@
         <div class="espaco-trabalho">
             <b>ST</b>
             <div>
-                <strong>SoundFy Studio</strong>
-                <small data-i18n="workspace.professional">Espaço profissional</small>
+                <strong data-i18n="workspace.title">Análise Musical</strong>
+                <small data-i18n="workspace.professional">Espaço de trabalho profissional</small>
             </div>
             <i>⌄</i>
         </div>
@@ -40,36 +44,35 @@
             <div data-role-section="artist">
                 <label data-i18n="navigation.artistArea">ÁREA DO ARTISTA</label>
 
-                <a href="artista.html">
-                    <span data-i18n="navigation.artistProfile">Meu perfil de artista</span>
-                </a>
+            <a href="artista.html">
+                <span data-i18n="navigation.artistProfile">Meu perfil de artista</span>
+            </a>
             </div>
 
             <div data-role-section="producer">
                 <label data-i18n="navigation.producerArea">ÁREA DO PRODUTOR</label>
 
-                <a class="ativo" href="produtor.html">
-                    <span data-i18n="navigation.production">Área de produção</span>
-                </a>
+            <a class="ativo" href="produtor.html">
+                <span data-i18n="navigation.production">Área de produção</span>
+            </a>
             </div>
 
             <label data-i18n="navigation.analysis">ANÁLISES</label>
 
-            <a href="./relatorios.html">
+            <a href="relatorios.html">
                 <span data-i18n="navigation.reports">Relatórios</span>
             </a>
         </nav>
 
         <div class="rodape-lateral">
-            <a href="configuracoes.html">
-                ⚙ <span data-i18n="navigation.settings">Configurações</span>
-            </a>
+            <a href="configuracoes.html">⚙ <span data-i18n="navigation.settings">Configurações</span></a>
 
             <div class="perfil">
-                <b>FL</b>
+                <b data-user-initials>U</b>
                 <div>
-                    <strong>Felipe Leone</strong>
-                    <small data-i18n="profile.producer">Produtor</small>
+                    <strong data-user-name>Usuário</strong>
+                    <small data-role-section="artist" data-i18n="profile.artist">Artista</small>
+                    <small data-role-section="producer" data-i18n="profile.producer">Produtor</small>
                 </div>
             </div>
         </div>
@@ -82,7 +85,7 @@
             <div class="trilha">
                 <span data-i18n="workspace.name">SoundFy Studio</span>
                 <b>/</b>
-                <strong data-i18n="producer.title">Área do Produtor</strong>
+                <strong>Área do Produtor</strong>
             </div>
 
             <div class="logo-mobile">
@@ -93,20 +96,16 @@
                 <button class="sino">♢<i></i></button>
 
                 <div class="menu-perfil-container">
-                    <button
-                        class="avatar-topo"
-                        id="perfil-menu-botao"
-                        aria-label="Abrir menu do perfil"
-                        aria-expanded="false"
-                        aria-controls="perfil-menu"
-                    >
-                        FL
+                    <button class="avatar-topo" id="perfil-menu-botao" aria-label="Abrir menu do perfil"
+                        aria-expanded="false" aria-controls="perfil-menu">
+                        <b data-user-initials>U</b>
                     </button>
 
                     <div class="menu-perfil" id="perfil-menu" hidden>
                         <div class="menu-perfil-info">
-                            <strong data-i18n="profile.name">Felipe Leone</strong>
-                            <small data-i18n="profile.producer">Produtor</small>
+                            <strong data-user-name>Usuário</strong>
+                            <small data-role-section="artist" data-i18n="profile.artist">Artista</small>
+                            <small data-role-section="producer" data-i18n="profile.producer">Produtor</small>
                         </div>
 
                         <a href="configuracoes.html" data-i18n="navigation.settings">
@@ -123,50 +122,51 @@
 
         <section class="introducao">
             <div>
-                <p data-i18n="producer.eyebrow">SOUNDFY STUDIO</p>
-                <h1 data-i18n="producer.heading">Área do Produtor</h1>
-                <span data-i18n="producer.description">
-                    Analise o mercado musical e encontre novas oportunidades.
+                <p>SOUNDFY STUDIO</p>
+                <h1>Área do Produtor</h1>
+                <span>
+                    Analise o mercado musical, compare atrações e identifique dados relevantes para a programação de
+                    eventos.
                 </span>
             </div>
         </section>
 
         <section class="produtor-aviso">
-            <span data-i18n="producer.demo">Dados demonstrativos</span>
+            <span>Base de dados consolidada nacional</span>
         </section>
 
         <section class="produtor-indicadores">
             <article class="painel">
-                <span data-i18n="producer.artistsAnalyzed">Artistas analisados</span>
-                <strong>128</strong>
-                <small data-i18n="producer.demoMetric">Exemplo ilustrativo</small>
+                <span>Artistas Mapeados</span>
+                <strong>1.085</strong>
+                <small>na base nacional</small>
             </article>
 
             <article class="painel">
-                <span data-i18n="producer.trendsTracked">Tendências acompanhadas</span>
-                <strong>24</strong>
-                <small data-i18n="producer.demoMetric">Exemplo ilustrativo</small>
+                <span>Gêneros Musicais</span>
+                <strong>17</strong>
+                <small>estilos analisados</small>
             </article>
 
             <article class="painel">
-                <span data-i18n="producer.genresAnalyzed">Gêneros analisados</span>
+                <span>Cidades Monitoradas</span>
                 <strong>16</strong>
-                <small data-i18n="producer.demoMetric">Exemplo ilustrativo</small>
+                <small>capitais brasileiras</small>
             </article>
 
             <article class="painel">
-                <span data-i18n="producer.opportunities">Oportunidades identificadas</span>
-                <strong>8</strong>
-                <small data-i18n="producer.demoMetric">Exemplo ilustrativo</small>
+                <span>Músicas no Ranking</span>
+                <strong>10.078</strong>
+                <small>faixas com pontuação</small>
             </article>
         </section>
 
         <section class="produtor-secao">
             <div class="painel-cabecalho">
                 <div>
-                    <h2 data-i18n="producer.toolsTitle">Ferramentas de produção</h2>
-                    <p data-i18n="producer.toolsDescription">
-                        Acesse as ferramentas de análise do SoundFy.
+                    <h2>Ferramentas de produção</h2>
+                    <p>
+                        Acesse as ferramentas de análise e inteligência do SoundFy.
                     </p>
                 </div>
             </div>
@@ -174,25 +174,25 @@
             <div class="produtor-ferramentas">
                 <a class="painel produtor-ferramenta" href="index.html#tendencias">
                     <span class="produtor-icone">↗</span>
-                    <h3 data-i18n="navigation.trends">Tendências</h3>
-                    <p data-i18n="producer.trendsDescription">
-                        Explore tendências do mercado musical.
+                    <h3>Visão de Mercado</h3>
+                    <p>
+                        Explore a distribuição de demanda por região.
                     </p>
                 </a>
 
                 <a class="painel produtor-ferramenta" href="regioes.html">
                     <span class="produtor-icone">◎</span>
-                    <h3 data-i18n="navigation.regions">Regiões</h3>
-                    <p data-i18n="producer.regionsDescription">
-                        Explore os dados por região.
+                    <h3>Análise de Regiões</h3>
+                    <p>
+                        Explore os dados detalhados por estado e capital.
                     </p>
                 </a>
 
                 <a class="painel produtor-ferramenta" href="#comparador">
                     <span class="produtor-icone">⇄</span>
-                    <h3 data-i18n="producer.comparator">Comparador de artistas</h3>
-                    <p data-i18n="producer.comparatorDescription">
-                        Compare indicadores entre artistas.
+                    <h3>Comparador de Artistas</h3>
+                    <p>
+                        Compare indicadores diretos entre atrações.
                     </p>
                 </a>
             </div>
@@ -201,52 +201,102 @@
         <section class="painel produtor-secao" id="comparador">
             <div class="painel-cabecalho">
                 <div>
-                    <h2 data-i18n="producer.comparator">Comparador de artistas</h2>
-                    <p data-i18n="producer.comparatorDescription">
-                        Compare indicadores entre artistas.
+                    <h2>Comparador de atrações</h2>
+                    <p>
+                        Confronto direto de métricas entre artistas para curadoria e programação de eventos.
                     </p>
                 </div>
             </div>
 
             <div class="produtor-comparador">
                 <div>
-                    <label for="artista-a" data-i18n="producer.artistA">Artista A</label>
+                    <label for="artista-a">Artista A</label>
                     <select id="artista-a">
-                        <option value="a" data-i18n="producer.demoArtistA">Artista Demonstração A</option>
-                        <option value="b" data-i18n="producer.demoArtistB">Artista Demonstração B</option>
+                        <option value="hj">Henrique & Juliano</option>
+                        <option value="gl">Gusttavo Lima</option>
+                        <option value="fa">Felipe Amorim</option>
                     </select>
                 </div>
 
                 <div>
-                    <label for="artista-b" data-i18n="producer.artistB">Artista B</label>
+                    <label for="artista-b">Artista B</label>
                     <select id="artista-b">
-                        <option value="b" data-i18n="producer.demoArtistB">Artista Demonstração B</option>
-                        <option value="a" data-i18n="producer.demoArtistA">Artista Demonstração A</option>
+                        <option value="gl">Gusttavo Lima</option>
+                        <option value="fa">Felipe Amorim</option>
+                        <option value="hj">Henrique & Juliano</option>
                     </select>
                 </div>
+            </div>
 
-                <p data-i18n="producer.comparatorPending">
-                    A comparação será implementada com os dados do projeto.
-                </p>
+            <div class="tabela-responsiva" style="margin-top: 1.5rem;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Métrica Comparativa</th>
+                            <th>Henrique & Juliano</th>
+                            <th>Gusttavo Lima</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Gênero Principal</strong></td>
+                            <td>Sertanejo</td>
+                            <td>Sertanejo</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pontuação Acumulada</strong></td>
+                            <td>405.777 pts</td>
+                            <td>309.019 pts</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Aparições em Paradas</strong></td>
+                            <td>8.042 vezes</td>
+                            <td>5.230 vezes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Músicas no Ranking</strong></td>
+                            <td>117 faixas</td>
+                            <td>92 faixas</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Presença Regional</strong></td>
+                            <td>16 capitais (5 regiões)</td>
+                            <td>16 capitais (5 regiões)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Região de Maior Força</strong></td>
+                            <td>Centro-Oeste (161k pts · 1º)</td>
+                            <td>Centro-Oeste (101k pts · 2º)</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </section>
 
         <section class="painel produtor-secao">
             <div class="painel-cabecalho">
                 <div>
-                    <h2 data-i18n="producer.insightsTitle">Insights de mercado</h2>
-                    <p data-i18n="producer.insightsDescription">
-                        Exemplos de análises que poderão ser realizadas.
+                    <h2>Insights de mercado para eventos</h2>
+                    <p>
+                        Análises baseadas nos volumes reais de pontuação da base de dados.
                     </p>
                 </div>
             </div>
 
+            <div class="produtor-insight" style="margin-bottom: 1rem;">
+                <strong>Concentração por Gêneros no Line-up</strong>
+                <p>
+                    O Sertanejo (2,43M pts) e o Arrocha (2,37M pts) concentram mais de 50% de toda a pontuação do
+                    mercado brasileiro, sendo escolhas consolidadas para grande público em qualquer região.
+                </p>
+            </div>
+
             <div class="produtor-insight">
-                <strong data-i18n="producer.insightExample">
-                    Explore novos segmentos musicais
-                </strong>
-                <p data-i18n="producer.insightPending">
-                    Os insights reais dependerão da integração com os dados.
+                <strong>Oportunidade de Contracting Regional</strong>
+                <p>
+                    Enquanto artistas como Henrique & Juliano lideram o volume total no Sudeste, Sul e Centro-Oeste,
+                    artistas como Felipe Amorim alcançam seu ápice de desempenho no Nordeste (53.200 pts, 1º lugar na
+                    região), sendo atrações estratégicas para eventos nessa localidade.
                 </p>
             </div>
         </section>
@@ -257,6 +307,6 @@
     <script src="../JS/translate.js"></script>
     <script src="../JS/script.js"></script>
     <script src="../JS/menu-perfil.js"></script>
-    <script src="../JS/sidebar-perfil.js"></script>
 </body>
+
 </html>

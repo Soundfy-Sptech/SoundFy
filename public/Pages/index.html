@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="index.title">SoundFy — Dashboard</title>
     <link rel="stylesheet" href="../Style/style.css">
+    <script src="../JS/sidebar-perfil.js"></script>
 </head>
 
 <body>
@@ -18,8 +19,8 @@
         <div class="espaco-trabalho">
             <b>ST</b>
             <div>
-                <strong>SoundFy Studio</strong>
-                <small data-i18n="workspace.professional">Workspace Profissional</small>
+                <strong data-i18n="workspace.title">Análise Musical</strong>
+                <small data-i18n="workspace.professional">Espaço de trabalho profissional</small>
             </div>
             <i>⌄</i>
         </div>
@@ -37,16 +38,18 @@
 
             <div data-role-section="artist">
                 <label data-i18n="navigation.artistArea">ÁREA DO ARTISTA</label>
-                <a href="artista.html">
-                    <span data-i18n="navigation.artistProfile">Meu perfil de artista</span>
-                </a>
+
+            <a href="artista.html">
+                <span data-i18n="navigation.artistProfile">Meu perfil de artista</span>
+            </a>
             </div>
 
             <div data-role-section="producer">
                 <label data-i18n="navigation.producerArea">ÁREA DO PRODUTOR</label>
-                <a href="produtor.html">
-                    <span data-i18n="navigation.production">Área de produção</span>
-                </a>
+
+            <a href="produtor.html">
+                <span data-i18n="navigation.production">Área de produção</span>
+            </a>
             </div>
 
             <label data-i18n="navigation.analysis">ANÁLISES</label>
@@ -56,18 +59,15 @@
             </a>
         </nav>
 
-
-
         <div class="rodape-lateral">
-            <a href="configuracoes.html">
-                ⚙ <span data-i18n="navigation.settings">Configurações</span>
-            </a>
+            <a href="configuracoes.html">⚙ <span data-i18n="navigation.settings">Configurações</span></a>
 
             <div class="perfil">
-                <b>FL</b>
+                <b data-user-initials>U</b>
                 <div>
-                    <strong>Felipe Leone</strong>
-                    <small data-i18n="profile.producer">Produtor</small>
+                    <strong data-user-name>Usuário</strong>
+                    <small data-role-section="artist" data-i18n="profile.artist">Artista</small>
+                    <small data-role-section="producer" data-i18n="profile.producer">Produtor</small>
                 </div>
             </div>
         </div>
@@ -88,18 +88,19 @@
             </div>
 
             <div class="acoes">
-                <button class="sino" aria-label="Notificações">♢<i></i></button>
+                <button class="sino" aria-label="Notificações" data-i18n-aria-label="configuracoes.notifications">♢<i></i></button>
 
                 <div class="menu-perfil-container">
-                    <button class="avatar-topo" id="perfil-menu-botao" aria-label="Abrir menu do perfil"
+                    <button class="avatar-topo" id="perfil-menu-botao" aria-label="Abrir menu do perfil" data-i18n-aria-label="profile.openMenu"
                         aria-expanded="false" aria-controls="perfil-menu">
-                        FL
+                        <b data-user-initials>U</b>
                     </button>
 
                     <div class="menu-perfil" id="perfil-menu" hidden>
                         <div class="menu-perfil-info">
-                            <strong data-i18n="profile.name">Felipe Leone</strong>
-                            <small data-i18n="profile.producer">Produtor</small>
+                            <strong data-user-name>Usuário</strong>
+                            <small data-role-section="artist" data-i18n="profile.artist">Artista</small>
+                            <small data-role-section="producer" data-i18n="profile.producer">Produtor</small>
                         </div>
 
                         <a href="configuracoes.html" data-i18n="navigation.settings">
@@ -116,8 +117,11 @@
 
         <section class="introducao">
             <div>
-                <p data-i18n="index.date">Quinta-feira, 22 de Outubro</p>
-                <h1 data-i18n="index.greeting">Olá, Felipe</h1>
+                <p data-i18n-date></p>
+                <h1>
+    <span data-i18n="index.greeting">Olá,</span>
+    <span id="nome-usuario-greeting">Usuário</span>
+</h1>
                 <span data-i18n="index.description">Aqui está o panorama geral do mercado musical de hoje.</span>
             </div>
         </section>
@@ -125,46 +129,46 @@
         <section class="indicadores">
             <article class="kpi-card">
                 <div class="kpi-header">
-                    <span data-i18n="index.growthIndex">Índice de Crescimento</span>
-                    <span class="kpi-badge positivo">+18,7%</span>
+                    <span data-i18n="index.leadGenre">Gênero Líder</span>
+                    <span class="kpi-badge positivo" data-i18n="index.leadGenreBadge">#1 em 3 de 5 regiões</span>
                 </div>
-                <strong class="kpi-valor">+18,7%</strong>
+                <strong class="kpi-valor">Sertanejo</strong>
                 <small class="kpi-meta">
-                    <em>↑ 4,2%</em>
-                    <span data-i18n="index.vsPreviousPeriod">vs. período anterior</span>
+                    <em data-i18n="common.millionPts" data-i18n-params='{"n":2.44}'>2,44 mi pts</em>
+                    <span data-i18n="index.leadGenreMeta">contra 2,38 mi do Arrocha (2º)</span>
                 </small>
             </article>
 
             <article class="kpi-card">
                 <div class="kpi-header">
                     <span data-i18n="index.monitoredGenres">Gêneros Monitorados</span>
-                    <span class="kpi-badge neutro">+6 novos</span>
+                    <span class="kpi-badge neutro" data-i18n="index.genresBadge">+2 categorias gerais</span>
                 </div>
-                <strong class="kpi-valor">48</strong>
+                <strong class="kpi-valor">15</strong>
                 <small class="kpi-meta">
-                    <span data-i18n="index.newThisMonth">adicionados este mês</span>
+                    <span data-i18n="index.genresMeta">além de “Outros” e “Não identificado”</span>
                 </small>
             </article>
 
             <article class="kpi-card">
                 <div class="kpi-header">
                     <span data-i18n="index.analyzedRegions">Regiões Analisadas</span>
-                    <span class="kpi-badge positivo">↑ 3</span>
+                    <span class="kpi-badge positivo" data-i18n="index.regionsBadge">16 cidades</span>
                 </div>
-                <strong class="kpi-valor">27</strong>
+                <strong class="kpi-valor">5</strong>
                 <small class="kpi-meta">
-                    <span data-i18n="index.newRegions">novas microrregiões</span>
+                    <span data-i18n="index.regionsMeta">até 119 semanas de paradas por cidade</span>
                 </small>
             </article>
 
             <article class="kpi-card">
                 <div class="kpi-header">
-                    <span data-i18n="index.detectedOpportunities">Oportunidades</span>
-                    <span class="kpi-badge alerta">4 prioritárias</span>
+                    <span data-i18n="index.nationalArtists">Artistas em Todas as Regiões</span>
+                    <span class="kpi-badge alerta" data-i18n="index.artistsBadge">de 1.085 na base</span>
                 </div>
-                <strong class="kpi-valor">12</strong>
+                <strong class="kpi-valor">371</strong>
                 <small class="kpi-meta">
-                    <span data-i18n="index.newLast48Hours">detectadas nas últimas 48h</span>
+                    <span data-i18n="index.artistsMeta">319 aparecem em apenas uma região</span>
                 </small>
             </article>
         </section>
@@ -174,34 +178,35 @@
                 <div class="painel-cabecalho">
                     <div>
                         <p data-i18n="index.marketView">VISÃO DE MERCADO</p>
-                        <h2 data-i18n="index.musicInterestTrend">Tendência de Interesse Musical</h2>
+                        <h2 data-i18n="index.leadGenresByRegion">Gêneros Líderes por Região</h2>
                     </div>
-                    <button class="filtro" data-i18n="index.last5Weeks">Últimas 5 semanas</button>
+                    <button class="filtro" data-i18n="index.avgPerCity">Média por cidade</button>
                 </div>
 
                 <div class="explicacao-grafico">
-                    <strong data-i18n="index.marketAccelerating">Mercado em aceleração:</strong>
-                    <span data-i18n="index.marketExplanation">O volume de buscas por novos gêneros cresceu 74% no
-                        período.</span>
+                    <strong data-i18n="index.twoGenresLead">Dois gêneros dominam:</strong>
+                    <span data-i18n="index.twoGenresExplanation">Sertanejo e Arrocha ocupam as duas primeiras posições
+                        em todas as 5 regiões. Cada ponto do gráfico é uma região, comparada pela pontuação média por
+                        cidade.</span>
                 </div>
 
                 <div class="legenda">
                     <span>
                         <i class="ponto-primario"></i>
-                        <span data-i18n="index.publicInterest">Interesse do público</span>
+                        <span data-i18n="index.legendSertanejo">Sertanejo</span>
                     </span>
                     <span>
                         <i class="ponto-secundario"></i>
-                        <span data-i18n="index.searches">Volume de buscas</span>
+                        <span data-i18n="index.legendArrocha">Arrocha</span>
                     </span>
                 </div>
 
                 <div class="grafico">
                     <div class="eixo">
-                        <span>100</span>
-                        <span>75</span>
-                        <span>50</span>
-                        <span>25</span>
+                        <span data-i18n="index.axisThousands" data-i18n-params='{"n":240}'>240 mil</span>
+                        <span data-i18n="index.axisThousands" data-i18n-params='{"n":180}'>180 mil</span>
+                        <span data-i18n="index.axisThousands" data-i18n-params='{"n":120}'>120 mil</span>
+                        <span data-i18n="index.axisThousands" data-i18n-params='{"n":60}'>60 mil</span>
                         <span>0</span>
                     </div>
 
@@ -212,40 +217,41 @@
                         <div class="line l4"></div>
 
                         <svg viewBox="0 0 700 220" preserveAspectRatio="none"
-                            aria-label="Gráfico de tendência de interesse">
+                            aria-label="Gráfico da pontuação média por cidade de Sertanejo e Arrocha em cada região"
+                            data-i18n-aria-label="index.chartAria">
                             <path class="area"
-                                d="M0 160 C80 158 100 145 140 140 S210 135 270 112 S340 115 400 90 S470 94 530 67 S620 65 700 30 L700 220 L0 220Z">
+                                d="M0 107.8 L175 127.3 L350 33.1 L525 87.5 L700 69.3 L700 220 L0 220Z">
                             </path>
                             <path class="tendencia"
-                                d="M0 160 C80 158 100 145 140 140 S210 135 270 112 S340 115 400 90 S470 94 530 67 S620 65 700 30">
+                                d="M0 107.8 L175 127.3 L350 33.1 L525 87.5 L700 69.3">
                             </path>
                             <path class="tendencia linha-secundaria"
-                                d="M0 178 C80 174 105 165 145 160 S215 158 275 138 S345 145 405 119 S475 128 535 99 S620 108 700 78">
+                                d="M0 95.5 L175 102.0 L350 51.0 L525 96.4 L700 85.3">
                             </path>
                         </svg>
 
                         <div class="datas">
-                            <span data-i18n="index.date30Jul">30 Jul</span>
-                            <span data-i18n="index.date06Aug">06 Ago</span>
-                            <span data-i18n="index.date13Aug">13 Ago</span>
-                            <span data-i18n="index.date20Aug">20 Ago</span>
-                            <span data-i18n="index.date27Aug">27 Ago</span>
+                            <span data-i18n="index.north">Norte</span>
+                            <span data-i18n="index.northeast">Nordeste</span>
+                            <span data-i18n="index.centralWest">Centro-Oeste</span>
+                            <span data-i18n="index.southeast">Sudeste</span>
+                            <span data-i18n="index.south">Sul</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="resumo-tendencia">
                     <div>
-                        <span data-i18n="index.start">Início</span>
-                        <strong>58 pts</strong>
+                        <span data-i18n="index.arrochaLeads">Arrocha lidera em</span>
+                        <strong data-i18n="index.regionsCount" data-i18n-params='{"n":2}'>2 regiões</strong>
                     </div>
                     <div>
-                        <span data-i18n="index.now">Atual</span>
-                        <strong>101 pts</strong>
+                        <span data-i18n="index.sertanejoLeads">Sertanejo lidera em</span>
+                        <strong data-i18n="index.regionsCount" data-i18n-params='{"n":3}'>3 regiões</strong>
                     </div>
                     <div>
-                        <span data-i18n="index.change">Variação</span>
-                        <strong class="texto-positivo">+74,1%</strong>
+                        <span data-i18n="index.biggestGap">Maior vantagem (Nordeste)</span>
+                        <strong class="texto-positivo" data-i18n="common.pts" data-i18n-params='{"n":27661}'>27.661 pts</strong>
                     </div>
                 </div>
             </article>
@@ -253,30 +259,31 @@
             <article class="painel insight" id="insights">
                 <div class="painel-cabecalho">
                     <div>
-                        <p data-i18n="index.weeklyInsight">INSIGHT DA SEMANA</p>
-                        <h2><b data-i18n="index.newOpportunity">Nova Oportunidade</b></h2>
+                        <p data-i18n="index.dataInsight">INSIGHT DOS DADOS</p>
+                        <h2><b data-i18n="index.regionalHighlight">Destaque Regional</b></h2>
                     </div>
-                    <mark data-i18n="index.new">NOVO</mark>
+                    <mark data-i18n="index.regional">REGIONAL</mark>
                 </div>
 
                 <div class="corpo-insight">
-                    <h3>Brazilian Phonk</h3>
+                    <h3 data-i18n="index.forroTitle">Forró/Piseiro no Nordeste</h3>
                     <div class="crescimento-tag">
-                        <strong>+42,8%</strong>
-                        <small data-i18n="index.growth">de crescimento</small>
+                        <strong data-i18n-number="100012">100.012</strong>
+                        <small data-i18n="index.avgPtsPerCity">pts médios por cidade</small>
                     </div>
-                    <p data-i18n="index.phonkDescription">Alta demanda em playlists de treino e redes de vídeo curto com
-                        escassez de lançamentos de produtores nacionais.</p>
+                    <p data-i18n="index.forroDescription">O Nordeste tem a maior pontuação média por cidade do gênero,
+                        à frente do Norte (73.740) e mais de 2,5 vezes acima do Centro-Oeste, Sudeste e Sul
+                        (entre 33 mil e 39 mil).</p>
                 </div>
 
                 <div class="meta">
                     <div>
                         <span data-i18n="index.highlightRegion">Região Destaque</span>
-                        <strong>São Paulo</strong>
+                        <strong data-i18n="index.northeast">Nordeste</strong>
                     </div>
                     <div>
-                        <span data-i18n="index.potential">Potencial</span>
-                        <strong class="texto-positivo" data-i18n="index.high">Alto</strong>
+                        <span data-i18n="index.genreRank">Posição na região</span>
+                        <strong class="texto-positivo" data-i18n="index.thirdPlace">3º lugar</strong>
                     </div>
                 </div>
 
@@ -288,8 +295,8 @@
             <article class="painel" id="generos">
                 <div class="painel-cabecalho">
                     <div>
-                        <p data-i18n="index.ranking">RANKING</p>
-                        <h2 data-i18n="index.trendingGenres">Gêneros em Alta</h2>
+                        <p data-i18n="index.rankingNoGeneral">RANKING · SEM CATEGORIAS GERAIS</p>
+                        <h2 data-i18n="index.topGenresByScore">Gêneros com Maior Pontuação</h2>
                     </div>
                     <a class="link-ver-mais" href="#generos" data-i18n="index.viewAll">Ver todos →</a>
                 </div>
@@ -298,46 +305,46 @@
                     <div class="item-rank">
                         <span class="posicao">01</span>
                         <div class="info">
-                            <strong>Brazilian Phonk</strong>
-                            <small data-i18n="index.electronicSubgenre">Subgênero Eletrônico</small>
+                            <strong>Sertanejo</strong>
+                            <small data-i18n="common.appearances" data-i18n-params='{"n":93903}'>93.903 aparições</small>
                         </div>
-                        <span class="variacao positivo">+42,8% ↗</span>
+                        <span class="variacao positivo" data-i18n="common.millionPts" data-i18n-params='{"n":2.44}'>2,44 mi pts</span>
                     </div>
 
                     <div class="item-rank">
                         <span class="posicao">02</span>
                         <div class="info">
-                            <strong>Hyperpop</strong>
-                            <small data-i18n="index.popSubgenre">Subgênero Pop</small>
+                            <strong>Arrocha</strong>
+                            <small data-i18n="common.appearances" data-i18n-params='{"n":100651}'>100.651 aparições</small>
                         </div>
-                        <span class="variacao positivo">+31,4% ↗</span>
+                        <span class="variacao positivo" data-i18n="common.millionPts" data-i18n-params='{"n":2.38}'>2,38 mi pts</span>
                     </div>
 
                     <div class="item-rank">
                         <span class="posicao">03</span>
                         <div class="info">
-                            <strong>Afrobeats</strong>
-                            <small data-i18n="index.rnbGlobal">R&B / Global</small>
+                            <strong>Funk</strong>
+                            <small data-i18n="common.appearances" data-i18n-params='{"n":46282}'>46.282 aparições</small>
                         </div>
-                        <span class="variacao positivo">+24,9% ↗</span>
+                        <span class="variacao positivo" data-i18n="common.thousandPts" data-i18n-params='{"n":914.9}'>914,9 mil pts</span>
                     </div>
 
                     <div class="item-rank">
                         <span class="posicao">04</span>
                         <div class="info">
-                            <strong>Drill</strong>
-                            <small data-i18n="index.hipHopSubgenre">Subgênero Hip-Hop</small>
+                            <strong>Trap/Rap/Hip-Hop</strong>
+                            <small data-i18n="common.appearances" data-i18n-params='{"n":33382}'>33.382 aparições</small>
                         </div>
-                        <span class="variacao positivo">+19,6% ↗</span>
+                        <span class="variacao positivo" data-i18n="common.thousandPts" data-i18n-params='{"n":854.5}'>854,5 mil pts</span>
                     </div>
 
                     <div class="item-rank">
                         <span class="posicao">05</span>
                         <div class="info">
-                            <strong>House</strong>
-                            <small data-i18n="index.electronicDance">Eletrônico / Dance</small>
+                            <strong>Forró/Piseiro</strong>
+                            <small data-i18n="common.appearances" data-i18n-params='{"n":37140}'>37.140 aparições</small>
                         </div>
-                        <span class="variacao positivo">+15,2% ↗</span>
+                        <span class="variacao positivo" data-i18n="common.thousandPts" data-i18n-params='{"n":842.1}'>842,1 mil pts</span>
                     </div>
                 </div>
             </article>
@@ -345,59 +352,59 @@
             <article class="painel" id="regioes">
                 <div class="painel-cabecalho">
                     <div>
-                        <p data-i18n="index.geography">GEOGRAFIA</p>
-                        <h2 data-i18n="index.regionsGrowth">Crescimento por Região</h2>
+                        <p data-i18n="index.geographyAvg">GEOGRAFIA · MÉDIA POR CIDADE</p>
+                        <h2 data-i18n="index.topArtistByRegion">Artista Nº 1 por Região</h2>
                     </div>
                 </div>
 
                 <div class="lista-regioes">
                     <div class="item-regiao">
                         <div class="regiao-info">
-                            <span data-i18n="index.southeast">Sudeste</span>
-                            <strong>+28,4%</strong>
+                            <span data-i18n="index.centralWest">Centro-Oeste</span>
+                            <strong data-i18n="index.artistPts" data-i18n-params='{"artist":"Henrique &amp; Juliano","pts":40356}'>Henrique &amp; Juliano · 40.356 pts</strong>
                         </div>
                         <div class="barra-fundo">
-                            <div class="barra-progresso" style="width: 89%;"></div>
+                            <div class="barra-progresso" style="width: 100%;"></div>
                         </div>
                     </div>
 
                     <div class="item-regiao">
                         <div class="regiao-info">
                             <span data-i18n="index.south">Sul</span>
-                            <strong>+21,1%</strong>
+                            <strong data-i18n="index.artistPts" data-i18n-params='{"artist":"Henrique &amp; Juliano","pts":24756}'>Henrique &amp; Juliano · 24.756 pts</strong>
                         </div>
                         <div class="barra-fundo">
-                            <div class="barra-progresso" style="width: 71%;"></div>
+                            <div class="barra-progresso" style="width: 61%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="item-regiao">
+                        <div class="regiao-info">
+                            <span data-i18n="index.southeast">Sudeste</span>
+                            <strong data-i18n="index.artistPts" data-i18n-params='{"artist":"Henrique &amp; Juliano","pts":24256}'>Henrique &amp; Juliano · 24.256 pts</strong>
+                        </div>
+                        <div class="barra-fundo">
+                            <div class="barra-progresso" style="width: 60%;"></div>
                         </div>
                     </div>
 
                     <div class="item-regiao">
                         <div class="regiao-info">
                             <span data-i18n="index.northeast">Nordeste</span>
-                            <strong>+17,8%</strong>
+                            <strong data-i18n="index.artistPts" data-i18n-params='{"artist":"Felipe Amorim","pts":17733}'>Felipe Amorim · 17.733 pts</strong>
                         </div>
                         <div class="barra-fundo">
-                            <div class="barra-progresso" style="width: 58%;"></div>
-                        </div>
-                    </div>
-
-                    <div class="item-regiao">
-                        <div class="regiao-info">
-                            <span data-i18n="index.centralWest">Centro-Oeste</span>
-                            <strong>+12,2%</strong>
-                        </div>
-                        <div class="barra-fundo">
-                            <div class="barra-progresso" style="width: 43%;"></div>
+                            <div class="barra-progresso" style="width: 44%;"></div>
                         </div>
                     </div>
 
                     <div class="item-regiao">
                         <div class="regiao-info">
                             <span data-i18n="index.north">Norte</span>
-                            <strong>+8,7%</strong>
+                            <strong data-i18n="index.artistPts" data-i18n-params='{"artist":"Henrique &amp; Juliano","pts":17155}'>Henrique &amp; Juliano · 17.155 pts</strong>
                         </div>
                         <div class="barra-fundo">
-                            <div class="barra-progresso" style="width: 31%;"></div>
+                            <div class="barra-progresso" style="width: 43%;"></div>
                         </div>
                     </div>
                 </div>
@@ -410,7 +417,6 @@
     <script src="../JS/translate.js"></script>
     <script src="../JS/script.js"></script>
     <script src="../JS/menu-perfil.js"></script>
-    <script src="../JS/sidebar-perfil.js"></script>
 </body>
 
 </html>

@@ -13,7 +13,12 @@ function cadastrar(nome, email, senha, telefone, tipoUsuario) {
 
 function autenticar(email, senha) {
     let instrucaoSql = `
-        SELECT * FROM usuario WHERE email = '${email}' AND senha = '${senha}'
+        SELECT  
+            idUsuario,
+            email,
+            nome,
+            tipo_usuario AS tipoUsuario 
+            FROM usuario WHERE email = '${email}' AND senha = '${senha}'
     `
     console.log("Executando a instrução SQL: \n" + instrucaoSql)
     return database.executar(instrucaoSql)
