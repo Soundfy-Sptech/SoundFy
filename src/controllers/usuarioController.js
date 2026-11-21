@@ -1,78 +1,362 @@
-var usuarioModel = require("../models/usuarioModel")
 
-function cadastrar(req, res) {
-    let nome = req.body.nomeServer
-    let email = req.body.emailServer
-    let senha = req.body.senhaServer
-    let telefone = req.body.telefoneServer;
-    let tipo_usuario = req.body.tipoUsuarioServer;
+const usuarioModel = require("../models/usuarioModel");
+const bcrypt = require("bcrypt");
+const { gerarToken } = require("../middleware/autenticacao");
 
-    if (nome == undefined) {
-        res.status(400).send("Seu nome não foi encontrado")
+const RODADAS_BCRYPT = 12;
+
+function validarEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+async function verificarSenha(senhaInformada, senhaArmazenada) {
+    if (
+        typeof senhaArmazenada === "string" &&
+        senhaArmazenada.startsWith("$2")
+    ) {
+        return bcrypt.compare(senhaInformada, senhaArmazenada);
     }
-    else if (email == undefined) {
-        res.status(400).send("Seu email não foi encontrado")
-    }
-    else if (senha == undefined) {
-        res.status(400).send("Sua senha não foi definida")
-    }
-    else {
-        usuarioModel.cadastrar(nome, email, senha, telefone, tipo_usuario)
-            .then(
-                function (resultado) {
-                    res.json(resultado)
-                }
-            ).catch(function (erro) {
-                console.log(erro)
-                console.log(
-                    "\nHouve um erro ao realizar o cadastro!: Erro:",
-                    erro.sqlMessage
-                )
-                res.status(500).json(erro.sqlMessage)
-            })
+
+    return senhaInformada === senhaArmazenada;
+}
+
+// CADASTRO
+async function cadastrar(req, res) {
+    try {
+        const nome = req.body.nomeServer?.trim();
+        const email = req.body.emailServer?.trim().toLowerCase();
+        const senha = req.body.senhaServer;
+        const telefone = req.body.telefoneServer;
+        const tipoUsuario = req.body.tipoUsuarioServer;
+
+        if (!nome || !email || !senha || !tipoUsuario) {
+            return res.status(400).json({
+                mensagem: "Preencha todos os campos obrigatórios."
+            });
+        }
+
+        if (nome.length > 50 || !validarEmail(email) || email.length > 50) {
+            return res.status(400).json({
+                mensagem: "Nome ou e-mail inválido."
+            });
+        }
+
+        if (
+            typeof senha !== "string" ||
+            senha.length < 8 ||
+            senha.length > 72
+        ) {
+            return res.status(400).json({
+                mensagem: "A senha deve possuir entre 8 e 72 caracteres."
+            });
+        }
+
+        if (!["artista", "produtor"].includes(tipoUsuario.toLowerCase())) {
+            return res.status(400).json({
+                mensagem: "Tipo de usuário inválido."
+            });
+        }
+
+        if (telefone && telefone.length > 12) {
+            return res.status(400).json({
+                mensagem: "Telefone inválido."
+            });
+        }
+
+        const senhaHash = await bcrypt.hash(senha, RODADAS_BCRYPT);
+
+        const resultado = await usuarioModel.cadastrar(
+            nome,
+            email,
+            senhaHash,
+            telefone,
+            tipoUsuario
+        );
+
+        const token = gerarToken(resultado.insertId);
+
+        return res.status(201).json({
+            id: resultado.insertId,
+            nome,
+            email,
+            tipoUsuario,
+            token
+        });
+
+    } catch (erro) {
+        console.error("Erro no cadastro:", erro);
+
+        if (erro.code === "ER_DUP_ENTRY") {
+            return res.status(409).json({
+                mensagem: "Este e-mail já está cadastrado."
+            });
+        }
+
+        return res.status(500).json({
+            mensagem: "Erro interno ao cadastrar usuário."
+        });
     }
 }
 
-function autenticar(req, res) {
-    let email = req.body.emailServer
-    let senha = req.body.senhaServer
-    if (email == undefined) {
-        res.status(400).send("Seu email não foi encontrado")
-    }
-    else if (senha == undefined) {
-        res.status(400).send("Sua senha não foi definida")
-    }
-    else {
-        usuarioModel.autenticar(email, senha)
-            .then(
-                function (resultadoAutenticar) {
-                    console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`)
-                    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`)
-                    if (resultadoAutenticar.length == 1) {
-                         res.json({
-                            id: resultadoAutenticar[0].idUsuario,
-                            email: resultadoAutenticar[0].email,
-                            nome: resultadoAutenticar[0].nomeCompleto,
-                            senha: resultadoAutenticar[0].senha})
-                    }
-                    else if(resultadoAutenticar.length == 0){
-                        res.status(403).send("Email e/ou senha inválido(s)")
-                    }
-                    else{
-                        res.status(403).send("mais de um usuário com o mesmo login e senha!")
-                    }
-                }
-            ).catch(
-                function(erro){
-                    console.log(erro)
-                    console.log("\nHouve um erro ao realizar o login! Erro:", erro.sqlMessage)
-                    res.status(500).json(erro.sqlMessage)
-                }
-            )
-    }
+// LOGIN
+async function autenticar(req, res) {
+    try {
+        const email = req.body.emailServer?.trim().toLowerCase();
+        const senha = req.body.senhaServer;
 
+        if (!email || !senha) {
+            return res.status(400).json({
+                mensagem: "Informe e-mail e senha."
+            });
+        }
+
+        const usuarios = await usuarioModel.autenticar(email);
+
+        if (usuarios.length !== 1) {
+            return res.status(401).json({
+                mensagem: "E-mail ou senha inválidos."
+            });
+        }
+
+        const usuario = usuarios[0];
+
+        const senhaValida = await verificarSenha(
+            senha,
+            usuario.senha
+        );
+
+        if (!senhaValida) {
+            return res.status(401).json({
+                mensagem: "E-mail ou senha inválidos."
+            });
+        }
+
+        // Migra senhas antigas para bcrypt após login válido.
+        if (!usuario.senha.startsWith("$2")) {
+            const senhaHash = await bcrypt.hash(
+                senha,
+                RODADAS_BCRYPT
+            );
+
+            await usuarioModel.atualizarSenha(
+                usuario.idUsuario,
+                senhaHash
+            );
+        }
+
+        const token = gerarToken(usuario.idUsuario);
+
+        return res.status(200).json({
+            id: usuario.idUsuario,
+            nome: usuario.nome,
+            email: usuario.email,
+            telefone: usuario.telefone,
+            tipoUsuario: usuario.tipo_usuario,
+            token
+        });
+
+    } catch (erro) {
+        console.error("Erro no login:", erro);
+
+        return res.status(500).json({
+            mensagem: "Erro interno ao realizar login."
+        });
+    }
 }
+
+// CONSULTAR A PRÓPRIA CONTA
+async function buscarMinhaConta(req, res) {
+    try {
+        const usuarios = await usuarioModel.buscarPorId(
+            req.usuarioId
+        );
+
+        if (usuarios.length === 0) {
+            return res.status(404).json({
+                mensagem: "Conta não encontrada."
+            });
+        }
+
+        return res.status(200).json(usuarios[0]);
+
+    } catch (erro) {
+        console.error("Erro ao consultar conta:", erro);
+
+        return res.status(500).json({
+            mensagem: "Erro ao consultar conta."
+        });
+    }
+}
+
+// ATUALIZAR DADOS PESSOAIS
+async function atualizarMinhaConta(req, res) {
+    try {
+        const nome = req.body.nome?.trim();
+        const email = req.body.email?.trim().toLowerCase();
+        const telefone = req.body.telefone?.trim() || null;
+
+        if (!nome || !email) {
+            return res.status(400).json({
+                mensagem: "Nome e e-mail são obrigatórios."
+            });
+        }
+
+        if (nome.length > 50 || email.length > 50 || !validarEmail(email)) {
+            return res.status(400).json({
+                mensagem: "Nome ou e-mail inválido."
+            });
+        }
+
+        if (telefone && telefone.length > 12) {
+            return res.status(400).json({
+                mensagem: "Telefone inválido."
+            });
+        }
+
+        await usuarioModel.atualizarDados(
+            req.usuarioId,
+            nome,
+            email,
+            telefone
+        );
+
+        return res.status(200).json({
+            mensagem: "Dados atualizados com sucesso."
+        });
+
+    } catch (erro) {
+        console.error("Erro ao atualizar conta:", erro);
+
+        if (erro.code === "ER_DUP_ENTRY") {
+            return res.status(409).json({
+                mensagem: "Este e-mail já está sendo utilizado."
+            });
+        }
+
+        return res.status(500).json({
+            mensagem: "Erro ao atualizar dados da conta."
+        });
+    }
+}
+
+// ALTERAR SENHA
+async function alterarMinhaSenha(req, res) {
+    try {
+        const senhaAtual = req.body.senhaAtual;
+        const novaSenha = req.body.novaSenha;
+
+        if (!senhaAtual || !novaSenha) {
+            return res.status(400).json({
+                mensagem: "Informe a senha atual e a nova senha."
+            });
+        }
+
+        if (
+            typeof novaSenha !== "string" ||
+            novaSenha.length < 8 ||
+            novaSenha.length > 72
+        ) {
+            return res.status(400).json({
+                mensagem: "A nova senha deve possuir entre 8 e 72 caracteres."
+            });
+        }
+
+        const credenciais = await usuarioModel.buscarCredenciaisPorId(
+            req.usuarioId
+        );
+
+        if (credenciais.length !== 1) {
+            return res.status(404).json({
+                mensagem: "Conta não encontrada."
+            });
+        }
+
+        const senhaValida = await verificarSenha(
+            senhaAtual,
+            credenciais[0].senha
+        );
+
+        if (!senhaValida) {
+            return res.status(401).json({
+                mensagem: "A senha atual está incorreta."
+            });
+        }
+
+        const senhaHash = await bcrypt.hash(
+            novaSenha,
+            RODADAS_BCRYPT
+        );
+
+        await usuarioModel.atualizarSenha(
+            req.usuarioId,
+            senhaHash
+        );
+
+        return res.status(200).json({
+            mensagem: "Senha alterada com sucesso."
+        });
+
+    } catch (erro) {
+        console.error("Erro ao alterar senha:", erro);
+
+        return res.status(500).json({
+            mensagem: "Erro ao alterar senha."
+        });
+    }
+}
+
+// EXCLUIR A PRÓPRIA CONTA
+async function excluirMinhaConta(req, res) {
+    try {
+        const senha = req.body.senha;
+
+        if (!senha) {
+            return res.status(400).json({
+                mensagem: "Informe sua senha para confirmar a exclusão."
+            });
+        }
+
+        const credenciais = await usuarioModel.buscarCredenciaisPorId(
+            req.usuarioId
+        );
+
+        if (credenciais.length !== 1) {
+            return res.status(404).json({
+                mensagem: "Conta não encontrada."
+            });
+        }
+
+        const senhaValida = await verificarSenha(
+            senha,
+            credenciais[0].senha
+        );
+
+        if (!senhaValida) {
+            return res.status(401).json({
+                mensagem: "Senha incorreta. A conta não foi excluída."
+            });
+        }
+
+        await usuarioModel.excluirConta(req.usuarioId);
+
+        return res.status(200).json({
+            mensagem: "Conta excluída com sucesso."
+        });
+
+    } catch (erro) {
+        console.error("Erro ao excluir conta:", erro);
+
+        return res.status(500).json({
+            mensagem: "Não foi possível excluir a conta."
+        });
+    }
+}
+
 module.exports = {
     cadastrar,
-    autenticar
-}
+    autenticar,
+    buscarMinhaConta,
+    atualizarMinhaConta,
+    alterarMinhaSenha,
+    excluirMinhaConta
+};
