@@ -1298,3 +1298,213 @@ nav [data-role-section][hidden] {
     .salvar > * { width: 100%; }
     .grafico { height: 185px; }
 }
+
+/* Página de regiões — layout preparado para bases extensas */
+.introducao-regioes { margin-bottom: 22px; }
+.introducao-regioes > div { min-width: 0; }
+.busca-regiao-redesenhada {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) minmax(280px, 420px);
+    align-items: end;
+    gap: 8px 24px;
+    padding: 18px 20px;
+    margin-bottom: 18px;
+}
+.busca-regiao-texto { min-width: 0; }
+.regiao-etiqueta {
+    display: block;
+    color: var(--texto);
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+.busca-regiao-texto p {
+    color: var(--cinza);
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 0;
+}
+.busca-regiao-linha { min-width: 0; }
+.busca-regiao-linha select {
+    min-width: 0;
+    width: 100%;
+    flex: 1;
+    padding: 11px 12px;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    background: var(--superficie-2);
+    color: var(--texto);
+    font: inherit;
+    font-size: 13px;
+}
+.busca-regiao-linha .primario { flex: 0 0 auto; white-space: nowrap; }
+.mensagem-regiao {
+    grid-column: 1 / -1;
+    margin: 4px 0 0;
+    padding: 10px 12px;
+    color: var(--cinza);
+    background: var(--superficie-2);
+    border-radius: 7px;
+    font-size: 12px;
+}
+.mensagem-regiao-erro { color: #f08b9b; }
+.conteudo-regiao { min-width: 0; }
+.conteudo-regiao[hidden] { display: none !important; }
+.indicadores-regiao {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+}
+.indicadores-regiao .kpi-card { min-width: 0; padding: 16px; }
+.indicadores-regiao .kpi-valor {
+    display: block;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    font-size: clamp(18px, 2vw, 25px);
+    line-height: 1.25;
+    font-variant-numeric: tabular-nums;
+}
+.painel-grafico-regiao { margin-bottom: 14px; min-width: 0; }
+.painel-grafico-regiao .painel-cabecalho { align-items: center; }
+.subtitulo-painel {
+    display: block;
+    color: var(--cinza);
+    font-size: 11px;
+    line-height: 1.5;
+    margin-top: 5px;
+}
+.selo-dados {
+    flex: 0 0 auto;
+    padding: 5px 9px;
+    border-radius: 20px;
+    background: rgba(167,139,250,.12);
+    color: var(--roxo-claro);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .06em;
+}
+.grafico-regiao-container {
+    position: relative;
+    width: 100%;
+    height: 330px;
+    min-width: 0;
+}
+.grafico-regiao-container canvas {
+    display: block;
+    max-width: 100%;
+}
+.estado-grafico {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    color: var(--cinza);
+    font-size: 13px;
+    text-align: center;
+}
+.grade-regioes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 14px;
+}
+.painel-ranking-regiao { min-width: 0; padding: 18px; }
+.painel-ranking-regiao .painel-cabecalho { min-height: 55px; }
+.tabela-regiao-scroll {
+    width: 100%;
+    max-height: 470px;
+    overflow: auto;
+    overscroll-behavior: contain;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+}
+.tabela-regiao {
+    width: 100%;
+    min-width: 440px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 12px;
+}
+.tabela-regiao th,
+.tabela-regiao td {
+    padding: 11px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--borda);
+    vertical-align: middle;
+}
+.tabela-regiao th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: var(--superficie-2);
+    color: var(--cinza);
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    white-space: nowrap;
+}
+.tabela-regiao tbody tr:last-child td { border-bottom: 0; }
+.tabela-regiao tbody tr:hover { background: rgba(167,139,250,.055); }
+.tabela-regiao .coluna-posicao { width: 48px; color: var(--cinza); font-variant-numeric: tabular-nums; }
+.tabela-regiao .coluna-nome {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 700;
+    color: var(--texto);
+}
+.tabela-regiao .coluna-numero {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+.tabela-regiao th:nth-child(3) { text-align: right; }
+.tabela-regiao th:nth-child(4) { text-align: right; }
+.tabela-regiao .celula-estado {
+    padding: 24px 12px;
+    color: var(--cinza);
+    text-align: center;
+    white-space: normal;
+}
+.paginacao-regiao {
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-top: 10px;
+}
+.paginacao-resumo { color: var(--cinza); font-size: 11px; }
+.paginacao-controles { display: flex; align-items: center; gap: 7px; }
+.paginacao-controles button {
+    width: 29px;
+    height: 29px;
+    border: 1px solid var(--borda);
+    border-radius: 7px;
+    background: var(--superficie-2);
+    color: var(--texto);
+    font-size: 18px;
+    line-height: 1;
+}
+.paginacao-controles button:disabled { opacity: .35; cursor: not-allowed; }
+.pagina-atual { min-width: 42px; color: var(--cinza); font-size: 11px; text-align: center; }
+
+@media (max-width: 1250px) {
+    .indicadores-regiao { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grade-regioes { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+    .busca-regiao-redesenhada { grid-template-columns: 1fr; gap: 12px; padding: 15px; }
+    .busca-regiao-linha { display: flex; }
+    .indicadores-regiao { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grafico-regiao-container { height: 300px; }
+    .painel-ranking-regiao { padding: 14px; }
+    .tabela-regiao-scroll { max-height: 390px; }
+}
+@media (max-width: 420px) {
+    .indicadores-regiao { grid-template-columns: 1fr 1fr; }
+    .indicadores-regiao .kpi-card { padding: 12px; }
+    .indicadores-regiao .kpi-header { font-size: 11px; }
+    .indicadores-regiao .kpi-valor { font-size: 17px; }
+    .busca-regiao-linha { flex-direction: column; }
+    .busca-regiao-linha .primario { width: 100%; }
+    .grafico-regiao-container { height: 270px; }
+}

@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoundFy Intelligence — Regiões</title>
+
+    <title data-i18n="regionsDynamic.title">SoundFy Intelligence | Regiões</title>
+
     <link rel="stylesheet" href="../Style/style.css">
 </head>
 
@@ -59,7 +61,9 @@
         </nav>
 
         <div class="rodape-lateral">
-            <a href="configuracoes.html">⚙<span data-i18n="navigation.settings">Configurações</span></a>
+            <a href="configuracoes.html">
+                ⚙ <span data-i18n="navigation.settings">Configurações</span>
+            </a>
 
             <div class="perfil">
                 <b data-user-initials>U</b>
@@ -76,8 +80,9 @@
             <button id="menu" class="menu-mobile">☰</button>
 
             <div class="trilha">
-                <span data-i18n="workspace.name">Espaço de trabalho</span> <b>/</b> <strong
-                    data-i18n="navigation.regions">Regiões</strong>
+                <span data-i18n="workspace.name">Espaço de trabalho</span>
+                <b>/</b>
+                <strong data-i18n="navigation.regions">Regiões</strong>
             </div>
 
             <div class="logo-mobile">
@@ -88,8 +93,13 @@
                 <button class="sino">♢<i></i></button>
 
                 <div class="menu-perfil-container">
-                    <button class="avatar-topo" id="perfil-menu-botao" aria-label="Abrir menu do perfil"
-                        aria-expanded="false" aria-controls="perfil-menu">
+                    <button
+                        class="avatar-topo"
+                        id="perfil-menu-botao"
+                        aria-label="Abrir menu do perfil"
+                        aria-expanded="false"
+                        aria-controls="perfil-menu"
+                    >
                         <b data-user-initials>U</b>
                     </button>
 
@@ -111,92 +121,116 @@
             </div>
         </header>
 
-        <section class="introducao">
+        <section class="introducao introducao-regioes">
             <div>
-                <p>GEOGRAFIA</p>
-                <h1>Buscar por região</h1>
-                <span>Explore gêneros, artistas e cidades em alta em cada região do Brasil.</span>
+                <p data-i18n="regionsDynamic.eyebrow">GEOGRAFIA</p>
+                <h1 data-i18n="regionsDynamic.heading">Buscar por região</h1>
+                <span data-i18n="regionsDynamic.description">Explore os dados de consumo musical de cada região do Brasil.</span>
             </div>
         </section>
 
-        <section class="painel busca-regiao">
-            <label for="campoRegiao">Região</label>
+        <section class="painel busca-regiao busca-regiao-redesenhada">
+            <div class="busca-regiao-texto">
+                <span class="regiao-etiqueta" data-i18n="regionsDynamic.region">Região</span>
+                <p data-i18n="regionsDynamic.selectHint">Selecione uma região para visualizar os indicadores e rankings.</p>
+            </div>
             <div class="busca-regiao-linha">
-                <input id="campoRegiao" type="text" list="listaRegioes"
-                    placeholder="Digite: Norte, Nordeste, Centro-Oeste, Sudeste ou Sul" value="Sudeste">
-                <datalist id="listaRegioes">
-                    <option value="Norte">
-                    <option value="Nordeste">
-                    <option value="Centro-Oeste">
-                    <option value="Sudeste">
-                    <option value="Sul">
-                </datalist>
-                <button id="botaoBuscarRegiao" class="primario">Buscar →</button>
+                <select id="regiao-select" aria-label="Região">
+                    <option value="" data-i18n="regionsDynamic.loadingRegions">Carregando regiões...</option>
+                </select>
+                <button id="botaoBuscarRegiao" class="primario" type="button" data-i18n="regionsDynamic.search">Buscar →</button>
             </div>
-            <p id="mensagemRegiao" class="estado-vazio" style="display:none;"></p>
+            <p id="mensagemRegiao" class="mensagem-regiao" role="status" aria-live="polite" hidden></p>
         </section>
 
-        <div id="resultadoRegiao">
+        <div id="resultadoRegiao" class="conteudo-regiao" aria-live="polite">
             <section class="indicadores indicadores-regiao">
                 <article class="kpi-card">
-                    <div class="kpi-header"><span>Pontuação Total</span></div>
-                    <strong class="kpi-valor" id="kpiPontuacao">—</strong>
+                    <div class="kpi-header"><span data-i18n="regionsDynamic.totalStreams">Total de streams</span></div>
+                    <strong class="kpi-valor" id="total-streams">—</strong>
                 </article>
-
                 <article class="kpi-card">
-                    <div class="kpi-header"><span>Registros</span></div>
-                    <strong class="kpi-valor" id="kpiRegistros">—</strong>
+                    <div class="kpi-header"><span data-i18n="regionsDynamic.records">Registros de consumo</span></div>
+                    <strong class="kpi-valor" id="total-registros">—</strong>
                 </article>
-
                 <article class="kpi-card">
-                    <div class="kpi-header"><span>Cidades</span></div>
-                    <strong class="kpi-valor" id="kpiCidades">—</strong>
+                    <div class="kpi-header"><span data-i18n="regionsDynamic.artists">Artistas</span></div>
+                    <strong class="kpi-valor" id="total-artistas">—</strong>
                 </article>
-
                 <article class="kpi-card">
-                    <div class="kpi-header"><span>Músicas</span></div>
-                    <strong class="kpi-valor" id="kpiMusicas">—</strong>
+                    <div class="kpi-header"><span data-i18n="regionsDynamic.genres">Gêneros</span></div>
+                    <strong class="kpi-valor" id="total-generos">—</strong>
                 </article>
-
                 <article class="kpi-card">
-                    <div class="kpi-header"><span>Média por Cidade</span></div>
-                    <strong class="kpi-valor" id="kpiMedia">—</strong>
+                    <div class="kpi-header"><span data-i18n="regionsDynamic.average">Média de streams por registro</span></div>
+                    <strong class="kpi-valor" id="media-streams">—</strong>
                 </article>
             </section>
 
-            <section class="grade">
-                <article class="painel">
-                    <div class="painel-cabecalho">
-                        <div>
-                            <p>RANKING</p>
-                            <h2 id="tituloGenerosRegiao">Gêneros em alta — Sudeste</h2>
-                        </div>
-                    </div>
-                    <div id="listaGenerosRegiao" class="lista-rank"></div>
-                </article>
-
-                <article class="painel">
-                    <div class="painel-cabecalho">
-                        <div>
-                            <p>RANKING</p>
-                            <h2 id="tituloArtistasRegiao">Artistas em alta — Sudeste</h2>
-                        </div>
-                    </div>
-                    <div id="listaArtistasRegiao" class="lista-rank"></div>
-                </article>
-            </section>
-
-            <section class="painel">
+            <section class="painel painel-grafico-regiao">
                 <div class="painel-cabecalho">
                     <div>
-                        <p>GEOGRAFIA</p>
-                        <h2 id="tituloCidadesRegiao">Cidades analisadas — Sudeste</h2>
+                        <p data-i18n="regionsDynamic.geography">GEOGRAFIA</p>
+                        <h2 data-i18n="regionsDynamic.genresRanking">Gêneros mais consumidos</h2>
+                        <span class="subtitulo-painel" data-i18n="regionsDynamic.chartHint">Os 10 gêneros com maior volume de streams nesta região.</span>
                     </div>
+                    <span class="selo-dados" data-i18n="regionsDynamic.topTen">TOP 10</span>
                 </div>
-                <div id="listaCidadesRegiao" class="lista-rank"></div>
+                <div class="grafico-regiao-container">
+                    <canvas id="grafico-generos" role="img" aria-label="Ranking de gêneros por streams"></canvas>
+                    <p id="estado-grafico" class="estado-grafico" hidden></p>
+                </div>
+            </section>
+
+            <section class="grade grade-regioes">
+                <article class="painel painel-ranking-regiao">
+                    <div class="painel-cabecalho">
+                        <div>
+                            <p data-i18n="regionsDynamic.ranking">RANKING</p>
+                            <h2 data-i18n="regionsDynamic.genresRanking">Gêneros mais consumidos</h2>
+                            <span class="subtitulo-painel" data-i18n="regionsDynamic.genreTableHint">Lista completa, organizada por volume de streams.</span>
+                        </div>
+                    </div>
+                    <div class="tabela-regiao-scroll">
+                        <table class="tabela-regiao">
+                            <thead><tr>
+                                <th data-i18n="regionsDynamic.position">Pos.</th>
+                                <th data-i18n="regionsDynamic.genre">Gênero</th>
+                                <th data-i18n="regionsDynamic.streams">Streams</th>
+                                <th data-i18n="regionsDynamic.bestRanking">Melhor ranking</th>
+                            </tr></thead>
+                            <tbody id="tabela-generos"><tr><td colspan="4" data-i18n="regionsDynamic.loadingData">Carregando dados...</td></tr></tbody>
+                        </table>
+                    </div>
+                    <div class="paginacao-regiao" id="paginacao-generos"></div>
+                </article>
+
+                <article class="painel painel-ranking-regiao">
+                    <div class="painel-cabecalho">
+                        <div>
+                            <p data-i18n="regionsDynamic.ranking">RANKING</p>
+                            <h2 data-i18n="regionsDynamic.artistsRanking">Artistas mais consumidos</h2>
+                            <span class="subtitulo-painel" data-i18n="regionsDynamic.artistTableHint">Explore os artistas com maior audiência na região.</span>
+                        </div>
+                    </div>
+                    <div class="tabela-regiao-scroll">
+                        <table class="tabela-regiao">
+                            <thead><tr>
+                                <th data-i18n="regionsDynamic.position">Pos.</th>
+                                <th data-i18n="regionsDynamic.artist">Artista</th>
+                                <th data-i18n="regionsDynamic.streams">Streams</th>
+                                <th data-i18n="regionsDynamic.bestRanking">Melhor ranking</th>
+                            </tr></thead>
+                            <tbody id="tabela-artistas"><tr><td colspan="4" data-i18n="regionsDynamic.loadingData">Carregando dados...</td></tr></tbody>
+                        </table>
+                    </div>
+                    <div class="paginacao-regiao" id="paginacao-artistas"></div>
+                </article>
             </section>
         </div>
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script src="../JS/sessao.js"></script>
     <script src="../JS/i18n.js"></script>
@@ -204,6 +238,7 @@
     <script src="../JS/script.js"></script>
     <script src="../JS/menu-perfil.js"></script>
     <script src="../JS/sidebar-perfil.js"></script>
-</body>
+    <script src="../JS/regioes.js"></script>
 
+</body>
 </html>
