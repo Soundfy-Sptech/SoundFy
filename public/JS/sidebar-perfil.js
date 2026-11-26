@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
         '[data-role-section="producer"]'
     );
 
-    // Valor temporário até a integração com o cadastro.
-    const tipoPerfil = localStorage.getItem("soundfy-role") || "producer";
+    const tipo = String(sessionStorage.getItem("TIPO_USUARIO") || "").toLowerCase();
+    const tipoPerfil = tipo === "artista" ? "artist" : "producer";
 
     function atualizarSidebar(tipo) {
         const ehArtista = tipo === "artist";
