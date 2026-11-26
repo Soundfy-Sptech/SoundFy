@@ -16,10 +16,11 @@ var app = express();
 
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
-// var dashboardRouter = require("./src/routes/dashboard");
-// var regioesRouter = require("./src/routes/regioes");
-// var produtorRouter = require("./src/routes/produtor");
-// var artistasRouter = require("./src/routes/artistas");
+ var dashboardRouter = require("./src/routes/dashboard");
+ var regioesRouter = require("./src/routes/regioes");
+ var produtorRouter = require("./src/routes/produtor");
+ var artistasRouter = require("./src/routes/artistas");
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -29,10 +30,10 @@ app.use(cors());
 
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
-// app.use("/dashboard", dashboardRouter);
-// app.use("/regioes", regioesRouter);
-// app.use("/produtor", produtorRouter);
-// app.use("/artistas", artistasRouter);
+ app.use("/regioes", regioesRouter);
+ app.use("/produtor", produtorRouter);
+ app.use("/artistas", artistasRouter);
+ app.use("/dashboard", dashboardRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`

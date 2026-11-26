@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="index.title">SoundFy — Dashboard</title>
     <link rel="stylesheet" href="../Style/style.css">
+    <script src="../JS/sidebar-perfil.js"></script>
 </head>
 
 <body>
@@ -18,8 +19,8 @@
         <div class="espaco-trabalho">
             <b>ST</b>
             <div>
-                <strong>SoundFy Studio</strong>
-                <small data-i18n="workspace.professional">Workspace Profissional</small>
+                <strong data-i18n="workspace.title">Análise Musical</strong>
+                <small data-i18n="workspace.professional">Espaço de trabalho profissional</small>
             </div>
             <i>⌄</i>
         </div>
@@ -37,16 +38,18 @@
 
             <div data-role-section="artist">
                 <label data-i18n="navigation.artistArea">ÁREA DO ARTISTA</label>
-                <a href="artista.html">
-                    <span data-i18n="navigation.artistProfile">Meu perfil de artista</span>
-                </a>
+
+            <a href="artista.html">
+                <span data-i18n="navigation.artistProfile">Meu perfil de artista</span>
+            </a>
             </div>
 
             <div data-role-section="producer">
                 <label data-i18n="navigation.producerArea">ÁREA DO PRODUTOR</label>
-                <a href="produtor.html">
-                    <span data-i18n="navigation.production">Área de produção</span>
-                </a>
+
+            <a href="produtor.html">
+                <span data-i18n="navigation.production">Área de produção</span>
+            </a>
             </div>
 
             <label data-i18n="navigation.analysis">ANÁLISES</label>
@@ -56,18 +59,15 @@
             </a>
         </nav>
 
-
-
         <div class="rodape-lateral">
-            <a href="configuracoes.html">
-                ⚙ <span data-i18n="navigation.settings">Configurações</span>
-            </a>
+            <a href="configuracoes.html">⚙ <span data-i18n="navigation.settings">Configurações</span></a>
 
             <div class="perfil">
                 <b data-user-initials>U</b>
                 <div>
                     <strong data-user-name>Usuário</strong>
-                    <small data-i18n="profile.producer">Produtor</small>
+                    <small data-role-section="artist" data-i18n="profile.artist">Artista</small>
+                    <small data-role-section="producer" data-i18n="profile.producer">Produtor</small>
                 </div>
             </div>
         </div>
@@ -88,10 +88,10 @@
             </div>
 
             <div class="acoes">
-                <button class="sino" aria-label="Notificações">♢<i></i></button>
+                <button class="sino" aria-label="Notificações" data-i18n-aria-label="configuracoes.notifications">♢<i></i></button>
 
                 <div class="menu-perfil-container">
-                    <button class="avatar-topo" id="perfil-menu-botao" aria-label="Abrir menu do perfil"
+                    <button class="avatar-topo" id="perfil-menu-botao" aria-label="Abrir menu do perfil" data-i18n-aria-label="profile.openMenu"
                         aria-expanded="false" aria-controls="perfil-menu">
                         <b data-user-initials>U</b>
                     </button>
@@ -99,7 +99,8 @@
                     <div class="menu-perfil" id="perfil-menu" hidden>
                         <div class="menu-perfil-info">
                             <strong data-user-name>Usuário</strong>
-                            <small data-i18n="profile.producer">Produtor</small>
+                            <small data-role-section="artist" data-i18n="profile.artist">Artista</small>
+                            <small data-role-section="producer" data-i18n="profile.producer">Produtor</small>
                         </div>
 
                         <a href="configuracoes.html" data-i18n="navigation.settings">
@@ -116,7 +117,7 @@
 
         <section class="introducao">
             <div>
-                <p data-i18n="index.date">Quinta-feira, 22 de Outubro</p>
+                <p data-i18n-date></p>
                 <h1>
     <span data-i18n="index.greeting">Olá,</span>
     <span id="nome-usuario-greeting">Usuário</span>
@@ -128,47 +129,38 @@
         <section class="indicadores">
             <article class="kpi-card">
                 <div class="kpi-header">
-                    <span data-i18n="index.growthIndex">Índice de Crescimento</span>
-                    <span class="kpi-badge positivo">+18,7%</span>
+                    <span data-i18n="index.kpiStreams">Total de Streams</span>
+                    <span class="kpi-badge positivo" data-i18n="index.registered">Cadastrados</span>
                 </div>
-                <strong class="kpi-valor">+18,7%</strong>
-                <small class="kpi-meta">
-                    <em>↑ 4,2%</em>
-                    <span data-i18n="index.vsPreviousPeriod">vs. período anterior</span>
-                </small>
+                <strong class="kpi-valor" id="kpi-total-streams">0</strong>
+                <small class="kpi-meta" data-i18n="index.kpiStreamsMeta">Streams registrados no consumo musical</small>
             </article>
 
             <article class="kpi-card">
                 <div class="kpi-header">
-                    <span data-i18n="index.monitoredGenres">Gêneros Monitorados</span>
-                    <span class="kpi-badge neutro">+6 novos</span>
+                    <span data-i18n="index.kpiGenres">Gêneros Monitorados</span>
+                    <span class="kpi-badge neutro" data-i18n="index.registered">Cadastrados</span>
                 </div>
-                <strong class="kpi-valor">48</strong>
-                <small class="kpi-meta">
-                    <span data-i18n="index.newThisMonth">adicionados este mês</span>
-                </small>
+                <strong class="kpi-valor" id="kpi-total-generos">0</strong>
+                <small class="kpi-meta" data-i18n="index.kpiGenresMeta">Gêneros disponíveis na base</small>
             </article>
 
             <article class="kpi-card">
                 <div class="kpi-header">
-                    <span data-i18n="index.analyzedRegions">Regiões Analisadas</span>
-                    <span class="kpi-badge positivo">↑ 3</span>
+                    <span data-i18n="index.kpiRegions">Regiões Analisadas</span>
+                    <span class="kpi-badge positivo" data-i18n="index.registered">Cadastrados</span>
                 </div>
-                <strong class="kpi-valor">27</strong>
-                <small class="kpi-meta">
-                    <span data-i18n="index.newRegions">novas microrregiões</span>
-                </small>
+                <strong class="kpi-valor" id="kpi-total-regioes">0</strong>
+                <small class="kpi-meta" data-i18n="index.kpiRegionsMeta">Regiões disponíveis na base</small>
             </article>
 
             <article class="kpi-card">
                 <div class="kpi-header">
-                    <span data-i18n="index.detectedOpportunities">Oportunidades</span>
-                    <span class="kpi-badge alerta">4 prioritárias</span>
+                    <span data-i18n="index.kpiArtists">Artistas Monitorados</span>
+                    <span class="kpi-badge alerta" data-i18n="index.registered">Cadastrados</span>
                 </div>
-                <strong class="kpi-valor">12</strong>
-                <small class="kpi-meta">
-                    <span data-i18n="index.newLast48Hours">detectadas nas últimas 48h</span>
-                </small>
+                <strong class="kpi-valor" id="kpi-total-artistas">0</strong>
+                <small class="kpi-meta" data-i18n="index.kpiArtistsMeta">Artistas disponíveis na base</small>
             </article>
         </section>
 
@@ -177,113 +169,48 @@
                 <div class="painel-cabecalho">
                     <div>
                         <p data-i18n="index.marketView">VISÃO DE MERCADO</p>
-                        <h2 data-i18n="index.musicInterestTrend">Tendência de Interesse Musical</h2>
+                        <h2 data-i18n="index.marketGenresByRegion">Gêneros mais ouvidos por região</h2>
                     </div>
-                    <button class="filtro" data-i18n="index.last5Weeks">Últimas 5 semanas</button>
                 </div>
 
                 <div class="explicacao-grafico">
-                    <strong data-i18n="index.marketAccelerating">Mercado em aceleração:</strong>
-                    <span data-i18n="index.marketExplanation">O volume de buscas por novos gêneros cresceu 74% no
-                        período.</span>
+                    <strong data-i18n="index.streamsDistribution">Distribuição de streams</strong>
+                    <span data-i18n="index.regionGenreExplanation">Comparativo dos gêneros musicais com maior volume de streams em cada região, conforme os registros do banco de dados.</span>
                 </div>
 
-                <div class="legenda">
-                    <span>
-                        <i class="ponto-primario"></i>
-                        <span data-i18n="index.publicInterest">Interesse do público</span>
-                    </span>
-                    <span>
-                        <i class="ponto-secundario"></i>
-                        <span data-i18n="index.searches">Volume de buscas</span>
-                    </span>
-                </div>
-
-                <div class="grafico">
-                    <div class="eixo">
-                        <span>100</span>
-                        <span>75</span>
-                        <span>50</span>
-                        <span>25</span>
-                        <span>0</span>
-                    </div>
-
-                    <div class="grafico-area">
-                        <div class="line l1"></div>
-                        <div class="line l2"></div>
-                        <div class="line l3"></div>
-                        <div class="line l4"></div>
-
-                        <svg viewBox="0 0 700 220" preserveAspectRatio="none"
-                            aria-label="Gráfico de tendência de interesse">
-                            <path class="area"
-                                d="M0 160 C80 158 100 145 140 140 S210 135 270 112 S340 115 400 90 S470 94 530 67 S620 65 700 30 L700 220 L0 220Z">
-                            </path>
-                            <path class="tendencia"
-                                d="M0 160 C80 158 100 145 140 140 S210 135 270 112 S340 115 400 90 S470 94 530 67 S620 65 700 30">
-                            </path>
-                            <path class="tendencia linha-secundaria"
-                                d="M0 178 C80 174 105 165 145 160 S215 158 275 138 S345 145 405 119 S475 128 535 99 S620 108 700 78">
-                            </path>
-                        </svg>
-
-                        <div class="datas">
-                            <span data-i18n="index.date30Jul">30 Jul</span>
-                            <span data-i18n="index.date06Aug">06 Ago</span>
-                            <span data-i18n="index.date13Aug">13 Ago</span>
-                            <span data-i18n="index.date20Aug">20 Ago</span>
-                            <span data-i18n="index.date27Aug">27 Ago</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="resumo-tendencia">
-                    <div>
-                        <span data-i18n="index.start">Início</span>
-                        <strong>58 pts</strong>
-                    </div>
-                    <div>
-                        <span data-i18n="index.now">Atual</span>
-                        <strong>101 pts</strong>
-                    </div>
-                    <div>
-                        <span data-i18n="index.change">Variação</span>
-                        <strong class="texto-positivo">+74,1%</strong>
-                    </div>
+                <div id="grafico-generos-regiao" class="lista-regioes">
+                    <p class="mensagem-dashboard" data-i18n="index.loadingDashboard">Carregando dados do painel...</p>
                 </div>
             </article>
 
             <article class="painel insight" id="insights">
                 <div class="painel-cabecalho">
                     <div>
-                        <p data-i18n="index.weeklyInsight">INSIGHT DA SEMANA</p>
-                        <h2><b data-i18n="index.newOpportunity">Nova Oportunidade</b></h2>
+                        <p data-i18n="index.marketHighlight">DESTAQUE DO MERCADO</p>
+                        <h2 data-i18n="index.featuredGenre">Gênero em destaque</h2>
                     </div>
-                    <mark data-i18n="index.new">NOVO</mark>
+                    <mark data-i18n="index.general">GERAL</mark>
                 </div>
 
                 <div class="corpo-insight">
-                    <h3>Brazilian Phonk</h3>
+                    <h3 id="insight-genero">Aguardando dados</h3>
                     <div class="crescimento-tag">
-                        <strong>+42,8%</strong>
-                        <small data-i18n="index.growth">de crescimento</small>
+                        <strong id="insight-streams">0</strong>
+                        <small data-i18n="index.streamsRecorded">streams registrados</small>
                     </div>
-                    <p data-i18n="index.phonkDescription">Alta demanda em playlists de treino e redes de vídeo curto com
-                        escassez de lançamentos de produtores nacionais.</p>
+                    <p id="insight-descricao">O gênero com maior volume de streams será exibido aqui após o carregamento dos dados.</p>
                 </div>
 
                 <div class="meta">
                     <div>
-                        <span data-i18n="index.highlightRegion">Região Destaque</span>
-                        <strong>São Paulo</strong>
+                        <span data-i18n="index.registeredGenres">Gêneros cadastrados</span>
+                        <strong id="insight-qtd-generos">0</strong>
                     </div>
                     <div>
-                        <span data-i18n="index.potential">Potencial</span>
-                        <strong class="texto-positivo" data-i18n="index.high">Alto</strong>
+                        <span data-i18n="index.registeredRegions">Regiões cadastradas</span>
+                        <strong id="insight-qtd-regioes">0</strong>
                     </div>
                 </div>
-
-                <button class="botao-acao" data-i18n="index.viewFullAnalysis">Ver Análise Completa →</button>
             </article>
         </section>
 
@@ -291,118 +218,27 @@
             <article class="painel" id="generos">
                 <div class="painel-cabecalho">
                     <div>
-                        <p data-i18n="index.ranking">RANKING</p>
-                        <h2 data-i18n="index.trendingGenres">Gêneros em Alta</h2>
+                        <p data-i18n="index.rankingNoGeneral">RANKING · SEM CATEGORIAS GERAIS</p>
+                        <h2 data-i18n="index.rankingStreams">Gêneros com mais streams</h2>
                     </div>
                     <a class="link-ver-mais" href="#generos" data-i18n="index.viewAll">Ver todos →</a>
                 </div>
 
-                <div class="lista-rank">
-                    <div class="item-rank">
-                        <span class="posicao">01</span>
-                        <div class="info">
-                            <strong>Brazilian Phonk</strong>
-                            <small data-i18n="index.electronicSubgenre">Subgênero Eletrônico</small>
-                        </div>
-                        <span class="variacao positivo">+42,8% ↗</span>
-                    </div>
-
-                    <div class="item-rank">
-                        <span class="posicao">02</span>
-                        <div class="info">
-                            <strong>Hyperpop</strong>
-                            <small data-i18n="index.popSubgenre">Subgênero Pop</small>
-                        </div>
-                        <span class="variacao positivo">+31,4% ↗</span>
-                    </div>
-
-                    <div class="item-rank">
-                        <span class="posicao">03</span>
-                        <div class="info">
-                            <strong>Afrobeats</strong>
-                            <small data-i18n="index.rnbGlobal">R&B / Global</small>
-                        </div>
-                        <span class="variacao positivo">+24,9% ↗</span>
-                    </div>
-
-                    <div class="item-rank">
-                        <span class="posicao">04</span>
-                        <div class="info">
-                            <strong>Drill</strong>
-                            <small data-i18n="index.hipHopSubgenre">Subgênero Hip-Hop</small>
-                        </div>
-                        <span class="variacao positivo">+19,6% ↗</span>
-                    </div>
-
-                    <div class="item-rank">
-                        <span class="posicao">05</span>
-                        <div class="info">
-                            <strong>House</strong>
-                            <small data-i18n="index.electronicDance">Eletrônico / Dance</small>
-                        </div>
-                        <span class="variacao positivo">+15,2% ↗</span>
-                    </div>
+                <div class="lista-rank" id="ranking-generos">
+                    <p class="mensagem-dashboard" data-i18n="index.loadingRanking">Carregando ranking...</p>
                 </div>
             </article>
 
             <article class="painel" id="regioes">
                 <div class="painel-cabecalho">
                     <div>
-                        <p data-i18n="index.geography">GEOGRAFIA</p>
-                        <h2 data-i18n="index.regionsGrowth">Crescimento por Região</h2>
+                        <p data-i18n="index.geographyArtists">GEOGRAFIA · ARTISTAS POR REGIÃO</p>
+                        <h2 data-i18n="index.topArtistByRegion">Artista Nº 1 por Região</h2>
                     </div>
                 </div>
 
-                <div class="lista-regioes">
-                    <div class="item-regiao">
-                        <div class="regiao-info">
-                            <span data-i18n="index.southeast">Sudeste</span>
-                            <strong>+28,4%</strong>
-                        </div>
-                        <div class="barra-fundo">
-                            <div class="barra-progresso" style="width: 89%;"></div>
-                        </div>
-                    </div>
-
-                    <div class="item-regiao">
-                        <div class="regiao-info">
-                            <span data-i18n="index.south">Sul</span>
-                            <strong>+21,1%</strong>
-                        </div>
-                        <div class="barra-fundo">
-                            <div class="barra-progresso" style="width: 71%;"></div>
-                        </div>
-                    </div>
-
-                    <div class="item-regiao">
-                        <div class="regiao-info">
-                            <span data-i18n="index.northeast">Nordeste</span>
-                            <strong>+17,8%</strong>
-                        </div>
-                        <div class="barra-fundo">
-                            <div class="barra-progresso" style="width: 58%;"></div>
-                        </div>
-                    </div>
-
-                    <div class="item-regiao">
-                        <div class="regiao-info">
-                            <span data-i18n="index.centralWest">Centro-Oeste</span>
-                            <strong>+12,2%</strong>
-                        </div>
-                        <div class="barra-fundo">
-                            <div class="barra-progresso" style="width: 43%;"></div>
-                        </div>
-                    </div>
-
-                    <div class="item-regiao">
-                        <div class="regiao-info">
-                            <span data-i18n="index.north">Norte</span>
-                            <strong>+8,7%</strong>
-                        </div>
-                        <div class="barra-fundo">
-                            <div class="barra-progresso" style="width: 31%;"></div>
-                        </div>
-                    </div>
+                <div class="lista-regioes" id="ranking-artistas-regiao">
+                    <p class="mensagem-dashboard" data-i18n="index.loadingArtists">Carregando artistas...</p>
                 </div>
             </article>
         </section>
@@ -412,8 +248,8 @@
     <script src="../JS/i18n.js"></script>
     <script src="../JS/translate.js"></script>
     <script src="../JS/script.js"></script>
+    <script src="../JS/dashboard.js"></script>
     <script src="../JS/menu-perfil.js"></script>
-    <script src="../JS/sidebar-perfil.js"></script>
 </body>
 
 </html>
