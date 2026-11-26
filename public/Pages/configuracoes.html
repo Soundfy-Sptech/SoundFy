@@ -123,13 +123,130 @@
 
         <section class="layout-configuracoes">
             <nav class="nav-configuracoes">
-                <a class="ativo" href="#espaco-trabalho" data-i18n="configuracoes.workspaceTab"></a>
+    <a class="ativo" href="#conta">Minha conta</a>
+    <a href="#espaco-trabalho" data-i18n="configuracoes.workspaceTab"></a>
                 <a href="#aparencia" data-i18n="configuracoes.appearanceTab"></a>
                 <a href="#dados" data-i18n="configuracoes.dataTab"></a>
                 <a href="#notificacoes" data-i18n="configuracoes.notificationsTab"></a>
             </nav>
 
             <div class="conteudo-configuracoes">
+
+<article class="painel cartao-configuracoes" id="conta">
+    <div class="painel-cabecalho">
+        <div>
+            <p>PERFIL PESSOAL</p>
+            <h2>Minha conta</h2>
+            <span>Gerencie seus dados pessoais e sua segurança.</span>
+        </div>
+    </div>
+
+    <form id="form-conta" class="formulario">
+        <label class="completo">
+            Nome
+            <input
+                id="conta-nome"
+                type="text"
+                maxlength="50"
+                required
+            >
+        </label>
+
+        <label>
+            E-mail
+            <input
+                id="conta-email"
+                type="email"
+                maxlength="50"
+                required
+            >
+        </label>
+
+        <label>
+            Telefone
+            <input
+                id="conta-telefone"
+                type="tel"
+                maxlength="12"
+            >
+        </label>
+
+        <label class="completo">
+            Tipo de usuário
+            <input id="conta-tipo" type="text" disabled>
+        </label>
+
+        <p id="conta-status" class="completo" role="status"></p>
+
+        <div class="salvar completo">
+            <button class="primario" type="submit">
+                Salvar alterações
+            </button>
+        </div>
+    </form>
+
+    <div style="border-top:1px solid var(--borda); margin-top:24px; padding-top:20px;">
+        <h3>Alterar senha</h3>
+
+        <form id="form-senha" class="formulario">
+            <label>
+                Senha atual
+                <input
+                    id="senha-atual"
+                    type="password"
+                    autocomplete="current-password"
+                    required
+                >
+            </label>
+
+            <label>
+                Nova senha
+                <input
+                    id="senha-nova"
+                    type="password"
+                    minlength="8"
+                    maxlength="72"
+                    autocomplete="new-password"
+                    required
+                >
+            </label>
+
+            <p id="senha-status" class="completo" role="status"></p>
+
+            <div class="salvar completo">
+                <button class="primario" type="submit">
+                    Alterar senha
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div style="border-top:1px solid var(--borda); margin-top:24px; padding-top:20px;">
+        <h3>Excluir minha conta</h3>
+        <p>Essa ação é permanente e excluirá suas notificações vinculadas.</p>
+
+        <form id="form-excluir-conta" class="formulario">
+            <label class="completo">
+                Confirme sua senha
+                <input
+                    id="excluir-senha"
+                    type="password"
+                    autocomplete="current-password"
+                    required
+                >
+            </label>
+
+            <p id="excluir-status" class="completo" role="status"></p>
+
+            <div class="salvar completo">
+                <button class="botao-excluir" type="submit">
+                    Excluir minha conta
+                </button>
+            </div>
+        </form>
+    </div>
+</article>
+
                 <article class="painel cartao-configuracoes" id="espaco-trabalho">
                     <div class="painel-cabecalho">
                         <div>
@@ -289,5 +406,6 @@
 <script src="../JS/script.js"></script>
 <script src="../JS/menu-perfil.js"></script>
 <script src="../JS/sidebar-perfil.js"></script>
+<script src="../JS/conta.js"></script>
 </body>
 </html>

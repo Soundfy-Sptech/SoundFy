@@ -1,15 +1,37 @@
-var express = require("express");
-var router = express.Router();
 
-var usuarioController = require("../controllers/usuarioController");
+const express = require("express");
+const router = express.Router();
 
-//Recebendo os dados do html e direcionando para a função cadastrar de usuarioController.js
-router.post("/cadastrar", function (req, res) {
-    usuarioController.cadastrar(req, res);
-})
+const usuarioController = require("../controllers/usuarioController");
+const { autenticarToken } = require("../middleware/autenticacao");
 
-router.post("/autenticar", function (req, res) {
-    usuarioController.autenticar(req, res);
-});
+// Rotas públicas
+router.post("/cadastrar", usuarioController.cadastrar);
+router.post("/autenticar", usuarioController.autenticar);
+
+// Rotas privadas: somente o usuário autenticado
+router.get(
+    "/minha-conta",
+    autenticarToken,
+    usuarioController.buscarMinhaConta
+);
+
+router.put(
+    "/minha-conta",
+    autenticarToken,
+    usuarioController.atualizarMinhaConta
+);
+
+router.patch(
+    "/minha-conta/senha",
+    autenticarToken,
+    usuarioController.alterarMinhaSenha
+);
+
+router.delete(
+    "/minha-conta",
+    autenticarToken,
+    usuarioController.excluirMinhaConta
+);
 
 module.exports = router;
