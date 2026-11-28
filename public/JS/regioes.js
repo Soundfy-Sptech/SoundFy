@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var resultado = document.getElementById("resultadoRegiao");
     var estadoGrafico = document.getElementById("estado-grafico");
     var paginaAtual = { generos: 1, artistas: 1 };
-    var dadosAtuais = { generos: [], artistas: [] };
+    var dadosAtuais = { generos: [], artistas: [], resumo: null, ranking: null, destaques: null };
     var graficoGeneros = null;
     var requisicaoAtual = 0;
     var ITENS_POR_PAGINA = 10;
@@ -22,7 +22,15 @@ document.addEventListener("DOMContentLoaded", function () {
         tabelaGeneros: document.getElementById("tabela-generos"),
         tabelaArtistas: document.getElementById("tabela-artistas"),
         paginacaoGeneros: document.getElementById("paginacao-generos"),
-        paginacaoArtistas: document.getElementById("paginacao-artistas")
+        paginacaoArtistas: document.getElementById("paginacao-artistas"),
+        seloRanking: document.getElementById("selo-ranking-artistas"),
+        dicaRanking: document.getElementById("dica-ranking-artistas"),
+        destaqueArtista: document.getElementById("destaque-artista"),
+        destaqueArtistaMeta: document.getElementById("destaque-artista-meta"),
+        destaqueGenero: document.getElementById("destaque-genero"),
+        destaqueGeneroMeta: document.getElementById("destaque-genero-meta"),
+        destaqueNacional: document.getElementById("destaque-nacional"),
+        destaqueNacionalMeta: document.getElementById("destaque-nacional-meta")
     };
 
     function traducao(chave, fallback) {
@@ -217,6 +225,81 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Substitui {chave} pelos valores informados no texto traduzido.
+    function modelo(chave, fallback, valores) {
+        return String(traducao(chave, fallback)).replace(/\{(\w+)\}/g, function (trecho, nome) {
+            return valores[nome] === undefined ? trecho : valores[nome];
+        });
+    }
+
+    function formatarPercentual(valor) {
+        return Number(valor || 0).toLocaleString(localeAtual(), { maximumFractionDigits: 1 });
+    }
+
+    // Identifica claramente que o ranking de artistas é um Top N (o limite vem da API).
+    function atualizarCabecalhoRanking() {
+        var ranking = dadosAtuais.ranking;
+        if (!ranking || !ranking.limite) return;
+
+        // Passa a ser controlado por este script (o translate.js não deve sobrescrever).
+        elementos.dicaRanking.removeAttribute("data-i18n");
+
+        // Região com poucos artistas: todos já aparecem, então não há "Top N" a destacar.
+        if (ranking.totalArtistas <= ranking.limite) {
+            elementos.seloRanking.hidden = true;
+            elementos.dicaRanking.textContent = traducao(
+                "regionsDynamic.artistTableHint",
+                "Ranking de artistas por volume de streams e melhor posição na região selecionada."
+            );
+            return;
+        }
+
+        elementos.seloRanking.hidden = false;
+        elementos.seloRanking.textContent = "TOP " + ranking.limite;
+        var texto = modelo(
+            "regionsDynamic.artistTableHintTop",
+            "Os {limit} artistas com maior audiência na região, de {total} com dados cadastrados.",
+            { limit: formatar(ranking.limite), total: formatar(ranking.totalArtistas) }
+        );
+        if (ranking.participacaoTop > 0) {
+            texto += modelo(
+                "regionsDynamic.artistTableHintTopShare",
+                " Juntos, concentram {share}% das streams de artistas da região.",
+                { share: formatarPercentual(ranking.participacaoTop) }
+            );
+        }
+        elementos.dicaRanking.textContent = texto;
+    }
+
+    function atualizarDestaques() {
+        var destaques = dadosAtuais.destaques;
+        var resumo = dadosAtuais.resumo;
+        if (!destaques || !resumo) return;
+
+        var artista = destaques.artistaLider;
+        elementos.destaqueArtista.textContent = artista ? artista.nome : "—";
+        elementos.destaqueArtistaMeta.textContent = artista
+            ? modelo("regionsDynamic.leadArtistMeta", "{share}% das streams de artistas da região",
+                { share: formatarPercentual(artista.participacao) })
+            : "";
+
+        // Gênero líder: usa a lista completa de gêneros (não é limitada).
+        var genero = dadosAtuais.generos[0];
+        var totalGeneros = Number(resumo.totalStreams) || 0;
+        elementos.destaqueGenero.textContent = genero ? genero.genero : "—";
+        elementos.destaqueGeneroMeta.textContent = genero && totalGeneros
+            ? modelo("regionsDynamic.leadGenreMeta", "{share}% das streams de gêneros da região",
+                { share: formatarPercentual((Number(genero.totalStreams) / totalGeneros) * 100) })
+            : "";
+
+        var nacional = destaques.cenarioNacional;
+        elementos.destaqueNacional.textContent = nacional ? formatarPercentual(nacional.participacao) + "%" : "—";
+        elementos.destaqueNacionalMeta.textContent = nacional
+            ? modelo("regionsDynamic.nationalWeightMeta", "{position}ª de {total} regiões em volume de streams",
+                { position: nacional.posicao, total: nacional.totalRegioes })
+            : "";
+    }
+
     function atualizarResumo(resumo) {
         elementos.streams.textContent = formatar(resumo.totalStreams);
         elementos.registros.textContent = formatar(resumo.quantidadeRegistros);
@@ -225,8 +308,13 @@ document.addEventListener("DOMContentLoaded", function () {
         elementos.media.textContent = formatar(resumo.mediaStreams);
     }
 
+    function cabecalhoAutenticacao() {
+        var token = sessionStorage.getItem("TOKEN_USUARIO");
+        return token ? { Authorization: "Bearer " + token } : {};
+    }
+
     function carregarRegioes() {
-        fetch("/regioes")
+        fetch("/regioes", { headers: cabecalhoAutenticacao() })
             .then(function (resposta) {
                 if (!resposta.ok) throw new Error("regions");
                 return resposta.json();
@@ -266,7 +354,9 @@ document.addEventListener("DOMContentLoaded", function () {
         mostrarMensagem("", false);
         resultado.hidden = false;
 
-        fetch("/regioes/" + encodeURIComponent(idRegiao))
+        fetch("/regioes/" + encodeURIComponent(idRegiao), {
+            headers: cabecalhoAutenticacao()
+        })
             .then(function (resposta) {
                 if (!resposta.ok) throw new Error("region-data");
                 return resposta.json();
@@ -274,13 +364,18 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(function (dados) {
                 if (identificador !== requisicaoAtual) return;
                 atualizarResumo(dados.resumo || {});
+                dadosAtuais.resumo = dados.resumo || {};
                 dadosAtuais.generos = Array.isArray(dados.generos) ? dados.generos : [];
                 dadosAtuais.artistas = Array.isArray(dados.artistas) ? dados.artistas : [];
+                dadosAtuais.ranking = dados.ranking || null;
+                dadosAtuais.destaques = dados.destaques || null;
                 paginaAtual.generos = 1;
                 paginaAtual.artistas = 1;
                 renderizarTabela("generos");
                 renderizarTabela("artistas");
                 renderizarGrafico(dadosAtuais.generos);
+                atualizarCabecalhoRanking();
+                atualizarDestaques();
             })
             .catch(function (erro) {
                 if (identificador !== requisicaoAtual) return;
@@ -303,6 +398,14 @@ document.addEventListener("DOMContentLoaded", function () {
     botaoBuscar.addEventListener("click", function () {
         carregarDados(seletor.value);
     });
+
+    // Textos montados por este script precisam ser refeitos quando o idioma muda.
+    if (typeof window.onLanguageReady === "function") {
+        window.onLanguageReady(function () {
+            atualizarCabecalhoRanking();
+            atualizarDestaques();
+        });
+    }
 
     var observador = new MutationObserver(atualizarIdiomaETema);
     observador.observe(document.documentElement, {

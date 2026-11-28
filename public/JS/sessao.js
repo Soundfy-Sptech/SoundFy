@@ -1,91 +1,75 @@
-// ============================================================
-// ARQUIVO: JS/sessao.js
-// ============================================================
+// Controle centralizado de acesso e identificação do perfil.
+(function () {
+    "use strict";
 
-function validarSessao() {
-    var email = sessionStorage.EMAIL_USUARIO;
-    var nome = sessionStorage.NOME_USUARIO;
+    function normalizarTipo(tipo) {
+        var valor = String(tipo || "").trim().toLocaleLowerCase("pt-BR");
+        if (["1", "artista", "produtor musical", "produtor_musical"].includes(valor)) return "musical-producer";
+        if (["2", "produtor", "produtor eventos", "produtor de eventos", "produtor_de_eventos"].includes(valor)) return "event-producer";
+        if (["3", "administrador", "admin"].includes(valor)) return "administrator";
+        return "";
+    }
 
-    var b_usuario = document.getElementById("b_usuario");
+    function paginaPorPerfil(perfil) {
+        if (perfil === "musical-producer") return "artista.html";
+        return "produtor.html";
+    }
 
-    if (email != null && nome != null) {
-        if (b_usuario) {
-            b_usuario.innerHTML = nome;
+    function controlarExibicaoPorTipoUsuario() {
+        var perfil = normalizarTipo(sessionStorage.getItem("TIPO_USUARIO"));
+        var ehAdmin = perfil === "administrator";
+
+        var paginaLegadaRegioes = document.body && document.body.dataset.legacyRegions === "true";
+        var perfilPermitido = document.body && document.body.dataset.allowedRole;
+
+        if (paginaLegadaRegioes) {
+            if (!perfil) {
+                window.location.replace("cadastro.html");
+                return;
+            }
+            window.location.replace(paginaPorPerfil(perfil));
+            return;
         }
-        controlarExibicaoPorTipoUsuario();
-    } else {
+
+        if (perfilPermitido && perfil && perfil !== perfilPermitido && !ehAdmin) {
+            window.location.replace(paginaPorPerfil(perfil));
+        } else if (perfilPermitido && !perfil) {
+            window.location.replace("cadastro.html");
+        }
+    }
+
+    function limparSessao() {
+        sessionStorage.clear();
         window.location.href = "cadastro.html";
     }
-}
 
-function controlarExibicaoPorTipoUsuario() {
-    // Recupera o tipo de usuário salvo na sessão
-    var tipoUsuario = sessionStorage.TIPO_USUARIO;
+    function atualizarDadosPerfil() {
+        var nomeUsuario = sessionStorage.getItem("NOME_USUARIO") || "Usuário";
+        var perfil = normalizarTipo(sessionStorage.getItem("TIPO_USUARIO"));
+        var nomePerfil = perfil === "musical-producer" ? "Produtor musical" :
+            perfil === "event-producer" ? "Produtor de eventos" :
+            perfil === "administrator" ? "Administrador" : "Usuário";
 
-    var secaoArtista = document.querySelector('[data-role-section="artist"]');
-    var secaoProdutor = document.querySelector('[data-role-section="producer"]');
-
-    if (!secaoArtista || !secaoProdutor) {
-        return;
+        document.querySelectorAll("[data-user-name]").forEach(function (el) { el.textContent = nomeUsuario; });
+        document.querySelectorAll("[data-user-initials]").forEach(function (el) {
+            el.textContent = nomeUsuario.trim().split(/\s+/).slice(0, 2)
+                .map(function (parte) { return parte.charAt(0); }).join("").toUpperCase();
+        });
+        document.querySelectorAll("[data-user-role]").forEach(function (el) { el.textContent = nomePerfil; });
+        var saudacao = document.getElementById("nome-usuario-greeting");
+        if (saudacao) saudacao.textContent = nomeUsuario;
     }
 
-    if (tipoUsuario) {
-        var tipoNormalizado = String(tipoUsuario).trim().toLowerCase();
+    window.controlarExibicaoPorTipoUsuario = controlarExibicaoPorTipoUsuario;
+    window.limparSessao = limparSessao;
 
-        if (tipoNormalizado === "artista") {
-            // Exibe a aba do artista e oculta a do produtor
-            secaoArtista.style.setProperty("display", "block", "important");
-            secaoProdutor.style.setProperty("display", "none", "important");
-        } else if (tipoNormalizado === "produtor") {
-            // Exibe a aba do produtor e oculta a do artista
-            secaoArtista.style.setProperty("display", "none", "important");
-            secaoProdutor.style.setProperty("display", "block", "important");
-        } else {
-            secaoArtista.style.setProperty("display", "none", "important");
-            secaoProdutor.style.setProperty("display", "none", "important");
-        }
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () {
+            controlarExibicaoPorTipoUsuario();
+            atualizarDadosPerfil();
+        });
+    } else {
+        controlarExibicaoPorTipoUsuario();
+        atualizarDadosPerfil();
     }
-}
-
-function limparSessao() {
-    sessionStorage.clear();
-    window.location.href = "cadastro.html";
-}
-
-// Executa assim que o DOM estiver pronto e também ao finalizar o carregamento total
-if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", controlarExibicaoPorTipoUsuario);
-} else {
-    controlarExibicaoPorTipoUsuario();
-}
-
-window.addEventListener("load", controlarExibicaoPorTipoUsuario);
-
-function atualizarDadosPerfil() {
-    const nome = sessionStorage.getItem("NOME_USUARIO");
-    const nomeUsuario = nome || "Usuário";
-
-    document.querySelectorAll("[data-user-name]").forEach(function (elemento) {
-        elemento.textContent = nomeUsuario;
-    });
-
-    document.querySelectorAll("[data-user-initials]").forEach(function (elemento) {
-        elemento.textContent = nomeUsuario
-            .trim()
-            .split(/\s+/)
-            .slice(0, 2)
-            .map(function (parte) {
-                return parte.charAt(0);
-            })
-            .join("")
-            .toUpperCase();
-    });
-
-    const saudacao = document.getElementById("nome-usuario-greeting");
-
-    if (saudacao) {
-        saudacao.textContent = nomeUsuario;
-    }
-}
-
-document.addEventListener("DOMContentLoaded", atualizarDadosPerfil);
+})();

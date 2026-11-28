@@ -1,10 +1,9 @@
-
 const database = require("../database/config");
 
-function cadastrar(nome, email, senha, telefone, tipoUsuario) {
+function cadastrar(nome, email, senha, telefone, fkTipoUsuario) {
     const instrucaoSql = `
-        INSERT INTO usuario
-        (nome, email, senha, telefone, tipo_usuario)
+        INSERT INTO Usuario
+        (nome, email, senha, telefone, fkTipoUsuario)
         VALUES (?, ?, ?, ?, ?)
     `;
 
@@ -13,15 +12,23 @@ function cadastrar(nome, email, senha, telefone, tipoUsuario) {
         email,
         senha,
         telefone || null,
-        tipoUsuario
+        fkTipoUsuario
     ]);
 }
 
 function autenticar(email) {
     const instrucaoSql = `
-        SELECT idUsuario, nome, email, senha, telefone, tipo_usuario
-        FROM usuario
-        WHERE email = ?
+        SELECT 
+            u.idUsuario, 
+            u.nome, 
+            u.email, 
+            u.senha, 
+            u.telefone, 
+            u.fkTipoUsuario,
+            t.tipoUsuario
+        FROM Usuario u
+        LEFT JOIN tipoUsuario t ON u.fkTipoUsuario = t.idTipoUsuario
+        WHERE u.email = ?
     `;
 
     return database.executar(instrucaoSql, [email]);
@@ -29,9 +36,16 @@ function autenticar(email) {
 
 function buscarPorId(idUsuario) {
     const instrucaoSql = `
-        SELECT idUsuario, nome, email, telefone, tipo_usuario
-        FROM usuario
-        WHERE idUsuario = ?
+        SELECT 
+            u.idUsuario, 
+            u.nome, 
+            u.email, 
+            u.telefone, 
+            u.fkTipoUsuario,
+            t.tipoUsuario
+        FROM Usuario u
+        LEFT JOIN tipoUsuario t ON u.fkTipoUsuario = t.idTipoUsuario
+        WHERE u.idUsuario = ?
     `;
 
     return database.executar(instrucaoSql, [idUsuario]);
@@ -39,7 +53,7 @@ function buscarPorId(idUsuario) {
 
 function atualizarDados(idUsuario, nome, email, telefone) {
     const instrucaoSql = `
-        UPDATE usuario
+        UPDATE Usuario
         SET nome = ?, email = ?, telefone = ?
         WHERE idUsuario = ?
     `;
@@ -54,7 +68,7 @@ function atualizarDados(idUsuario, nome, email, telefone) {
 
 function atualizarSenha(idUsuario, senha) {
     const instrucaoSql = `
-        UPDATE usuario
+        UPDATE Usuario
         SET senha = ?
         WHERE idUsuario = ?
     `;
@@ -70,7 +84,7 @@ async function excluirConta(idUsuario) {
         );
 
         const [resultado] = await conexao.execute(
-            "DELETE FROM usuario WHERE idUsuario = ?",
+            "DELETE FROM Usuario WHERE idUsuario = ?",
             [idUsuario]
         );
 
@@ -85,7 +99,7 @@ async function excluirConta(idUsuario) {
 function buscarCredenciaisPorId(idUsuario) {
     const instrucaoSql = `
         SELECT idUsuario, senha
-        FROM usuario
+        FROM Usuario
         WHERE idUsuario = ?
     `;
 

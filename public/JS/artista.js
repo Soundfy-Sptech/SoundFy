@@ -1,534 +1,314 @@
-
 document.addEventListener("DOMContentLoaded", function () {
-    const traducoesMock = {
-        pt: {
-            artista1: {
-                nome: "Artista Demonstração",
-                genero: "Pop · Música brasileira",
-                insightTitulo: "Oportunidade de crescimento",
-                insightDescricao:
-                    "Neste cenário demonstrativo, o artista apresenta uma trajetória positiva de popularidade. Vale investigar quais faixas e gêneros acompanham esse crescimento."
-            },
-            artista2: {
-                nome: "Artista Alternativo",
-                genero: "Indie · Alternativo",
-                insightTitulo: "Espaço para consolidar o público",
-                insightDescricao:
-                    "Neste exemplo fictício, o artista apresenta crescimento moderado. Comparar as faixas com melhor desempenho pode ajudar a identificar características recorrentes no catálogo."
-            },
-            artista3: {
-                nome: "Artista Emergente",
-                genero: "Trap · Hip-hop",
-                insightTitulo: "Acompanhar a ascensão do artista",
-                insightDescricao:
-                    "Neste cenário fictício, o artista combina popularidade moderada com crescimento recente. É importante acompanhar os próximos resultados antes de concluir que existe uma tendência consolidada."
+    const API_ARTISTAS = "/artistas";
+    const estado = { artistas: [], principal: null, comparado: null };
+
+    const el = {
+        buscaPrincipal: document.getElementById("busca-artista"),
+        resultadosPrincipal: document.getElementById("resultados-busca-artista"),
+        mensagemPrincipal: document.getElementById("mensagem-busca-artista"),
+        limparPrincipal: document.getElementById("limpar-busca-artista"),
+        buscaComparacao: document.getElementById("busca-artista-comparacao"),
+        resultadosComparacao: document.getElementById("resultados-busca-comparacao"),
+        mensagemComparacao: document.getElementById("mensagem-busca-comparacao"),
+        limparComparacao: document.getElementById("limpar-busca-comparacao"),
+        perfil: document.getElementById("perfil-artista"),
+        vazio: document.getElementById("estado-inicial-artista"),
+        comparacao: document.getElementById("resultado-comparacao"),
+        comparacaoAjuda: document.getElementById("comparacao-ajuda")
+    };
+
+    function t(chave, fallback) {
+        return typeof window.t === "function" ? (window.t(chave) || fallback || chave) : (fallback || chave);
+    }
+
+    function normalizar(texto) {
+        return String(texto || "")
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .toLocaleLowerCase("pt-BR")
+            .replace(/[^a-z0-9\s&]/g, " ")
+            .replace(/\s+/g, " ")
+            .trim();
+    }
+
+    function formatarNumero(valor) {
+        const numero = Number(valor || 0);
+        return numero.toLocaleString(document.documentElement.lang || "pt-BR");
+    }
+
+    function iniciais(nome) {
+        return String(nome || "?").trim().split(/\s+/).slice(0, 2).map(p => p.charAt(0)).join("").toUpperCase();
+    }
+
+    async function carregarArtistas() {
+        try {
+            const resposta = await fetch(API_ARTISTAS);
+            if (!resposta.ok) throw new Error("Falha ao consultar artistas.");
+            estado.artistas = await resposta.json();
+            if (!Array.isArray(estado.artistas)) estado.artistas = [];
+            if (!estado.artistas.length) {
+                el.mensagemPrincipal.textContent = t("musicalProducer.noArtists", "Nenhum artista foi encontrado no banco de dados.");
             }
-        },
-        en: {
-            artista1: {
-                nome: "Demo Artist",
-                genero: "Pop · Brazilian music",
-                insightTitulo: "Growth opportunity",
-                insightDescricao:
-                    "In this illustrative scenario, the artist shows a positive popularity trajectory. It is worth exploring which tracks and genres are contributing to this growth."
-            },
-            artista2: {
-                nome: "Alternative Artist",
-                genero: "Indie · Alternative",
-                insightTitulo: "Room to build a stronger audience",
-                insightDescricao:
-                    "In this fictional example, the artist shows moderate growth. Comparing the best-performing tracks may help identify recurring characteristics in the catalog."
-            },
-            artista3: {
-                nome: "Emerging Artist",
-                genero: "Trap · Hip-hop",
-                insightTitulo: "Track the artist's rise",
-                insightDescricao:
-                    "In this fictional scenario, the artist combines moderate popularity with recent growth. Follow upcoming results before concluding that a lasting trend has emerged."
-            }
-        },
-        es: {
-            artista1: {
-                nome: "Artista de demostración",
-                genero: "Pop · Música brasileña",
-                insightTitulo: "Oportunidad de crecimiento",
-                insightDescricao:
-                    "En este escenario ilustrativo, el artista muestra una trayectoria positiva de popularidad. Conviene investigar qué canciones y géneros acompañan este crecimiento."
-            },
-            artista2: {
-                nome: "Artista alternativo",
-                genero: "Indie · Alternativo",
-                insightTitulo: "Oportunidad para consolidar la audiencia",
-                insightDescricao:
-                    "En este ejemplo ficticio, el artista presenta un crecimiento moderado. Comparar las canciones con mejor rendimiento puede ayudar a identificar características recurrentes del catálogo."
-            },
-            artista3: {
-                nome: "Artista emergente",
-                genero: "Trap · Hip-hop",
-                insightTitulo: "Seguir el crecimiento del artista",
-                insightDescricao:
-                    "En este escenario ficticio, el artista combina una popularidad moderada con un crecimiento reciente. Conviene observar los próximos resultados antes de concluir que existe una tendencia consolidada."
-            }
+        } catch (erro) {
+            console.error("Erro ao carregar lista de artistas:", erro);
+            el.mensagemPrincipal.textContent = t("musicalProducer.loadArtistsError", "Não foi possível carregar a lista de artistas.");
         }
-    };
-
-    function obterIdiomaAtual() {
-        const idiomaSalvo = localStorage.getItem("soundfy-language");
-        const idiomaPagina = document.documentElement.lang;
-
-        const idioma = idiomaSalvo || idiomaPagina || "pt";
-
-        if (idioma.startsWith("en")) return "en";
-        if (idioma.startsWith("es")) return "es";
-
-        return "pt";
     }
 
-    function obterTextoMock(idArtista) {
-        const idioma = obterIdiomaAtual();
-
-        return traducoesMock[idioma][idArtista] ||
-            traducoesMock.pt[idArtista];
+    function pontuarCorrespondencia(artista, consulta) {
+        const nome = normalizar(artista.nome);
+        if (nome === consulta) return 100;
+        if (nome.startsWith(consulta)) return 90;
+        const palavras = nome.split(" ");
+        if (palavras.some(palavra => palavra.startsWith(consulta))) return 80;
+        if (nome.includes(consulta)) return 70;
+        const termos = consulta.split(" ").filter(Boolean);
+        if (termos.length && termos.every(termo => palavras.some(p => p.startsWith(termo) || p.includes(termo)))) return 60;
+        return 0;
     }
 
-    function traduzir(chave) {
-        return typeof window.t === "function" ? window.t(chave) : chave;
+    function encontrarCorrespondencias(consulta, idIgnorado) {
+        const termo = normalizar(consulta);
+        if (!termo) return [];
+        return estado.artistas
+            .filter(artista => Number(artista.idArtista) !== Number(idIgnorado))
+            .map(artista => ({ artista, pontos: pontuarCorrespondencia(artista, termo) }))
+            .filter(item => item.pontos > 0)
+            .sort((a, b) => b.pontos - a.pontos || String(a.artista.nome).localeCompare(String(b.artista.nome), "pt-BR"))
+            .slice(0, 8)
+            .map(item => item.artista);
     }
 
-    const seletor = document.getElementById("artista-select");
-
-    const elementos = {
-        avatar: document.getElementById("artista-avatar"),
-        nome: document.getElementById("artista-nome"),
-        genero: document.getElementById("artista-genero"),
-        popularidade: document.getElementById("popularidade"),
-        crescimento: document.getElementById("crescimento"),
-        faixas: document.getElementById("faixas"),
-        tabela: document.getElementById("tabela-faixas"),
-        insightTitulo: document.getElementById("insight-titulo"),
-        insightDescricao: document.getElementById("insight-descricao")
-    };
-
-    // Dados fictícios: substituir pela integração com o banco futuramente.
-    const artistas = {
-        artista1: {
-            iniciais: "AD",
-            popularidade: 82,
-            crescimento: 12.4,
-            faixas: 24,
-            historico: [48, 52, 49, 58, 61, 59, 67, 72, 75, 79, 76, 82],
-            generos: {
-                labels: ["Pop", "Dance", "R&B", "Outros"],
-                valores: [45, 25, 18, 12]
-            },
-            musicas: [
-                {
-                    nome: "Horizonte",
-                    genero: "Pop",
-                    popularidade: 91,
-                    tendencia: "Alta",
-                    classe: "tendencia-positiva"
-                },
-                {
-                    nome: "Noite Inteira",
-                    genero: "Dance",
-                    popularidade: 84,
-                    tendencia: "Alta",
-                    classe: "tendencia-positiva"
-                },
-                {
-                    nome: "Entre Nós",
-                    genero: "R&B",
-                    popularidade: 76,
-                    tendencia: "Estável",
-                    classe: "tendencia-estavel"
-                },
-                {
-                    nome: "Outro Lugar",
-                    genero: "Pop",
-                    popularidade: 68,
-                    tendencia: "Em observação",
-                    classe: "tendencia-estavel"
-                }
-            ]
-        },
-
-        artista2: {
-            iniciais: "AA",
-            popularidade: 67,
-            crescimento: 5.8,
-            faixas: 18,
-            historico: [40, 44, 43, 48, 46, 51, 54, 53, 59, 61, 63, 67],
-            generos: {
-                labels: ["Indie", "Rock", "Pop", "Outros"],
-                valores: [42, 28, 20, 10]
-            },
-            musicas: [
-                {
-                    nome: "Cidade Vazia",
-                    genero: "Indie",
-                    popularidade: 79,
-                    tendencia: "Alta",
-                    classe: "tendencia-positiva"
-                },
-                {
-                    nome: "Último Trem",
-                    genero: "Rock",
-                    popularidade: 72,
-                    tendencia: "Estável",
-                    classe: "tendencia-estavel"
-                },
-                {
-                    nome: "Fotografias",
-                    genero: "Indie",
-                    popularidade: 65,
-                    tendencia: "Alta",
-                    classe: "tendencia-positiva"
-                },
-                {
-                    nome: "Distância",
-                    genero: "Pop",
-                    popularidade: 51,
-                    tendencia: "Em queda",
-                    classe: "tendencia-negativa"
-                }
-            ]
-        },
-
-        artista3: {
-            iniciais: "AE",
-            popularidade: 54,
-            crescimento: 18.6,
-            faixas: 12,
-            historico: [20, 22, 25, 23, 31, 34, 32, 39, 43, 45, 50, 54],
-            generos: {
-                labels: ["Trap", "Hip-hop", "R&B", "Outros"],
-                valores: [50, 25, 15, 10]
-            },
-            musicas: [
-                {
-                    nome: "Sem Limites",
-                    genero: "Trap",
-                    popularidade: 83,
-                    tendencia: "Alta",
-                    classe: "tendencia-positiva"
-                },
-                {
-                    nome: "De Madrugada",
-                    genero: "Hip-hop",
-                    popularidade: 70,
-                    tendencia: "Alta",
-                    classe: "tendencia-positiva"
-                },
-                {
-                    nome: "Perspectiva",
-                    genero: "Trap",
-                    popularidade: 56,
-                    tendencia: "Estável",
-                    classe: "tendencia-estavel"
-                },
-                {
-                    nome: "Novo Ciclo",
-                    genero: "R&B",
-                    popularidade: 42,
-                    tendencia: "Em observação",
-                    classe: "tendencia-estavel"
-                }
-            ]
-        }
-    };
-
-    let graficoPopularidade = null;
-    let graficoGeneros = null;
-
-    const cores = {
-        roxo: "#7c3aed",
-        roxoClaro: "#a78bfa",
-        rosa: "#ff4fa3",
-        texto: "#f5f0fa",
-        cinza: "#9c8fb0",
-        grade: "rgba(156, 143, 176, 0.15)"
-    };
-
-    function obterTema() {
-        return document.documentElement.getAttribute("data-theme") || "dark";
+    function fecharResultados(container, input) {
+        container.hidden = true;
+        input.setAttribute("aria-expanded", "false");
     }
 
-    function atualizarCoresGraficos() {
-        const estiloClaro = obterTema() === "light";
-
-        cores.texto = estiloClaro ? "#30243d" : "#f5f0fa";
-        cores.cinza = estiloClaro ? "#71647f" : "#9c8fb0";
-        cores.grade = estiloClaro
-            ? "rgba(48, 36, 61, 0.12)"
-            : "rgba(156, 143, 176, 0.15)";
-    }
-
-    function criarGraficoPopularidade(dados) {
-        const canvas = document.getElementById("grafico-popularidade");
-
-        if (!canvas || typeof Chart === "undefined") {
-            console.error(
-                "Chart.js não foi carregado. Verifique a conexão e o script no HTML."
-            );
+    function mostrarResultados(consulta, tipo) {
+        const principal = tipo === "principal";
+        const input = principal ? el.buscaPrincipal : el.buscaComparacao;
+        const container = principal ? el.resultadosPrincipal : el.resultadosComparacao;
+        const mensagem = principal ? el.mensagemPrincipal : el.mensagemComparacao;
+        const ignorar = principal ? null : (estado.principal && estado.principal.idArtista);
+        const resultados = encontrarCorrespondencias(consulta, ignorar);
+        container.replaceChildren();
+        mensagem.textContent = "";
+        if (!normalizar(consulta)) {
+            fecharResultados(container, input);
             return;
         }
-
-        if (graficoPopularidade) {
-            graficoPopularidade.destroy();
-        }
-
-        atualizarCoresGraficos();
-
-        graficoPopularidade = new Chart(canvas, {
-            type: "line",
-            data: {
-                labels: Array.from(
-                    { length: 12 },
-                    (_, i) => `${traduzir("artist.period")} ${i + 1}`
-                ),
-                datasets: [{
-                    label: traduzir("artist.popularity"),
-                    data: dados.historico,
-                    borderColor: cores.roxoClaro,
-                    backgroundColor: "rgba(124, 58, 237, 0.15)",
-                    borderWidth: 3,
-                    pointRadius: 3,
-                    pointHoverRadius: 6,
-                    pointBackgroundColor: cores.rosa,
-                    fill: true,
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        backgroundColor: "#170f24",
-                        titleColor: "#f5f0fa",
-                        bodyColor: "#f5f0fa",
-                        padding: 12,
-                        displayColors: false
-                    }
-                },
-                scales: {
-                    x: {
-                        grid: {
-                            display: false
-                        },
-                        ticks: {
-                            color: cores.cinza,
-                            maxRotation: 0,
-                            autoSkip: true,
-                            maxTicksLimit: 6
-                        },
-                        border: {
-                            display: false
-                        }
-                    },
-                    y: {
-                        min: 0,
-                        max: 100,
-                        ticks: {
-                            color: cores.cinza,
-                            stepSize: 20
-                        },
-                        grid: {
-                            color: cores.grade
-                        },
-                        border: {
-                            display: false
-                        }
-                    }
-                }
-            }
-        });
-    }
-
-    function criarGraficoGeneros(dados) {
-        const canvas = document.getElementById("grafico-generos");
-
-        if (!canvas || typeof Chart === "undefined") {
-            console.error(
-                "Chart.js não foi carregado. Verifique a conexão e o script no HTML."
-            );
+        if (!resultados.length) {
+            fecharResultados(container, input);
+            mensagem.textContent = t("musicalProducer.noMatch", "Nenhum artista encontrado com esse termo.");
             return;
         }
+        resultados.forEach(artista => {
+            const botao = document.createElement("button");
+            botao.type = "button";
+            botao.className = "resultado-artista-item";
+            botao.setAttribute("role", "option");
+            const nome = document.createElement("strong");
+            nome.textContent = artista.nome;
+            const pais = document.createElement("small");
+            pais.textContent = artista.pais_origem || t("musicalProducer.countryNotInformed", "País não informado");
+            botao.append(nome, pais);
+            botao.addEventListener("click", function () {
+                if (principal) selecionarPrincipal(artista);
+                else selecionarComparado(artista);
+                fecharResultados(container, input);
+            });
+            container.appendChild(botao);
+        });
+        container.hidden = false;
+        input.setAttribute("aria-expanded", "true");
+    }
 
-        if (graficoGeneros) {
-            graficoGeneros.destroy();
+    async function buscarPerfil(idArtista) {
+        const resposta = await fetch(`${API_ARTISTAS}/${encodeURIComponent(idArtista)}`);
+        const dados = await resposta.json();
+        if (!resposta.ok) throw new Error(dados.mensagem || "Não foi possível carregar o perfil.");
+        return dados;
+    }
+
+    async function selecionarPrincipal(artista) {
+        estado.principal = artista;
+        estado.comparado = null;
+        el.buscaPrincipal.value = artista.nome;
+        el.limparPrincipal.hidden = false;
+        el.buscaComparacao.value = "";
+        el.limparComparacao.hidden = true;
+        el.comparacao.hidden = true;
+        el.comparacaoAjuda.hidden = false;
+        el.mensagemPrincipal.textContent = t("musicalProducer.loadingProfile", "Carregando dados do artista...");
+        try {
+            const dados = await buscarPerfil(artista.idArtista);
+            renderizarPerfil(dados);
+            el.mensagemPrincipal.textContent = "";
+            el.comparacaoAjuda.textContent = t("musicalProducer.comparisonHelp", "Agora escolha outro artista para comparar os indicadores.");
+        } catch (erro) {
+            console.error("Erro ao carregar perfil:", erro);
+            el.mensagemPrincipal.textContent = erro.message;
+            el.perfil.hidden = true;
+            el.perfil.style.display = "none";
+            el.vazio.hidden = false;
+            el.vazio.style.display = "flex";
         }
+    }
 
-        atualizarCoresGraficos();
+    function renderizarPerfil(dados) {
+        const artista = dados.artista || {};
+        const generos = Array.isArray(dados.generos) ? dados.generos : [];
+        el.vazio.hidden = true;
+        el.vazio.style.display = "none";
 
-        graficoGeneros = new Chart(canvas, {
-            type: "doughnut",
-            data: {
-                labels: dados.generos.labels.map(traduzirGenero),
-                datasets: [{
-                    data: dados.generos.valores,
-                    backgroundColor: [
-                        cores.roxo,
-                        cores.rosa,
-                        cores.roxoClaro,
-                        "#514260"
-                    ],
-                    borderColor: obterTema() === "light"
-                        ? "#ffffff"
-                        : "#170f24",
-                    borderWidth: 3,
-                    hoverOffset: 8
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: "68%",
-                plugins: {
-                    legend: {
-                        position: "bottom",
-                        labels: {
-                            color: cores.texto,
-                            padding: 18,
-                            usePointStyle: true,
-                            pointStyle: "circle",
-                            font: {
-                                size: 11
-                            }
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function (contexto) {
-                                return contexto.label + ": " +
-                                    contexto.raw + "%";
-                            }
-                        }
-                    }
-                }
+        el.perfil.hidden = false;
+        el.perfil.style.display = "grid";
+        document.getElementById("artista-avatar").textContent = iniciais(artista.nome);
+        document.getElementById("artista-nome").textContent = artista.nome || "—";
+        document.getElementById("artista-pais").textContent = artista.paisOrigem || t("musicalProducer.countryNotInformed", "País não informado");
+        document.getElementById("artista-streams").textContent = formatarNumero(artista.totalStreams);
+        document.getElementById("artista-generos-total").textContent = formatarNumero(artista.totalGeneros ?? generos.length);
+        document.getElementById("artista-ranking").textContent = artista.melhorRanking == null ? "—" : `#${formatarNumero(artista.melhorRanking)}`;
+        const lista = document.getElementById("artista-generos-lista");
+        lista.replaceChildren();
+        if (!generos.length) {
+            const vazio = document.createElement("p");
+            vazio.className = "generos-sem-dados";
+            vazio.textContent = t("musicalProducer.noGenres", "Não há gêneros associados a este artista.");
+            lista.appendChild(vazio);
+        } else {
+            generos.forEach(item => {
+                const tag = document.createElement("span");
+                tag.className = "genero-artista-tag";
+                tag.textContent = item.genero;
+                lista.appendChild(tag);
+            });
+        }
+    }
+
+    async function selecionarComparado(artista) {
+        if (!estado.principal) {
+            el.mensagemComparacao.textContent = t("musicalProducer.selectMainFirst", "Pesquise e selecione primeiro um artista na busca principal.");
+            return;
+        }
+        if (Number(estado.principal.idArtista) === Number(artista.idArtista)) {
+            el.mensagemComparacao.textContent = t("musicalProducer.sameArtistError", "Escolha um artista diferente do perfil principal.");
+            return;
+        }
+        estado.comparado = artista;
+        el.buscaComparacao.value = artista.nome;
+        el.limparComparacao.hidden = false;
+        el.mensagemComparacao.textContent = t("musicalProducer.loadingComparison", "Carregando comparação...");
+        try {
+            const url = `${API_ARTISTAS}/comparar?artistaA=${encodeURIComponent(estado.principal.idArtista)}&artistaB=${encodeURIComponent(artista.idArtista)}`;
+            const resposta = await fetch(url);
+            const dados = await resposta.json();
+            if (!resposta.ok) throw new Error(dados.mensagem || "Não foi possível comparar os artistas.");
+            renderizarComparacao(dados);
+            el.mensagemComparacao.textContent = "";
+        } catch (erro) {
+            console.error("Erro ao comparar artistas:", erro);
+            el.mensagemComparacao.textContent = erro.message;
+        }
+    }
+
+    function renderizarComparacao(dados) {
+        const a = dados.artistaA || {};
+        const b = dados.artistaB || {};
+        document.getElementById("comparacao-nome-a").textContent = a.nome || estado.principal.nome;
+        document.getElementById("comparacao-nome-b").textContent = b.nome || estado.comparado.nome;
+        const container = document.getElementById("comparacao-indicadores");
+        container.replaceChildren();
+        const metricas = [
+            { chave: "totalStreams", titulo: t("musicalProducer.totalStreams", "Streams registrados"), formato: formatarNumero },
+            { chave: "totalGeneros", titulo: t("musicalProducer.genresCount", "Gêneros associados"), formato: formatarNumero },
+            { chave: "melhorRanking", titulo: t("musicalProducer.bestRanking", "Melhor posição"), formato: valor => valor == null ? "—" : `#${formatarNumero(valor)}`, menorMelhor: true }
+        ];
+        metricas.forEach(metrica => {
+            const valorA = a[metrica.chave];
+            const valorB = b[metrica.chave];
+            const card = document.createElement("article");
+            card.className = "comparacao-metrica";
+            const titulo = document.createElement("h3");
+            titulo.textContent = metrica.titulo;
+            const valores = document.createElement("div");
+            valores.className = "comparacao-valores";
+            const itemA = document.createElement("strong");
+            const itemB = document.createElement("strong");
+            itemA.textContent = metrica.formato(valorA);
+            itemB.textContent = metrica.formato(valorB);
+            if (valorA != null && valorB != null && Number(valorA) !== Number(valorB)) {
+                const aMelhor = metrica.menorMelhor ? Number(valorA) < Number(valorB) : Number(valorA) > Number(valorB);
+                (aMelhor ? itemA : itemB).classList.add("comparacao-vencedor");
+            }
+            valores.append(itemA, itemB);
+            card.append(titulo, valores);
+            container.appendChild(card);
+        });
+        el.comparacao.hidden = false;
+        el.comparacaoAjuda.hidden = true;
+    }
+
+    function configurarBusca(input, tipo, limpar) {
+        input.addEventListener("input", function () {
+            limpar.hidden = !input.value;
+            mostrarResultados(input.value, tipo);
+            if (tipo === "principal" && estado.principal && normalizar(input.value) !== normalizar(estado.principal.nome)) {
+                estado.principal = null;
+                estado.comparado = null;
+                el.perfil.hidden = true;
+                el.vazio.hidden = false;
+                el.comparacao.hidden = true;
+                el.comparacaoAjuda.hidden = false;
+            }
+            if (tipo === "comparacao" && estado.comparado && normalizar(input.value) !== normalizar(estado.comparado.nome)) {
+                estado.comparado = null;
+                el.comparacao.hidden = true;
+                el.comparacaoAjuda.hidden = false;
+            }
+        });
+        limpar.addEventListener("click", function () {
+            input.value = "";
+            limpar.hidden = true;
+            const container = tipo === "principal" ? el.resultadosPrincipal : el.resultadosComparacao;
+            const mensagem = tipo === "principal" ? el.mensagemPrincipal : el.mensagemComparacao;
+            fecharResultados(container, input);
+            mensagem.textContent = "";
+            if (tipo === "principal") {
+                estado.principal = null;
+                estado.comparado = null;
+                el.perfil.hidden = true;
+                el.vazio.hidden = false;
+                el.comparacao.hidden = true;
+                el.buscaComparacao.value = "";
+                el.limparComparacao.hidden = true;
+                el.comparacaoAjuda.hidden = false;
+            } else {
+                estado.comparado = null;
+                el.comparacao.hidden = true;
+                el.comparacaoAjuda.hidden = false;
+            }
+            input.focus();
+        });
+        input.addEventListener("keydown", function (evento) {
+            if (evento.key === "Escape") fecharResultados(tipo === "principal" ? el.resultadosPrincipal : el.resultadosComparacao, input);
+            if (evento.key === "Enter") {
+                const opcoes = (tipo === "principal" ? el.resultadosPrincipal : el.resultadosComparacao).querySelectorAll("button");
+                if (opcoes.length === 1) opcoes[0].click();
             }
         });
     }
 
-    function preencherTabela(musicas) {
-        if (!elementos.tabela) return;
-
-        elementos.tabela.replaceChildren();
-
-        musicas.forEach(function (musica) {
-            const linha = document.createElement("tr");
-
-            const celulaNome = document.createElement("td");
-            celulaNome.textContent = musica.nome;
-
-            const celulaGenero = document.createElement("td");
-            celulaGenero.textContent = traduzirGenero(musica.genero);
-
-            const celulaPopularidade = document.createElement("td");
-            celulaPopularidade.textContent = musica.popularidade + "/100";
-
-            const celulaTendencia = document.createElement("td");
-
-            const chavesTendencia = {
-                "Alta": "artist.high",
-                "Estável": "artist.stable",
-                "Em observação": "artist.observing",
-                "Em queda": "artist.falling"
-            };
-
-            celulaTendencia.textContent = traduzir(
-                chavesTendencia[musica.tendencia] || musica.tendencia
-            );
-
-            celulaTendencia.classList.add(musica.classe);
-
-            linha.append(
-                celulaNome,
-                celulaGenero,
-                celulaPopularidade,
-                celulaTendencia
-            );
-
-            elementos.tabela.appendChild(linha);
+    document.addEventListener("click", function (evento) {
+        document.querySelectorAll("[data-search-container]").forEach(bloco => {
+            if (!bloco.contains(evento.target)) {
+                const principal = bloco.dataset.searchContainer === "principal";
+                fecharResultados(principal ? el.resultadosPrincipal : el.resultadosComparacao, principal ? el.buscaPrincipal : el.buscaComparacao);
+            }
         });
-    }
-
-    function atualizarPerfil(idArtista) {
-        const artista = artistas[idArtista];
-
-        if (!artista) return;
-
-        const texto = obterTextoMock(idArtista);
-
-        elementos.avatar.textContent = artista.iniciais;
-        elementos.nome.textContent = texto.nome;
-        elementos.genero.textContent = texto.genero;
-        elementos.popularidade.textContent = artista.popularidade + "/100";
-
-        const sinalCrescimento = artista.crescimento > 0 ? "+" : "";
-
-        elementos.crescimento.textContent =
-            sinalCrescimento + artista.crescimento.toFixed(1) + "%";
-
-        elementos.faixas.textContent = artista.faixas;
-        elementos.insightTitulo.textContent = texto.insightTitulo;
-        elementos.insightDescricao.textContent = texto.insightDescricao;
-
-        preencherTabela(artista.musicas);
-        criarGraficoPopularidade(artista);
-        criarGraficoGeneros(artista);
-    }
-
-    if (seletor) {
-        atualizarPerfil(seletor.value);
-
-        seletor.addEventListener("change", function () {
-            atualizarPerfil(seletor.value);
-        });
-    }
-
-    // Atualiza os gráficos ao alternar entre tema claro e escuro.
-    const observadorTema = new MutationObserver(function () {
-        if (seletor && artistas[seletor.value]) {
-            atualizarPerfil(seletor.value);
-        }
     });
 
-    observadorTema.observe(document.documentElement, {
-        attributes: true,
-        attributeFilter: ["data-theme"]
-    });
-
-    // Atualiza o conteúdo dinâmico quando o idioma da página muda.
-    const observadorIdioma = new MutationObserver(function () {
-        if (seletor && artistas[seletor.value]) {
-            atualizarPerfil(seletor.value);
-        }
-    });
-
-    observadorIdioma.observe(document.documentElement, {
-        attributes: true,
-        attributeFilter: ["lang"]
-    });
+    configurarBusca(el.buscaPrincipal, "principal", el.limparPrincipal);
+    configurarBusca(el.buscaComparacao, "comparacao", el.limparComparacao);
+    carregarArtistas();
 });
-
-function traduzirGenero(genero) {
-    const chaves = {
-        "Pop": "artist.pop",
-        "Dance": "artist.dance",
-        "R&B": "artist.rnb",
-        "Outros": "artist.other",
-        "Indie": "artist.indie",
-        "Rock": "artist.rock",
-        "Hip-hop": "artist.hipHop",
-        "Trap": "artist.trap"
-    };
-
-    return typeof window.t === "function"
-        ? window.t(chaves[genero] || genero)
-        : genero;
-}

@@ -1,324 +1,279 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title data-i18n="cadastro.title">SoundFy — Entrar ou criar conta</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="cadastro.title">SoundFy — Entrar ou criar conta</title>
 
-    <link rel="stylesheet" href="../Style/cadastro.css" />
-  </head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
 
-  <body>
-    <a class="marca" href="home.html">
-      <div class="logo">S</div>
-      <span class="nome">Sound<span class="destaque">Fy</span></span>
-    </a>
+  <link rel="stylesheet" href="../Style/cadastro.css" />
+</head>
 
-    <div class="conteudo">
-      <div class="apresentacao">
-        <p class="rotulo" data-i18n="cadastro.marketLabel">
-          INTELIGÊNCIA DE MERCADO MUSICAL
-        </p>
+<body>
+  <a class="marca" href="home.html">
+    <div class="logo">S</div>
+    <span class="nome">Sound<span class="destaque">Fy</span></span>
+  </a>
 
-        <h1>
-          <span data-i18n="cadastro.heading"
-            >Entre para acompanhar o mercado</span
-          >
-          <span class="destaque" data-i18n="cadastro.headingHighlight"
-            >em tempo real.</span
-          >
-        </h1>
+  <div class="conteudo">
+    <div class="apresentacao">
+      <p class="rotulo" data-i18n="cadastro.marketLabel">
+        INTELIGÊNCIA DE MERCADO MUSICAL
+      </p>
 
-        <p class="descricao" data-i18n="cadastro.description">
-          Uma conta SoundFy dá acesso ao dashboard completo de tendências,
-          gêneros e regiões para sua produtora, gravadora ou evento.
-        </p>
-      </div>
+      <h1>
+        <span data-i18n="cadastro.heading">Entre para acompanhar o mercado</span>
+        <span class="destaque" data-i18n="cadastro.headingHighlight">em tempo real.</span>
+      </h1>
 
-      <div class="cartao-acesso">
-        <div class="abas">
-          <button
-            type="button"
-            id="abaEntrar"
-            class="ativo"
-            onclick="MostrarEntrar()"
-            data-i18n="cadastro.login"
-          >
-            Entrar
-          </button>
-
-          <button
-            type="button"
-            id="abaCriar"
-            onclick="MostrarCriar()"
-            data-i18n="cadastro.createAccount"
-          >
-            Criar conta
-          </button>
-        </div>
-
-        <div id="formEntrar" class="formulario ativo">
-          <div class="campo">
-            <p data-i18n="cadastro.email">E-mail</p>
-
-            <input
-              id="entrarEmail"
-              type="email"
-              data-i18n-placeholder="cadastro.emailPlaceholder"
-              placeholder="voce@suaempresa.com"
-            />
-          </div>
-
-          <div class="campo">
-            <p data-i18n="cadastro.password">Senha</p>
-
-            <input id="entrarSenha" type="password" placeholder="••••••••" />
-          </div>
-
-          <a class="esqueci" href="#" data-i18n="cadastro.forgotPassword">
-            Esqueci minha senha
-          </a>
-
-          <button
-            class="botao-enviar"
-            onclick="Entrar()"
-            data-i18n="cadastro.login"
-          >
-            Entrar
-          </button>
-        </div>
-
-        <div id="formCriar" class="formulario">
-          <div class="campo">
-            <p data-i18n="cadastro.name">Nome</p>
-
-            <input
-              id="criarNome"
-              type="text"
-              data-i18n-placeholder="cadastro.namePlaceholder"
-              placeholder="Seu nome"
-            />
-          </div>
-
-          <div class="campo">
-            <p data-i18n="cadastro.email">E-mail</p>
-
-            <input
-              id="criarEmail"
-              type="email"
-              data-i18n-placeholder="cadastro.emailPlaceholder"
-              placeholder="voce@suaempresa.com"
-            />
-          </div>
-
-          <div class="campo">
-            <p data-i18n="Telefone">Telefone</p>
-
-            <input
-              id="criarTelefone"
-              type="tel"
-              data-i18n-placeholder="(11) 91234 5678"
-              placeholder="(11) 99999-9999"
-            />
-          </div>
-
-          <div class="campo">
-            <p data-i18n="Tipo de Usuário">Tipo de Usuário</p>
-
-            <select id="criarTipoUsuario">
-              <option value="" disabled selected>Selecione uma opção</option>
-              <option value="Artista">Artista</option>
-              <option value="Produtor">Produtor</option>
-            </select>
-          </div>
-
-          <div class="campo">
-            <p data-i18n="cadastro.password">Senha</p>
-
-            <input
-              id="criarSenha"
-              type="password"
-              data-i18n-placeholder="cadastro.passwordPlaceholder"
-              placeholder="Mínimo 8 caracteres"
-            />
-          </div>
-
-          <button
-            class="botao-enviar"
-            onclick="Criar()"
-            data-i18n="cadastro.createAccount"
-          >
-            Criar conta
-          </button>
-        </div>
-
-        <p class="status" id="status" data-i18n="cadastro.successMessage">
-          Tudo certo! Redirecionando…
-        </p>
-
-        <p class="rodape" id="dicaEntrar">
-          <span data-i18n="cadastro.noAccount">Ainda não tem conta?</span>
-
-          <button onclick="MostrarCriar()" data-i18n="cadastro.createAccount">
-            Criar conta
-          </button>
-        </p>
-
-        <p class="rodape" id="dicaCriar" style="display: none">
-          <span data-i18n="cadastro.hasAccount">Já tem uma conta?</span>
-
-          <button onclick="MostrarEntrar()" data-i18n="cadastro.login">
-            Entrar
-          </button>
-        </p>
-      </div>
+      <p class="descricao" data-i18n="cadastro.description">
+        Uma conta SoundFy dá acesso ao dashboard completo de tendências,
+        gêneros e regiões para sua produtora, gravadora ou evento.
+      </p>
     </div>
 
-    <script>
-      function MostrarEntrar() {
-        document.getElementById("abaEntrar").className = "ativo";
-        document.getElementById("abaCriar").className = "";
-        document.getElementById("formEntrar").className = "formulario ativo";
-        document.getElementById("formCriar").className = "formulario";
-        document.getElementById("dicaEntrar").style.display = "block";
-        document.getElementById("dicaCriar").style.display = "none";
-        document.getElementById("status").className = "status";
-      }
+    <div class="cartao-acesso">
+      <div class="abas">
+        <button type="button" id="abaEntrar" class="ativo" onclick="MostrarEntrar()" data-i18n="cadastro.login">
+          Entrar
+        </button>
 
-      function MostrarCriar() {
-        document.getElementById("abaCriar").className = "ativo";
-        document.getElementById("abaEntrar").className = "";
-        document.getElementById("formCriar").className = "formulario ativo";
-        document.getElementById("formEntrar").className = "formulario";
-        document.getElementById("dicaCriar").style.display = "block";
-        document.getElementById("dicaEntrar").style.display = "none";
-        document.getElementById("status").className = "status";
-      }
+        <button type="button" id="abaCriar" onclick="MostrarCriar()" data-i18n="cadastro.createAccount">
+          Criar conta
+        </button>
+      </div>
 
-     
-async function Entrar() {
-  const emailVar = document.getElementById("entrarEmail").value.trim();
-  const senhaVar = document.getElementById("entrarSenha").value;
-  const status = document.getElementById("status");
+      <div id="formEntrar" class="formulario ativo">
+        <div class="campo">
+          <p data-i18n="cadastro.email">E-mail</p>
 
-  if (!emailVar || !senhaVar) {
-    status.textContent = "Preencha todos os campos para entrar.";
-    status.className = "status mostrar";
-    return;
-  }
+          <input id="entrarEmail" type="email" data-i18n-placeholder="cadastro.emailPlaceholder"
+            placeholder="voce@suaempresa.com" />
+        </div>
 
-  try {
-    const resposta = await fetch("/usuarios/autenticar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        emailServer: emailVar,
-        senhaServer: senhaVar
-      })
-    });
+        <div class="campo">
+          <p data-i18n="cadastro.password">Senha</p>
 
-    const json = await resposta.json();
+          <input id="entrarSenha" type="password" placeholder="••••••••" />
+        </div>
 
-    if (!resposta.ok) {
-      throw new Error(json.mensagem || "Erro ao realizar login.");
+        <a class="esqueci" href="#" data-i18n="cadastro.forgotPassword">
+          Esqueci minha senha
+        </a>
+
+        <button class="botao-enviar" onclick="Entrar()" data-i18n="cadastro.login">
+          Entrar
+        </button>
+      </div>
+
+      <div id="formCriar" class="formulario">
+        <div class="campo">
+          <p data-i18n="cadastro.name">Nome</p>
+
+          <input id="criarNome" type="text" data-i18n-placeholder="cadastro.namePlaceholder" placeholder="Seu nome" />
+        </div>
+
+        <div class="campo">
+          <p data-i18n="cadastro.email">E-mail</p>
+
+          <input id="criarEmail" type="email" data-i18n-placeholder="cadastro.emailPlaceholder"
+            placeholder="voce@suaempresa.com" />
+        </div>
+
+        <div class="campo">
+          <p data-i18n="Telefone">Telefone</p>
+
+          <input id="criarTelefone" type="tel" data-i18n-placeholder="(11) 91234 5678" placeholder="(11) 99999-9999" />
+        </div>
+
+        <div class="campo">
+          <p data-i18n="Tipo de Usuário">Tipo de Usuário</p>
+
+          <select id="criarTipoUsuario">
+            <option value="" disabled selected>Selecione uma opção</option>
+            <option value="1" data-i18n="roles.musicalProducer">Produtor Musical</option>
+            <option value="2" data-i18n="roles.eventProducer">Produtor de Eventos</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <p data-i18n="cadastro.password">Senha</p>
+          <input id="criarSenha" type="password" data-i18n-placeholder="cadastro.passwordPlaceholder"
+            placeholder="Mínimo 8 caracteres">
+        </div>
+
+        <button class="botao-enviar" onclick="Criar()" data-i18n="cadastro.createAccount">
+          Criar conta
+        </button>
+      </div>
+
+      <p class="status" id="status" data-i18n="cadastro.successMessage">
+        Tudo certo! Redirecionando…
+      </p>
+
+      <p class="rodape" id="dicaEntrar">
+        <span data-i18n="cadastro.noAccount">Ainda não tem conta?</span>
+
+        <button onclick="MostrarCriar()" data-i18n="cadastro.createAccount">
+          Criar conta
+        </button>
+      </p>
+
+      <p class="rodape" id="dicaCriar" style="display: none">
+        <span data-i18n="cadastro.hasAccount">Já tem uma conta?</span>
+
+        <button onclick="MostrarEntrar()" data-i18n="cadastro.login">
+          Entrar
+        </button>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function MostrarEntrar() {
+      document.getElementById("abaEntrar").className = "ativo";
+      document.getElementById("abaCriar").className = "";
+      document.getElementById("formEntrar").className = "formulario ativo";
+      document.getElementById("formCriar").className = "formulario";
+      document.getElementById("dicaEntrar").style.display = "block";
+      document.getElementById("dicaCriar").style.display = "none";
+      document.getElementById("status").className = "status";
     }
 
-    sessionStorage.setItem("EMAIL_USUARIO", json.email);
-    sessionStorage.setItem("NOME_USUARIO", json.nome);
-    sessionStorage.setItem("ID_USUARIO", json.id);
-    sessionStorage.setItem("TIPO_USUARIO", json.tipoUsuario);
-    sessionStorage.setItem("TOKEN_USUARIO", json.token);
-
-    status.textContent = "Login realizado com sucesso! Redirecionando...";
-    status.className = "status mostrar";
-
-    setTimeout(() => {
-      window.location.href = "index.html";
-    }, 1000);
-
-  } catch (erro) {
-    console.error("Erro no login:", erro);
-    status.textContent = erro.message;
-    status.className = "status mostrar";
-  }
-}
-
-
-     
-async function Criar() {
-  const nomeVar = document.getElementById("criarNome").value.trim();
-  const emailVar = document.getElementById("criarEmail").value.trim();
-  const telefoneVar = document.getElementById("criarTelefone").value.trim();
-  const tipoUsuarioVar = document.getElementById("criarTipoUsuario").value;
-  const senhaVar = document.getElementById("criarSenha").value;
-  const status = document.getElementById("status");
-
-  if (!nomeVar || !emailVar || !tipoUsuarioVar || !senhaVar) {
-    status.textContent = "Preencha os campos obrigatórios.";
-    status.className = "status mostrar";
-    return;
-  }
-
-  if (senhaVar.length < 8 || senhaVar.length > 72) {
-    status.textContent = "A senha deve possuir entre 8 e 72 caracteres.";
-    status.className = "status mostrar";
-    return;
-  }
-
-  try {
-    const resposta = await fetch("/usuarios/cadastrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        nomeServer: nomeVar,
-        emailServer: emailVar,
-        telefoneServer: telefoneVar,
-        tipoUsuarioServer: tipoUsuarioVar,
-        senhaServer: senhaVar
-      })
-    });
-
-    const json = await resposta.json();
-
-    if (!resposta.ok) {
-      throw new Error(json.mensagem || "Erro ao cadastrar usuário.");
+    function MostrarCriar() {
+      document.getElementById("abaCriar").className = "ativo";
+      document.getElementById("abaEntrar").className = "";
+      document.getElementById("formCriar").className = "formulario ativo";
+      document.getElementById("formEntrar").className = "formulario";
+      document.getElementById("dicaCriar").style.display = "block";
+      document.getElementById("dicaEntrar").style.display = "none";
+      document.getElementById("status").className = "status";
     }
 
-    sessionStorage.setItem("NOME_USUARIO", json.nome);
-    sessionStorage.setItem("EMAIL_USUARIO", json.email);
-    sessionStorage.setItem("ID_USUARIO", json.id);
-    sessionStorage.setItem("TIPO_USUARIO", json.tipoUsuario);
-    sessionStorage.setItem("TOKEN_USUARIO", json.token);
 
-    status.textContent = "Cadastro realizado com sucesso! Redirecionando...";
-    status.className = "status mostrar";
+    async function Entrar() {
+      const emailVar = document.getElementById("entrarEmail").value.trim();
+      const senhaVar = document.getElementById("entrarSenha").value;
+      const status = document.getElementById("status");
 
-    setTimeout(() => {
-      window.location.href = "index.html";
-    }, 1000);
+      if (!emailVar || !senhaVar) {
+        status.textContent = "Preencha todos os campos para entrar.";
+        status.className = "status mostrar";
+        return;
+      }
 
-  } catch (erro) {
-    console.error("Erro no cadastro:", erro);
-    status.textContent = erro.message;
-    status.className = "status mostrar";
-  }
-}
+      try {
+        const resposta = await fetch("/usuarios/autenticar", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            emailServer: emailVar,
+            senhaServer: senhaVar
+          })
+        });
 
-    </script>
+        const json = await resposta.json();
 
-    <script src="../JS/sessao.js"></script>
-    <script src="../JS/i18n.js"></script>
-    <script src="../JS/translate.js"></script>
-  </body>
+        if (!resposta.ok) {
+          throw new Error(json.mensagem || "Erro ao realizar login.");
+        }
+
+        sessionStorage.setItem("EMAIL_USUARIO", json.email);
+        sessionStorage.setItem("NOME_USUARIO", json.nome);
+        sessionStorage.setItem("ID_USUARIO", json.id);
+        sessionStorage.setItem("TIPO_USUARIO", json.tipoUsuario);
+        sessionStorage.setItem("TOKEN_USUARIO", json.token);
+
+        status.textContent = "Login realizado com sucesso! Redirecionando...";
+        status.className = "status mostrar";
+
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 1000);
+
+      } catch (erro) {
+        console.error("Erro no login:", erro);
+        status.textContent = erro.message;
+        status.className = "status mostrar";
+      }
+    }
+
+
+
+    async function Criar() {
+      const nomeVar = document.getElementById("criarNome").value.trim();
+      const emailVar = document.getElementById("criarEmail").value.trim();
+      const telefoneVar = document.getElementById("criarTelefone").value.trim();
+      const tipoUsuarioVar = document.getElementById("criarTipoUsuario").value;
+      const senhaVar = document.getElementById("criarSenha").value;
+      const status = document.getElementById("status");
+
+      if (!nomeVar || !emailVar || !tipoUsuarioVar || !senhaVar) {
+        status.textContent = "Preencha os campos obrigatórios.";
+        status.className = "status mostrar";
+        return;
+      }
+
+      if (senhaVar.length < 8 || senhaVar.length > 72) {
+        status.textContent = "A senha deve possuir entre 8 e 72 caracteres.";
+        status.className = "status mostrar";
+        return;
+      }
+
+      try {
+        const resposta = await fetch("/usuarios/cadastrar", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            nomeServer: nomeVar,
+            emailServer: emailVar,
+            telefoneServer: telefoneVar,
+            tipoUsuarioServer: tipoUsuarioVar,
+            senhaServer: senhaVar
+          })
+        });
+
+        const json = await resposta.json();
+
+        if (!resposta.ok) {
+          throw new Error(json.mensagem || "Erro ao cadastrar usuário.");
+        }
+
+        sessionStorage.setItem("NOME_USUARIO", json.nome);
+        sessionStorage.setItem("EMAIL_USUARIO", json.email);
+        sessionStorage.setItem("ID_USUARIO", json.id);
+        sessionStorage.setItem("TIPO_USUARIO", json.tipoUsuario);
+        sessionStorage.setItem("TOKEN_USUARIO", json.token);
+
+        status.textContent = "Cadastro realizado com sucesso! Redirecionando...";
+        status.className = "status mostrar";
+
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 1000);
+
+      } catch (erro) {
+        console.error("Erro no cadastro:", erro);
+        status.textContent = erro.message;
+        status.className = "status mostrar";
+      }
+    }
+
+  </script>
+
+  <script src="../JS/sessao.js"></script>
+  <script src="../JS/i18n.js"></script>
+  <script src="../JS/translate.js"></script>
+</body>
+
 </html>

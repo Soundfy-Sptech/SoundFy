@@ -9,6 +9,23 @@ function validarEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+// Substitua a função normalizarTipoUsuario atual por esta:
+function resolverTipoUsuario(tipo) {
+    const valor = String(tipo || "").trim().toLocaleLowerCase("pt-BR");
+
+    if (["1", "artista", "produtor musical", "produtor_musical"].includes(valor)) {
+        return { id: 1, nome: "Produtor Musical" };
+    }
+    if (["2", "produtor", "produtor de eventos", "produtor eventos", "produtor_de_eventos"].includes(valor)) {
+        return { id: 2, nome: "Produtor Eventos" };
+    }
+    if (["3", "administrador", "admin"].includes(valor)) {
+        return { id: 3, nome: "Administrador" };
+    }
+
+    return null;
+}
+
 async function verificarSenha(senhaInformada, senhaArmazenada) {
     if (
         typeof senhaArmazenada === "string" &&
@@ -21,15 +38,17 @@ async function verificarSenha(senhaInformada, senhaArmazenada) {
 }
 
 // CADASTRO
+// DENTRO DE cadastrar(req, res):
 async function cadastrar(req, res) {
     try {
         const nome = req.body.nomeServer?.trim();
         const email = req.body.emailServer?.trim().toLowerCase();
         const senha = req.body.senhaServer;
-        const telefone = req.body.telefoneServer;
-        const tipoUsuario = req.body.tipoUsuarioServer;
+        // Remove caracteres não numéricos se quiser evitar estourar VARCHAR(12)
+        const telefone = req.body.telefoneServer?.trim() || null;
+        const tipoResolvido = resolverTipoUsuario(req.body.tipoUsuarioServer);
 
-        if (!nome || !email || !senha || !tipoUsuario) {
+        if (!nome || !email || !senha || !tipoResolvido) {
             return res.status(400).json({
                 mensagem: "Preencha todos os campos obrigatórios."
             });
@@ -41,25 +60,15 @@ async function cadastrar(req, res) {
             });
         }
 
-        if (
-            typeof senha !== "string" ||
-            senha.length < 8 ||
-            senha.length > 72
-        ) {
+        if (typeof senha !== "string" || senha.length < 8 || senha.length > 72) {
             return res.status(400).json({
                 mensagem: "A senha deve possuir entre 8 e 72 caracteres."
             });
         }
 
-        if (!["artista", "produtor"].includes(tipoUsuario.toLowerCase())) {
-            return res.status(400).json({
-                mensagem: "Tipo de usuário inválido."
-            });
-        }
-
         if (telefone && telefone.length > 12) {
             return res.status(400).json({
-                mensagem: "Telefone inválido."
+                mensagem: "Telefone inválido (máximo 12 caracteres)."
             });
         }
 
@@ -70,7 +79,7 @@ async function cadastrar(req, res) {
             email,
             senhaHash,
             telefone,
-            tipoUsuario
+            tipoResolvido.id
         );
 
         const token = gerarToken(resultado.insertId);
@@ -79,7 +88,8 @@ async function cadastrar(req, res) {
             id: resultado.insertId,
             nome,
             email,
-            tipoUsuario,
+            fkTipoUsuario: tipoResolvido.id,
+            tipoUsuario: tipoResolvido.nome,
             token
         });
 
@@ -89,6 +99,12 @@ async function cadastrar(req, res) {
         if (erro.code === "ER_DUP_ENTRY") {
             return res.status(409).json({
                 mensagem: "Este e-mail já está cadastrado."
+            });
+        }
+
+        if (erro.code === "ER_NO_REFERENCED_ROW_2") {
+            return res.status(400).json({
+                mensagem: "Tipo de usuário inválido no banco de dados."
             });
         }
 
@@ -151,7 +167,8 @@ async function autenticar(req, res) {
             nome: usuario.nome,
             email: usuario.email,
             telefone: usuario.telefone,
-            tipoUsuario: usuario.tipo_usuario,
+            fkTipoUsuario: usuario.fkTipoUsuario,
+            tipoUsuario: usuario.tipoUsuario,
             token
         });
 

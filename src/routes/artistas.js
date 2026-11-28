@@ -3,6 +3,7 @@ var router = express.Router();
 var artistaController = require("../controllers/artistaController");
 
 router.get("/", artistaController.buscarTodos);
+router.get("/comparar", artistaController.comparar);
 router.get("/:id", artistaController.buscarDados);
 
 module.exports = router;
