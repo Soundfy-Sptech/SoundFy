@@ -20,6 +20,7 @@ var usuarioRouter = require("./src/routes/usuarios");
  var regioesRouter = require("./src/routes/regioes");
  var produtorRouter = require("./src/routes/produtor");
  var artistasRouter = require("./src/routes/artistas");
+ var relatoriosRouter = require("./src/routes/relatorios");
 
 
 app.use(express.json());
@@ -34,6 +35,7 @@ app.use("/usuarios", usuarioRouter);
  app.use("/produtor", produtorRouter);
  app.use("/artistas", artistasRouter);
  app.use("/dashboard", dashboardRouter);
+ app.use("/relatorios", relatoriosRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`

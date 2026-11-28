@@ -1,8 +1,8 @@
-
 document.addEventListener("DOMContentLoaded", function () {
-    const $ = (id) => document.getElementById(id);
+    "use strict";
 
-    const elementos = {
+    var $ = function (id) { return document.getElementById(id); };
+    var elementos = {
         tipo: $("filtroTipo"),
         regiao: $("filtroRegiao"),
         limite: $("filtroLimite"),
@@ -16,353 +16,328 @@ document.addEventListener("DOMContentLoaded", function () {
         pdf: $("btnExportarPDF")
     };
 
-    const colunas = {
+    var colunas = {
         artistas: [
-            { chave: "name", titulo: "reports.columnArtist", campo: "nome" },
-            { chave: "region", titulo: "reports.columnRegion", campo: "regiao" },
-            { chave: "city", titulo: "reports.columnCity", campo: "cidade" },
-            { chave: "genre", titulo: "reports.columnGenre", campo: "genero" },
-            { chave: "score", titulo: "reports.columnScore", campo: "pontuacao" },
-            { chave: "popularity", titulo: "reports.columnPopularity", campo: "popularidade" }
+            { titulo: "reports.columnArtist", campo: "artista" },
+            { titulo: "reports.columnRegion", campo: "regiao" },
+            { titulo: "reports.columnScore", campo: "pontuacao", numero: true },
+            { titulo: "reports.columnRanking", campo: "melhorRanking", numero: true },
+            { titulo: "reports.columnAppearances", campo: "aparicoes", numero: true },
+            { titulo: "reports.columnTracks", campo: "faixas", numero: true },
+            { titulo: "reports.columnCities", campo: "cidades", numero: true }
         ],
         generos: [
-            { chave: "genre", titulo: "reports.columnGenre", campo: "genero" },
-            { chave: "region", titulo: "reports.columnRegion", campo: "regiao" },
-            { chave: "artists", titulo: "reports.columnArtists", campo: "artistas" },
-            { chave: "tracks", titulo: "reports.columnTracks", campo: "faixas" },
-            { chave: "score", titulo: "reports.columnScore", campo: "pontuacao" }
+            { titulo: "reports.columnGenre", campo: "genero" },
+            { titulo: "reports.columnRegion", campo: "regiao" },
+            { titulo: "reports.columnScore", campo: "pontuacao", numero: true },
+            { titulo: "reports.columnRanking", campo: "melhorRanking", numero: true },
+            { titulo: "reports.columnArtists", campo: "artistas", numero: true },
+            { titulo: "reports.columnTracks", campo: "faixas", numero: true },
+            { titulo: "reports.columnCities", campo: "cidades", numero: true }
         ],
         cidades: [
-            { chave: "city", titulo: "reports.columnCity", campo: "cidade" },
-            { chave: "region", titulo: "reports.columnRegion", campo: "regiao" },
-            { chave: "artists", titulo: "reports.columnArtists", campo: "artistas" },
-            { chave: "tracks", titulo: "reports.columnTracks", campo: "faixas" },
-            { chave: "score", titulo: "reports.columnScore", campo: "pontuacao" }
+            { titulo: "reports.columnCity", campo: "cidade" },
+            { titulo: "reports.columnRegion", campo: "regiao" },
+            { titulo: "reports.columnWeeks", campo: "semanas", numero: true },
+            { titulo: "reports.columnRecords", campo: "registros", numero: true },
+            { titulo: "reports.columnScore", campo: "pontuacao", numero: true }
         ],
         resumo: [
-            { chave: "region", titulo: "reports.columnRegion", campo: "regiao" },
-            { chave: "cities", titulo: "reports.columnCities", campo: "cidades" },
-            { chave: "artists", titulo: "reports.columnArtists", campo: "artistas" },
-            { chave: "tracks", titulo: "reports.columnTracks", campo: "faixas" },
-            { chave: "score", titulo: "reports.columnScore", campo: "pontuacao" }
+            { titulo: "reports.columnRegion", campo: "regiao" },
+            { titulo: "reports.columnCities", campo: "cidades", numero: true },
+            { titulo: "reports.columnArtists", campo: "artistas", numero: true },
+            { titulo: "reports.columnGenres", campo: "generos", numero: true },
+            { titulo: "reports.columnTracks", campo: "faixas", numero: true },
+            { titulo: "reports.columnRecords", campo: "registros", numero: true },
+            { titulo: "reports.columnScore", campo: "pontuacao", numero: true }
         ]
     };
 
-    // Dados fictícios para demonstração. Substitua pela resposta da API quando disponível.
-    const dados = {
-        artistas: [
-            { nome: "Luna Martins", regiao: "Sudeste", cidade: "São Paulo", genero: "Pop", pontuacao: 958270, popularidade: 92 },
-            { nome: "Caio Mendes", regiao: "Nordeste", cidade: "Salvador", genero: "MPB", pontuacao: 842610, popularidade: 88 },
-            { nome: "Aurora Beats", regiao: "Sul", cidade: "Curitiba", genero: "Eletrônica", pontuacao: 790450, popularidade: 85 },
-            { nome: "Ritmo Livre", regiao: "Centro-Oeste", cidade: "Brasília", genero: "Hip-hop", pontuacao: 721380, popularidade: 82 },
-            { nome: "Maré Alta", regiao: "Norte", cidade: "Belém", genero: "Regional", pontuacao: 689240, popularidade: 79 },
-            { nome: "Nina Sol", regiao: "Sudeste", cidade: "Rio de Janeiro", genero: "R&B", pontuacao: 654100, popularidade: 77 },
-            { nome: "Vitor Reis", regiao: "Nordeste", cidade: "Recife", genero: "Rock", pontuacao: 601720, popularidade: 74 },
-            { nome: "Clube Neon", regiao: "Sul", cidade: "Porto Alegre", genero: "Pop", pontuacao: 578300, popularidade: 72 },
-            { nome: "Duda Campos", regiao: "Centro-Oeste", cidade: "Goiânia", genero: "Sertanejo", pontuacao: 530980, popularidade: 70 },
-            { nome: "Tom Nascimento", regiao: "Norte", cidade: "Manaus", genero: "MPB", pontuacao: 489650, popularidade: 67 }
-        ],
+    var registrosAtuais = [];
+    var carregando = false;
+    var erroAtual = false;
 
-        generos: [
-            { genero: "Pop", regiao: "Sudeste", artistas: 420, faixas: 1250, pontuacao: 958270 },
-            { genero: "MPB", regiao: "Nordeste", artistas: 315, faixas: 980, pontuacao: 842610 },
-            { genero: "Eletrônica", regiao: "Sul", artistas: 280, faixas: 760, pontuacao: 790450 },
-            { genero: "Hip-hop", regiao: "Centro-Oeste", artistas: 245, faixas: 690, pontuacao: 721380 },
-            { genero: "Regional", regiao: "Norte", artistas: 190, faixas: 540, pontuacao: 689240 },
-            { genero: "R&B", regiao: "Sudeste", artistas: 175, faixas: 430, pontuacao: 654100 },
-            { genero: "Rock", regiao: "Nordeste", artistas: 160, faixas: 410, pontuacao: 601720 },
-            { genero: "Sertanejo", regiao: "Centro-Oeste", artistas: 150, faixas: 390, pontuacao: 530980 }
-        ],
-
-        cidades: [
-            { cidade: "São Paulo", regiao: "Sudeste", artistas: 850, faixas: 2100, pontuacao: 958270 },
-            { cidade: "Rio de Janeiro", regiao: "Sudeste", artistas: 630, faixas: 1720, pontuacao: 854210 },
-            { cidade: "Salvador", regiao: "Nordeste", artistas: 490, faixas: 1380, pontuacao: 842610 },
-            { cidade: "Recife", regiao: "Nordeste", artistas: 420, faixas: 1170, pontuacao: 721380 },
-            { cidade: "Curitiba", regiao: "Sul", artistas: 390, faixas: 1050, pontuacao: 790450 },
-            { cidade: "Porto Alegre", regiao: "Sul", artistas: 350, faixas: 960, pontuacao: 578300 },
-            { cidade: "Brasília", regiao: "Centro-Oeste", artistas: 310, faixas: 870, pontuacao: 721380 },
-            { cidade: "Goiânia", regiao: "Centro-Oeste", artistas: 290, faixas: 810, pontuacao: 530980 },
-            { cidade: "Belém", regiao: "Norte", artistas: 230, faixas: 650, pontuacao: 689240 },
-            { cidade: "Manaus", regiao: "Norte", artistas: 210, faixas: 590, pontuacao: 489650 }
-        ],
-
-        resumo: [
-            { regiao: "Sudeste", cidades: 4, artistas: 1480, faixas: 3820, pontuacao: 1812480 },
-            { regiao: "Nordeste", cidades: 3, artistas: 910, faixas: 2550, pontuacao: 1444330 },
-            { regiao: "Centro-Oeste", cidades: 3, artistas: 600, faixas: 1680, pontuacao: 1252360 },
-            { regiao: "Sul", cidades: 3, artistas: 740, faixas: 2010, pontuacao: 1368750 },
-            { regiao: "Norte", cidades: 3, artistas: 440, faixas: 1240, pontuacao: 1178890 }
-        ]
-    };
-
-    function t(chave) {
-        return typeof window.t === "function" ? window.t(chave) : chave;
-    }
-
-    function obterTipo() {
-        return elementos.tipo.value;
-    }
-
-    function obterColunas() {
-        return colunas[obterTipo()] || colunas.artistas;
-    }
-
-    function obterDadosFiltrados() {
-        const tipo = obterTipo();
-        const regiao = elementos.regiao.value;
-        const busca = elementos.busca.value.trim().toLocaleLowerCase();
-        const limite = elementos.limite.value;
-
-        let resultado = (dados[tipo] || []).filter((item) => {
-            const correspondeRegiao =
-                regiao === "todas" || item.regiao === regiao;
-
-            const textoBusca = Object.values(item)
-                .join(" ")
-                .toLocaleLowerCase();
-
-            return correspondeRegiao && textoBusca.includes(busca);
-        });
-
-        resultado = resultado.slice().sort((a, b) => {
-            const valorA = Number(a.pontuacao) || 0;
-            const valorB = Number(b.pontuacao) || 0;
-            return valorB - valorA;
-        });
-
-        if (limite !== "todos") {
-            resultado = resultado.slice(0, Number(limite));
-        }
-
-        return resultado;
-    }
-
-    function formatarNumero(valor) {
-        if (typeof valor !== "number") return valor ?? "";
-        return new Intl.NumberFormat(obterLocale()).format(valor);
+    function traduzir(chave, padrao) {
+        return typeof window.t === "function" ? window.t(chave, padrao || chave) : (padrao || chave);
     }
 
     function obterLocale() {
-        const idioma = document.documentElement.lang ||
-            localStorage.getItem("soundfy-language") ||
-            "pt-BR";
-
-        if (idioma.startsWith("en")) return "en-US";
-        if (idioma.startsWith("es")) return "es-ES";
-
+        var idioma = document.documentElement.lang || localStorage.getItem("soundfy-language") || "pt";
+        if (idioma.indexOf("en") === 0) return "en-US";
+        if (idioma.indexOf("es") === 0) return "es-ES";
         return "pt-BR";
     }
 
+    function formatarNumero(valor) {
+        var numero = Number(valor);
+        return Number.isFinite(numero) ? numero.toLocaleString(obterLocale(), { maximumFractionDigits: 0 }) : "—";
+    }
+
+    function cabecalhoAutenticacao() {
+        var token = sessionStorage.getItem("TOKEN_USUARIO");
+        return token ? { Authorization: "Bearer " + token } : {};
+    }
+
+    async function requisitar(url) {
+        var resposta = await fetch(url, { headers: cabecalhoAutenticacao() });
+        var dados = await resposta.json().catch(function () { return {}; });
+        if (!resposta.ok) {
+            if (resposta.status === 401) {
+                sessionStorage.clear();
+                window.location.href = "cadastro.html";
+                throw new Error("Sessão expirada. Entre novamente.");
+            }
+            throw new Error(dados.mensagem || "Não foi possível consultar os dados.");
+        }
+        return dados;
+    }
+
+    function exibirEstadoTabela(mensagem) {
+        elementos.corpo.replaceChildren();
+        var linha = document.createElement("tr");
+        var celula = document.createElement("td");
+        celula.colSpan = (colunas[elementos.tipo.value] || colunas.artistas).length;
+        celula.className = "estado-tabela-relatorios";
+        celula.textContent = mensagem;
+        linha.appendChild(celula);
+        elementos.corpo.appendChild(linha);
+    }
+
+    async function carregarIndicadores() {
+        try {
+            var dados = await requisitar("/relatorios/indicadores");
+            $("kpiPontuacao").textContent = formatarNumero(dados.pontuacaoTotal);
+            $("kpiRegistros").textContent = formatarNumero(dados.registrosAnalisados);
+            $("kpiCidades").textContent = formatarNumero(dados.cidadesCobertas);
+            $("kpiFaixas").textContent = formatarNumero(dados.musicasMapeadas);
+        } catch (erro) {
+            console.error("Erro ao carregar indicadores dos relatórios:", erro);
+            ["kpiPontuacao", "kpiRegistros", "kpiCidades", "kpiFaixas"].forEach(function (id) {
+                $(id).textContent = "—";
+            });
+        }
+    }
+
+    async function carregarRegioes() {
+        try {
+            var regioes = await requisitar("/relatorios/regioes");
+            var selecionada = elementos.regiao.value || "todas";
+            elementos.regiao.replaceChildren();
+
+            var todas = document.createElement("option");
+            todas.value = "todas";
+            todas.textContent = traduzir("reports.allRegions", "Todas as regiões");
+            elementos.regiao.appendChild(todas);
+
+            regioes.forEach(function (regiao) {
+                var opcao = document.createElement("option");
+                opcao.value = regiao.nome;
+                opcao.textContent = regiao.nome;
+                elementos.regiao.appendChild(opcao);
+            });
+
+            elementos.regiao.value = Array.from(elementos.regiao.options).some(function (opcao) {
+                return opcao.value === selecionada;
+            }) ? selecionada : "todas";
+        } catch (erro) {
+            console.error("Erro ao carregar regiões dos relatórios:", erro);
+        }
+    }
+
+    function obterColunas() {
+        return colunas[elementos.tipo.value] || colunas.artistas;
+    }
+
+    function filtrarRegistros() {
+        var termo = elementos.busca.value.trim().toLocaleLowerCase(obterLocale());
+        var resultado = registrosAtuais.filter(function (registro) {
+            return !termo || Object.keys(registro).some(function (chave) {
+                return String(registro[chave] == null ? "" : registro[chave])
+                    .toLocaleLowerCase(obterLocale()).includes(termo);
+            });
+        });
+
+        var limite = elementos.limite.value;
+        if (limite !== "todos") resultado = resultado.slice(0, Number(limite));
+        return resultado;
+    }
+
     function renderizarTabela() {
-        if (!elementos.cabecalho || !elementos.corpo) return;
-
-        const listaColunas = obterColunas();
-        const registros = obterDadosFiltrados();
-
+        var listaColunas = obterColunas();
+        var registros = filtrarRegistros();
         elementos.cabecalho.replaceChildren();
         elementos.corpo.replaceChildren();
 
-        const linhaCabecalho = document.createElement("tr");
-
-        listaColunas.forEach((coluna) => {
-            const th = document.createElement("th");
-            th.textContent = t(coluna.titulo);
+        var linhaCabecalho = document.createElement("tr");
+        listaColunas.forEach(function (coluna) {
+            var th = document.createElement("th");
+            th.textContent = traduzir(coluna.titulo);
             linhaCabecalho.appendChild(th);
         });
-
         elementos.cabecalho.appendChild(linhaCabecalho);
 
-        registros.forEach((registro) => {
-            const tr = document.createElement("tr");
-
-            listaColunas.forEach((coluna) => {
-                const td = document.createElement("td");
-                const valor = registro[coluna.campo];
-
-                td.textContent = typeof valor === "number"
-                    ? formatarNumero(valor)
-                    : (valor ?? "");
-
-                tr.appendChild(td);
+        if (carregando) {
+            exibirEstadoTabela(traduzir("reports.loading", "Carregando dados do banco..."));
+        } else if (erroAtual) {
+            exibirEstadoTabela(traduzir("reports.loadError", "Não foi possível carregar os dados. Tente novamente."));
+        } else if (!registros.length) {
+            exibirEstadoTabela(traduzir("reports.empty", "Nenhum registro encontrado para os filtros selecionados."));
+        } else {
+            registros.forEach(function (registro) {
+                var tr = document.createElement("tr");
+                listaColunas.forEach(function (coluna) {
+                    var td = document.createElement("td");
+                    var valor = registro[coluna.campo];
+                    td.textContent = valor == null ? "—" :
+                        (coluna.numero ? formatarNumero(valor) : String(valor));
+                    tr.appendChild(td);
+                });
+                elementos.corpo.appendChild(tr);
             });
+        }
 
-            elementos.corpo.appendChild(tr);
-        });
+        elementos.contador.textContent = formatarNumero(registros.length) + " " +
+            traduzir("reports.recordsFound", "registros encontrados");
+        elementos.subtitulo.textContent = traduzir({
+            artistas: "reports.typeArtists",
+            generos: "reports.typeGenres",
+            cidades: "reports.typeCities",
+            resumo: "reports.typeRegions"
+        }[elementos.tipo.value] || "reports.detailedReport");
+    }
 
-        elementos.contador.textContent =
-            `${formatarNumero(registros.length)} ${t("reports.recordsFound")}`;
+    async function carregarRelatorio() {
+        carregando = true;
+        erroAtual = false;
+        renderizarTabela();
 
-        elementos.subtitulo.textContent = t(
-            {
-                artistas: "reports.typeArtists",
-                generos: "reports.typeGenres",
-                cidades: "reports.typeCities",
-                resumo: "reports.typeRegions"
-            }[obterTipo()] || "reports.detailedReport"
-        );
+        var parametros = new URLSearchParams({ tipo: elementos.tipo.value });
+        if (elementos.regiao.value && elementos.regiao.value !== "todas") {
+            parametros.set("regiao", elementos.regiao.value);
+        }
+
+        try {
+            var resposta = await requisitar("/relatorios?" + parametros.toString());
+            registrosAtuais = Array.isArray(resposta.registros) ? resposta.registros : [];
+            carregando = false;
+            erroAtual = false;
+        } catch (erro) {
+            console.error("Erro ao carregar relatório:", erro);
+            registrosAtuais = [];
+            carregando = false;
+            erroAtual = true;
+        }
+        renderizarTabela();
     }
 
     function escaparCSV(valor) {
-        const texto = String(valor ?? "");
-        return `"${texto.replace(/"/g, '""')}"`;
+        return '"' + String(valor == null ? "" : valor).replace(/"/g, '""') + '"';
     }
 
-    function gerarMatrizExportacao() {
-        const listaColunas = obterColunas();
-        const registros = obterDadosFiltrados();
-
+    function matrizExportacao() {
+        var listaColunas = obterColunas();
+        var registros = filtrarRegistros();
         return [
-            listaColunas.map((coluna) => t(coluna.titulo)),
-            ...registros.map((registro) =>
-                listaColunas.map((coluna) => registro[coluna.campo] ?? "")
-            )
+            listaColunas.map(function (coluna) { return traduzir(coluna.titulo); }),
+            ...registros.map(function (registro) {
+                return listaColunas.map(function (coluna) { return registro[coluna.campo] == null ? "" : registro[coluna.campo]; });
+            })
         ];
     }
 
-    function baixarArquivo(conteudo, tipoMime, nomeArquivo) {
-        const blob = new Blob([conteudo], { type: tipoMime });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
+    function nomeArquivo(extensao) {
+        return "soundfy-relatorio-" + elementos.tipo.value + "-" +
+            new Date().toISOString().slice(0, 10) + "." + extensao;
+    }
 
+    function baixarArquivo(conteudo, mime, nome) {
+        var blob = new Blob([conteudo], { type: mime });
+        var url = URL.createObjectURL(blob);
+        var link = document.createElement("a");
         link.href = url;
-        link.download = nomeArquivo;
+        link.download = nome;
         document.body.appendChild(link);
         link.click();
         link.remove();
-
         URL.revokeObjectURL(url);
     }
 
-    function obterNomeArquivo(extensao) {
-        const data = new Date().toISOString().slice(0, 10);
-        return `soundfy-relatorio-${obterTipo()}-${data}.${extensao}`;
+    function validarExportacao() {
+        var matriz = matrizExportacao();
+        if (matriz.length <= 1) {
+            alert(traduzir("reports.noDataToExport", "Não há dados para exportar."));
+            return null;
+        }
+        return matriz;
     }
 
     function exportarCSV() {
-        const matriz = gerarMatrizExportacao();
-
-        if (matriz.length <= 1) {
-            alert(t("reports.noDataToExport"));
-            return;
-        }
-
-        const csv = matriz
-            .map((linha) => linha.map(escaparCSV).join(";"))
-            .join("\r\n");
-
-        // BOM melhora a leitura de caracteres acentuados no Excel.
-        baixarArquivo(
-            "\uFEFF" + csv,
-            "text/csv;charset=utf-8;",
-            obterNomeArquivo("csv")
-        );
+        var matriz = validarExportacao();
+        if (!matriz) return;
+        var csv = matriz.map(function (linha) {
+            return linha.map(escaparCSV).join(";");
+        }).join("\r\n");
+        baixarArquivo("\uFEFF" + csv, "text/csv;charset=utf-8;", nomeArquivo("csv"));
     }
 
     function exportarXLSX() {
+        var matriz = validarExportacao();
+        if (!matriz) return;
         if (typeof XLSX === "undefined") {
-            alert(t("reports.xlsxLibraryError"));
+            alert(traduzir("reports.xlsxLibraryError", "Biblioteca XLSX indisponível."));
             return;
         }
-
-        const matriz = gerarMatrizExportacao();
-
-        if (matriz.length <= 1) {
-            alert(t("reports.noDataToExport"));
-            return;
-        }
-
-        const planilha = XLSX.utils.aoa_to_sheet(matriz);
-        const livro = XLSX.utils.book_new();
-
-        XLSX.utils.book_append_sheet(
-            livro,
-            planilha,
-            obterTipo().slice(0, 31)
-        );
-
-        XLSX.writeFile(livro, obterNomeArquivo("xlsx"));
+        var planilha = XLSX.utils.aoa_to_sheet(matriz);
+        var livro = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(livro, planilha, elementos.tipo.value.slice(0, 31));
+        XLSX.writeFile(livro, nomeArquivo("xlsx"));
     }
 
     function exportarPDF() {
+        var matriz = validarExportacao();
+        if (!matriz) return;
         if (!window.jspdf || !window.jspdf.jsPDF) {
-            alert(t("reports.pdfLibraryError"));
+            alert(traduzir("reports.pdfLibraryError", "Biblioteca PDF indisponível."));
             return;
         }
-
-        const matriz = gerarMatrizExportacao();
-
-        if (matriz.length <= 1) {
-            alert(t("reports.noDataToExport"));
-            return;
-        }
-
-        const { jsPDF } = window.jspdf;
-        const documento = new jsPDF({ orientation: "landscape" });
-
+        var documento = new window.jspdf.jsPDF({ orientation: "landscape" });
         documento.setFontSize(16);
-        documento.text(t("reports.pdfTitle"), 14, 16);
-
+        documento.text(traduzir("reports.pdfTitle", "Relatório SoundFy"), 14, 16);
         documento.setFontSize(9);
-        documento.text(
-            `${t("reports.pdfType")}: ${t(
-                {
-                    artistas: "reports.typeArtists",
-                    generos: "reports.typeGenres",
-                    cidades: "reports.typeCities",
-                    resumo: "reports.typeRegions"
-                }[obterTipo()]
-            )}`,
-            14,
-            23
-        );
-
-        documento.text(
-            `${t("reports.pdfGeneratedAt")}: ${new Date().toLocaleString(obterLocale())}`,
-            14,
-            29
-        );
-
+        documento.text(traduzir("reports.pdfGeneratedAt", "Gerado em") + ": " +
+            new Date().toLocaleString(obterLocale()), 14, 23);
         if (typeof documento.autoTable !== "function") {
-            alert(t("reports.pdfTableError"));
+            alert(traduzir("reports.pdfTableError", "Não foi possível montar a tabela do PDF."));
             return;
         }
-
         documento.autoTable({
             head: [matriz[0]],
             body: matriz.slice(1),
-            startY: 35,
-            styles: {
-                fontSize: 8,
-                cellPadding: 3
-            },
-            headStyles: {
-                fillColor: [124, 58, 237]
-            },
-            alternateRowStyles: {
-                fillColor: [245, 240, 250]
-            }
+            startY: 30,
+            styles: { fontSize: 8, cellPadding: 3 },
+            headStyles: { fillColor: [124, 58, 237] },
+            alternateRowStyles: { fillColor: [245, 240, 250] }
         });
-
-        documento.save(obterNomeArquivo("pdf"));
+        documento.save(nomeArquivo("pdf"));
     }
 
-    elementos.tipo.addEventListener("change", renderizarTabela);
-    elementos.regiao.addEventListener("change", renderizarTabela);
+    elementos.tipo.addEventListener("change", carregarRelatorio);
+    elementos.regiao.addEventListener("change", carregarRelatorio);
     elementos.limite.addEventListener("change", renderizarTabela);
     elementos.busca.addEventListener("input", renderizarTabela);
-
     elementos.csv.addEventListener("click", exportarCSV);
     elementos.xlsx.addEventListener("click", exportarXLSX);
     elementos.pdf.addEventListener("click", exportarPDF);
 
-    // Atualiza os títulos da tabela quando o idioma da página muda.
-    const observadorIdioma = new MutationObserver(renderizarTabela);
-
-    observadorIdioma.observe(document.documentElement, {
-        attributes: true,
-        attributeFilter: ["lang"]
+    if (typeof window.onLanguageReady === "function") {
+        window.onLanguageReady(function () {
+            carregarRegioes();
+            renderizarTabela();
+        });
+    }
+    new MutationObserver(renderizarTabela).observe(document.documentElement, {
+        attributes: true, attributeFilter: ["lang"]
     });
 
-    renderizarTabela();
+    Promise.all([carregarIndicadores(), carregarRegioes()]).then(carregarRelatorio);
 });

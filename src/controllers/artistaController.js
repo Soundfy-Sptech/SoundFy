@@ -22,20 +22,16 @@ function buscarDados(req, res) {
 
     Promise.all([
         artistaModel.buscarPorId(idArtista),
-        artistaModel.buscarGeneros(idArtista),
-        artistaModel.buscarConsumoPorRegiao(idArtista)
+        artistaModel.buscarGeneros(idArtista)
     ])
         .then(function (resultados) {
             if (!resultados[0].length) {
-                return res.status(404).json({
-                    mensagem: "Artista não encontrado."
-                });
+                return res.status(404).json({ mensagem: "Artista não encontrado." });
             }
 
             res.status(200).json({
                 artista: resultados[0][0],
-                generos: resultados[1],
-                consumoPorRegiao: resultados[2]
+                generos: resultados[1]
             });
         })
         .catch(function (erro) {
@@ -46,4 +42,28 @@ function buscarDados(req, res) {
         });
 }
 
-module.exports = { buscarTodos, buscarDados };
+function comparar(req, res) {
+    const artistaA = Number(req.query.artistaA);
+    const artistaB = Number(req.query.artistaB);
+    if (!Number.isInteger(artistaA) || artistaA <= 0 || !Number.isInteger(artistaB) || artistaB <= 0 || artistaA === artistaB) {
+        return res.status(400).json({ mensagem: "Selecione dois artistas diferentes." });
+    }
+
+    artistaModel.compararArtistas(artistaA, artistaB)
+        .then(function (artistas) {
+            if (artistas.length !== 2) {
+                return res.status(404).json({ mensagem: "Um ou mais artistas não foram encontrados." });
+            }
+            const porId = new Map(artistas.map(artista => [Number(artista.idArtista), artista]));
+            return res.status(200).json({
+                artistaA: porId.get(artistaA),
+                artistaB: porId.get(artistaB)
+            });
+        })
+        .catch(function (erro) {
+            console.error("Erro ao comparar artistas:", erro);
+            res.status(500).json({ mensagem: "Não foi possível comparar os artistas." });
+        });
+}
+
+module.exports = { buscarTodos, buscarDados, comparar };

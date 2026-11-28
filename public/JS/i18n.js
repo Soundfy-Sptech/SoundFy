@@ -22,6 +22,19 @@ async function loadLanguage(language) {
     currentLanguage = language;
 
     localStorage.setItem("soundfy-language", language);
+
+    // Guarda só o trecho usado pela barra lateral (JS/sidebar.js), que é montada
+    // de forma síncrona e precisa dos textos antes de este arquivo terminar de carregar.
+    try {
+        localStorage.setItem("soundfy-sidebar-i18n", JSON.stringify({
+            language: language,
+            navigation: translations.navigation,
+            sidebar: translations.sidebar,
+            profile: translations.profile
+        }));
+    } catch (erro) {
+        // Armazenamento indisponível: a barra usa os textos padrão.
+    }
 }
 
 // Busca a tradução pela chave (ex.: "index.kpiStreams").

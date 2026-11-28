@@ -5,73 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="index.title">SoundFy — Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap">
     <link rel="stylesheet" href="../Style/style.css">
-    <script src="../JS/sidebar-perfil.js"></script>
 </head>
 
-<body>
-    <aside class="barra-lateral">
-        <a class="logo" href="index.html">
-            <b>S</b>
-            <span>Sound<span>Fy</span></span>
-        </a>
-
-        <div class="espaco-trabalho">
-            <b>ST</b>
-            <div>
-                <strong data-i18n="workspace.title">Análise Musical</strong>
-                <small data-i18n="workspace.professional">Espaço de trabalho profissional</small>
-            </div>
-            <i>⌄</i>
-        </div>
-
-        <nav>
-            <label data-i18n="navigation.overview">VISÃO GERAL</label>
-
-            <a class="ativo" href="index.html">
-                <span data-i18n="navigation.dashboard">Dashboard</span>
-            </a>
-
-            <a href="regioes.html">
-                <span data-i18n="navigation.regions">Regiões</span>
-            </a>
-
-            <div data-role-section="artist">
-                <label data-i18n="navigation.artistArea">ÁREA DO ARTISTA</label>
-
-            <a href="artista.html">
-                <span data-i18n="navigation.artistProfile">Meu perfil de artista</span>
-            </a>
-            </div>
-
-            <div data-role-section="producer">
-                <label data-i18n="navigation.producerArea">ÁREA DO PRODUTOR</label>
-
-            <a href="produtor.html">
-                <span data-i18n="navigation.production">Área de produção</span>
-            </a>
-            </div>
-
-            <label data-i18n="navigation.analysis">ANÁLISES</label>
-
-            <a href="relatorios.html">
-                <span data-i18n="navigation.reports">Relatórios</span>
-            </a>
-        </nav>
-
-        <div class="rodape-lateral">
-            <a href="configuracoes.html">⚙ <span data-i18n="navigation.settings">Configurações</span></a>
-
-            <div class="perfil">
-                <b data-user-initials>U</b>
-                <div>
-                    <strong data-user-name>Usuário</strong>
-                    <small data-role-section="artist" data-i18n="profile.artist">Artista</small>
-                    <small data-role-section="producer" data-i18n="profile.producer">Produtor</small>
-                </div>
-            </div>
-        </div>
-    </aside>
+<body class="pagina-dashboard">
+    <aside class="barra-lateral" id="barra-lateral"></aside>
+    <script src="../JS/sidebar.js"></script>
 
     <main>
         <header>
@@ -99,8 +41,7 @@
                     <div class="menu-perfil" id="perfil-menu" hidden>
                         <div class="menu-perfil-info">
                             <strong data-user-name>Usuário</strong>
-                            <small data-role-section="artist" data-i18n="profile.artist">Artista</small>
-                            <small data-role-section="producer" data-i18n="profile.producer">Produtor</small>
+                            <small data-user-role>Usuário</small>
                         </div>
 
                         <a href="configuracoes.html" data-i18n="navigation.settings">
@@ -221,7 +162,6 @@
                         <p data-i18n="index.rankingNoGeneral">RANKING · SEM CATEGORIAS GERAIS</p>
                         <h2 data-i18n="index.rankingStreams">Gêneros com mais streams</h2>
                     </div>
-                    <a class="link-ver-mais" href="#generos" data-i18n="index.viewAll">Ver todos →</a>
                 </div>
 
                 <div class="lista-rank" id="ranking-generos">

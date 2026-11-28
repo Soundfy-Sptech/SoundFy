@@ -1,10 +1,13 @@
+
 var database = require("../database/config");
 
 function buscarTodos() {
     return database.executar(`
-        SELECT idArtista, nome, pais_origem
+        SELECT
+            idArtista,
+            nome
         FROM Artista
-        ORDER BY nome
+        ORDER BY nome;
     `);
 }
 
@@ -13,54 +16,74 @@ function buscarPorId(idArtista) {
         SELECT
             a.idArtista,
             a.nome,
-            a.pais_origem AS paisOrigem,
             COALESCE(c.totalStreams, 0) AS totalStreams,
-            COALESCE(c.totalRegioes, 0) AS totalRegioes,
-            COALESCE(g.totalGeneros, 0) AS totalGeneros,
-            c.melhorRanking
+            COALESCE(c.melhorRanking, 0) AS melhorRanking,
+            COALESCE(g.totalGeneros, 0) AS totalGeneros
         FROM Artista a
         LEFT JOIN (
-            SELECT idArtista, SUM(qtd_streams) AS totalStreams,
-                   COUNT(DISTINCT idRegiao) AS totalRegioes,
-                   MIN(ranking) AS melhorRanking
+            SELECT
+                idArtista,
+                SUM(qtd_streams) AS totalStreams,
+                MIN(ranking) AS melhorRanking
             FROM ConsumoArtista
             GROUP BY idArtista
         ) c ON c.idArtista = a.idArtista
         LEFT JOIN (
-            SELECT idArtista, COUNT(*) AS totalGeneros
+            SELECT
+                idArtista,
+                COUNT(*) AS totalGeneros
             FROM \`Genero dos artistas\`
             GROUP BY idArtista
         ) g ON g.idArtista = a.idArtista
-        WHERE a.idArtista = ?
+        WHERE a.idArtista = ?;
     `, [idArtista]);
 }
 
 function buscarGeneros(idArtista) {
     return database.executar(`
-        SELECT g.nome AS genero
+        SELECT
+            g.idGenero,
+            g.nome AS genero
         FROM \`Genero dos artistas\` ga
-        INNER JOIN Genero g ON g.idGenero = ga.idGenero
+        INNER JOIN Genero g
+            ON g.idGenero = ga.idGenero
         WHERE ga.idArtista = ?
-        ORDER BY g.nome
+        ORDER BY g.nome;
     `, [idArtista]);
 }
 
-function buscarConsumoPorRegiao(idArtista) {
+function compararArtistas(idArtistaA, idArtistaB) {
     return database.executar(`
-        SELECT r.nome AS regiao,
-               SUM(ca.qtd_streams) AS totalStreams,
-               MIN(ca.ranking) AS melhorRanking
-        FROM ConsumoArtista ca
-        INNER JOIN Regiao r ON r.idRegiao = ca.idRegiao
-        WHERE ca.idArtista = ?
-        GROUP BY r.idRegiao, r.nome
-        ORDER BY totalStreams DESC
-    `, [idArtista]);
+        SELECT
+            a.idArtista,
+            a.nome,
+            COALESCE(c.totalStreams, 0) AS totalStreams,
+            COALESCE(c.melhorRanking, 0) AS melhorRanking,
+            COALESCE(g.totalGeneros, 0) AS totalGeneros
+        FROM Artista a
+        LEFT JOIN (
+            SELECT
+                idArtista,
+                SUM(qtd_streams) AS totalStreams,
+                MIN(ranking) AS melhorRanking
+            FROM ConsumoArtista
+            GROUP BY idArtista
+        ) c ON c.idArtista = a.idArtista
+        LEFT JOIN (
+            SELECT
+                idArtista,
+                COUNT(*) AS totalGeneros
+            FROM \`Genero dos artistas\`
+            GROUP BY idArtista
+        ) g ON g.idArtista = a.idArtista
+        WHERE a.idArtista IN (?, ?)
+        ORDER BY a.idArtista;
+    `, [idArtistaA, idArtistaB]);
 }
 
 module.exports = {
     buscarTodos,
     buscarPorId,
     buscarGeneros,
-    buscarConsumoPorRegiao
+    compararArtistas
 };

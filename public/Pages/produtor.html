@@ -1,88 +1,30 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title data-i18n="producer.title">SoundFy | Área do Produtor</title>
+    <title data-i18n="eventProducerDynamic.title">SoundFy | Produtor de eventos</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap">
     <link rel="stylesheet" href="../Style/style.css">
-    <link rel="stylesheet" href="../Style/produtor.css">
 </head>
 
-<body>
-    <aside class="barra-lateral">
-        <a class="logo" href="index.html">
-            <b>S</b>
-            <span>Sound<span>Fy</span></span>
-        </a>
-
-        <div class="espaco-trabalho">
-            <b>ST</b>
-            <div>
-                <strong>SoundFy Studio</strong>
-                <small data-i18n="workspace.professional">Espaço profissional</small>
-            </div>
-            <i>⌄</i>
-        </div>
-
-        <nav>
-            <label data-i18n="navigation.overview">VISÃO GERAL</label>
-
-            <a href="index.html">
-                <span data-i18n="navigation.dashboard">Dashboard</span>
-            </a>
-
-            <a href="regioes.html">
-                <span data-i18n="navigation.regions">Regiões</span>
-            </a>
-
-            <div data-role-section="artist">
-                <label data-i18n="navigation.artistArea">ÁREA DO ARTISTA</label>
-
-                <a href="artista.html">
-                    <span data-i18n="navigation.artistProfile">Meu perfil de artista</span>
-                </a>
-            </div>
-
-            <div data-role-section="producer">
-                <label data-i18n="navigation.producerArea">ÁREA DO PRODUTOR</label>
-
-                <a class="ativo" href="produtor.html">
-                    <span data-i18n="navigation.production">Área de produção</span>
-                </a>
-            </div>
-
-            <label data-i18n="navigation.analysis">ANÁLISES</label>
-
-            <a href="./relatorios.html">
-                <span data-i18n="navigation.reports">Relatórios</span>
-            </a>
-        </nav>
-
-        <div class="rodape-lateral">
-            <a href="configuracoes.html">
-                ⚙ <span data-i18n="navigation.settings">Configurações</span>
-            </a>
-
-            <div class="perfil">
-                <b data-user-initials>U</b>
-                <div>
-                   <strong data-user-name>Usuário</strong>
-                    <small data-i18n="profile.producer">Produtor</small>
-                </div>
-            </div>
-        </div>
-    </aside>
+<body data-allowed-role="event-producer">
+    <aside class="barra-lateral" id="barra-lateral"></aside>
+    <script src="../JS/sidebar.js"></script>
 
     <main>
         <header>
             <button id="menu" class="menu-mobile">☰</button>
 
             <div class="trilha">
-                <span data-i18n="workspace.name">SoundFy Studio</span>
+                <span data-i18n="workspace.name">Espaço de trabalho</span>
                 <b>/</b>
-                <strong data-i18n="producer.title">Área do Produtor</strong>
+                <strong data-i18n="eventProducerDynamic.title">Produtor de eventos</strong>
             </div>
 
             <div class="logo-mobile">
@@ -105,8 +47,8 @@
 
                     <div class="menu-perfil" id="perfil-menu" hidden>
                         <div class="menu-perfil-info">
-                           <strong data-user-name>Usuário</strong>
-                            <small data-i18n="profile.producer">Produtor</small>
+                            <strong data-user-name>Usuário</strong>
+                            <small data-user-role>Produtor de eventos</small>
                         </div>
 
                         <a href="configuracoes.html" data-i18n="navigation.settings">
@@ -121,142 +63,142 @@
             </div>
         </header>
 
-        <section class="introducao">
+        <section class="introducao introducao-regioes">
             <div>
-                <p data-i18n="producer.eyebrow">SOUNDFY STUDIO</p>
-                <h1 data-i18n="producer.heading">Área do Produtor</h1>
-                <span data-i18n="producer.description">
-                    Analise o mercado musical e encontre novas oportunidades.
-                </span>
+                <p data-i18n="eventProducerDynamic.eyebrow">INTELIGÊNCIA REGIONAL</p>
+                <h1 data-i18n="eventProducerDynamic.heading">Inteligência regional para eventos</h1>
+                <span data-i18n="eventProducerDynamic.description">Analise gêneros e artistas por região para identificar oportunidades de eventos.</span>
             </div>
         </section>
 
-        <section class="produtor-aviso">
-            <span data-i18n="producer.demo">Dados demonstrativos</span>
+        <section class="painel busca-regiao busca-regiao-redesenhada">
+            <div class="busca-regiao-texto">
+                <span class="regiao-etiqueta" data-i18n="regionsDynamic.region">Região</span>
+                <p data-i18n="regionsDynamic.selectHint">Selecione uma região para visualizar os indicadores e rankings.</p>
+            </div>
+            <div class="busca-regiao-linha">
+                <select id="regiao-select" aria-label="Região">
+                    <option value="" data-i18n="regionsDynamic.loadingRegions">Carregando regiões...</option>
+                </select>
+                <button id="botaoBuscarRegiao" class="primario" type="button" data-i18n="regionsDynamic.search">Buscar →</button>
+            </div>
+            <p id="mensagemRegiao" class="mensagem-regiao" role="status" aria-live="polite" hidden></p>
         </section>
 
-        <section class="produtor-indicadores">
-            <article class="painel">
-                <span data-i18n="producer.artistsAnalyzed">Artistas analisados</span>
-                <strong>128</strong>
-                <small data-i18n="producer.demoMetric">Exemplo ilustrativo</small>
-            </article>
+        <div id="resultadoRegiao" class="conteudo-regiao" aria-live="polite">
+            <section class="indicadores indicadores-regiao">
+                <article class="kpi-card">
+                    <div class="kpi-header"><span data-i18n="regionsDynamic.totalStreams">Total de streams</span></div>
+                    <strong class="kpi-valor" id="total-streams">—</strong>
+                </article>
+                <article class="kpi-card">
+                    <div class="kpi-header"><span data-i18n="regionsDynamic.records">Registros de consumo</span></div>
+                    <strong class="kpi-valor" id="total-registros">—</strong>
+                </article>
+                <article class="kpi-card">
+                    <div class="kpi-header"><span data-i18n="regionsDynamic.artists">Artistas</span></div>
+                    <strong class="kpi-valor" id="total-artistas">—</strong>
+                </article>
+                <article class="kpi-card">
+                    <div class="kpi-header"><span data-i18n="regionsDynamic.genres">Gêneros</span></div>
+                    <strong class="kpi-valor" id="total-generos">—</strong>
+                </article>
+                <article class="kpi-card">
+                    <div class="kpi-header"><span data-i18n="regionsDynamic.average">Média de streams por registro</span></div>
+                    <strong class="kpi-valor" id="media-streams">—</strong>
+                </article>
+            </section>
 
-            <article class="painel">
-                <span data-i18n="producer.trendsTracked">Tendências acompanhadas</span>
-                <strong>24</strong>
-                <small data-i18n="producer.demoMetric">Exemplo ilustrativo</small>
-            </article>
+            <section class="indicadores indicadores-regiao indicadores-destaques" id="destaques-regiao" aria-label="Destaques da região" data-i18n-aria-label="regionsDynamic.highlights">
+                <article class="kpi-card">
+                    <div class="kpi-header"><span data-i18n="regionsDynamic.leadArtist">Artista líder</span></div>
+                    <strong class="kpi-valor kpi-valor-texto" id="destaque-artista">—</strong>
+                    <small class="kpi-meta" id="destaque-artista-meta"></small>
+                </article>
+                <article class="kpi-card">
+                    <div class="kpi-header"><span data-i18n="regionsDynamic.leadGenre">Gênero líder</span></div>
+                    <strong class="kpi-valor kpi-valor-texto" id="destaque-genero">—</strong>
+                    <small class="kpi-meta" id="destaque-genero-meta"></small>
+                </article>
+                <article class="kpi-card">
+                    <div class="kpi-header"><span data-i18n="regionsDynamic.nationalWeight">Peso no cenário nacional</span></div>
+                    <strong class="kpi-valor kpi-valor-texto" id="destaque-nacional">—</strong>
+                    <small class="kpi-meta" id="destaque-nacional-meta"></small>
+                </article>
+            </section>
 
-            <article class="painel">
-                <span data-i18n="producer.genresAnalyzed">Gêneros analisados</span>
-                <strong>16</strong>
-                <small data-i18n="producer.demoMetric">Exemplo ilustrativo</small>
-            </article>
-
-            <article class="painel">
-                <span data-i18n="producer.opportunities">Oportunidades identificadas</span>
-                <strong>8</strong>
-                <small data-i18n="producer.demoMetric">Exemplo ilustrativo</small>
-            </article>
-        </section>
-
-        <section class="produtor-secao">
-            <div class="painel-cabecalho">
-                <div>
-                    <h2 data-i18n="producer.toolsTitle">Ferramentas de produção</h2>
-                    <p data-i18n="producer.toolsDescription">
-                        Acesse as ferramentas de análise do SoundFy.
-                    </p>
+            <section class="painel painel-grafico-regiao">
+                <div class="painel-cabecalho">
+                    <div>
+                        <p data-i18n="regionsDynamic.geography">GEOGRAFIA</p>
+                        <h2 data-i18n="regionsDynamic.genresRanking">Gêneros mais consumidos</h2>
+                        <span class="subtitulo-painel" data-i18n="regionsDynamic.chartHint">Os 10 gêneros com maior volume de streams nesta região.</span>
+                    </div>
+                    <span class="selo-dados" data-i18n="regionsDynamic.topTen">TOP 10</span>
                 </div>
-            </div>
-
-            <div class="produtor-ferramentas">
-                <a class="painel produtor-ferramenta" href="index.html#tendencias">
-                    <span class="produtor-icone">↗</span>
-                    <h3 data-i18n="navigation.trends">Tendências</h3>
-                    <p data-i18n="producer.trendsDescription">
-                        Explore tendências do mercado musical.
-                    </p>
-                </a>
-
-                <a class="painel produtor-ferramenta" href="regioes.html">
-                    <span class="produtor-icone">◎</span>
-                    <h3 data-i18n="navigation.regions">Regiões</h3>
-                    <p data-i18n="producer.regionsDescription">
-                        Explore os dados por região.
-                    </p>
-                </a>
-
-                <a class="painel produtor-ferramenta" href="#comparador">
-                    <span class="produtor-icone">⇄</span>
-                    <h3 data-i18n="producer.comparator">Comparador de artistas</h3>
-                    <p data-i18n="producer.comparatorDescription">
-                        Compare indicadores entre artistas.
-                    </p>
-                </a>
-            </div>
-        </section>
-
-        <section class="painel produtor-secao" id="comparador">
-            <div class="painel-cabecalho">
-                <div>
-                    <h2 data-i18n="producer.comparator">Comparador de artistas</h2>
-                    <p data-i18n="producer.comparatorDescription">
-                        Compare indicadores entre artistas.
-                    </p>
+                <div class="grafico-regiao-container">
+                    <canvas id="grafico-generos" role="img" aria-label="Ranking de gêneros por streams"></canvas>
+                    <p id="estado-grafico" class="estado-grafico" hidden></p>
                 </div>
-            </div>
+            </section>
 
-            <div class="produtor-comparador">
-                <div>
-                    <label for="artista-a" data-i18n="producer.artistA">Artista A</label>
-                    <select id="artista-a">
-                        <option value="a" data-i18n="producer.demoArtistA">Artista Demonstração A</option>
-                        <option value="b" data-i18n="producer.demoArtistB">Artista Demonstração B</option>
-                    </select>
-                </div>
+            <section class="grade grade-regioes">
+                <article class="painel painel-ranking-regiao">
+                    <div class="painel-cabecalho">
+                        <div>
+                            <p data-i18n="regionsDynamic.ranking">RANKING</p>
+                            <h2 data-i18n="regionsDynamic.genresRanking">Gêneros mais consumidos</h2>
+                            <span class="subtitulo-painel" data-i18n="regionsDynamic.genreTableHint">Lista completa, organizada por volume de streams.</span>
+                        </div>
+                    </div>
+                    <div class="tabela-regiao-scroll">
+                        <table class="tabela-regiao">
+                            <thead><tr>
+                                <th data-i18n="regionsDynamic.position">Pos.</th>
+                                <th data-i18n="regionsDynamic.genre">Gênero</th>
+                                <th data-i18n="regionsDynamic.streams">Streams</th>
+                                <th data-i18n="regionsDynamic.bestRanking">Melhor ranking</th>
+                            </tr></thead>
+                            <tbody id="tabela-generos"><tr><td colspan="4" data-i18n="regionsDynamic.loadingData">Carregando dados...</td></tr></tbody>
+                        </table>
+                    </div>
+                    <div class="paginacao-regiao" id="paginacao-generos"></div>
+                </article>
 
-                <div>
-                    <label for="artista-b" data-i18n="producer.artistB">Artista B</label>
-                    <select id="artista-b">
-                        <option value="b" data-i18n="producer.demoArtistB">Artista Demonstração B</option>
-                        <option value="a" data-i18n="producer.demoArtistA">Artista Demonstração A</option>
-                    </select>
-                </div>
-
-                <p data-i18n="producer.comparatorPending">
-                    A comparação será implementada com os dados do projeto.
-                </p>
-            </div>
-        </section>
-
-        <section class="painel produtor-secao">
-            <div class="painel-cabecalho">
-                <div>
-                    <h2 data-i18n="producer.insightsTitle">Insights de mercado</h2>
-                    <p data-i18n="producer.insightsDescription">
-                        Exemplos de análises que poderão ser realizadas.
-                    </p>
-                </div>
-            </div>
-
-            <div class="produtor-insight">
-                <strong data-i18n="producer.insightExample">
-                    Explore novos segmentos musicais
-                </strong>
-                <p data-i18n="producer.insightPending">
-                    Os insights reais dependerão da integração com os dados.
-                </p>
-            </div>
-        </section>
+                <article class="painel painel-ranking-regiao">
+                    <div class="painel-cabecalho">
+                        <div>
+                            <p data-i18n="regionsDynamic.ranking">RANKING</p>
+                            <h2 data-i18n="regionsDynamic.artistsRanking">Desempenho dos artistas por região</h2>
+                            <span class="subtitulo-painel" id="dica-ranking-artistas" data-i18n="regionsDynamic.artistTableHint">Explore os artistas com maior audiência na região.</span>
+                        </div>
+                        <span class="selo-dados" id="selo-ranking-artistas">TOP 50</span>
+                    </div>
+                    <div class="tabela-regiao-scroll">
+                        <table class="tabela-regiao">
+                            <thead><tr>
+                                <th data-i18n="regionsDynamic.position">Pos.</th>
+                                <th data-i18n="regionsDynamic.artist">Artista</th>
+                                <th data-i18n="regionsDynamic.streams">Streams</th>
+                                <th data-i18n="regionsDynamic.bestRanking">Melhor ranking</th>
+                            </tr></thead>
+                            <tbody id="tabela-artistas"><tr><td colspan="4" data-i18n="regionsDynamic.loadingData">Carregando dados...</td></tr></tbody>
+                        </table>
+                    </div>
+                    <div class="paginacao-regiao" id="paginacao-artistas"></div>
+                </article>
+            </section>
+        </div>
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
 
     <script src="../JS/sessao.js"></script>
     <script src="../JS/i18n.js"></script>
     <script src="../JS/translate.js"></script>
     <script src="../JS/script.js"></script>
     <script src="../JS/menu-perfil.js"></script>
-    <script src="../JS/sidebar-perfil.js"></script>
+    <script src="../JS/regioes.js"></script>
+
 </body>
 </html>

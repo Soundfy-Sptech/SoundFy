@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap');
-
 :root {
     --fundo: #0b0712;
     --superficie: #170f24;
@@ -1186,26 +1184,6 @@ button.avatar-topo:focus-visible {
     color: #fb7185;
 }
 
-nav [data-role-section][hidden] {
-    display: none !important;
-}
-
-/* ============================================================
-   Barra lateral: abas por perfil (sem piscar)
-   Por padrão, tudo que é específico de perfil fica oculto. O script
-   JS/sidebar-perfil.js (no <head>) grava o perfil em
-   <html data-perfil="artista|produtor"> antes da primeira pintura.
-   Sem perfil válido, nenhuma opção específica é exibida.
-   ============================================================ */
-[data-role-section] {
-    display: none !important;
-}
-
-html[data-perfil="artista"] [data-role-section="artist"],
-html[data-perfil="produtor"] [data-role-section="producer"] {
-    display: block !important;
-}
-
 /* ============================================================
    Barra lateral: estrutura estável (mesmas alturas em todas as páginas)
    ============================================================ */
@@ -1264,6 +1242,86 @@ html[data-perfil="produtor"] [data-role-section="producer"] {
 .barra-lateral .perfil > div {
     min-width: 0;
     min-height: 32px;
+}
+
+/* ============================================================
+   Barra lateral: identidade da marca e ícones de navegação
+   (montada por JS/sidebar.js, igual em todas as páginas)
+   ============================================================ */
+.barra-lateral .logo {
+    height: auto;
+    min-height: 34px;
+    margin-bottom: 18px;
+}
+
+.barra-lateral .logo small {
+    margin-top: 2px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .02em;
+    line-height: 12px;
+}
+
+.marca-lema {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 40px;
+    margin-bottom: 14px;
+    padding: 9px 12px;
+    flex-shrink: 0;
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(124,58,237,.10), rgba(255,79,163,.05));
+    color: var(--cinza);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 15px;
+}
+
+.marca-eq {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.marca-eq s {
+    display: block;
+    width: 3px;
+    border-radius: 2px;
+    background: linear-gradient(180deg, var(--rosa), var(--roxo));
+    text-decoration: none;
+}
+
+.marca-eq s:nth-child(1) { height: 6px; }
+.marca-eq s:nth-child(2) { height: 14px; }
+.marca-eq s:nth-child(3) { height: 9px; }
+.marca-eq s:nth-child(4) { height: 12px; }
+
+.barra-lateral nav a svg,
+.barra-lateral .rodape-lateral > a svg {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Transição curta: só cor/fundo, sem atrasar a troca de página. */
+.barra-lateral nav a,
+.barra-lateral .rodape-lateral > a {
+    transition: background-color .12s ease, color .12s ease;
+}
+
+.barra-lateral .rodape-lateral > a.ativo {
+    background: rgba(124,58,237,.09);
+    color: var(--roxo);
 }
 
 .idioma-select {
@@ -1577,4 +1635,534 @@ html[data-perfil="produtor"] [data-role-section="producer"] {
     .busca-regiao-linha { flex-direction: column; }
     .busca-regiao-linha .primario { width: 100%; }
     .grafico-regiao-container { height: 270px; }
+}
+.estado-vazio-artista[hidden],
+.perfil-artista-conteudo[hidden] {
+    display: none !important;
+}
+
+/* Destaques da região (página do Produtor de Eventos) */
+.indicadores-destaques {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.indicadores-destaques .kpi-valor.kpi-valor-texto {
+    font-size: clamp(16px, 1.6vw, 21px);
+    line-height: 1.3;
+}
+
+@media (max-width: 720px) {
+    .indicadores-destaques { grid-template-columns: 1fr; }
+}
+
+
+/* Refinamento visual da navegação lateral */
+.barra-lateral {
+    padding: 27px 16px 18px;
+    background:
+        radial-gradient(ellipse at 10% 0%, rgba(124,58,237,.075), transparent 42%),
+        var(--superficie);
+}
+.barra-lateral .logo { margin: 0 9px 22px; }
+.barra-lateral .marca-lema {
+    margin: 0 2px 25px;
+    min-height: 44px;
+    border-color: rgba(124,58,237,.15);
+    background: rgba(124,58,237,.055);
+}
+.barra-lateral nav { gap: 10px; }
+.barra-lateral nav label {
+    margin: 0 11px 2px;
+    font-size: 10px;
+    letter-spacing: .16em;
+}
+.barra-lateral nav .nav-itens {
+    display: grid;
+    gap: 7px;
+}
+.barra-lateral nav a {
+    position: relative;
+    min-height: 46px;
+    padding: 0 13px;
+    gap: 13px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 650;
+}
+.barra-lateral nav a svg {
+    width: 19px;
+    height: 19px;
+    opacity: .86;
+}
+.barra-lateral nav a.ativo {
+    color: var(--texto);
+    border-color: rgba(124,58,237,.18);
+    background: linear-gradient(100deg, rgba(124,58,237,.15), rgba(124,58,237,.045));
+    box-shadow: inset 3px 0 0 var(--roxo);
+}
+.barra-lateral nav a.ativo svg { color: var(--roxo-claro); opacity: 1; }
+.barra-lateral nav a:hover:not(.ativo) { background: var(--superficie-2); }
+.sidebar-resumo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 22px 2px 14px;
+    padding: 12px 10px;
+    border: 1px solid var(--borda);
+    border-radius: 11px;
+    background: var(--superficie-2);
+}
+.sidebar-resumo-icone {
+    display: grid;
+    place-items: center;
+    width: 31px;
+    height: 31px;
+    flex: 0 0 auto;
+    border-radius: 9px;
+    color: var(--roxo-claro);
+    background: rgba(124,58,237,.13);
+    font-size: 18px;
+}
+.sidebar-resumo div { min-width: 0; }
+.sidebar-resumo strong,
+.sidebar-resumo small { display: block; }
+.sidebar-resumo strong { color: var(--texto); font-size: 11px; }
+.sidebar-resumo small { margin-top: 3px; color: var(--cinza); font-size: 10px; }
+.sidebar-resumo-ponto {
+    width: 6px;
+    height: 6px;
+    margin-left: auto;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: #35b981;
+    box-shadow: 0 0 0 4px rgba(53,185,129,.10);
+}
+.barra-lateral .rodape-lateral > a {
+    min-height: 43px;
+    padding: 0 13px;
+    border-radius: 10px;
+}
+.barra-lateral .perfil {
+    margin-top: 7px;
+    padding: 14px 5px 2px;
+}
+.barra-lateral .perfil > b {
+    width: 34px;
+    height: 34px;
+}
+.barra-lateral .perfil strong {
+    max-width: 145px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Dashboard: hierarquia mais leve e menos elementos concorrendo pela atenção */
+.pagina-dashboard main { max-width: 1660px; }
+.pagina-dashboard header { margin-bottom: 24px; }
+.pagina-dashboard .introducao { margin-bottom: 21px; }
+.pagina-dashboard .introducao h1 { font-size: 29px; }
+.pagina-dashboard .indicadores {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 13px;
+    margin-bottom: 16px;
+}
+.pagina-dashboard .kpi-card {
+    padding: 17px 18px;
+    gap: 7px;
+    border-radius: 13px;
+    box-shadow: none;
+}
+.pagina-dashboard .kpi-card:hover,
+.pagina-dashboard .indicadores article:hover { transform: none; }
+.pagina-dashboard .kpi-badge { display: none; }
+.pagina-dashboard .kpi-header { font-size: 12px; }
+.pagina-dashboard .kpi-valor { font-size: clamp(23px, 2vw, 29px); }
+.pagina-dashboard .kpi-meta { font-size: 11px; }
+.pagina-dashboard .grade {
+    grid-template-columns: minmax(0, 1.55fr) minmax(280px, .85fr);
+    gap: 14px;
+    margin-bottom: 14px;
+}
+.pagina-dashboard .grade.inferior {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.pagina-dashboard .painel {
+    padding: 19px;
+    border-radius: 13px;
+}
+.pagina-dashboard .painel-cabecalho { margin-bottom: 13px; }
+.pagina-dashboard .painel-cabecalho p {
+    font-size: 10px;
+    letter-spacing: .13em;
+}
+.pagina-dashboard .painel-cabecalho h2 { font-size: 15px; }
+.pagina-dashboard .explicacao-grafico {
+    margin-top: 8px;
+    padding: 9px 12px;
+}
+.pagina-dashboard .explicacao-grafico span { line-height: 1.5; }
+.pagina-dashboard .insight {
+    background: linear-gradient(155deg, rgba(124,58,237,.075), var(--superficie) 62%);
+}
+.pagina-dashboard .corpo-insight { padding: 8px 0 12px; }
+.pagina-dashboard .corpo-insight h3 { font-size: 25px; }
+.pagina-dashboard .meta {
+    padding-top: 13px;
+    border-top: 1px solid var(--borda);
+}
+.pagina-dashboard .item-rank,
+.pagina-dashboard .item-regiao {
+    padding-top: 11px;
+    padding-bottom: 11px;
+}
+.pagina-dashboard .lista-rank,
+.pagina-dashboard .lista-regioes { gap: 0; }
+
+@media (max-width: 1100px) {
+    .pagina-dashboard .grade { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+    .sidebar-resumo { margin-top: 16px; }
+    .pagina-dashboard .indicadores { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pagina-dashboard .grade.inferior { grid-template-columns: 1fr; }
+}
+@media (max-width: 450px) {
+    .pagina-dashboard .indicadores { grid-template-columns: 1fr 1fr; }
+    .pagina-dashboard .kpi-card { padding: 14px 12px; }
+}
+
+/* Mantém a navegação logo abaixo do bloco superior, sem centralização vertical */
+.barra-lateral nav {
+    flex: 0 0 auto;
+    align-content: start;
+}
+
+
+/* Botão de exclusão da conta */
+.botao-excluir {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 10px 18px;
+    border: 1px solid rgba(239, 68, 68, .38);
+    border-radius: 9px;
+    background: rgba(239, 68, 68, .10);
+    color: #f87171;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 750;
+    cursor: pointer;
+    transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.botao-excluir:hover {
+    background: rgba(239, 68, 68, .18);
+    border-color: #ef4444;
+    transform: translateY(-1px);
+}
+
+.botao-excluir:focus-visible {
+    outline: 2px solid #ef4444;
+    outline-offset: 3px;
+}
+
+.botao-excluir:active {
+    transform: translateY(0);
+}
+
+.botao-excluir:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* SoundFy Insights: último elemento da barra lateral */
+.barra-lateral > .sidebar-resumo {
+    flex: 0 0 auto;
+    margin: 12px 2px 0;
+}
+
+
+
+/* =========================================================
+   DASHBOARD — ajustes de organização visual
+   Mantém integralmente as cores e a identidade visual originais.
+   ========================================================= */
+
+.pagina-dashboard main {
+    max-width: 1500px;
+    padding-bottom: 28px;
+}
+
+.pagina-dashboard header {
+    margin-bottom: 28px;
+}
+
+.pagina-dashboard .introducao {
+    margin-bottom: 28px;
+}
+
+.pagina-dashboard .introducao h1 {
+    margin-bottom: 8px;
+}
+
+/* Indicadores: mesma altura, alinhamento e leitura mais clara */
+.pagina-dashboard .indicadores {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 22px;
+    align-items: stretch;
+}
+
+.pagina-dashboard .kpi-card {
+    min-width: 0;
+    min-height: 126px;
+    padding: 18px 20px;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.pagina-dashboard .kpi-header {
+    min-height: 20px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 5px 8px;
+    line-height: 1.4;
+}
+
+.pagina-dashboard .kpi-badge {
+    display: none;
+}
+
+.pagina-dashboard .kpi-valor {
+    font-size: clamp(25px, 2vw, 30px);
+    line-height: 1.15;
+}
+
+.pagina-dashboard .kpi-meta {
+    line-height: 1.45;
+}
+
+/* Primeira linha: gráfico com espaço real e insight sem esmagamento */
+.pagina-dashboard .grade {
+    grid-template-columns: minmax(0, 1.7fr) minmax(290px, .8fr);
+    gap: 18px;
+    margin-bottom: 20px;
+    align-items: stretch;
+}
+
+.pagina-dashboard .painel {
+    min-width: 0;
+    padding: 22px;
+}
+
+.pagina-dashboard .painel-cabecalho {
+    margin-bottom: 18px;
+    align-items: center;
+}
+
+.pagina-dashboard .painel-cabecalho > div {
+    min-width: 0;
+}
+
+.pagina-dashboard .painel-cabecalho p {
+    margin-bottom: 7px;
+    line-height: 1.4;
+}
+
+.pagina-dashboard .painel-cabecalho h2 {
+    font-size: 17px;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+}
+
+/* Explicação passa a ocupar menos espaço e deixa o gráfico respirar */
+.pagina-dashboard .explicacao-grafico {
+    margin: 0 0 20px;
+    padding: 0 0 0 12px;
+    gap: 4px;
+    background: transparent;
+    border-radius: 0;
+}
+
+.pagina-dashboard .explicacao-grafico strong {
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.pagina-dashboard .explicacao-grafico span {
+    max-width: 720px;
+    font-size: 11px;
+    line-height: 1.55;
+}
+
+/* Gêneros por região: mais distância entre regiões e itens internos */
+.pagina-dashboard #grafico-generos-regiao {
+    gap: 20px;
+}
+
+.pagina-dashboard #grafico-generos-regiao .item-regiao {
+    min-width: 0;
+    gap: 10px;
+    padding: 2px 0 4px;
+}
+
+.pagina-dashboard #grafico-generos-regiao .regiao-info {
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 5px 12px;
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+.pagina-dashboard #grafico-generos-regiao .barra-fundo {
+    height: 7px;
+}
+
+.pagina-dashboard #grafico-generos-regiao .lista-regioes {
+    gap: 12px;
+}
+
+/* Insight: conteúdo em blocos com respiro e sem competir com o gráfico */
+.pagina-dashboard .insight {
+    display: flex;
+    flex-direction: column;
+}
+
+.pagina-dashboard .corpo-insight {
+    padding: 12px 0 20px;
+}
+
+.pagina-dashboard .corpo-insight h3 {
+    font-size: 23px;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+}
+
+.pagina-dashboard .corpo-insight .crescimento-tag {
+    margin-top: 9px;
+    flex-wrap: wrap;
+    gap: 4px 7px;
+}
+
+.pagina-dashboard .corpo-insight p {
+    max-width: 440px;
+    margin-top: 16px;
+    line-height: 1.65;
+}
+
+.pagina-dashboard .meta {
+    margin-top: auto;
+    padding: 16px 0 4px;
+    gap: 18px;
+}
+
+.pagina-dashboard .meta > div {
+    min-width: 0;
+}
+
+.pagina-dashboard .meta span {
+    display: block;
+    line-height: 1.45;
+}
+
+.pagina-dashboard .meta strong {
+    margin-top: 7px;
+    font-size: 16px;
+}
+
+/* Segunda linha: listas alinhadas e com separação consistente */
+.pagina-dashboard .grade.inferior {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.pagina-dashboard .lista-rank,
+.pagina-dashboard #ranking-artistas-regiao {
+    gap: 10px;
+}
+
+.pagina-dashboard .item-rank,
+.pagina-dashboard #ranking-artistas-regiao .item-regiao {
+    min-width: 0;
+    padding: 13px 14px;
+    gap: 12px;
+}
+
+.pagina-dashboard .item-rank .info,
+.pagina-dashboard #ranking-artistas-regiao .regiao-info {
+    min-width: 0;
+}
+
+.pagina-dashboard .item-rank .info strong,
+.pagina-dashboard #ranking-artistas-regiao .regiao-info strong {
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.pagina-dashboard .item-rank .info small,
+.pagina-dashboard #ranking-artistas-regiao .regiao-info small {
+    line-height: 1.45;
+}
+
+/* Impede que conteúdos longos estourem os cards */
+.pagina-dashboard .painel *,
+.pagina-dashboard .kpi-card * {
+    min-width: 0;
+}
+
+@media (max-width: 1100px) {
+    .pagina-dashboard .grade {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .pagina-dashboard .grade.inferior {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .pagina-dashboard .insight {
+        min-height: 0;
+    }
+}
+
+@media (max-width: 760px) {
+    .pagina-dashboard .indicadores {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .pagina-dashboard .grade.inferior {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .pagina-dashboard .painel {
+        padding: 18px;
+    }
+}
+
+@media (max-width: 460px) {
+    .pagina-dashboard .kpi-card {
+        min-height: 116px;
+        padding: 14px;
+    }
+
+    .pagina-dashboard .kpi-header {
+        font-size: 11px;
+    }
+
+    .pagina-dashboard .kpi-meta {
+        font-size: 10px;
+    }
+
+    .pagina-dashboard .painel-cabecalho h2 {
+        font-size: 15px;
+    }
+
+    .pagina-dashboard .corpo-insight h3 {
+        font-size: 21px;
+    }
 }
